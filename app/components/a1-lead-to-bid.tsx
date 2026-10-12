@@ -89,11 +89,11 @@ export default function A1LeadToBid() {
             strokeLinecap="round"
           />
         </svg>
-        <ol className="relative flex flex-col gap-4 lg:gap-5" aria-hidden="true">
+        <ol className="relative flex flex-col gap-2.5 sm:gap-4 lg:gap-5" aria-hidden="true">
           {cards.map((c, i) => (
             <li key={c.title} className={`ltb-card ${c.offset}`} data-i={i}>
-              <div className="ltb-card-in frag flex w-full items-center gap-4 p-4 pr-5 lg:w-[360px]">
-                <span className={`flex size-12 shrink-0 items-center justify-center rounded-chip ${c.tile} text-blue-700 lg:size-14`}>{c.icon}</span>
+              <div className="ltb-card-in frag flex w-full items-center gap-3 p-3 pr-4 sm:gap-4 sm:p-4 sm:pr-5 lg:w-[360px]">
+                <span className={`flex size-12 shrink-0 items-center justify-center rounded-chip ${c.tile} text-blue-700 max-sm:size-10 lg:size-14`}>{c.icon}</span>
                 <span className="min-w-0 flex-1 text-left">
                   <span className={`block font-mono text-[11px] leading-[1.3] tracking-normal ${c.sourceColour}`}>{c.source}</span>
                   <span className="mt-1 block text-[1.0625rem] leading-[1.2] font-medium tracking-[-0.02em] text-blue-700">{c.title}</span>
@@ -108,12 +108,12 @@ export default function A1LeadToBid() {
             </li>
           ))}
         </ol>
-        <div className="ltb-foot mt-5 flex flex-wrap items-center gap-2 lg:ml-28" aria-hidden="true">
+        <div className="ltb-foot mt-3 flex flex-wrap items-center gap-2 sm:mt-5 lg:ml-28" aria-hidden="true">
           <span className="inline-flex items-center gap-2 rounded-pill bg-blue-700 px-4 py-2 text-[0.875rem] leading-[1.3] font-medium tracking-[-0.02em] text-white">
             Bidding on: <span className="text-green-200">qualified stages</span>
           </span>
         </div>
-        <p className="img-label mt-4 lg:ml-28">Example</p>
+        <p className="img-label mt-3 sm:mt-4 lg:ml-28">Example</p>
       </div>
       {/* WCAG 2.2.2: pause control for the 9 s loop. Un-hidden by the motion script; hidden under reduced motion and without JS. */}
       <button type="button" className="btn-quiet motion-toggle mt-3 lg:ml-28" data-motion-toggle hidden>

@@ -41,8 +41,14 @@ export function CountTable({ className = "" }: { className?: string }) {
         <thead>
           <tr className="text-[0.75rem] text-gray-600 sm:text-[0.8125rem]">
             <th scope="col" className="py-3 pl-4 pr-2 font-normal sm:pl-5">Stage</th>
-            <th scope="col" className="px-2 py-3 text-right font-normal">HubSpot, from Google Ads contacts</th>
-            <th scope="col" className="px-2 py-3 text-right font-normal">Google Ads recorded</th>
+            <th scope="col" className="px-2 py-3 text-right font-normal max-sm:px-0.5">
+              <span className="max-sm:sr-only">HubSpot, from Google Ads contacts</span>
+              <span className="sm:hidden" aria-hidden="true">HubSpot</span>
+            </th>
+            <th scope="col" className="px-2 py-3 text-right font-normal max-sm:px-0.5">
+              <span className="max-sm:sr-only">Google Ads recorded</span>
+              <span className="sm:hidden" aria-hidden="true">Google Ads</span>
+            </th>
             <th scope="col" className="py-3 pl-2 pr-4 font-normal sm:pr-5"><span className="sr-only">Notes</span></th>
           </tr>
         </thead>
@@ -50,8 +56,8 @@ export function CountTable({ className = "" }: { className?: string }) {
           {rows.map(([stage, hs, ga, tag]) => (
             <tr key={stage}>
               <td className="pl-4 pr-2 font-sans sm:pl-5">{stage}</td>
-              <td className="px-2 text-right">{hs}</td>
-              <td className="px-2 text-right">{ga}</td>
+              <td className="px-2 text-right max-sm:px-0.5">{hs}</td>
+              <td className="px-2 text-right max-sm:px-0.5">{ga}</td>
               <td className="pl-2 pr-4 text-right sm:pr-5">{tag}</td>
             </tr>
           ))}

@@ -199,7 +199,7 @@ export default function Home() {
       <main id="main" tabIndex={-1}>
         {/* 1. Hero */}
         <section id="hero" aria-labelledby="hero-title">
-          <div className="container-site grid grid-cols-1 items-center gap-12 pb-16 pt-14 lg:min-h-[806px] lg:grid-cols-[1.4fr_1fr] lg:gap-5 lg:py-0">
+          <div className="container-site grid grid-cols-1 items-center gap-8 pb-12 pt-14 sm:gap-12 sm:pb-16 lg:min-h-[806px] lg:grid-cols-[1.4fr_1fr] lg:gap-5 lg:py-0">
             <div className="flex flex-col items-center gap-6 text-center lg:items-start lg:text-left">
               <p className="chip">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true" focusable="false">
