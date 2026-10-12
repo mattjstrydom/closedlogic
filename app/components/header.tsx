@@ -42,7 +42,7 @@ export default function Header({ path = "/", agency = false }: { path?: string; 
           <Link href="/sample-report" className="btn-m-outline" aria-current={onSample ? "page" : undefined}>
             See a sample report
           </Link>
-          <a href={bookHref} target="_blank" rel="noopener noreferrer" className="btn-m">Book a fit call<span className="sr-only"> (opens in a new tab)</span></a>
+          <a href={bookHref} target="_blank" rel="noopener noreferrer" className="btn-m">Book a <span className="max-xl:hidden">20-minute&nbsp;</span>fit call<span className="sr-only"> (opens in a new tab)</span></a>
         </div>
 
         <button

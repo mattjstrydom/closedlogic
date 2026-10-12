@@ -16,7 +16,7 @@ const cards: Card[] = [
     sourceColour: "text-green-text",
     title: "Form submitted",
     sub: "Demo request, Example Co",
-    offset: "lg:ml-12",
+    offset: "xl:ml-12",
     icon: icon(
       <>
         <rect x="4" y="3.5" width="16" height="17" rx="2.5" />
@@ -30,7 +30,7 @@ const cards: Card[] = [
     sourceColour: "text-blue-600",
     title: "Lifecycle stage: SQL",
     sub: "Set by the sales team",
-    offset: "lg:ml-4",
+    offset: "xl:ml-4",
     icon: icon(
       <>
         <path d="M4 19h4.5v-4.5H13V10h4.5V5.5H20" />
@@ -45,7 +45,7 @@ const cards: Card[] = [
     sourceColour: "text-coral-text",
     title: "HubSpot SQL received",
     sub: "Sent once, with the click ID",
-    offset: "lg:ml-16",
+    offset: "xl:ml-16",
     icon: icon(
       <>
         <path d="M3.5 12h11M11 8l4 4-4 4" />
@@ -60,7 +60,7 @@ const cards: Card[] = [
     sourceColour: "text-purple-text",
     title: "Counted for bidding",
     sub: "HubSpot SQL is a Primary action",
-    offset: "lg:ml-28",
+    offset: "xl:ml-28",
     icon: icon(
       <>
         <circle cx="12" cy="12" r="8" />
@@ -92,7 +92,7 @@ export default function A1LeadToBid() {
         <ol className="relative flex flex-col gap-2.5 sm:gap-4 lg:gap-5" aria-hidden="true">
           {cards.map((c, i) => (
             <li key={c.title} className={`ltb-card ${c.offset}`} data-i={i}>
-              <div className="ltb-card-in frag flex w-full items-center gap-3 p-3 pr-4 sm:gap-4 sm:p-4 sm:pr-5 lg:w-[360px]">
+              <div className="ltb-card-in frag flex w-full items-center gap-3 p-3 pr-4 sm:gap-4 sm:p-4 sm:pr-5 xl:w-[360px]">
                 <span className={`flex size-12 shrink-0 items-center justify-center rounded-chip ${c.tile} text-blue-700 max-sm:size-10 lg:size-14`}>{c.icon}</span>
                 <span className="min-w-0 flex-1 text-left">
                   <span className={`block font-mono text-[11px] leading-[1.3] tracking-normal ${c.sourceColour}`}>{c.source}</span>
@@ -108,15 +108,15 @@ export default function A1LeadToBid() {
             </li>
           ))}
         </ol>
-        <div className="ltb-foot mt-3 flex flex-wrap items-center gap-2 sm:mt-5 lg:ml-28" aria-hidden="true">
+        <div className="ltb-foot mt-3 flex flex-wrap items-center gap-2 sm:mt-5 xl:ml-28" aria-hidden="true">
           <span className="inline-flex items-center gap-2 rounded-pill bg-blue-700 px-4 py-2 text-[0.875rem] leading-[1.3] font-medium tracking-[-0.02em] text-white">
             Bidding on: <span className="text-green-200">qualified stages</span>
           </span>
         </div>
-        <p className="img-label mt-3 sm:mt-4 lg:ml-28">Example</p>
+        <p className="img-label mt-3 sm:mt-4 xl:ml-28">Example</p>
       </div>
       {/* WCAG 2.2.2: pause control for the 9 s loop. Un-hidden by the motion script; hidden under reduced motion and without JS. */}
-      <button type="button" className="btn-quiet motion-toggle mt-3 lg:ml-28" data-motion-toggle hidden>
+      <button type="button" className="btn-quiet motion-toggle mt-3 xl:ml-28" data-motion-toggle hidden>
         Pause animation
       </button>
     </div>

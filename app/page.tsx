@@ -203,10 +203,10 @@ export default function Home() {
                 HubSpot to Google Ads conversion fix
               </p>
               <h1 id="hero-title" className="text-title-xl max-w-[744px]">
-                Google Ads should bid on pipeline, <Accent>not form fills.</Accent>
+                Stop Google Ads bidding on <Accent>form fills your sales team never qualifies.</Accent>
               </h1>
               <p className="text-text-l max-w-[33.75rem]">
-                We check how HubSpot sends lifecycle stages to Google Ads and fix it inside your own accounts, with your sign-off, so Smart Bidding uses the stages your sales team qualifies. Fixed price, fixed scope, delivered within 7 business days of access.
+                We check how HubSpot sends lifecycle stages to Google Ads and fix it inside your own accounts, with your sign-off, so Smart Bidding learns from the stages your sales team qualifies. Fixed $1,200 scope, delivered within 7 business days of access.
               </p>
               <div className="mt-4 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
                 <CalButton className="w-full sm:w-auto" />
@@ -234,7 +234,7 @@ export default function Home() {
         {/* 1b. Who this is for */}
         <section id="for" aria-labelledby="for-title" className="section-y">
           <div className="container-site">
-            <SectionHead id="for">Who this is for</SectionHead>
+            <SectionHead id="for">Built for B2B teams on HubSpot and Google Ads</SectionHead>
             <div className="bento mt-10 max-w-[64rem] space-y-5 text-text-l">
               <p>This check fits if all of these are true:</p>
               <TickList
@@ -254,8 +254,9 @@ export default function Home() {
         <section id="problem" aria-labelledby="problem-title" className="section-y">
           <div className="container-site">
             <SectionHead id="problem" chip="The problem">
-              A stage that syncs <Accent>isn&apos;t always a stage that bids</Accent>
+              Syncing a stage <Accent>isn&apos;t the same as bidding on it</Accent>
             </SectionHead>
+            <p className="mt-4 max-w-[64ch] text-text-l text-gray-800">HubSpot can show MQLs and SQLs in Google Ads while Smart Bidding ignores them.</p>
             <div className="mt-10 grid gap-5 lg:grid-cols-3">
               <div className="bento text-text-l">
                 <p>If HubSpot already sends your lifecycle stages to Google Ads, the question is whether Smart Bidding uses them. A stage set as Secondary is reported but not bid on, unless a custom goal includes it. A Primary stage outside the goal your campaigns bid on isn&apos;t bid on either.</p>
@@ -273,6 +274,10 @@ export default function Home() {
               </div>
             </div>
             <C4Count />
+            <div className="bento mt-5 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-title-xs max-w-[40ch]">Not sure if your SQLs are set to Secondary or ignored by Smart Bidding?</p>
+              <CalButton className="w-full sm:w-auto" />
+            </div>
           </div>
         </section>
 
@@ -302,7 +307,7 @@ export default function Home() {
         <section id="fix" aria-labelledby="fix-title" className="section-y">
           <div className="container-site">
             <SectionHead id="fix" chip="Sign-off">
-              We fix it, <Accent>with your sign-off</Accent>
+              Seven checks. One clean setup. <Accent>Your sign-off on every change.</Accent>
             </SectionHead>
             <div className="mt-6 max-w-[64ch] space-y-4 text-text-l">
               <p>We fix everything on the list that lives in Google Ads, HubSpot or Tag Manager settings. You see every proposed change before we make it, and nothing changes without your approval.</p>
@@ -380,11 +385,12 @@ export default function Home() {
                 <TickList items={[priceTerms[0], priceTerms[1], priceTerms[3]]} className="mt-6 text-[1rem] leading-[1.5] tracking-[-0.02em] text-white/90" />
                 <p className="mt-6 flex gap-3 rounded-tile border border-green-200/40 bg-white/10 p-4 text-[1rem] leading-[1.5] tracking-[-0.02em]">
                   <Tick size={22} className="mt-0.5" />
-                  <span>{priceTerms[2]}</span>
+                  <span><strong className="block font-medium">The pay-half guarantee</strong>{priceTerms[2]}</span>
                 </p>
                 <div className="mt-6 flex flex-wrap items-center gap-4 lg:mt-auto lg:pt-6">
                   <CalButton className="w-full sm:w-auto" />
                 </div>
+                <p className="mt-3 text-[0.875rem] leading-[1.4] text-white/80">If it&apos;s not a fit, we&apos;ll say so on the call.</p>
               </div>
 
               {/* Monthly plan */}
