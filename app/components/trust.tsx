@@ -1,5 +1,3 @@
-import { site } from "../site.config";
-
 // Text-only product names with small generic icons. No trademarked logos: nothing here implies a partnership
 // (the footer carries the not-affiliated line).
 const icon = (d: React.ReactNode) => (
@@ -27,21 +25,5 @@ export function PlatformPills({ names, className = "" }: { names?: string[]; cla
         </li>
       ))}
     </ul>
-  );
-}
-
-export function FounderCard() {
-  return (
-    <div className="bento flex flex-col justify-between gap-6">
-      <div className="flex items-center gap-4">
-        <span aria-hidden="true" className="flex size-14 shrink-0 items-center justify-center rounded-chip bg-green-100 font-mono text-[1.125rem] font-medium text-green-deep">
-          MS
-        </span>
-        <div>
-          <p className="text-title-xs">Founded by Matt Strydom.</p>
-        </div>
-      </div>
-      <a href={site.linkedin} className="btn-quiet self-start">Matt on LinkedIn</a>
-    </div>
   );
 }

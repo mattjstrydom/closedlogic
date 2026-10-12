@@ -13,7 +13,7 @@ import A1LeadToBid from "./components/a1-lead-to-bid";
 import HeroTabs from "./components/hero-tabs";
 import ChecksPreview from "./components/checks-preview";
 import StepBadge from "./components/step-badge";
-import { PlatformPills, FounderCard } from "./components/trust";
+import { PlatformPills } from "./components/trust";
 import { checkItems } from "./checks-data";
 import A2SecondaryToPrimary from "./components/a2-secondary-to-primary";
 import A3ChangeLog from "./components/a3-change-log";
@@ -507,7 +507,7 @@ export default function Home() {
         {/* 11. Proof */}
         <section id="proof" aria-labelledby="proof-title" className="section-y">
           <div className="container-site">
-            <div className="grid gap-5 lg:grid-cols-[7fr_5fr]">
+            <div className="grid gap-5">
             <div className="bento">
               <h2 id="proof-title" className="text-title-m">Proof</h2>
               {site.caseStudy && (
@@ -522,7 +522,6 @@ export default function Home() {
                 <Link href="/sample-report" className="link">sample report</Link> shows exactly what you receive. It&apos;s built on a fictional account: the company, figures and screenshots are illustrative, not a client result.
               </p>
             </div>
-            <FounderCard />
             </div>
             <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-3">
               <p className="text-text-m text-gray-600">Inside your own accounts</p>
