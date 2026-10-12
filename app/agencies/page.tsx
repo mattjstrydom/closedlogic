@@ -114,7 +114,7 @@ export default function Agencies() {
                 Every check covers the same seven questions as our standard check: which conversions bidding uses, whether lifecycle stages are set up and firing, duplicates, click ID and contact data matching, legacy imports, EEA consent signals, and a side-by-side count. We fix everything on the list that lives in Google Ads, HubSpot or Tag Manager settings, with your sign-off on each change.
               </p>
               <p>
-                <Link href="/#checks" className="link">See the seven checks in detail</Link>
+                <Link href="/#checks" className="link inline-flex min-h-6 items-center">See the seven checks in detail</Link>
               </p>
             </div>
           </div>
@@ -196,7 +196,7 @@ export default function Agencies() {
                 Access works the same way as for direct clients: named invites only, every change logged with how to reverse it, and access removed at handover unless you&apos;re on the monthly plan.
               </p>
               <p className="mt-4">
-                <Link href="/#access" className="link">See access and security</Link>
+                <Link href="/#access" className="link inline-flex min-h-6 items-center">See access and security</Link>
               </p>
             </div>
           </div>
