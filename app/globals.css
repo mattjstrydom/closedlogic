@@ -195,7 +195,7 @@
 /* ---- Modernization layer (redesign branch): glass bar, glow, status dots, step badges, code blocks ---- */
 @layer components {
   /* Sticky bar: translucent paper with blur, solid fallback where blur isn't available or transparency is reduced */
-  .glass { background: rgb(242 246 245 / .78); -webkit-backdrop-filter: blur(14px) saturate(1.5); backdrop-filter: blur(14px) saturate(1.5); border-bottom: 1px solid rgb(190 201 198 / .5); }
+  .glass { background: rgb(242 246 245 / .86); -webkit-backdrop-filter: blur(14px) saturate(1.5); backdrop-filter: blur(14px) saturate(1.5); border-bottom: 1px solid rgb(190 201 198 / .7); box-shadow: 0 1px 0 rgb(255 255 255 / .6) inset, 0 8px 24px -16px rgba(21,52,68,.25); }
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) { .glass { background: var(--color-gray-50); } }
   @media (prefers-reduced-transparency: reduce) { .glass { background: var(--color-gray-50); -webkit-backdrop-filter: none; backdrop-filter: none; } }
 

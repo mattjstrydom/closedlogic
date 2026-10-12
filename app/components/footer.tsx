@@ -3,7 +3,7 @@ import CookieSettings from "./cookie-settings";
 import { site } from "../site.config";
 
 // min-h-6: 24px targets (WCAG 2.5.8)
-const link = "inline-flex min-h-6 items-center text-black underline underline-offset-[0.2em] hover:decoration-2";
+const link = "inline-flex min-h-6 items-center text-gray-800 underline underline-offset-[0.2em] hover:text-black hover:decoration-2";
 
 export default function Footer({ teardownHref = "/teardown" }: { teardownHref?: string }) {
   return (

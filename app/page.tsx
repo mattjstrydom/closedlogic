@@ -284,7 +284,7 @@ export default function Home() {
             </SectionHead>
             <ol className="bento mt-10">
               {checks.map(({ q, mock }, i) => (
-                <li key={q} className="group grid gap-4 border-t border-gray-100 py-6 first:border-0 first:pt-0 last:pb-0 lg:grid-cols-[1fr_22rem] lg:gap-12">
+                <li key={q} className="group -mx-3 grid gap-4 rounded-chip border-t border-gray-100 px-3 py-6 transition-colors duration-150 first:border-0 hover:bg-gray-50 lg:grid-cols-[1fr_22rem] lg:gap-12">
                   <div className="max-w-[64ch]">
                     <StepBadge n={i + 1} pad />
                     <p className="mt-3 text-text-l">
@@ -365,9 +365,9 @@ export default function Home() {
               One price.
               <br className="max-lg:hidden" /> <Accent>A named lead on every check.</Accent>
             </h2>
-            <div className="mt-10 grid grid-cols-1 gap-5 lg:grid-cols-2">
+            <div className="mt-10 grid grid-cols-1 gap-5 lg:grid-cols-2 lg:items-start">
               {/* Check and fix */}
-              <div className="bento-dark on-dark flex flex-col p-6 sm:p-10">
+              <div className="bento-dark on-dark flex flex-col p-6 shadow-[0_30px_60px_-24px_rgba(21,52,68,.55)] sm:p-10 lg:py-12">
                 <p className="text-[1rem] font-medium tracking-[-0.02em] text-green-200">Check and fix</p>
                 <p className="mt-3 text-[4rem] leading-none font-medium tracking-[-0.05em] sm:text-[5rem]">
                   $1,200<span className="text-[1.5rem] tracking-[-0.03em] text-green-200">, fixed</span>
