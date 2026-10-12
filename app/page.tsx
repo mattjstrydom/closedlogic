@@ -14,6 +14,7 @@ import HeroTabs from "./components/hero-tabs";
 import ChecksPreview from "./components/checks-preview";
 import StepBadge from "./components/step-badge";
 import Pipeline from "./components/pipeline";
+import ComparisonGrid from "./components/comparison-grid";
 import { PlatformPills } from "./components/trust";
 import { checkItems } from "./checks-data";
 import A2SecondaryToPrimary from "./components/a2-secondary-to-primary";
@@ -419,6 +420,7 @@ export default function Home() {
               </div>
             </div>
 
+            <ComparisonGrid />
             {/* Company details */}
             <div className="bento mt-5 grid gap-8 lg:grid-cols-[5fr_7fr] lg:gap-12">
               <div className="min-w-0">
