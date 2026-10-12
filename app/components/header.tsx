@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { site } from "../site.config";
-import Wordmark from "./wordmark";
+import Logo from "./logo";
 
 const directLinks: [string, string][] = [
   ["/#how", "How it works"],
@@ -27,7 +27,7 @@ export default function Header({ path = "/", agency = false }: { path?: string; 
         {/* /#hero, not /: a plain "/" can keep the visitor's old scroll position (the browser restores it), while a fragment always scrolls to the top of the home page, from any page or #section. */}
         {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
         <a href="/#hero" aria-label={`${site.brand}, home`} className="inline-flex min-h-6 items-center justify-self-start no-underline">
-          <Wordmark decorative className="h-[22px] w-auto md:h-6" />
+          <Logo />
         </a>
 
         <nav aria-label="Main" className="hidden items-center gap-8 rounded-pill bg-white px-7 py-2 text-[0.875rem] leading-[1.3] font-medium tracking-[-0.03em] lg:flex">
@@ -42,7 +42,7 @@ export default function Header({ path = "/", agency = false }: { path?: string; 
           <Link href="/sample-report" className="btn-m-outline" aria-current={onSample ? "page" : undefined}>
             See a sample report
           </Link>
-          <a href={bookHref} target="_blank" rel="noopener noreferrer" className="btn-m">Book a <span className="max-xl:hidden">20-minute&nbsp;</span>fit call<span className="sr-only"> (opens in a new tab)</span></a>
+          <a href={bookHref} target="_blank" rel="noopener noreferrer" className="btn-m">Book a&nbsp;<span className="max-xl:hidden">20-minute&nbsp;</span>fit call<span className="sr-only"> (opens in a new tab)</span></a>
         </div>
 
         <button
