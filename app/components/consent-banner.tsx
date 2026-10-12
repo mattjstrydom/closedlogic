@@ -10,6 +10,7 @@ export const OPEN_EVENT = OPEN_CONSENT_EVENT;
 declare global {
   interface Window {
     dataLayer: unknown[];
+    clarity?: (...args: unknown[]) => void;
   }
 }
 
@@ -52,6 +53,11 @@ export default function ConsentBanner() {
       // eslint-disable-next-line prefer-rest-params
       window.dataLayer.push(arguments);
     })("consent", "update", Object.fromEntries(SIGNALS.map((s) => [s, v])));
+    // A plain event too, so a GTM Custom Event trigger can start consent-gated tags (Clarity) right after Accept.
+    window.dataLayer.push({ event: granted ? "consent_granted" : "consent_denied" });
+    // Microsoft Clarity (loaded from GTM) gets the same choice; withdrawing consent also erases its cookies.
+    window.clarity?.("consentv2", { ad_Storage: v, analytics_Storage: v });
+    if (!granted) window.clarity?.("consent", false);
     setDone(true);
     setReopened(false);
   };

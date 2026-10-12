@@ -13,6 +13,8 @@ const GTM = "GTM-M7JTCXDW";
 const head = `window.dataLayer=window.dataLayer||[];function dl(){dataLayer.push(arguments)}
 dl("consent","default",{ad_storage:"denied",analytics_storage:"denied",ad_user_data:"denied",ad_personalization:"denied"});
 try{if(localStorage.getItem("${CONSENT_KEY}")==="granted")dl("consent","update",{ad_storage:"granted",analytics_storage:"granted",ad_user_data:"granted",ad_personalization:"granted"})}catch(e){}
+window.clarity=window.clarity||function(){(window.clarity.q=window.clarity.q||[]).push(arguments)};
+try{var cc=localStorage.getItem("${CONSENT_KEY}")==="granted"?"granted":"denied";clarity("consentv2",{ad_Storage:cc,analytics_Storage:cc})}catch(e){}
 dataLayer.push({"gtm.start":Date.now(),event:"gtm.js"});
 function loadGtm(){var j=document.createElement("script");j.async=true;j.src="https://www.googletagmanager.com/gtm.js?id=${GTM}";document.head.appendChild(j)}
 function queueGtm(){window.requestIdleCallback?requestIdleCallback(loadGtm,{timeout:2000}):setTimeout(loadGtm,1)}
@@ -54,7 +56,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-ZA" className={`${archivo.variable} ${azeret.variable}`} suppressHydrationWarning>
+    <html lang="en-ZA" data-scroll-behavior="smooth" className={`${archivo.variable} ${azeret.variable}`} suppressHydrationWarning>
       <body>
         {/* Marks JS as available before first paint, so the A1 loop only runs when its pause control can work (WCAG 2.2.2). */}
         <script dangerouslySetInnerHTML={{ __html: jsFlag }} />
