@@ -44,9 +44,18 @@ export default function ConsentBanner() {
 
   const choose = (granted: boolean) => {
     const v = granted ? "granted" : "denied";
+    let unchanged = false;
     try {
+      unchanged = localStorage.getItem(KEY) === v;
       localStorage.setItem(KEY, v);
     } catch {}
+    // Same choice again (for example Accept, reopen Cookie settings, Accept): nothing to tell GTM or Clarity, and re-sending
+    // it would start the consent-gated tags a second time.
+    if (unchanged) {
+      setDone(true);
+      setReopened(false);
+      return;
+    }
     // Defaults are already denied; an explicit update also covers someone who accepted earlier.
     // GTM only reads Arguments objects pushed to dataLayer.
     (function dl(..._cmd: unknown[]) {
