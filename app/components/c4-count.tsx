@@ -3,7 +3,7 @@ import { Accent, Chip, Tick, TickPath } from "./ui";
 // C4 annotated count. Port of the approved v3 graphic as live markup. Figures match /sample-report (fictional).
 function OkTag() {
   return (
-    <span className="tag-ok">
+    <span className="tag-neutral">
       <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true" focusable="false">
         <TickPath />
       </svg>
@@ -13,7 +13,16 @@ function OkTag() {
   );
 }
 
-function BadTag({ n, children }: { n: number; children: string }) {
+function BadTag({ n, kind = "bad", children }: { n: number; kind?: "warn" | "bad"; children: string }) {
+  if (kind === "warn")
+    return (
+      <span className="tag-warn">
+        <span className="status-dot status-dot-warn" aria-hidden="true" />
+        <span className="sr-only">{n}. </span>
+        <span className="max-md:hidden">{children}</span>
+        <span className="sr-only md:hidden">{children}</span>
+      </span>
+    );
   return (
     <span className="tag-bad">
       <span className="tag-num">{n}</span>
@@ -24,7 +33,7 @@ function BadTag({ n, children }: { n: number; children: string }) {
 
 const rows: [string, string, React.ReactNode, React.ReactNode][] = [
   ["MQL", "142", "131", <OkTag key="a" />],
-  ["SQL", "61", <span key="b" className="anno-box inline-flex px-1.5">118</span>, <BadTag key="c" n={1}>Sent twice</BadTag>],
+  ["SQL", "61", <span key="b" className="anno-box inline-flex px-1.5">118</span>, <BadTag key="c" n={1} kind="warn">Sent twice</BadTag>],
   ["Opportunity", "24", "22", <OkTag key="d" />],
   ["Customer", "9", <span key="e" className="anno-box inline-flex px-1.5">0</span>, <BadTag key="f" n={2}>Not recording</BadTag>],
 ];
@@ -35,7 +44,14 @@ export function CountTable({ className = "" }: { className?: string }) {
     // overflow-x-auto, not hidden: below about 360px the table is wider than the card, so it scrolls sideways instead of
     // being clipped (WCAG 1.4.10 allows this for data tables). Chrome and Firefox make such scrollers keyboard-focusable.
     <div className={`frag overflow-x-auto ${className}`}>
-      <p className="border-b border-gray-100 px-4 py-3.5 text-[0.9375rem] tracking-[-0.01em] sm:px-5">Same 30 days. Stage changes in HubSpot against conversions recorded in Google Ads.</p>
+      <div className="flex items-center gap-3 border-b border-gray-100 px-4 py-3.5 sm:px-5">
+        <span className="flex gap-1.5" aria-hidden="true">
+          <i className="size-2.5 rounded-full bg-gray-100" />
+          <i className="size-2.5 rounded-full bg-gray-100" />
+          <i className="size-2.5 rounded-full bg-gray-100" />
+        </span>
+        <p className="text-[0.9375rem] tracking-[-0.01em]">Same 30 days. Stage changes in HubSpot against conversions recorded in Google Ads.</p>
+      </div>
       <table className="w-full border-collapse text-left text-[0.875rem] leading-snug sm:text-[0.9375rem]">
         <caption className="sr-only">Example: HubSpot stage changes against Google Ads conversions, same 30 days</caption>
         <thead>
@@ -86,7 +102,7 @@ export default function C4Count() {
             <span><span className="font-medium">MQL.</span> Close. Differences alone aren&apos;t a fault.</span>
           </li>
           <li className="flex gap-3">
-            <span className="note-num" aria-hidden="true">1</span>
+            <span className="note-num !bg-amber-text" aria-hidden="true">1</span>
             <span><span className="font-medium">SQL.</span> Sent twice: HubSpot integration and a Zapier automation.</span>
           </li>
           <li className="flex gap-3 text-green-text">

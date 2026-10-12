@@ -1,23 +1,36 @@
+"use client";
+
+import { useId, useState } from "react";
 import { Accent, Chip, Tick } from "./ui";
-import { site } from "../site.config";
 
-// C3 annotated finding. Port of the approved v3 graphic as live markup (fictional account).
+// C3 annotated finding with a Before fix / After fix toggle (fictional account). The server passes the caption
+// label, so this client bundle doesn't carry the whole site config. Before is the default and the no-JS state.
 const secondary = "rounded-pill border border-solid border-gray-200 px-3 py-1 text-[0.75rem] text-gray-600 sm:text-[0.8125rem]";
+const primary = "rounded-pill bg-black px-3 py-1 text-[0.75rem] text-white sm:text-[0.8125rem]";
 
-function BadTag({ n, children }: { n: number; children: string }) {
-  return (
+function Tag({ n, kind, children }: { n: number; kind: "bad" | "ok"; children: string }) {
+  return kind === "bad" ? (
     <span className="tag-bad">
       <span className="tag-num">{n}</span>
       <span className="max-md:hidden">{children}</span>
     </span>
+  ) : (
+    <span className="tag-ok">
+      <span className="status-dot status-dot-ok" aria-hidden="true" />
+      <span className="max-md:hidden">{children}</span>
+      <span className="sr-only md:hidden">{children}</span>
+    </span>
   );
 }
 
-export default function C3Finding() {
+export default function C3Finding({ label }: { label: string }) {
+  const [fixed, setFixed] = useState(false);
+  const name = useId();
+
   return (
     <figure
       aria-labelledby="c3-title"
-      className="mt-10 grid grid-cols-1 gap-8 rounded-card bg-white p-5 sm:p-10 lg:grid-cols-[5fr_7fr] lg:grid-rows-[1fr_auto] lg:gap-x-12"
+      className="bento mt-10 grid grid-cols-1 gap-8 !p-5 sm:!p-10 lg:grid-cols-[5fr_7fr] lg:grid-rows-[1fr_auto] lg:gap-x-12"
     >
       <div className="flex min-w-0 flex-col lg:col-start-1 lg:row-start-1">
         <Chip>Finding, close up</Chip>
@@ -26,10 +39,19 @@ export default function C3Finding() {
         </h3>
         <p className="mt-4 text-text-l text-gray-800">“Lead form submit” is the only Primary conversion action. “HubSpot MQL” and “HubSpot SQL” are syncing, but they are set to Secondary.</p>
 
-        <ol className="mt-7 space-y-4 text-text-m">
-          <li className="flex gap-3"><span className="note-num" aria-hidden="true">1</span><span><span className="sr-only">Note 1. </span>Form fills are the only Primary action, so Smart Bidding looks for more form fills.</span></li>
-          <li className="flex gap-3"><span className="note-num" aria-hidden="true">2</span><span><span className="sr-only">Note 2. </span>Syncing from HubSpot, so the connection looks fine.</span></li>
-          <li className="flex gap-3"><span className="note-num" aria-hidden="true">3</span><span><span className="sr-only">Note 3. </span>Set to Secondary, so Smart Bidding ignores it.</span></li>
+        <ol className="mt-7 space-y-4 text-text-m" aria-live="polite">
+          {!fixed ? (
+            <>
+              <li className="flex gap-3"><span className="note-num" aria-hidden="true">1</span><span><span className="sr-only">Note 1. </span>Form fills are the only Primary action, so Smart Bidding looks for more form fills.</span></li>
+              <li className="flex gap-3"><span className="note-num" aria-hidden="true">2</span><span><span className="sr-only">Note 2. </span>Syncing from HubSpot, so the connection looks fine.</span></li>
+              <li className="flex gap-3"><span className="note-num" aria-hidden="true">3</span><span><span className="sr-only">Note 3. </span>Set to Secondary, so Smart Bidding ignores it.</span></li>
+            </>
+          ) : (
+            <>
+              <li className="flex gap-3 text-green-text"><Tick size={22} /><span>Set to Primary, so Smart Bidding uses it.</span></li>
+              <li className="flex gap-3"><span className="note-ok" aria-hidden="true">✓</span><span>Syncing from HubSpot, so the connection looks fine.</span></li>
+            </>
+          )}
           <li className="flex gap-3 border-t border-gray-100 pt-4 text-green-text">
             <Tick size={22} />
             <span>The fix is a settings change, logged with its undo step and switched on the date you choose.</span>
@@ -38,6 +60,16 @@ export default function C3Finding() {
       </div>
 
       <div className="tile min-w-0 lg:col-start-2 lg:row-span-2 lg:row-start-1">
+        <fieldset className="mb-4 flex justify-center border-0 p-0 sm:justify-start">
+          <legend className="sr-only">Show the conversion actions before or after the fix</legend>
+          <div className="seg">
+            <input type="radio" id={`${name}-before`} name={name} className="seg-input sr-only" checked={!fixed} onChange={() => setFixed(false)} />
+            <label htmlFor={`${name}-before`} className="seg-item">Before fix</label>
+            <input type="radio" id={`${name}-after`} name={name} className="seg-input sr-only" checked={fixed} onChange={() => setFixed(true)} />
+            <label htmlFor={`${name}-after`} className="seg-item">After fix</label>
+          </div>
+        </fieldset>
+
         <div className="frag overflow-hidden">
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-gray-100 px-4 py-3.5 sm:px-5">
             <p className="text-[1rem] font-medium tracking-[-0.02em]">Conversion actions</p>
@@ -59,8 +91,14 @@ export default function C3Finding() {
               <tr>
                 <td className="pl-4 pr-2 sm:pl-5">Lead form submit</td>
                 <td className="px-2 text-gray-600 max-sm:hidden">Website form</td>
-                <td className="px-2"><span className="anno-box inline-flex"><span className="rounded-pill bg-black px-3 py-1 text-[0.75rem] text-white sm:text-[0.8125rem]">Primary</span></span></td>
-                <td className="pl-2 pr-4 text-right sm:pr-5"><BadTag n={1}>Only Primary action</BadTag></td>
+                <td className="px-2">
+                  {fixed ? (
+                    <span className={secondary}>Secondary</span>
+                  ) : (
+                    <span className="anno-box inline-flex"><span className={primary}>Primary</span></span>
+                  )}
+                </td>
+                <td className="pl-2 pr-4 text-right sm:pr-5">{!fixed && <Tag n={1} kind="bad">Only Primary action</Tag>}</td>
               </tr>
               <tr>
                 <td className="pl-4 pr-2 sm:pl-5">HubSpot MQL</td>
@@ -70,13 +108,25 @@ export default function C3Finding() {
               </tr>
               <tr>
                 <td className="pl-4 pr-2 sm:pl-5">HubSpot SQL</td>
-                <td className="px-2 max-sm:hidden"><span className="anno-box inline-flex px-1 font-mono text-[0.75rem] sm:text-[0.8125rem]">HubSpot, synced</span></td>
-                <td className="px-2"><span className="anno-box inline-flex"><span className={secondary}>Secondary</span></span></td>
+                <td className="px-2 max-sm:hidden">
+                  <span className={`inline-flex px-1 font-mono text-[0.75rem] sm:text-[0.8125rem] ${fixed ? "anno-ok" : "anno-box"}`}>HubSpot, synced</span>
+                </td>
+                <td className="px-2">
+                  {fixed ? (
+                    <span className="anno-ok inline-flex"><span className={primary}>Primary</span></span>
+                  ) : (
+                    <span className="anno-box inline-flex"><span className={secondary}>Secondary</span></span>
+                  )}
+                </td>
                 <td className="pl-2 pr-4 text-right sm:pr-5">
-                  <span className="flex flex-col items-end gap-1.5">
-                    <BadTag n={2}>Looks fine</BadTag>
-                    <BadTag n={3}>Ignored by bidding</BadTag>
-                  </span>
+                  {fixed ? (
+                    <Tag n={1} kind="ok">Counted for bidding</Tag>
+                  ) : (
+                    <span className="flex flex-col items-end gap-1.5">
+                      <Tag n={2} kind="bad">Looks fine</Tag>
+                      <Tag n={3} kind="bad">Ignored by bidding</Tag>
+                    </span>
+                  )}
                 </td>
               </tr>
               <tr>
@@ -110,7 +160,7 @@ export default function C3Finding() {
         </div>
       </div>
 
-      <figcaption className="img-label-quiet justify-self-start self-start lg:col-start-1 lg:row-start-2 lg:self-end">{site.c3Label}</figcaption>
+      <figcaption className="img-label-quiet justify-self-start self-start lg:col-start-1 lg:row-start-2 lg:self-end">{label}</figcaption>
     </figure>
   );
 }

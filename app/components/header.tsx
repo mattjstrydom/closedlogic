@@ -22,7 +22,7 @@ export default function Header({ path = "/", agency = false }: { path?: string; 
   const links = agency ? agencyLinks : directLinks;
   const bookHref = agency ? site.agencyBookingUrl : site.bookPath;
   return (
-    <header className="sticky top-0 z-20 bg-gray-50">
+    <header className="glass sticky top-0 z-20">
       <div className="container-site grid h-16 grid-cols-[1fr_auto] items-center gap-4 max-md:h-[60px] lg:grid-cols-[1fr_auto_1fr]">
         {/* /#hero, not /: a plain "/" can keep the visitor's old scroll position (the browser restores it), while a fragment always scrolls to the top of the home page, from any page or #section. */}
         {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}

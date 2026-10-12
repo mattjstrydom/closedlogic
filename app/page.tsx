@@ -10,6 +10,11 @@ import { Accent, Chip, SectionHead, Tick, TickList } from "./components/ui";
 import { Slot } from "./components/ph";
 import { ConsentMock, ConversionMock, CookieMock } from "./components/mocks";
 import A1LeadToBid from "./components/a1-lead-to-bid";
+import HeroTabs from "./components/hero-tabs";
+import ChecksPreview from "./components/checks-preview";
+import StepBadge from "./components/step-badge";
+import { PlatformPills, FounderCard } from "./components/trust";
+import { checkItems } from "./checks-data";
 import A2SecondaryToPrimary from "./components/a2-secondary-to-primary";
 import A3ChangeLog from "./components/a3-change-log";
 import C3Finding from "./components/c3-finding";
@@ -30,20 +35,8 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: homeTitle, description, images: [twitterImage] },
 };
 
-const checks: { q: string; more?: string; mock?: React.ReactNode }[] = [
-  { q: "Which conversions is Smart Bidding actually optimising for, and which are duplicates, tests or leftovers?", mock: <ConversionMock /> },
-  {
-    q: "Are your lifecycle stages (MQL, SQL, opportunity, customer) set up as conversions, included in your goals, firing, and carrying the right value?",
-  },
-  { q: "Is any stage sent more than once, through HubSpot, Data Manager or a Zapier automation?" },
-  {
-    q: "Does each contact reach Google with a click ID or contact data (email, phone or address), so it can be matched to an ad click? And is Google's combined enhanced conversions setting switched on?",
-    mock: <CookieMock />,
-  },
-  { q: "Is anything still on legacy offline import or a custom API upload, or routed through a manager account that HubSpot can't connect?" },
-  { q: "Are consent signals set correctly for traffic from the EEA, where Google requires them?", mock: <ConsentMock /> },
-  { q: "For the same period, how do HubSpot's stage changes and Google Ads' conversions compare, and what explains the gap?" },
-];
+const checkMocks: Record<number, React.ReactNode> = { 0: <ConversionMock />, 3: <CookieMock />, 5: <ConsentMock /> };
+const checks = checkItems.map(({ q }, i) => ({ q, mock: checkMocks[i] }));
 
 const included = [
   "A written report, with a screenshot for every finding",
@@ -197,7 +190,7 @@ export default function Home() {
       <Header />
       <main id="main" tabIndex={-1}>
         {/* 1. Hero */}
-        <section id="hero" aria-labelledby="hero-title">
+        <section id="hero" aria-labelledby="hero-title" className="glow-bg">
           <div className="container-site grid grid-cols-1 items-center gap-8 pb-12 pt-14 sm:gap-12 sm:pb-16 lg:min-h-[806px] lg:grid-cols-[1.4fr_1fr] lg:gap-5 lg:py-0">
             <div className="flex flex-col items-center gap-6 text-center lg:items-start lg:text-left">
               <p className="chip">
@@ -226,7 +219,15 @@ export default function Home() {
                 <p className="text-left text-[0.875rem] leading-[1.3] tracking-[-0.02em] font-medium">A named lead on every check</p>
               </div>
             </div>
-            <A1LeadToBid />
+            <div className="flex min-w-0 flex-col items-center gap-6 lg:items-start">
+              <HeroTabs
+                tabs={[
+                  { label: "Lead to bid", panel: <A1LeadToBid /> },
+                  { label: "The seven checks", panel: <ChecksPreview /> },
+                ]}
+              />
+              <PlatformPills names={["HubSpot Marketing Hub", "Google Ads Data Manager", "Enhanced conversions for leads"]} className="max-w-[460px] justify-center lg:justify-start" />
+            </div>
           </div>
         </section>
 
@@ -282,15 +283,12 @@ export default function Home() {
               Seven questions we answer <Accent>in every check</Accent>
             </SectionHead>
             <ol className="bento mt-10">
-              {checks.map(({ q, more, mock }, i) => (
-                <li key={q} className="grid gap-4 border-t border-gray-100 py-6 first:border-0 first:pt-0 last:pb-0 lg:grid-cols-[1fr_22rem] lg:gap-12">
+              {checks.map(({ q, mock }, i) => (
+                <li key={q} className="group grid gap-4 border-t border-gray-100 py-6 first:border-0 first:pt-0 last:pb-0 lg:grid-cols-[1fr_22rem] lg:gap-12">
                   <div className="max-w-[64ch]">
-                    <p className="font-mono text-[12px] leading-[1.3] tracking-normal text-gray-600" aria-hidden="true">
-                      {String(i + 1).padStart(2, "0")}
-                    </p>
-                    <p className="mt-2 text-text-l">
+                    <StepBadge n={i + 1} pad />
+                    <p className="mt-3 text-text-l">
                       <span className="font-medium">{q}</span>
-                      {more && <> {more}</>}
                     </p>
                   </div>
                   {mock && <div>{mock}</div>}
@@ -310,7 +308,7 @@ export default function Home() {
               <p>We fix everything on the list that lives in Google Ads, HubSpot or Tag Manager settings. You see every proposed change before we make it, and nothing changes without your approval.</p>
               <p>You also choose when bidding changes go live. Google says Smart Bidding takes some time to relearn after a change to conversion goals or actions (1 to 2 conversion cycles in most cases).</p>
             </div>
-            <C3Finding />
+            <C3Finding label={site.c3Label} />
             <A2SecondaryToPrimary />
           </div>
         </section>
@@ -345,8 +343,8 @@ export default function Home() {
             <div className="mt-10 grid gap-5 lg:grid-cols-[5fr_7fr] lg:items-start">
               <ol>
                 {steps.map(([lead, rest], i) => (
-                  <li key={lead} className="grid grid-cols-[3rem_1fr] gap-2 border-t border-gray-200 py-5 last:border-b">
-                    <span className="text-title-s text-green-500" aria-hidden="true">{i + 1}</span>
+                  <li key={lead} className="group grid grid-cols-[3.25rem_1fr] items-start gap-2 border-t border-gray-200 py-5 last:border-b">
+                    <StepBadge n={i + 1} large />
                     <p className="text-text-m">
                       <span className="font-medium">{lead}</span> {rest}
                     </p>
@@ -359,7 +357,7 @@ export default function Home() {
         </section>
 
         {/* 7. Pricing (C2) and monthly plan */}
-        <section id="pricing" aria-labelledby="pricing-title" className="section-y">
+        <section id="pricing" aria-labelledby="pricing-title" className="glow-bg section-y">
           <span id="price" aria-hidden="true" />
           <div className="container-site">
             <Chip>Pricing</Chip>
@@ -367,64 +365,72 @@ export default function Home() {
               One price.
               <br className="max-lg:hidden" /> <Accent>A named lead on every check.</Accent>
             </h2>
-            <div className="mt-10 grid grid-cols-1 gap-4 lg:grid-cols-[5fr_7fr]">
-              {/* Price card */}
+            <div className="mt-10 grid grid-cols-1 gap-5 lg:grid-cols-2">
+              {/* Check and fix */}
               <div className="bento-dark on-dark flex flex-col p-6 sm:p-10">
                 <p className="text-[1rem] font-medium tracking-[-0.02em] text-green-200">Check and fix</p>
                 <p className="mt-3 text-[4rem] leading-none font-medium tracking-[-0.05em] sm:text-[5rem]">
                   $1,200<span className="text-[1.5rem] tracking-[-0.03em] text-green-200">, fixed</span>
                 </p>
-                <ul className="mt-8 text-[1rem] leading-[1.5] tracking-[-0.02em] text-white/90">
-                  {priceTerms.map((t) => (
-                    <li key={t} className="border-t border-white/15 py-3.5">{t}</li>
+                <ul className="mt-6 flex flex-wrap gap-2">
+                  {["Seven checks", "Google Ads", "HubSpot", "Tag Manager", "7 business days of access"].map((t) => (
+                    <li key={t} className="pill-scope">{t}</li>
                   ))}
                 </ul>
+                <TickList items={[priceTerms[0], priceTerms[1], priceTerms[3]]} className="mt-6 text-[1rem] leading-[1.5] tracking-[-0.02em] text-white/90" />
+                <p className="mt-6 flex gap-3 rounded-tile border border-green-200/40 bg-white/10 p-4 text-[1rem] leading-[1.5] tracking-[-0.02em]">
+                  <Tick size={22} className="mt-0.5" />
+                  <span>{priceTerms[2]}</span>
+                </p>
                 <div className="mt-6 flex flex-wrap items-center gap-4 lg:mt-auto lg:pt-6">
                   <CalButton className="w-full sm:w-auto" />
                 </div>
               </div>
 
-              {/* Company card */}
-              <div className="bento p-6 sm:p-10">
-                <div className="min-w-0">
-                  <p className="text-title-m">{site.brand}</p>
-                  <p className="mt-2 text-text-l text-gray-800">Every check has a named lead from our team who joins your fit call and stays on your account through handover, so nothing gets handed off mid-check.</p>
-                  <p className="mt-3 text-text-m text-gray-800">Founded by Matt Strydom.</p>
-                  <a href={site.linkedin} className="btn-quiet mt-4">Matt on LinkedIn</a>
-                </div>
-
-                <dl className="mt-8 grid grid-cols-1 gap-x-6 gap-y-1 text-[1rem] leading-[1.5] tracking-[-0.02em] sm:grid-cols-[120px_1fr] sm:gap-y-3">
-                  <dt className="text-gray-600">Company</dt>
-                  <dd className="mb-3 [text-wrap:balance] sm:mb-0">{site.legalLine}.</dd>
-                  <dt className="text-gray-600">Billing</dt>
-                  <dd className="mb-3 sm:mb-0">Invoices in USD through Stripe.</dd>
-                  <dt className="text-gray-600">Reply time</dt>
-                  <dd className="mb-3 sm:mb-0">
-                    <Slot value={site.replyTime} />
-                  </dd>
-                  <dt className="text-gray-600">Booking</dt>
-                  <dd>
-                    <a href={site.bookPath} target="_blank" rel="noopener noreferrer" className="link">Book a 20-minute fit call<span className="sr-only"> (opens in a new tab)</span></a>. If it&apos;s not a fit, we&apos;ll say so on the call.
-                  </dd>
-                </dl>
-
-              </div>
-            </div>
-
-            {/* Monthly plan */}
-            <div className="bento mt-5 grid gap-8 lg:grid-cols-[5fr_7fr] lg:gap-12">
-              <div>
-                <h3 className="text-title-m">
+              {/* Monthly plan */}
+              <div className="bento flex flex-col p-6 sm:p-10">
+                <h3 className="text-[1rem] font-medium tracking-[-0.02em] text-gray-600">
                   Monthly plan: <Accent small>we keep the connection fixed</Accent>
                 </h3>
-                <p className="mt-4 text-text-l">A monitored-account plan, not an hours bank. $750 a month for one HubSpot portal and one Google Ads account.</p>
-              </div>
-              <div className="min-w-0">
-                <p className="font-medium">Every month:</p>
+                <p className="mt-3 text-[4rem] leading-none font-medium tracking-[-0.05em] sm:text-[5rem]">
+                  $750<span className="text-[1.5rem] tracking-[-0.03em] text-gray-600"> a month</span>
+                </p>
+                <ul className="mt-6 flex flex-wrap gap-2">
+                  {["One HubSpot portal", "One Google Ads account", "Up to 1.5 hours a month"].map((t) => (
+                    <li key={t} className="pill-scope">{t}</li>
+                  ))}
+                </ul>
+                <p className="mt-6 text-text-l">A monitored-account plan, not an hours bank. $750 a month for one HubSpot portal and one Google Ads account.</p>
+                <p className="mt-6 font-medium">Every month:</p>
                 <TickList items={monthlyDirect} className="mt-3" />
                 <p className="mt-4 text-text-m text-gray-600">Other ops work (routing, clean-up, reporting, new builds) is quoted separately in blocks at $150 an hour, 5-hour minimum.</p>
                 <p className="mt-4 text-text-m text-gray-600">3-month minimum, then month to month with 30 days&apos; notice. Billed monthly in advance by Stripe subscription.</p>
+                <div className="mt-6 lg:mt-auto lg:pt-6">
+                  <CalButton className="w-full sm:w-auto" />
+                </div>
               </div>
+            </div>
+
+            {/* Company details */}
+            <div className="bento mt-5 grid gap-8 lg:grid-cols-[5fr_7fr] lg:gap-12">
+              <div className="min-w-0">
+                <p className="text-title-m">{site.brand}</p>
+                <p className="mt-2 text-text-l text-gray-800">Every check has a named lead from our team who joins your fit call and stays on your account through handover, so nothing gets handed off mid-check.</p>
+              </div>
+              <dl className="grid grid-cols-1 gap-x-6 gap-y-1 text-[1rem] leading-[1.5] tracking-[-0.02em] sm:grid-cols-[120px_1fr] sm:gap-y-3">
+                <dt className="text-gray-600">Company</dt>
+                <dd className="mb-3 [text-wrap:balance] sm:mb-0">{site.legalLine}.</dd>
+                <dt className="text-gray-600">Billing</dt>
+                <dd className="mb-3 sm:mb-0">Invoices in USD through Stripe.</dd>
+                <dt className="text-gray-600">Reply time</dt>
+                <dd className="mb-3 sm:mb-0">
+                  <Slot value={site.replyTime} />
+                </dd>
+                <dt className="text-gray-600">Booking</dt>
+                <dd>
+                  <a href={site.bookPath} target="_blank" rel="noopener noreferrer" className="link">Book a 20-minute fit call<span className="sr-only"> (opens in a new tab)</span></a>. If it&apos;s not a fit, we&apos;ll say so on the call.
+                </dd>
+              </dl>
             </div>
           </div>
         </section>
@@ -495,6 +501,7 @@ export default function Home() {
         {/* 11. Proof */}
         <section id="proof" aria-labelledby="proof-title" className="section-y">
           <div className="container-site">
+            <div className="grid gap-5 lg:grid-cols-[7fr_5fr]">
             <div className="bento">
               <h2 id="proof-title" className="text-title-m">Proof</h2>
               {site.caseStudy && (
@@ -508,6 +515,12 @@ export default function Home() {
                 {site.caseStudy ? "Until then, our " : "Our "}
                 <Link href="/sample-report" className="link">sample report</Link> shows exactly what you receive. It&apos;s built on a fictional account: the company, figures and screenshots are illustrative, not a client result.
               </p>
+            </div>
+            <FounderCard />
+            </div>
+            <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-3">
+              <p className="text-text-m text-gray-600">Inside your own accounts</p>
+              <PlatformPills />
             </div>
           </div>
         </section>

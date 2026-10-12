@@ -1,6 +1,7 @@
+import CodeBlock, { type Tok } from "./code-block";
+
 // Product-style illustrations. Values are literal identifiers / example rows, labelled "Example".
 const frame = "frag overflow-hidden text-[0.8125rem] leading-snug";
-const mono = "font-mono";
 
 function Caption() {
   return <p className="img-label-quiet m-3">Example</p>;
@@ -41,15 +42,17 @@ export function ConversionMock() {
 
 export function CookieMock() {
   return (
-    <div className={frame}>
-      <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5 border-b border-gray-100 px-3 py-3">
-        <dt className="text-gray-600">Name</dt>
-        <dd className={mono}>_gcl_aw</dd>
-        <dt className="text-gray-600">Value</dt>
-        <dd className={`${mono} break-all`}>GCL.1700000000.Cj0KCQ…</dd>
-        <dt className="text-gray-600">Domain</dt>
-        <dd className={mono}>.example.com</dd>
-      </dl>
+    <div>
+      <CodeBlock
+        title="Cookie"
+        copyText="_gcl_aw"
+        copyLabel="Copy the cookie name _gcl_aw"
+        lines={[
+          [["k", "Name    "], ["v", "_gcl_aw"]],
+          [["k", "Value   "], ["s", "GCL.1700000000.Cj0KCQ…"]],
+          [["k", "Domain  "], ["s", ".example.com"]],
+        ]}
+      />
       <Caption />
     </div>
   );
@@ -58,16 +61,16 @@ export function CookieMock() {
 export function ConsentMock() {
   const keys = ["ad_storage", "analytics_storage", "ad_user_data", "ad_personalization"];
   return (
-    <div className={frame}>
-      <ul className={`${mono} space-y-1 border-b border-gray-100 px-3 py-3`}>
-        <li className="text-gray-600">consent: default</li>
-        {keys.map((k) => (
-          <li key={k} className="flex justify-between gap-4">
-            <span>{k}</span>
-            <span>denied</span>
-          </li>
-        ))}
-      </ul>
+    <div>
+      <CodeBlock
+        title="Consent"
+        copyText={keys.map((k) => k + ": denied").join("\n")}
+        copyLabel="Copy the four consent defaults"
+        lines={[
+          [["c", "consent: default"]],
+          ...keys.map((k): Tok[] => [["k", k], ["", ": "], ["s", "denied"]]),
+        ]}
+      />
       <Caption />
     </div>
   );

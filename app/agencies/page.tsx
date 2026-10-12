@@ -64,7 +64,7 @@ export default function Agencies() {
       <Header path="/agencies" agency />
       <main id="main" tabIndex={-1}>
         {/* 1. Hero */}
-        <section id="hero" aria-labelledby="hero-title">
+        <section id="hero" aria-labelledby="hero-title" className="glow-bg">
           <div className="container-site flex flex-col items-center gap-6 pb-16 pt-14 text-center lg:items-start lg:py-24 lg:text-left">
             <h1 id="hero-title" className="text-title-xl max-w-[900px]">
               Your client&apos;s Google Ads bids on form fills. <Accent>Their sales team qualifies in HubSpot.</Accent>
@@ -145,7 +145,7 @@ export default function Agencies() {
         </section>
 
         {/* 6. Pricing after the pilot */}
-        <section id="pricing" aria-labelledby="pricing-title" className="section-y">
+        <section id="pricing" aria-labelledby="pricing-title" className="glow-bg section-y">
           <div className="container-site">
             <SectionHead id="pricing">Pricing after the pilot</SectionHead>
             <div className="mt-10 grid gap-5 lg:grid-cols-[5fr_7fr]">
@@ -160,23 +160,18 @@ export default function Agencies() {
                   Monthly plan: <Accent small>we keep your clients&apos; connections fixed</Accent>
                 </h3>
                 <p className="mt-4 text-text-l">A monitored-account plan, not an hours bank. Start with one account and add more as you go.</p>
-                <table className="mt-6 w-full border-collapse text-left text-text-m">
-                  <caption className="sr-only">Monthly plan prices</caption>
-                  <thead>
-                    <tr className="text-gray-600">
-                      <th scope="col" className="py-3 pr-3 font-normal">Client accounts</th>
-                      <th scope="col" className="py-3 pl-3 font-normal">Price a month</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {plans.map(([n, price]) => (
-                      <tr key={n} className="border-t border-gray-100 align-top">
-                        <th scope="row" className="py-3 pr-3 font-normal">{n}</th>
-                        <td className="py-3 pl-3 font-medium">{price}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                <ul aria-label="Monthly plan prices" className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+                  {plans.map(([n, price]) => (
+                    <li key={n} className="rounded-tile border border-solid border-gray-100 bg-gray-50 p-4">
+                      <dl>
+                        <dt className="text-text-s text-gray-600">Client accounts</dt>
+                        <dd className="mt-1 text-title-s">{n}</dd>
+                        <dt className="mt-3 text-text-s text-gray-600">Price a month</dt>
+                        <dd className="mt-1 text-title-xs font-medium">{price}</dd>
+                      </dl>
+                    </li>
+                  ))}
+                </ul>
                 <p className="mt-4 text-text-m text-gray-600">$500 a month per account for your first four accounts, then $400 a month for each account from the fifth.</p>
                 <p className="mt-6 font-medium">On each account, every month:</p>
                 <TickList items={monthly} className="mt-3" />
