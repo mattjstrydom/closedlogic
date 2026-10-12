@@ -434,7 +434,7 @@ export default function Home() {
         <section id="agencies" aria-label="Agencies" className="pb-4">
           <div className="container-site">
             <p className="text-text-l">
-              <Link href="/agencies" className="link">Agency? See how we work under your name.</Link>
+              <Link href="/agencies" className="link inline-flex min-h-6 items-center">Agency? See how we work under your name.</Link>
             </p>
           </div>
         </section>
