@@ -13,6 +13,7 @@ import A1LeadToBid from "./components/a1-lead-to-bid";
 import HeroTabs from "./components/hero-tabs";
 import ChecksPreview from "./components/checks-preview";
 import StepBadge from "./components/step-badge";
+import Pipeline from "./components/pipeline";
 import { PlatformPills } from "./components/trust";
 import { checkItems } from "./checks-data";
 import A2SecondaryToPrimary from "./components/a2-secondary-to-primary";
@@ -257,6 +258,7 @@ export default function Home() {
               Syncing a stage <Accent>isn&apos;t the same as bidding on it</Accent>
             </SectionHead>
             <p className="mt-4 max-w-[64ch] text-text-l text-gray-800">HubSpot can show MQLs and SQLs in Google Ads while Smart Bidding ignores them.</p>
+            <Pipeline />
             <div className="mt-10 grid gap-5 lg:grid-cols-3">
               <div className="bento text-text-l">
                 <p>If HubSpot already sends your lifecycle stages to Google Ads, the question is whether Smart Bidding uses them. A stage set as Secondary is reported but not bid on, unless a custom goal includes it. A Primary stage outside the goal your campaigns bid on isn&apos;t bid on either.</p>
@@ -383,7 +385,7 @@ export default function Home() {
                   ))}
                 </ul>
                 <TickList items={[priceTerms[0], priceTerms[1], priceTerms[3]]} className="mt-6 text-[1rem] leading-[1.5] tracking-[-0.02em] text-white/90" />
-                <p className="mt-6 flex gap-3 rounded-tile border border-green-200/40 bg-white/10 p-4 text-[1rem] leading-[1.5] tracking-[-0.02em]">
+                <p className="mt-6 flex gap-3 rounded-lg border border-[#3b82f6]/30 bg-[#3b82f6]/5 p-4 text-[1rem] leading-[1.5] tracking-[-0.02em]">
                   <Tick size={22} className="mt-0.5" />
                   <span><strong className="block font-medium">The pay-half guarantee</strong>{priceTerms[2]}</span>
                 </p>
