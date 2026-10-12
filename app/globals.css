@@ -5,45 +5,48 @@
 @theme {
   --color-*: initial;               /* only the colours below exist */
   --color-white: #ffffff;
-  --color-black: #15171a;           /* ink: text, Primary pills */
-  --color-gray-50: #f2f6f5;         /* page background (paper) */
-  --color-gray-100: #d9dfde;        /* hairlines inside fragments */
-  --color-gray-200: #bec9c6;        /* borders, A1 connector line */
-  --color-gray-300: #a5b2af;
-  --color-gray-400: #8b9a96;
-  --color-gray-500: #73817e;        /* decorative only, never text (4.06:1) */
-  --color-gray-600: #5c6764;        /* secondary text, chips */
-  --color-gray-700: #454e4c;
-  --color-gray-800: #2e3332;        /* lead paragraphs inside cards */
-  --color-green-100: #c4ece1;       /* OK tags, "To reverse" tiles, access tile */
-  --color-green-200: #93dcc8;       /* accent text on blue-700 */
+  --color-surface: #121a27;         /* card surface (dark theme) */
+  --color-pill: #e6edf4;            /* Primary pill fill */
+  --color-pill-ink: #0b0f17;
+  --color-black: #eef2f6;           /* ink: text, Primary pills */
+  --color-gray-50: #0b0f17;         /* page background (paper) */
+  --color-gray-100: #1f2a3a;        /* hairlines inside fragments */
+  --color-gray-200: #2d3a4e;        /* borders, A1 connector line */
+  --color-gray-300: #44546b;
+  --color-gray-400: #5d6f87;
+  --color-gray-500: #73849b;        /* decorative only, never text (4.06:1) */
+  --color-gray-600: #9fb0c3;        /* secondary text, chips */
+  --color-gray-700: #b7c4d3;
+  --color-gray-800: #d3dde8;        /* lead paragraphs inside cards */
+  --color-green-100: #0f3a31;       /* OK tags, "To reverse" tiles, access tile */
+  --color-green-200: #8fe3c9;       /* accent text on blue-700 */
   --color-green-300: #60c7ac;
   --color-green-400: #37a88a;
-  --color-green-500: #08906c;       /* accent phrase in large headings, check circles. Not for text under 24px */
-  --color-green-text: #067857;      /* small green text and links on white or gray-50 */
-  --color-green-deep: #05664a;      /* green text on green-100 */
-  --color-tint-ok: #eaf7f2;         /* A2 final row tint */
-  --color-coral-10: #fdfafa;
-  --color-coral-50: #fbeeec;
-  --color-coral-100: #f6dad5;
-  --color-coral-200: #ebb5ab;
+  --color-green-500: #2fc596;       /* accent phrase in large headings, check circles. Not for text under 24px */
+  --color-green-text: #5fd3b0;      /* small green text and links on white or gray-50 */
+  --color-green-deep: #9be8d2;      /* green text on green-100 */
+  --color-tint-ok: #0f2a26;         /* A2 final row tint */
+  --color-coral-10: #170f11;
+  --color-coral-50: #2a1517;
+  --color-coral-100: #3b1b1d;
+  --color-coral-200: #7a3a35;
   --color-coral-400: #e06f68;
   --color-coral-500: #ce3c2b;       /* primary button fill only; text use only on white */
-  --color-coral-text: #b33222;      /* coral text, fault tags, outlines, annotation */
-  --color-blue-50: #ebf5f9;
-  --color-blue-100: #d8ebf4;
-  --color-blue-200: #b0d4e8;
+  --color-coral-text: #ff9a8c;      /* coral text, fault tags, outlines, annotation */
+  --color-blue-50: #101c2a;
+  --color-blue-100: #15263a;
+  --color-blue-200: #28486a;
   --color-blue-500: #478fb8;        /* decorative only (3.57:1 on white) */
-  --color-blue-600: #356f92;        /* small blue text */
-  --color-blue-700: #2b4d60;        /* dark surfaces, A1 card titles */
-  --color-purple-100: #edddf8;
-  --color-purple-text: #8a3bb0;     /* A1 "Smart Bidding" label */
-  --color-error: #b3261e;           /* form errors (existing) */
-  --color-amber-100: #fdf1d6;       /* warning tag fill */
+  --color-blue-600: #86bddd;        /* small blue text */
+  --color-blue-700: #a9d2ea;        /* dark surfaces, A1 card titles */
+  --color-purple-100: #2a1a3a;
+  --color-purple-text: #d3a8f0;     /* A1 "Smart Bidding" label */
+  --color-error: #ff8a80;           /* form errors (existing) */
+  --color-amber-100: #3a2a08;       /* warning tag fill */
   --color-amber-400: #e0a52e;       /* warning status dot */
-  --color-amber-text: #8a5a00;      /* warning tag text (5.3:1 on amber-100) */
-  --color-neutral-100: #e8eef2;     /* neutral tag fill */
-  --color-neutral-text: #3d4f5c;    /* neutral tag text (7.2:1 on neutral-100) */
+  --color-amber-text: #f2c566;      /* warning tag text (5.3:1 on amber-100) */
+  --color-neutral-100: #1e2a38;     /* neutral tag fill */
+  --color-neutral-text: #b6c6d6;    /* neutral tag text (7.2:1 on neutral-100) */
 
   /* Type scale: values switch at 768 and 1280 via custom properties in @layer base */
   --text-title-xl: var(--fs-title-xl); --text-title-xl--line-height: 1.2;  --text-title-xl--letter-spacing: -0.03em; --text-title-xl--font-weight: 500;
@@ -62,9 +65,9 @@
   --radius-tile: 16px;   /* fragments, inner tiles, headshot */
   --radius-chip: 12px;   /* icon tiles, small panels */
 
-  --shadow-float: 0 22px 22px rgba(43, 77, 96, .09), 0 5px 12px rgba(43, 77, 96, .1);  /* fragments only, never on cards */
+  --shadow-float: 0 22px 30px -8px rgba(0, 0, 0, .55), inset 0 0 0 1px rgb(255 255 255 / .07);  /* fragments only, never on cards */
   --shadow-soft: 0 9px 9px rgba(0, 0, 0, .09);
-  --shadow-card: 0 1px 2px rgba(21, 23, 26, .04), 0 14px 32px -18px rgba(43, 77, 96, .28);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, .3), 0 18px 40px -20px rgba(0, 0, 0, .6);
 
   --ease-zig: cubic-bezier(0.215, 0.61, 0.355, 1);   /* measured zig transform transition */
   --ease-power4-out: cubic-bezier(0.22, 1, 0.36, 1);  /* entrances (inferred power4.out) */
@@ -91,7 +94,7 @@
     :root { --fs-title-xl: 2rem; --fs-title-l: 1.75rem; --fs-title-m: 1.375rem; --fs-title-s: 1.25rem; --fs-title-xs: 1.125rem;
             --fs-text-xl: 1rem; --fs-text-l: .875rem; --fs-text-m: .875rem; --fs-text-s: .75rem; }
   }
-  html { -webkit-text-size-adjust: 100%; scroll-padding-top: 5rem; }
+  html { -webkit-text-size-adjust: 100%; scroll-padding-top: 5rem; color-scheme: dark; }
   @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
   body {
     min-height: 100dvh; display: flex; flex-direction: column;
@@ -122,13 +125,13 @@
 @layer components {
   /* Primary pill: measured zig .button (16px 40px, 1rem/130%, 500, -0.03em, radius 80px, colour .3s).
      Border added so the hover state (white fill) keeps its edge on white cards. */
-  .btn { @apply inline-flex min-h-12 items-center justify-center whitespace-nowrap rounded-pill border-[1.5px] border-solid border-coral-500 bg-coral-500 px-10 py-4 text-[1rem] leading-[1.3] font-medium tracking-[-0.03em] text-white no-underline transition-[background-color,color,transform] duration-300 hover:bg-white hover:text-coral-500 active:bg-coral-50 active:text-coral-text; }
-  .btn-outline { @apply inline-flex min-h-12 items-center justify-center whitespace-nowrap rounded-pill border-[1.5px] border-solid border-coral-500 bg-white px-10 py-4 text-[1rem] leading-[1.3] font-medium tracking-[-0.03em] text-coral-text no-underline transition-colors duration-300 hover:bg-coral-50 active:bg-coral-100; }
+  .btn { @apply inline-flex min-h-12 items-center justify-center whitespace-nowrap rounded-pill border-[1.5px] border-solid border-coral-500 bg-coral-500 px-10 py-4 text-[1rem] leading-[1.3] font-medium tracking-[-0.03em] text-white no-underline transition-[background-color,color,transform] duration-300 hover:bg-surface hover:text-coral-500 active:bg-coral-50 active:text-coral-text; }
+  .btn-outline { @apply inline-flex min-h-12 items-center justify-center whitespace-nowrap rounded-pill border-[1.5px] border-solid border-coral-500 bg-surface px-10 py-4 text-[1rem] leading-[1.3] font-medium tracking-[-0.03em] text-coral-text no-underline transition-colors duration-300 hover:bg-coral-50 active:bg-coral-100; }
   /* Nav-size variants: measured 12px 24px, 14px */
-  .btn-m { @apply inline-flex min-h-10 max-sm:min-h-11 items-center justify-center whitespace-nowrap rounded-pill border-[1.5px] border-solid border-coral-500 bg-coral-500 px-6 py-2.5 text-[0.875rem] leading-[1.3] font-medium tracking-[-0.03em] text-white no-underline transition-colors duration-300 hover:bg-white hover:text-coral-500 active:bg-coral-50 active:text-coral-text; }
-  .btn-m-outline { @apply inline-flex min-h-10 max-sm:min-h-11 items-center justify-center whitespace-nowrap rounded-pill border-[1.5px] border-solid border-coral-500 bg-white px-5 py-2.5 text-[0.875rem] leading-[1.3] font-medium tracking-[-0.03em] text-coral-text no-underline transition-colors duration-300 hover:bg-coral-50 active:bg-coral-100; }
+  .btn-m { @apply inline-flex min-h-10 max-sm:min-h-11 items-center justify-center whitespace-nowrap rounded-pill border-[1.5px] border-solid border-coral-500 bg-coral-500 px-6 py-2.5 text-[0.875rem] leading-[1.3] font-medium tracking-[-0.03em] text-white no-underline transition-colors duration-300 hover:bg-surface hover:text-coral-500 active:bg-coral-50 active:text-coral-text; }
+  .btn-m-outline { @apply inline-flex min-h-10 max-sm:min-h-11 items-center justify-center whitespace-nowrap rounded-pill border-[1.5px] border-solid border-coral-500 bg-surface px-5 py-2.5 text-[0.875rem] leading-[1.3] font-medium tracking-[-0.03em] text-coral-text no-underline transition-colors duration-300 hover:bg-coral-50 active:bg-coral-100; }
   /* Quiet white pill (LinkedIn link) */
-  .btn-quiet { @apply inline-flex min-h-10 max-sm:min-h-11 items-center justify-center whitespace-nowrap rounded-pill border border-solid border-gray-200 bg-white px-4 py-2 text-[0.875rem] leading-[1.3] font-medium tracking-[-0.03em] text-black no-underline transition-colors duration-300 hover:bg-gray-50; }
+  .btn-quiet { @apply inline-flex min-h-10 max-sm:min-h-11 items-center justify-center whitespace-nowrap rounded-pill border border-solid border-gray-200 bg-surface px-4 py-2 text-[0.875rem] leading-[1.3] font-medium tracking-[-0.03em] text-black no-underline transition-colors duration-300 hover:bg-gray-50; }
   .link { @apply text-green-text underline decoration-1 underline-offset-[0.2em] hover:decoration-2; }
   .on-dark .link { @apply text-green-200; }
 
@@ -148,9 +151,9 @@
   .tag-info { @apply inline-flex items-center gap-1.5 whitespace-nowrap rounded-pill px-3 py-1 font-mono text-[12px] leading-[1.3] font-medium tracking-normal bg-blue-50 text-blue-700; }
   .tag-wait { @apply inline-flex items-center gap-1.5 whitespace-nowrap rounded-pill px-3 py-1 font-mono text-[12px] leading-[1.3] font-medium tracking-normal bg-coral-50 text-coral-text; }
   /* FIX: was white text on white/25 (3.88:1). Now coral-text on white (6.18:1) */
-  .tag-num { @apply inline-flex size-[16px] items-center justify-center rounded-full bg-white text-[10px] font-semibold text-coral-text; }
-  .goal-primary { @apply rounded-pill bg-black px-3 py-1 text-[0.75rem] leading-[1.3] text-white sm:text-[0.8125rem]; }
-  .goal-secondary { @apply rounded-pill border border-solid border-gray-200 bg-white px-3 py-1 text-[0.75rem] leading-[1.3] text-gray-600 sm:text-[0.8125rem]; }
+  .tag-num { @apply inline-flex size-[16px] items-center justify-center rounded-full bg-surface text-[10px] font-semibold text-coral-text; }
+  .goal-primary { @apply rounded-pill bg-pill px-3 py-1 text-[0.75rem] leading-[1.3] text-pill-ink sm:text-[0.8125rem]; }
+  .goal-secondary { @apply rounded-pill border border-solid border-gray-200 bg-surface px-3 py-1 text-[0.75rem] leading-[1.3] text-gray-600 sm:text-[0.8125rem]; }
 
   /* Annotation */
   .anno-box { @apply rounded-[6px] outline-[1.5px] outline-offset-[3px] outline-coral-text outline-solid; }
@@ -158,26 +161,26 @@
   .note-ok { @apply inline-flex size-[22px] shrink-0 items-center justify-center rounded-full bg-green-text text-[11px] leading-none text-white; }
 
   /* Image labels (inside every example graphic) */
-  .img-label { @apply inline-flex items-center rounded-pill bg-white px-3 py-1.5 font-mono text-[12px] leading-none tracking-normal text-gray-600; }
+  .img-label { @apply inline-flex items-center rounded-pill bg-surface px-3 py-1.5 font-mono text-[12px] leading-none tracking-normal text-gray-600; }
   .img-label-quiet { @apply inline-flex items-center rounded-pill bg-gray-50 px-3 py-1.5 font-mono text-[12px] leading-none tracking-normal text-gray-600; }   /* on white cards */
   /* FIX: was green-200 on white/10 (4.31:1). Now green-100 (5.32:1) */
-  .img-label-dark { @apply inline-flex items-center rounded-pill bg-white/10 px-3 py-1.5 font-mono text-[12px] leading-none tracking-normal text-green-100; }
+  .img-label-dark { @apply inline-flex items-center rounded-pill bg-white/10 px-3 py-1.5 font-mono text-[12px] leading-none tracking-normal text-green-200; }
 
   /* Surfaces */
-  .bento { @apply rounded-card bg-white p-8 max-[479px]:p-6; border: 1px solid rgb(190 201 198 / .45); box-shadow: var(--shadow-card);
-           background-image: radial-gradient(90% 70% at 100% 0%, rgb(196 236 225 / .38), transparent 65%); }   /* measured: padding 32, 24 at <=479, radius 24 */
-  .bento-dark { @apply rounded-card bg-blue-700 p-8 text-white max-[479px]:p-6 sm:p-10; box-shadow: inset 0 0 0 1px rgb(255 255 255 / .08), 0 26px 48px -26px rgb(43 77 96 / .55);
+  .bento { @apply rounded-card bg-surface p-8 max-[479px]:p-6; border: 1px solid rgb(255 255 255 / .08); box-shadow: var(--shadow-card);
+           background-image: radial-gradient(90% 70% at 100% 0%, rgb(47 197 150 / .08), transparent 65%); }   /* measured: padding 32, 24 at <=479, radius 24 */
+  .bento-dark { @apply rounded-card bg-[#16304a] p-8 text-white max-[479px]:p-6 sm:p-10; box-shadow: inset 0 0 0 1px rgb(255 255 255 / .08), 0 26px 48px -26px rgb(43 77 96 / .55);
                 background-image: radial-gradient(80% 60% at 100% 0%, rgb(96 199 172 / .24), transparent 62%); }
-  .frag { @apply rounded-tile bg-white shadow-float; }
+  .frag { @apply rounded-tile bg-surface shadow-float; }
   .tile { @apply rounded-tile bg-gray-50 p-3 sm:p-8; }           /* paper tile that holds fragments inside a white card */
 }
 
 /* Additions to the brief's base block (section 3.1): skip link, mobile menu popover, FAQ details. */
 @layer components {
-  .skip-link { @apply absolute left-4 -top-16 z-50 rounded-pill border-2 border-solid border-black bg-white px-4 py-2.5 font-medium text-black no-underline focus:top-4; }
+  .skip-link { @apply absolute left-4 -top-16 z-50 rounded-pill border-2 border-solid border-black bg-surface px-4 py-2.5 font-medium text-black no-underline focus:top-4; }
 
   /* Mobile menu (native popover, zero JS for open/close/Esc/light dismiss) */
-  .site-menu { position: fixed; inset: 64px 0 auto 0; margin: 0; width: 100%; max-width: none; border: 0; border-top: 1px solid var(--color-gray-100); background: var(--color-white); padding: 20px; color: var(--color-black); box-shadow: var(--shadow-float); }
+  .site-menu { position: fixed; inset: 64px 0 auto 0; margin: 0; width: 100%; max-width: none; border: 0; border-top: 1px solid var(--color-gray-100); background: var(--color-surface); padding: 20px; color: var(--color-black); box-shadow: var(--shadow-float); }
   @media (max-width: 767px) { .site-menu { inset: 60px 0 auto 0; } }
   .site-menu:not(:popover-open) { display: none; }
 
@@ -195,7 +198,7 @@
 /* ---- Modernization layer (redesign branch): glass bar, glow, status dots, step badges, code blocks ---- */
 @layer components {
   /* Sticky bar: translucent paper with blur, solid fallback where blur isn't available or transparency is reduced */
-  .glass { background: rgb(242 246 245 / .86); -webkit-backdrop-filter: blur(14px) saturate(1.5); backdrop-filter: blur(14px) saturate(1.5); border-bottom: 1px solid rgb(190 201 198 / .7); box-shadow: 0 1px 0 rgb(255 255 255 / .6) inset, 0 8px 24px -16px rgba(21,52,68,.25); }
+  .glass { background: rgb(11 15 23 / .8); -webkit-backdrop-filter: blur(14px) saturate(1.5); backdrop-filter: blur(14px) saturate(1.5); border-bottom: 1px solid rgb(255 255 255 / .08); box-shadow: 0 8px 24px -16px rgba(0,0,0,.6); }
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) { .glass { background: var(--color-gray-50); } }
   @media (prefers-reduced-transparency: reduce) { .glass { background: var(--color-gray-50); -webkit-backdrop-filter: none; backdrop-filter: none; } }
 
@@ -205,7 +208,7 @@
   /* Section backdrop: faint radial wash behind hero and pricing */
   .glow-bg { position: relative; isolation: isolate; }
   .glow-bg::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-    background: radial-gradient(50% 45% at 85% 5%, rgb(196 236 225 / .6), transparent 70%), radial-gradient(40% 40% at 5% 30%, rgb(216 235 244 / .55), transparent 70%); }
+    background: radial-gradient(50% 45% at 85% 5%, rgb(37 99 235 / .16), transparent 70%), radial-gradient(40% 40% at 5% 30%, rgb(16 185 129 / .09), transparent 70%); }
 
   /* Status dots: three soft pulses, then rest (WCAG 2.2.2: nothing moves for more than 5 s) */
   .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 9999px; flex: none; }
@@ -221,38 +224,38 @@
 
   /* Step badges: bordered mono counters with a hover/focus accent when the row has class "group" */
   .step-badge { display: inline-flex; flex: none; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: var(--radius-chip);
-    border: 1px solid var(--color-gray-200); background: var(--color-white); color: var(--color-gray-600); font-family: var(--font-mono); font-size: 12px; line-height: 1; letter-spacing: 0; }
+    border: 1px solid var(--color-gray-200); background: var(--color-surface); color: var(--color-gray-600); font-family: var(--font-mono); font-size: 12px; line-height: 1; letter-spacing: 0; }
   .step-badge-lg { width: 40px; height: 40px; font-size: 14px; }
   .group:hover .step-badge, .group:focus-within .step-badge, .group[open] .step-badge { border-color: var(--color-green-500); background: var(--color-green-100); color: var(--color-green-deep); }
   @media (prefers-reduced-motion: no-preference) { .step-badge { transition: border-color .25s, background-color .25s, color .25s; } }
 
   /* Code blocks: dark terminal surface with muted syntax colours (all pass 4.5:1 on the surface) */
-  .code-block { border-radius: var(--radius-tile); background: var(--color-black); color: var(--color-gray-100); box-shadow: inset 0 0 0 1px rgb(255 255 255 / .06); overflow: hidden; }
-  .code-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 8px 8px 14px; border-bottom: 1px solid rgb(255 255 255 / .08); font-family: var(--font-mono); font-size: 12px; color: var(--color-gray-300); }
+  .code-block { border-radius: var(--radius-tile); background: #070a10; color: #d9dfde; box-shadow: inset 0 0 0 1px rgb(255 255 255 / .06); overflow: hidden; }
+  .code-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 8px 8px 14px; border-bottom: 1px solid rgb(255 255 255 / .08); font-family: var(--font-mono); font-size: 12px; color: #9fb0c3; }
   .code-body { margin: 0; padding: 14px; font-family: var(--font-mono); font-size: 12.5px; line-height: 1.7; letter-spacing: 0; overflow-x: auto; }
-  .tok-k { color: var(--color-gray-300); }
-  .tok-s { color: var(--color-green-200); }
-  .tok-v { color: var(--color-coral-200); }
-  .tok-c { color: var(--color-gray-400); }
+  .tok-k { color: #9fb0c3; }
+  .tok-s { color: #8fe3c9; }
+  .tok-v { color: #f3b3a8; }
+  .tok-c { color: #8798ae; }
   .code-copy { display: inline-flex; min-height: 28px; align-items: center; gap: 6px; border-radius: var(--radius-pill); border: 1px solid rgb(255 255 255 / .18); background: rgb(255 255 255 / .06); padding: 2px 12px;
-    font-family: var(--font-mono); font-size: 12px; color: var(--color-gray-100); cursor: pointer; }
+    font-family: var(--font-mono); font-size: 12px; color: #e6edf4; cursor: pointer; }
   .code-copy:hover { background: rgb(255 255 255 / .14); }
   .code-copy:focus-visible { outline: 3px solid var(--color-green-200); outline-offset: 2px; }
 
   /* Segmented control (Before/After fix, tabs) */
-  .seg { display: inline-flex; gap: 4px; padding: 4px; border-radius: var(--radius-pill); background: var(--color-gray-50); border: 1px solid rgb(190 201 198 / .6); }
+  .seg { display: inline-flex; gap: 4px; padding: 4px; border-radius: var(--radius-pill); background: var(--color-gray-50); border: 1px solid rgb(255 255 255 / .1); }
   .seg-item { display: inline-flex; min-height: 36px; align-items: center; border-radius: var(--radius-pill); padding: 4px 16px; font-size: 14px; font-weight: 500; letter-spacing: -0.02em; color: var(--color-gray-600); cursor: pointer; }
   .seg-item:hover { color: var(--color-black); }
-  .seg-input:checked + .seg-item, .seg-item[aria-selected="true"] { background: var(--color-black); color: var(--color-white); }
+  .seg-input:checked + .seg-item, .seg-item[aria-selected="true"] { background: var(--color-pill); color: var(--color-pill-ink); }
   .seg-input:focus-visible + .seg-item, .seg-item:focus-visible { outline: 3px solid var(--color-green-text); outline-offset: 2px; }
   @media (prefers-reduced-motion: no-preference) { .seg-item { transition: background-color .2s, color .2s; } }
 
   /* Trust pills: text-only product names with a small generic icon */
-  .pill { display: inline-flex; min-height: 32px; align-items: center; gap: 8px; border-radius: var(--radius-pill); border: 1px solid rgb(190 201 198 / .6); background: rgb(255 255 255 / .85); padding: 4px 14px 4px 10px;
-    font-size: 13px; font-weight: 500; letter-spacing: -0.02em; color: var(--color-gray-800); white-space: nowrap; box-shadow: 0 6px 14px -8px rgb(43 77 96 / .35); }
+  .pill { display: inline-flex; min-height: 32px; align-items: center; gap: 8px; border-radius: var(--radius-pill); border: 1px solid rgb(255 255 255 / .12); background: rgb(255 255 255 / .05); padding: 4px 14px 4px 10px;
+    font-size: 13px; font-weight: 500; letter-spacing: -0.02em; color: var(--color-gray-800); white-space: nowrap; box-shadow: none; }
   .on-dark .pill { background: rgb(255 255 255 / .1); border-color: rgb(255 255 255 / .2); color: var(--color-white); box-shadow: none; }
   .pill-scope { display: inline-flex; align-items: center; border-radius: var(--radius-pill); background: var(--color-gray-50); padding: 3px 12px; font-size: 12px; font-weight: 500; letter-spacing: -0.01em; color: var(--color-gray-700); white-space: nowrap; }
-  .on-dark .pill-scope { background: rgb(255 255 255 / .1); color: var(--color-green-100); }
+  .on-dark .pill-scope { background: rgb(255 255 255 / .1); color: var(--color-green-200); }
   @media (prefers-reduced-motion: no-preference) {
     .pill-rise { animation: pill-rise .7s var(--ease-power4-out) both; animation-delay: var(--pd, 0s); }
     @keyframes pill-rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
@@ -265,5 +268,5 @@
 /* Card lift on hover (pointer devices only, off under reduced motion) */
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .bento, .bento-dark { transition: transform 200ms, box-shadow 200ms; }
-  .bento:hover, .bento-dark:hover { transform: translateY(-2px); box-shadow: 0 24px 48px -20px rgba(21, 52, 68, .35); }
+  .bento:hover, .bento-dark:hover { transform: translateY(-2px); border-color: rgb(255 255 255 / .16); box-shadow: 0 28px 56px -22px rgba(0, 0, 0, .75); }
 }

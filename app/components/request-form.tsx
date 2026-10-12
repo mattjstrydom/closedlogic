@@ -46,7 +46,7 @@ export default function RequestForm({ type = "check", email, calUrl, agency = fa
   if (status === "ok")
     return (
       // Focus moves here because the submit button that had it is gone; tabIndex -1 keeps it out of the tab order.
-      <div role="status" tabIndex={-1} ref={(el) => el?.focus()} className="rounded-chip border border-gray-100 bg-white p-6 focus:outline-none">
+      <div role="status" tabIndex={-1} ref={(el) => el?.focus()} className="rounded-chip border border-gray-100 bg-surface p-6 focus:outline-none">
         <p className="text-text-xl font-medium">
           {teardown ? "Thanks. We'll email you the recording." : "Thanks. We'll reply within one business day."}
         </p>

@@ -215,7 +215,7 @@ export default function Home() {
               <p className="text-text-m text-gray-600 max-w-[33.75rem]">
                 <span className="font-medium text-black">$1,200 fixed.</span> If none of our seven checks finds anything that needs changing, you pay only the first half and keep the report.
               </p>
-              <div className="rounded-pill bg-white px-5 py-3">
+              <div className="rounded-pill bg-surface px-5 py-3">
                 <p className="text-left text-[0.875rem] leading-[1.3] tracking-[-0.02em] font-medium">A named lead on every check</p>
               </div>
             </div>

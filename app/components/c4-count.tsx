@@ -87,7 +87,7 @@ export default function C4Count() {
   return (
     <figure
       aria-labelledby="c4-title"
-      className="mt-5 grid grid-cols-1 gap-8 rounded-card bg-white p-5 sm:p-10 lg:grid-cols-[5fr_7fr] lg:grid-rows-[1fr_auto] lg:gap-x-12"
+      className="mt-5 grid grid-cols-1 gap-8 rounded-card bg-surface p-5 sm:p-10 lg:grid-cols-[5fr_7fr] lg:grid-rows-[1fr_auto] lg:gap-x-12"
     >
       <div className="flex min-w-0 flex-col lg:col-start-1 lg:row-start-1">
         <Chip>Side-by-side count</Chip>

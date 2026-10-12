@@ -30,7 +30,7 @@ export default function Header({ path = "/", agency = false }: { path?: string; 
           <Logo />
         </a>
 
-        <nav aria-label="Main" className="hidden items-center gap-8 rounded-pill bg-white px-7 py-2 text-[0.875rem] leading-[1.3] font-medium tracking-[-0.03em] lg:flex">
+        <nav aria-label="Main" className="hidden items-center gap-8 rounded-pill bg-surface px-7 py-2 text-[0.875rem] leading-[1.3] font-medium tracking-[-0.03em] lg:flex">
           {links.map(([href, label]) => (
             <Link key={href} href={href} className="inline-flex min-h-[26px] items-center text-black no-underline underline-offset-[0.2em] hover:underline">
               {label}
@@ -49,7 +49,7 @@ export default function Header({ path = "/", agency = false }: { path?: string; 
           type="button"
           popoverTarget="site-menu"
           aria-label="Menu"
-          className="inline-flex size-11 items-center justify-center justify-self-end rounded-pill bg-white text-black lg:hidden"
+          className="inline-flex size-11 items-center justify-center justify-self-end rounded-pill bg-surface text-black lg:hidden"
         >
           <svg width="18" height="8" viewBox="0 0 18 8" aria-hidden="true" focusable="false">
             <rect y="0" width="18" height="2" fill="currentColor" />

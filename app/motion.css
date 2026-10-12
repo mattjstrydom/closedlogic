@@ -116,11 +116,11 @@ html:not(.js) .ltb * { animation: none !important; }
 }
 .m-grow { transform-origin: 0 50%; }
 /* A2: SQL row tint. Final state green-50-ish; passes through coral-10 while it is flagged */
-.s2p-tint { background-color: #eaf7f2; }
+.s2p-tint { background-color: #0f2a26; }
 @keyframes s2p-tint {
   0% { background-color: rgba(253,250,250,0); }
-  12%, 52% { background-color: #fbeeec; }
-  70%, 100% { background-color: #eaf7f2; }
+  12%, 52% { background-color: #2a1517; }
+  70%, 100% { background-color: #0f2a26; }
 }
 .m-blip { opacity: 0; } /* final state of a passing flag */
 
@@ -130,7 +130,7 @@ html:not(.js) .ltb * { animation: none !important; }
 
 /* A2 SQL row tint, applied to the <tr> rather than each <td>: Chrome skipped painting the animated
    background on cells that also carry a responsive display rule (max-sm:hidden). Same keyframes and timing (1.0 s, 3 s). */
-.s2p-row { background-color: #eaf7f2; }
+.s2p-row { background-color: #0f2a26; }
 @media (prefers-reduced-motion: no-preference) {
   .m-ready .m-rise.s2p-row {
     animation-name: m-rise, s2p-tint; animation-duration: .9s, 3s; animation-delay: .49s, 1s;

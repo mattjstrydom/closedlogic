@@ -6,8 +6,8 @@ type Vars = { d?: string; t?: string; y?: string; tint?: string };
 const v = ({ d, t, y, tint }: Vars) =>
   ({ ...(d && { "--d": d }), ...(t && { "--t": t }), ...(y && { "--y": y }), ...(tint && { "--tint": tint }) }) as React.CSSProperties;
 
-const primary = "rounded-pill bg-black px-3 py-1 text-[0.75rem] leading-[1.3] text-white sm:text-[0.8125rem]";
-const secondary = "rounded-pill border border-solid border-gray-200 bg-white px-3 py-1 text-[0.75rem] leading-[1.3] text-gray-600 sm:text-[0.8125rem]";
+const primary = "rounded-pill bg-pill px-3 py-1 text-[0.75rem] leading-[1.3] text-pill-ink sm:text-[0.8125rem]";
+const secondary = "rounded-pill border border-solid border-gray-200 bg-surface px-3 py-1 text-[0.75rem] leading-[1.3] text-gray-600 sm:text-[0.8125rem]";
 const row = "m-rise border-t border-solid border-gray-100";
 const rowVars = (d: string) => v({ d, t: ".9s", y: "16px" });
 

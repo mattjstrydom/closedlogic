@@ -109,7 +109,7 @@ export default function A1LeadToBid() {
           ))}
         </ol>
         <div className="ltb-foot mt-3 flex flex-wrap items-center gap-2 sm:mt-5 xl:ml-28" aria-hidden="true">
-          <span className="inline-flex items-center gap-2 rounded-pill bg-blue-700 px-4 py-2 text-[0.875rem] leading-[1.3] font-medium tracking-[-0.02em] text-white">
+          <span className="inline-flex items-center gap-2 rounded-pill bg-[#16304a] px-4 py-2 text-[0.875rem] leading-[1.3] font-medium tracking-[-0.02em] text-white">
             Bidding on: <span className="text-green-200">qualified stages</span>
           </span>
         </div>

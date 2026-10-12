@@ -6,7 +6,7 @@ import { Accent, Chip, Tick } from "./ui";
 // C3 annotated finding with a Before fix / After fix toggle (fictional account). The server passes the caption
 // label, so this client bundle doesn't carry the whole site config. Before is the default and the no-JS state.
 const secondary = "rounded-pill border border-solid border-gray-200 px-3 py-1 text-[0.75rem] text-gray-600 sm:text-[0.8125rem]";
-const primary = "rounded-pill bg-black px-3 py-1 text-[0.75rem] text-white sm:text-[0.8125rem]";
+const primary = "rounded-pill bg-pill px-3 py-1 text-[0.75rem] text-pill-ink sm:text-[0.8125rem]";
 
 function Tag({ n, kind, children }: { n: number; kind: "bad" | "ok"; children: string }) {
   return kind === "bad" ? (
