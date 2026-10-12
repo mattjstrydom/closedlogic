@@ -98,7 +98,7 @@ export default function Agencies() {
               <div className="bento">
                 <h3 className="text-title-m">If you run your client&apos;s HubSpot</h3>
                 <p className="mt-4 text-text-l">
-                  Lifecycle stages can sync to Google Ads and still be ignored by bidding. A stage set as Secondary, or outside the goal the campaigns bid on, is reported but never bid on. We make sure the stages you built are the ones Google Ads bids on.
+                  Lifecycle stages can sync to Google Ads and still be ignored by bidding. A stage set as Secondary is reported but not bid on, unless a custom goal includes it. A Primary stage outside the goal the campaigns bid on isn&apos;t bid on either. We make sure the stages you built are the ones Google Ads bids on.
                 </p>
               </div>
             </div>

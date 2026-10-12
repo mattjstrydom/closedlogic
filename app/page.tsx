@@ -34,7 +34,6 @@ const checks: { q: string; more?: string; mock?: React.ReactNode }[] = [
   { q: "Which conversions is Smart Bidding actually optimising for, and which are duplicates, tests or leftovers?", mock: <ConversionMock /> },
   {
     q: "Are your lifecycle stages (MQL, SQL, opportunity, customer) set up as conversions, included in your goals, firing, and carrying the right value?",
-    more: "When a stage uses the deal amount, HubSpot sends the weighted amount of the most recent associated deal, not the full amount.",
   },
   { q: "Is any stage sent more than once, through HubSpot, Data Manager or a Zapier automation?" },
   {
@@ -121,11 +120,11 @@ const faqs: FaqItem[] = [
   },
   {
     q: "Does lead volume matter?",
-    a: "Yes. Google says the learning period depends on the number of conversions, and suggests judging performance over the last 30 days with at least 30 conversions. If a qualified stage only gets a handful a month, we'll tell you in the report.",
+    a: "Yes. Google says the learning period depends on the number of conversions, and recommends judging results over a month or longer with at least 30 conversions (50 for Target ROAS). If a qualified stage only gets a handful a month, we'll tell you in the report.",
   },
   {
     q: "Will past leads be fixed too?",
-    a: "HubSpot's own sync only counts stage changes that happen after an event is created. If the fix uses Google's Data Manager connection, Google imports the last 14 days of HubSpot data on the first run. Either way, results count from handover forward.",
+    a: "HubSpot's own sync only counts stage changes that happen after an event is created. Results count from handover forward.",
   },
   {
     q: "Will my HubSpot and Google Ads counts match after the fix?",
@@ -258,7 +257,7 @@ export default function Home() {
             </SectionHead>
             <div className="mt-10 grid gap-5 lg:grid-cols-3">
               <div className="bento text-text-l">
-                <p>If HubSpot already sends your lifecycle stages to Google Ads, the question is whether Smart Bidding uses them. A stage set as Secondary, or outside the goal your campaigns bid on, is reported but never bid on.</p>
+                <p>If HubSpot already sends your lifecycle stages to Google Ads, the question is whether Smart Bidding uses them. A stage set as Secondary is reported but not bid on, unless a custom goal includes it. A Primary stage outside the goal your campaigns bid on isn&apos;t bid on either.</p>
               </div>
               <div className="bento space-y-4 text-text-m">
                 <p>
@@ -268,7 +267,7 @@ export default function Home() {
               </div>
               <div className="bento-dark on-dark text-text-m">
                 <p>
-                  If your setup still uses offline conversion import, there&apos;s one more reason to look. Google calls it a legacy feature and recommends enhanced conversions for leads. Since 15 June 2026, Google has moved offline conversion uploads to its Data Manager API and blocks them in the Google Ads API.
+                  If your setup still uses offline conversion import, there&apos;s one more reason to look. Google calls it a legacy feature and recommends enhanced conversions for leads. Since 15 June 2026, Google has moved offline conversion uploads to its Data Manager API and blocks them in the Google Ads API for developer tokens that weren&apos;t already active.
                 </p>
               </div>
             </div>
