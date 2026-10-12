@@ -13,7 +13,7 @@ import A1LeadToBid from "./components/a1-lead-to-bid";
 import HeroTabs from "./components/hero-tabs";
 import ChecksPreview from "./components/checks-preview";
 import StepBadge from "./components/step-badge";
-import Pipeline from "./components/pipeline";
+import PipelineFlow from "./components/PipelineFlow";
 import ComparisonGrid from "./components/comparison-grid";
 import { PlatformPills } from "./components/trust";
 import { checkItems } from "./checks-data";
@@ -233,6 +233,12 @@ export default function Home() {
           </div>
         </section>
 
+        <section aria-label="How a lead reaches bidding" className="section-y">
+          <div className="container-site">
+            <PipelineFlow />
+          </div>
+        </section>
+
         {/* 1b. Who this is for */}
         <section id="for" aria-labelledby="for-title" className="section-y">
           <div className="container-site">
@@ -259,7 +265,6 @@ export default function Home() {
               Syncing a stage <Accent>isn&apos;t the same as bidding on it</Accent>
             </SectionHead>
             <p className="mt-4 max-w-[64ch] text-text-l text-gray-800">HubSpot can show MQLs and SQLs in Google Ads while Smart Bidding ignores them.</p>
-            <Pipeline />
             <div className="mt-10 grid gap-5 lg:grid-cols-3">
               <div className="bento text-text-l">
                 <p>If HubSpot already sends your lifecycle stages to Google Ads, the question is whether Smart Bidding uses them. A stage set as Secondary is reported but not bid on, unless a custom goal includes it. A Primary stage outside the goal your campaigns bid on isn&apos;t bid on either.</p>

@@ -8,9 +8,9 @@ const green = `${pill} border-[#10b981]/30 bg-[#10b981]/20 text-[#6ee7b7] font-s
 
 const card = "flex flex-col justify-between rounded-xl border border-solid p-4 transition-colors";
 
-export default function Pipeline() {
+export function PipelineFlow() {
   return (
-    <div className="mt-8 rounded-2xl border border-solid border-[#1e293b] bg-[#0d121f] p-5 shadow-[0_25px_50px_-12px_rgba(0,0,0,.6)] sm:p-8">
+    <div className="mx-auto w-full max-w-5xl rounded-2xl border border-solid border-[#1e293b] bg-[#0d121f] p-5 shadow-[0_25px_50px_-12px_rgba(0,0,0,.6)] sm:p-8">
       <div className="mb-6 flex flex-col justify-between gap-4 border-b border-solid border-[#1e293b] pb-6 sm:flex-row sm:items-center">
         <div>
           <p className="font-mono text-xs uppercase tracking-wider text-gray-600">Pipeline, after the fix</p>
@@ -102,3 +102,5 @@ export default function Pipeline() {
     </div>
   );
 }
+
+export default PipelineFlow;
