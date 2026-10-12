@@ -1,1 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Closed Logic"><title>Closed Logic</title><defs><linearGradient id="g" x1="2" y1="4" x2="30" y2="28" gradientUnits="userSpaceOnUse"><stop stop-color="#60a5fa"/><stop offset="1" stop-color="#a5b4fc"/></linearGradient></defs><rect width="32" height="32" rx="7" fill="#15202b"/><path d="M18.1 8.7A9.5 9.5 0 1 0 18.1 23.3M22.5 6.5V25H30" fill="none" stroke="url(#g)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" role="img" aria-label="Closed Logic favicon"><title>Closed Logic favicon</title><defs><linearGradient id="cl-signal" x1="15" y1="16" x2="29" y2="16" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#3B82F6"/><stop offset="1" stop-color="#10B981"/></linearGradient></defs><rect width="32" height="32" rx="6" fill="#0B0F17"/><g id="signal-gate">
+  <path id="rejected-signals" fill="#64748B" d="M4 7h8v3H4zm0 16h8v3H4z"/>
+  <path id="gate-and-input" fill="#F8FAFC" d="M15 4h6v8h-6zm0 17h6v7h-6zM4 15h11v3H4z"/>
+  <path id="qualified-signal" fill="url(#cl-signal)" d="M15 15h9v-3l5 4.5-5 4.5v-3h-9z"/>
+</g></svg>
