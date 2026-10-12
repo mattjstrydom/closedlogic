@@ -36,7 +36,7 @@ const findings: { t: string; saw: React.ReactNode; why: string; change: string; 
     t: "Click IDs are on the page but not reaching HubSpot",
     saw: (
       <>
-        The <code className="font-mono text-[0.9em]">_gcl_aw</code> cookie is set after an ad click. The demo form is built in Webflow, not HubSpot, and its hidden click ID field is empty on submit.
+        The <code>_gcl_aw</code> cookie is set after an ad click. The demo form is built in Webflow, not HubSpot, and its hidden click ID field is empty on submit.
       </>
     ),
     why: "Without the click ID, HubSpot cannot match the contact to the ad click, so later stages cannot be attributed to the campaign that produced them.",
