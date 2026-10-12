@@ -24,9 +24,11 @@ export default function Header({ path = "/", agency = false }: { path?: string; 
   return (
     <header className="sticky top-0 z-20 bg-gray-50">
       <div className="container-site grid h-16 grid-cols-[1fr_auto] items-center gap-4 max-md:h-[60px] lg:grid-cols-[1fr_auto_1fr]">
-        <Link href="/" aria-label={`${site.brand}, home`} className="inline-flex min-h-6 items-center justify-self-start no-underline">
+        {/* /#hero, not /: a plain "/" can keep the visitor's old scroll position (the browser restores it), while a fragment always scrolls to the top of the home page, from any page or #section. */}
+        {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+        <a href="/#hero" aria-label={`${site.brand}, home`} className="inline-flex min-h-6 items-center justify-self-start no-underline">
           <Wordmark decorative className="h-[22px] w-auto md:h-6" />
-        </Link>
+        </a>
 
         <nav aria-label="Main" className="hidden items-center gap-8 rounded-pill bg-white px-7 py-2 text-[0.875rem] leading-[1.3] font-medium tracking-[-0.03em] lg:flex">
           {links.map(([href, label]) => (
@@ -40,7 +42,7 @@ export default function Header({ path = "/", agency = false }: { path?: string; 
           <Link href="/sample-report" className="btn-m-outline" aria-current={onSample ? "page" : undefined}>
             See a sample report
           </Link>
-          <a href={bookHref} className="btn-m">Book a fit call</a>
+          <a href={bookHref} target="_blank" rel="noopener noreferrer" className="btn-m">Book a fit call<span className="sr-only"> (opens in a new tab)</span></a>
         </div>
 
         <button
@@ -70,7 +72,7 @@ export default function Header({ path = "/", agency = false }: { path?: string; 
           <Link href="/sample-report" className="btn-outline w-full" aria-current={onSample ? "page" : undefined}>
             See a sample report
           </Link>
-          <a href={bookHref} className="btn w-full">Book a 20-minute fit call</a>
+          <a href={bookHref} target="_blank" rel="noopener noreferrer" className="btn w-full">Book a 20-minute fit call<span className="sr-only"> (opens in a new tab)</span></a>
         </div>
       </nav>
     </header>

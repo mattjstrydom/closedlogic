@@ -111,14 +111,15 @@ export default function RequestForm({ type = "check", email, calUrl, agency = fa
       </form>
       {teardown ? (
         <p className="mt-6">
-          {agency ? "Ready for a pilot?" : "Ready for the full check?"} <a href={calUrl} className="link">Book a 20-minute fit call</a>
+          {agency ? "Ready for a pilot?" : "Ready for the full check?"} <a href={calUrl} target="_blank" rel="noopener noreferrer" className="link">Book a 20-minute fit call<span className="sr-only"> (opens in a new tab)</span></a>
         </p>
       ) : (
         calUrl && (
           <p className="mt-6">
             Prefer to talk first?{" "}
-            <a href={calUrl} className="link">
+            <a href={calUrl} target="_blank" rel="noopener noreferrer" className="link">
               Book a 20-minute fit call
+              <span className="sr-only"> (opens in a new tab)</span>
             </a>
           </p>
         )

@@ -75,13 +75,6 @@ const priceTerms = [
   "Delivered within 7 business days of access, not counting time waiting for your approval.",
 ];
 
-const accessMine = [
-  "Named user invites only, never shared passwords. Our accounts use two-step login.",
-  "We use only the access the work needs. We don't export or copy contact records.",
-  "Every change is logged with how to reverse it, and nothing changes without your approval.",
-  "You can revoke our access at any time. We remove it at handover unless you're on the monthly plan.",
-];
-
 const monthlyDirect = [
   "Monthly checks of the HubSpot to Google Ads connection: sync errors, the gap between HubSpot and Google Ads counts, click ID coverage, changes to Primary conversions, and consent signals.",
   "A monthly note on what changed and what needs a decision.",
@@ -396,7 +389,7 @@ export default function Home() {
               <div className="bento p-6 sm:p-10">
                 <div className="min-w-0">
                   <p className="text-title-m">{site.brand}</p>
-                  <p className="mt-2 text-text-l text-gray-800">Every check has a named lead who joins your fit call and stays on your account through handover, so nothing gets handed off mid-check.</p>
+                  <p className="mt-2 text-text-l text-gray-800">Every check has a named lead from our team who joins your fit call and stays on your account through handover, so nothing gets handed off mid-check.</p>
                   <p className="mt-3 text-text-m text-gray-800">Founded by Matt Strydom.</p>
                   <a href={site.linkedin} className="btn-quiet mt-4">Matt on LinkedIn</a>
                 </div>
@@ -412,14 +405,10 @@ export default function Home() {
                   </dd>
                   <dt className="text-gray-600">Booking</dt>
                   <dd>
-                    <a href={site.bookPath} className="link">Book a 20-minute fit call</a>. If it&apos;s not a fit, we&apos;ll say so on the call.
+                    <a href={site.bookPath} target="_blank" rel="noopener noreferrer" className="link">Book a 20-minute fit call<span className="sr-only"> (opens in a new tab)</span></a>. If it&apos;s not a fit, we&apos;ll say so on the call.
                   </dd>
                 </dl>
 
-                <div className="mt-8 rounded-tile bg-green-100 p-5 sm:p-7">
-                  <h3 className="text-title-xs">How we handle access</h3>
-                  <TickList items={accessMine} className="mt-4 gap-x-8 md:grid-cols-2" itemClassName="text-[0.9375rem] leading-[1.45] tracking-[-0.01em] text-gray-800" />
-                </div>
               </div>
             </div>
 
