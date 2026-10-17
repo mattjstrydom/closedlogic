@@ -8,6 +8,9 @@
   --color-surface: #121a27;         /* card surface (dark theme) */
   --color-pill: #e6edf4;            /* Primary pill fill */
   --color-pill-ink: #0b0f17;
+  /* Ink for text and glyphs sitting on a light accent fill (coral-text, green-text, green-500, amber-text).
+     white on those fills is 1.8-2.2:1; this is 8.7-10.4:1. Never pair text-white with a light fill. */
+  --color-on-accent: #0b0f17;
   --color-black: #eef2f6;           /* ink: text, Primary pills */
   --color-gray-50: #080c14;         /* page background (paper) */
   --color-gray-100: #1f2a3a;        /* hairlines inside fragments */
@@ -145,7 +148,7 @@
 
   /* Tags (mono 12px) */
   .tag { @apply inline-flex items-center gap-1.5 whitespace-nowrap rounded-pill px-3 py-1 font-mono text-[12px] leading-[1.3] font-medium tracking-normal; }
-  .tag-bad { @apply inline-flex items-center gap-1.5 whitespace-nowrap rounded-pill px-3 py-1 font-mono text-[12px] leading-[1.3] font-medium tracking-normal bg-coral-text text-white; }
+  .tag-bad { @apply inline-flex items-center gap-1.5 whitespace-nowrap rounded-pill px-3 py-1 font-mono text-[12px] leading-[1.3] font-medium tracking-normal bg-coral-text text-on-accent; }
   .tag-ok { @apply inline-flex items-center gap-1.5 whitespace-nowrap rounded-pill px-3 py-1 font-mono text-[12px] leading-[1.3] font-medium tracking-normal bg-green-100 text-green-deep; }
   .tag-grey { @apply inline-flex items-center gap-1.5 whitespace-nowrap rounded-pill px-3 py-1 font-mono text-[12px] leading-[1.3] font-medium tracking-normal bg-gray-50 text-gray-600; }
   .tag-warn { @apply inline-flex items-center gap-1.5 whitespace-nowrap rounded-pill px-3 py-1 font-mono text-[12px] leading-[1.3] font-medium tracking-normal bg-amber-100 text-amber-text; }
@@ -159,8 +162,8 @@
 
   /* Annotation */
   .anno-box { @apply rounded-[6px] outline-[1.5px] outline-offset-[3px] outline-coral-text outline-solid; }
-  .note-num { @apply inline-flex size-[22px] shrink-0 items-center justify-center rounded-full bg-coral-text text-[12px] font-semibold leading-none tracking-normal text-white; }
-  .note-ok { @apply inline-flex size-[22px] shrink-0 items-center justify-center rounded-full bg-green-text text-[11px] leading-none text-white; }
+  .note-num { @apply inline-flex size-[22px] shrink-0 items-center justify-center rounded-full bg-coral-text text-[12px] font-semibold leading-none tracking-normal text-on-accent; }
+  .note-ok { @apply inline-flex size-[22px] shrink-0 items-center justify-center rounded-full bg-green-text text-[11px] leading-none text-on-accent; }
 
   /* Image labels (inside every example graphic) */
   .img-label { @apply inline-flex items-center rounded-pill bg-surface px-3 py-1.5 font-mono text-[12px] leading-none tracking-normal text-gray-600; }

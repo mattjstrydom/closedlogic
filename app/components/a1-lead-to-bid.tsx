@@ -99,7 +99,7 @@ export default function A1LeadToBid() {
                   <span className="mt-1 block text-[1.0625rem] leading-[1.2] font-medium tracking-[-0.02em] text-blue-700">{c.title}</span>
                   <span className="mt-1 block text-[0.8125rem] leading-[1.3] tracking-normal text-gray-600">{c.sub}</span>
                 </span>
-                <span className="ltb-check flex size-6 shrink-0 items-center justify-center rounded-full bg-green-500 text-white">
+                <span className="ltb-check flex size-6 shrink-0 items-center justify-center rounded-full bg-green-500 text-on-accent">
                   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true" focusable="false">
                     <TickPath />
                   </svg>

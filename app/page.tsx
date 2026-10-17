@@ -470,7 +470,7 @@ export default function Home() {
               <ol className="grid gap-3">
                 {working.map((t, i) => (
                   <li key={t} className="flex gap-3">
-                    <span className="inline-flex size-[22px] shrink-0 items-center justify-center rounded-full bg-green-text text-[12px] leading-none font-semibold tracking-normal text-white" aria-hidden="true">
+                    <span className="inline-flex size-[22px] shrink-0 items-center justify-center rounded-full bg-green-text text-[12px] leading-none font-semibold tracking-normal text-on-accent" aria-hidden="true">
                       {i + 1}
                     </span>
                     <span>{t}</span>

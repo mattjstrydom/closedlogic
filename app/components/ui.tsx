@@ -37,7 +37,7 @@ export function Tick({ size = 20, className = "" }: { size?: 20 | 22; className?
   return (
     <span
       aria-hidden="true"
-      className={`inline-flex shrink-0 items-center justify-center rounded-full bg-green-text text-white ${size === 22 ? "size-[22px]" : "size-5"} ${className}`}
+      className={`inline-flex shrink-0 items-center justify-center rounded-full bg-green-text text-on-accent ${size === 22 ? "size-[22px]" : "size-5"} ${className}`}
     >
       <svg width={size === 22 ? 12 : 11} height={size === 22 ? 12 : 11} viewBox="0 0 12 12" fill="none" focusable="false">
         <TickPath />
