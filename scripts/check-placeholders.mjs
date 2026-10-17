@@ -1,12 +1,10 @@
 // Fails the production build while any placeholder is left.
-import { readdirSync, readFileSync, existsSync, statSync } from "node:fs";
+import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
-import nextEnv from "@next/env";
-
-nextEnv.loadEnvConfig(process.cwd()); // same .env files next build reads
 
 // Preview deployments may show placeholders; production (and local builds) may not.
-// Preview = a Vercel preview, or a Cloudflare Workers Builds build of any branch other than main.
+// Preview = a Vercel preview, or a Cloudflare Workers Builds build of any branch other than main. Both are read from
+// the environment CI injects, and nothing else here depends on an .env file, so this script needs no env loader.
 const cfPreview = process.env.WORKERS_CI === "1" && process.env.WORKERS_CI_BRANCH && process.env.WORKERS_CI_BRANCH !== "main";
 if (process.env.VERCEL_ENV === "preview" || cfPreview) {
   console.log("Preview deployment: skipping placeholder check.");

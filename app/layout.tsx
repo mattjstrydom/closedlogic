@@ -50,7 +50,8 @@ export const metadata: Metadata = {
   applicationName: site.brand,
   openGraph: { ...sharedOpenGraph, images: [ogImage] },
   twitter: { card: "summary_large_image", images: [twitterImage] },
-  // Non-production builds (previews, local) are noindex; next.config.ts adds the matching X-Robots-Tag header.
+  // Non-production builds (previews, local) are noindex; scripts/cf-postbuild.mjs adds the matching X-Robots-Tag
+  // header to out/_headers from the same site.indexable value.
   ...(site.indexable ? {} : { robots: { index: false, follow: false } }),
 };
 

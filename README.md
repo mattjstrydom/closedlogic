@@ -55,12 +55,17 @@ than `main` (`WORKERS_CI_BRANCH`) and Vercel previews (`VERCEL_ENV=preview`).
 1. Cloudflare dashboard > Workers & Pages > Create > Import a repository: this repo.
 2. Build command `npm run build`; deploy command `npx wrangler deploy`; non-production branch deploy command
    `npx wrangler versions upload`; production branch `main`. Node comes from `.nvmrc` (22).
-3. Add the secret `SEQUENZY_API_KEY` (Settings > Variables and Secrets, type Secret). Optional build variable
-   `NEXT_PUBLIC_CAL_URL`.
+3. Add the secret `SEQUENZY_API_KEY` (Settings > Variables and Secrets, type Secret).
 4. Check a preview URL against the dev report's checks before connecting the domain.
 5. Domain (zone on Cloudflare): Worker > Settings > Domains & Routes > Add Custom Domain: `www.closedlogic.com` and
    `closedlogic.com`. Then Rules > Redirect Rules > "Redirect from root to WWW" template (301, keep the path and query).
 6. After the domain works on Cloudflare: remove the domains from the Vercel project, then delete or pause the Vercel project.
+
+**Before the domain goes public, limit form submissions.** The Worker has no rate limiting of its own: a honeypot and a
+`Sec-Fetch-Site` same-origin check are all `/api/request` does, and both are bypassable by a direct client. Add a
+Cloudflare rate limiting rule on `POST /api/request` (Security > WAF > Rate limiting rules; for example 5 requests per
+minute per IP), or add Turnstile to the form. Without one of those, anyone can post JSON straight to the endpoint and
+spend the Sequenzy sending quota.
 
 ## Renaming
 
@@ -88,7 +93,7 @@ JSON-LD, terms, privacy and the Worker. After a rename also:
 | Sample report, teardown, privacy, terms, 404 | `app/sample-report/`, `app/teardown/`, `app/privacy/`, `app/terms/`, `app/not-found.tsx` |
 | Form UI and messages | `app/components/request-form.tsx` |
 | Validation (browser and Worker) | `app/validate.ts` |
-| Form endpoint (honeypot, size cap, Sequenzy, `enrollInSequences: false`) | `worker/index.ts` |
+| Form endpoint (honeypot, same-origin check, streaming size cap, Sequenzy, `enrollInSequences: false`) | `worker/index.ts` |
 | Page metadata helper (title, description, canonical, OG, Twitter) | `app/seo.ts` |
 | Root metadata, GTM (`GTM-M7JTCXDW`, deferred) and consent defaults | `app/layout.tsx` |
 | Consent banner and Cookie settings | `app/components/consent-banner.tsx`, `app/components/cookie-settings.tsx` |
@@ -127,7 +132,9 @@ Never write a double-brace token in comments under `app/`: the check matches it.
 - `npx eslint .`, `npx tsc --noEmit`.
 - `npm run cf:preview`, then open http://localhost:8787.
 - Placeholder check on its own: `node scripts/check-placeholders.mjs`.
-- `scripts/formtest.mjs`, `shots.mjs`, `verify.mjs`, `reduced.mjs`, `dbg.mjs` are older dev helpers (puppeteer-core with a local Chrome).
+- `scripts/shots.mjs` (screenshots at four breakpoints) and `scripts/measure.mjs` (hero geometry at phone widths) are
+  dev helpers using puppeteer-core and a local Chrome. Both take the base URL as an argument: `npm run dev` serves
+  :3000, `npm run cf:preview` serves :8787. Set `CHROME_PATH` if Chrome isn't at the default Windows location.
 
 ## Notes
 

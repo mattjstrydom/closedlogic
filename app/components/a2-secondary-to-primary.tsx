@@ -6,8 +6,9 @@ type Vars = { d?: string; t?: string; y?: string; tint?: string };
 const v = ({ d, t, y, tint }: Vars) =>
   ({ ...(d && { "--d": d }), ...(t && { "--t": t }), ...(y && { "--y": y }), ...(tint && { "--tint": tint }) }) as React.CSSProperties;
 
-const primary = "rounded-pill border border-solid border-[#10b981]/20 bg-[#10b981]/10 text-[#34d399] font-medium px-3 py-1 text-[0.75rem] leading-[1.3] sm:text-[0.8125rem]";
-const secondary = "rounded-pill border border-solid border-[#334155] bg-[#1e293b] text-[#cbd5e1] px-3 py-1 text-[0.75rem] leading-[1.3] sm:text-[0.8125rem]";
+// Goal pills: the shared .goal-primary / .goal-secondary classes in app/globals.css, not copies of them.
+const primary = "goal-primary";
+const secondary = "goal-secondary";
 const row = "m-rise border-t border-solid border-gray-100";
 const rowVars = (d: string) => v({ d, t: ".9s", y: "16px" });
 

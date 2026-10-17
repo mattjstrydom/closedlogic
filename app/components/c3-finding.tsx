@@ -5,8 +5,9 @@ import { Accent, Chip, Tick } from "./ui";
 
 // C3 annotated finding with a Before fix / After fix toggle (fictional account). The server passes the caption
 // label, so this client bundle doesn't carry the whole site config. Before is the default and the no-JS state.
-const secondary = "rounded-pill border border-solid border-[#334155] bg-[#1e293b] text-[#cbd5e1] px-3 py-1 text-[0.75rem] sm:text-[0.8125rem]";
-const primary = "rounded-pill border border-solid border-[#10b981]/20 bg-[#10b981]/10 text-[#34d399] font-medium px-3 py-1 text-[0.75rem] sm:text-[0.8125rem]";
+// Goal pills: the shared .goal-primary / .goal-secondary classes in app/globals.css, not copies of them.
+const secondary = "goal-secondary";
+const primary = "goal-primary";
 
 function Tag({ n, kind, children }: { n: number; kind: "bad" | "ok"; children: string }) {
   return kind === "bad" ? (

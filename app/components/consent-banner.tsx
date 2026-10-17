@@ -57,11 +57,13 @@ export default function ConsentBanner() {
       return;
     }
     // Defaults are already denied; an explicit update also covers someone who accepted earlier.
-    // GTM only reads Arguments objects pushed to dataLayer.
-    (function dl(..._cmd: unknown[]) {
-      // eslint-disable-next-line prefer-rest-params
+    // GTM acts on an Arguments object, not an array, so push this function's own `arguments`. The rest parameter
+    // exists only so the three-value call type-checks; the values themselves are read from `arguments`.
+    /* eslint-disable @typescript-eslint/no-unused-vars, prefer-rest-params */
+    (function (..._args: unknown[]) {
       window.dataLayer.push(arguments);
     })("consent", "update", Object.fromEntries(SIGNALS.map((s) => [s, v])));
+    /* eslint-enable @typescript-eslint/no-unused-vars, prefer-rest-params */
     // A plain event too, so a GTM Custom Event trigger can start consent-gated tags (Clarity) right after Accept.
     window.dataLayer.push({ event: granted ? "consent_granted" : "consent_denied" });
     // Microsoft Clarity (loaded from GTM) gets the same choice; withdrawing consent also erases its cookies.
