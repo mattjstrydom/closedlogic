@@ -1,7 +1,10 @@
-// The site's only server code: POST /api/request (the teardown and check forms). Everything else is a static file
-// served by Workers static assets without running this Worker (wrangler.jsonc: run_worker_first ["/api/*"]).
+// The site's only server code: POST /api/request. Only the teardown form is rendered today (the two /teardown pages);
+// the handler also accepts type: "check", which no page posts yet. Everything else is a static file served by Workers
+// static assets without running this Worker (wrangler.jsonc: run_worker_first ["/api/*"]).
 // Free plan budget: 10 ms CPU per request and 100,000 Worker requests a day; this handler does a JSON parse, the
 // shared validation, and two fetches to Sequenzy (waiting on fetch is not CPU time). See the dev report for measurements.
+// Abuse: the honeypot and the Sec-Fetch-Site check below are speed bumps only. Real rate limiting needs a Cloudflare
+// Rate Limiting rule on /api/request or Turnstile (see README, "Before the domain goes public").
 import { validate, type FormType, type Fields } from "../app/validate";
 import { site } from "../app/site.config";
 
@@ -33,13 +36,44 @@ const json = (data: unknown, status = 200, extra: Record<string, string> = {}) =
     },
   });
 
+// Read at most `cap` bytes and stop as soon as the cap is passed. Reading the whole body first (req.text()) and
+// measuring it afterwards would buffer whatever a client sends, cap or not, so the cap would not protect memory.
+async function readCapped(req: Request, cap: number): Promise<string | null> {
+  if (!req.body) return "";
+  const reader = req.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let total = 0;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    total += value.byteLength;
+    if (total > cap) {
+      await reader.cancel().catch(() => {});
+      return null;
+    }
+    chunks.push(value);
+  }
+  const bytes = new Uint8Array(total);
+  let at = 0;
+  for (const c of chunks) {
+    bytes.set(c, at);
+    at += c.byteLength;
+  }
+  return new TextDecoder().decode(bytes);
+}
+
 async function handleRequest(req: Request, env: Env): Promise<Response> {
+  // Browsers label a fetch from our own page "same-origin"; a cross-site scripted post is refused. A direct client
+  // can omit or forge the header, so this is a speed bump, not authentication (see "Abuse" above).
+  const fetchSite = req.headers.get("sec-fetch-site");
+  if (fetchSite && fetchSite !== "same-origin") return json({ error: "Forbidden." }, 403);
+
   if (Number(req.headers.get("content-length") || 0) > MAX_BODY) return json({ error: "Too large." }, 413);
 
   let body: Record<string, unknown>;
   try {
-    const text = await req.text();
-    if (text.length > MAX_BODY) return json({ error: "Too large." }, 413);
+    const text = await readCapped(req, MAX_BODY);
+    if (text === null) return json({ error: "Too large." }, 413);
     body = JSON.parse(text);
     if (!body || typeof body !== "object") throw new Error();
   } catch {
@@ -96,7 +130,7 @@ async function handleRequest(req: Request, env: Env): Promise<Response> {
   // 2) Email the submission to us. Replying goes to the submitter.
   const notifyBody = JSON.stringify({
     to: site.notifyTo,
-    replyTo: `${oneLine(f.name) || "Lead"} <${f.email}>`,
+    replyTo: `${oneLine(f.name) || "Lead"} <${oneLine(f.email)}>`,
     subject: `${label}: ${oneLine(f.name)}`,
     html: `<table cellpadding="6" style="border-collapse:collapse;font:15px/1.5 sans-serif">${rows
       .map(([k, v]) => `<tr><td style="color:#5c6764;vertical-align:top"><b>${esc(k)}</b></td><td style="white-space:pre-wrap">${esc(v)}</td></tr>`)

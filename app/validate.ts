@@ -9,7 +9,9 @@ export type Errors = Partial<Record<keyof Fields, string>>;
 export function validate(f: Fields, type: FormType = "check"): Errors {
   const e: Errors = {};
   if (!f.name.trim() || f.name.length > 120) e.name = "Enter your name.";
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.email.trim()) || f.email.length > 200)
+  // No <, >, ", ,, ; or backslash: the worker interpolates this address into a Reply-To header, and those characters
+  // are what make an address list or a malformed header. Apostrophes and + / . - are legal and stay allowed.
+  if (!/^[^\s@<>",;\\]+@[^\s@<>",;\\]+\.[^\s@<>",;\\]{2,}$/.test(f.email.trim()) || f.email.length > 200)
     e.email = "Enter a work email like name@company.com.";
   if (!/^(https?:\/\/)?([a-z0-9-]+\.)+[a-z]{2,}(\/\S*)?$/i.test(f.website.trim()) || f.website.length > 300)
     e.website =
