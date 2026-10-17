@@ -22,6 +22,10 @@ validates and builds both Sequenzy requests, returns success, and sends nothing.
 `scripts/cf-postbuild.mjs`. The check is skipped only on preview builds: Cloudflare Workers Builds of any branch other
 than `main` (`WORKERS_CI_BRANCH`) and Vercel previews (`VERCEL_ENV=preview`).
 
+## Guides
+
+The `/guides` section is markdown in `content/guides/`. Posts stay hidden until `status: published`. How to add, preview and publish a post: `content/guides/README.md`.
+
 ## Environment variables
 
 | Name | Where | Purpose |

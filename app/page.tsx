@@ -24,9 +24,9 @@ import { site } from "./site.config";
 import { motionScript } from "./motion-script";
 import { sharedOpenGraph, ogImage, twitterImage } from "./seo";
 
-const homeTitle = `${site.brand} | Google Ads should bid on pipeline, not form fills`;
+const homeTitle = `HubSpot to Google Ads conversion tracking fix | ${site.brand}`;
 const description =
-  "We fix the HubSpot to Google Ads connection so Smart Bidding learns from the leads your sales team qualifies, not form fills. $1,200, fixed.";
+  "We check how HubSpot sends lifecycle stages to Google Ads and fix it in your accounts, so Smart Bidding learns from qualified leads. $1,200, fixed.";
 
 export const metadata: Metadata = {
   title: { absolute: homeTitle },

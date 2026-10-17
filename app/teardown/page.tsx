@@ -36,6 +36,9 @@ export default function Teardown() {
                 <li key={t}>{t}</li>
               ))}
             </ul>
+            <p>
+              These are the things behind most HubSpot Google Ads conversion tracking problems: a missing click ID, HubSpot tracking code that isn&apos;t on the page, and consent mode settings that are set up wrongly or too late.
+            </p>
             <p>No access, no call. We only look at what your page shows any visitor. We do a limited number each week.</p>
           </div>
         </section>

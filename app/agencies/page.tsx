@@ -6,15 +6,37 @@ import { CalButton, TeardownButton } from "../components/cta";
 import { Accent, SectionHead, TickList } from "../components/ui";
 import C1Report from "../components/c1-report";
 import { site } from "../site.config";
+import { jsonLdScript, ORG_ID, orgNode } from "../jsonld";
 import { pageMetadata, agenciesOgImage, agenciesTwitterImage } from "../seo";
 
 export const metadata = pageMetadata({
-  title: "Closed Logic for agencies | HubSpot to Google Ads, under your name",
+  title: "White-label HubSpot to Google Ads fix for agencies | Closed Logic",
   description:
     "We check and fix how your client's HubSpot sends lifecycle stages to Google Ads, delivered under your agency's name. Paid pilot from $900.",
   path: "/agencies",
   absoluteTitle: true, ogImg: agenciesOgImage, twImg: agenciesTwitterImage,
 });
+
+// Service and Offer data for the pilot and the monthly plans. The 10-account tier is left out until Matt decides on it.
+const agencyJsonLd = jsonLdScript([
+  orgNode,
+  {
+    "@type": "Service",
+    "@id": `${site.url}/agencies#service`,
+    name: "White-label HubSpot to Google Ads conversion check and fix for agencies",
+    serviceType: "Conversion tracking audit and fix",
+    provider: { "@id": ORG_ID },
+    description: "We check and fix how a client's HubSpot sends lifecycle stages to Google Ads, delivered under the agency's name.",
+    url: `${site.url}/agencies`,
+    audience: { "@type": "BusinessAudience", name: "Marketing agencies" },
+    offers: [
+      { "@type": "Offer", name: "Paid pilot with a short case study", price: "900", priceCurrency: "USD", url: `${site.url}/agencies#pilot` },
+      { "@type": "Offer", name: "Paid pilot without a case study", price: "1200", priceCurrency: "USD", url: `${site.url}/agencies#pilot` },
+      { "@type": "Offer", name: "Monthly plan, up to 3 client accounts", priceSpecification: { "@type": "UnitPriceSpecification", price: "1500", priceCurrency: "USD", unitCode: "MON" }, url: `${site.url}/agencies#pricing` },
+      { "@type": "Offer", name: "Monthly plan, up to 5 client accounts", priceSpecification: { "@type": "UnitPriceSpecification", price: "2400", priceCurrency: "USD", unitCode: "MON" }, url: `${site.url}/agencies#pricing` },
+    ],
+  },
+]);
 
 const pilot: React.ReactNode[] = [
   <>
@@ -87,6 +109,7 @@ export default function Agencies() {
   const book = site.agencyBookingUrl;
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: agencyJsonLd }} />
       <Header path="/agencies" agency />
       <main id="main" tabIndex={-1}>
         {/* 1. Hero */}

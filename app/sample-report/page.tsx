@@ -16,6 +16,7 @@ export const metadata = pageMetadata({
 });
 
 // No motion on this page: static final states only.
+// Later: link each finding to its guide once guides are published (see content/guides/README.md). No links yet, because no guide is live.
 const findings: { t: string; saw: React.ReactNode; why: string; change: string; undo: string; evidence?: React.ReactNode }[] = [
   {
     t: "Qualified stages are imported but not used for bidding",
@@ -103,7 +104,7 @@ export default function SampleReport() {
         <div className="container-site pb-16 pt-12 sm:pb-24 sm:pt-16">
           <section aria-labelledby="report-title">
             <Chip>{site.brand} report</Chip>
-            <h1 id="report-title" className="mt-4 text-title-l">Sample report</h1>
+            <h1 id="report-title" className="mt-4 text-title-l">Sample report: HubSpot to Google Ads conversion check</h1>
             <p className="mt-6 max-w-[62ch] text-text-l">
               This is an example of what you receive, built on a fictional account. The company, the figures and the screenshots are illustrative. They are not a client result.
             </p>

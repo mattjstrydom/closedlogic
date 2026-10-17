@@ -2,7 +2,7 @@
 // - out/_headers: security headers on every page and file (scripts/security-headers.mjs), long caching for hashed
 //   files, and X-Robots-Tag: noindex on non-production builds
 // (out/favicon.ico comes straight from app/favicon.ico, Nova's 16/32/48 px file.)
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { securityHeaders } from "./security-headers.mjs";
 
@@ -10,6 +10,9 @@ const out = new URL("../out/", import.meta.url);
 for (const f of ["index.html", "404.html"]) {
   if (!existsSync(new URL(f, out))) throw new Error(`out/${f} is missing: did next build run with output: "export"?`);
 }
+
+// app/guides/[slug] builds a placeholder page when no guide is published (a static export needs one route). Remove it.
+for (const f of ["guides/_none.html", "guides/_none.txt", "guides/_none"]) rmSync(new URL(f, out), { recursive: true, force: true });
 
 // Same decision the pages made: a noindex build has <meta name="robots" content="noindex..."> (site.indexable).
 const indexable = !/<meta name="robots" content="noindex/.test(readFileSync(new URL("index.html", out), "utf8"));

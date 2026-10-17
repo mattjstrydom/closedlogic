@@ -2,7 +2,7 @@ import Header from "../../components/header";
 import Footer from "../../components/footer";
 import RequestForm from "../../components/request-form";
 import { site } from "../../site.config";
-import { pageMetadata } from "../../seo";
+import { pageMetadata, agenciesOgImage, agenciesTwitterImage } from "../../seo";
 
 export const metadata = pageMetadata({
   title: "Free white-label teardown for agencies | Closed Logic",
@@ -10,6 +10,8 @@ export const metadata = pageMetadata({
     "Send us a client's or prospect's landing page. We record a five-minute look at what Google can see from outside, unbranded, so you can forward it.",
   path: "/agencies/teardown",
   absoluteTitle: true,
+  ogImg: agenciesOgImage,
+  twImg: agenciesTwitterImage,
 });
 
 const looks = [

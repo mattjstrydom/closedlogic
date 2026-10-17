@@ -2,6 +2,7 @@ import Link from "next/link";
 import CookieSettings from "./cookie-settings";
 import Logo from "./logo";
 import { site } from "../site.config";
+import { hasGuides } from "../guides/content";
 
 // min-h-6: 24px targets (WCAG 2.5.8). No underline, per the design.
 const link = "inline-flex min-h-6 items-center text-body no-underline hover:text-accent";
@@ -14,6 +15,7 @@ export default function Footer({ teardownHref = "/teardown" }: { teardownHref?: 
         <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-3">
           <p>{site.legalLine}.</p>
           <nav aria-label="Footer" className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            {hasGuides() && <Link href="/guides" className={link}>Guides</Link>}
             <Link href="/terms" className={link}>Terms</Link>
             <Link href="/privacy" className={link}>Privacy policy</Link>
             <CookieSettings className={`${link} cursor-pointer`} />

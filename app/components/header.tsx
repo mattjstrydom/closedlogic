@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { site } from "../site.config";
 import Logo from "./logo";
+import { hasGuides } from "../guides/content";
 
 const directLinks: [string, string][] = [
   ["/#how", "How it works"],
@@ -19,7 +20,8 @@ const agencyLinks: [string, string][] = [
 
 export default function Header({ path = "/", agency = false }: { path?: string; agency?: boolean }) {
   const onSample = path === "/sample-report";
-  const links = agency ? agencyLinks : directLinks;
+  // Guides appears only once a guide is published (automatic, see app/guides/content.ts).
+  const links = [...(agency ? agencyLinks : directLinks), ...(hasGuides() ? ([["/guides", "Guides"]] as [string, string][]) : [])];
   const bookHref = agency ? site.agencyBookingUrl : site.bookPath;
   return (
     <header className="site-header">
