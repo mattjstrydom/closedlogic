@@ -12,7 +12,7 @@ const mobileSizes = "calc(100vw - 80px)";
 
 export default function C1Report() {
   return (
-    <figure aria-labelledby="c1-title" className="bento-dark on-dark mt-5 overflow-hidden px-5 py-8 sm:px-16 sm:py-16">
+    <figure aria-labelledby="c1-title" className="card mt-5 overflow-hidden px-5 py-8 sm:px-16 sm:py-16">
       <Chip>White-label report</Chip>
       <h3 id="c1-title" className="mt-4 max-w-[900px] text-title-l">
         Shown as your agency would send it: <Accent dark>your logo, our name nowhere.</Accent>

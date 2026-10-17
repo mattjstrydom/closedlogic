@@ -116,21 +116,24 @@ html:not(.js) .ltb * { animation: none !important; }
 }
 .m-grow { transform-origin: 0 50%; }
 /* A2: SQL row tint. Final state green-50-ish; passes through coral-10 while it is flagged */
-.s2p-tint { background-color: #0f2a26; }
+.s2p-tint { background-color: #DFF7E8; }
 @keyframes s2p-tint {
   0% { background-color: rgba(253,250,250,0); }
-  12%, 52% { background-color: #2a1517; }
-  70%, 100% { background-color: #0f2a26; }
+  12%, 52% { background-color: #FFE0E4; }
+  70%, 100% { background-color: #DFF7E8; }
 }
 .m-blip { opacity: 0; } /* final state of a passing flag */
 
-/* A1 pause (WCAG 2.2.2) and off-screen pause */
+/* A1 pause (WCAG 2.2.2) and off-screen hold */
 .ltb.m-paused, .ltb.m-paused * { animation-play-state: paused !important; }
+/* Off-screen: drop the loop so the cards render at their natural, settled state. Pausing instead would
+   freeze them on frame 0, where they are still invisible. */
+.ltb.m-offscreen:not(.m-paused), .ltb.m-offscreen:not(.m-paused) * { animation: none !important; }
 @media (prefers-reduced-motion: reduce) { [data-motion-toggle] { display: none !important; } }
 
 /* A2 SQL row tint, applied to the <tr> rather than each <td>: Chrome skipped painting the animated
    background on cells that also carry a responsive display rule (max-sm:hidden). Same keyframes and timing (1.0 s, 3 s). */
-.s2p-row { background-color: #0f2a26; }
+.s2p-row { background-color: #DFF7E8; }
 @media (prefers-reduced-motion: no-preference) {
   .m-ready .m-rise.s2p-row {
     animation-name: m-rise, s2p-tint; animation-duration: .9s, 3s; animation-delay: .49s, 1s;

@@ -13,29 +13,29 @@ const rows = [
 
 export default function ComparisonGrid() {
   return (
-    <div className="bento mt-5 !p-0 overflow-hidden">
+    <div className="card mt-7 overflow-hidden !p-0">
       <div className="px-5 pt-5 sm:px-8 sm:pt-8">
         <h3 className="text-title-xs">What to ask any provider</h3>
-        <p className="mt-2 max-w-[64ch] text-text-m text-gray-600">We can only speak for ourselves. Other providers differ, so check each row with yours.</p>
+        <p className="mt-2 max-w-[64ch] text-text-m text-body">We can only speak for ourselves. Other providers differ, so check each row with yours.</p>
       </div>
-      <div className="mt-5 overflow-x-auto">
-        <table className="w-full min-w-[640px] border-collapse text-left text-[0.875rem]">
+      <div className="mt-5 table-scroll">
+        <table className="cmp w-full min-w-[640px] border-collapse text-left text-[0.95rem]">
           <caption className="sr-only">Comparison of Closed Logic with other ways to fix the HubSpot to Google Ads connection</caption>
           <thead>
-            <tr className="border-y border-[#1e293b] text-[0.8125rem] text-gray-600">
+            <tr className="border-y border-rule text-[0.8125rem] text-body">
               <th scope="col" className="py-3 pl-5 pr-2 font-normal sm:pl-8"><span className="sr-only">Criteria</span></th>
               {cols.map((c, i) => (
-                <th key={c} scope="col" className={`px-3 py-3 font-medium ${i === 0 ? "text-black" : "text-gray-600"}`}>{c}</th>
+                <th key={c} scope="col" className={`px-3 py-3 font-medium ${i === 0 ? "text-ink" : "text-body"}`}>{c}</th>
               ))}
             </tr>
           </thead>
-          <tbody className="[&_tr]:border-t [&_tr]:border-[#1e293b]">
+          <tbody className="[&_tr]:border-t [&_tr]:border-rule">
             {rows.map((r) => (
               <tr key={r}>
                 <th scope="row" className="py-3.5 pl-5 pr-2 font-medium sm:pl-8">{r}</th>
-                <td className="px-3"><span className="tag-ok"><Check size={14} aria-hidden="true" />Yes</span></td>
+                <td className="px-3"><span className="inline-flex items-center gap-1.5 whitespace-nowrap font-semibold text-ok"><Check size={14} aria-hidden="true" />Yes</span></td>
                 {cols.slice(1).map((c) => (
-                  <td key={c} className="px-3"><span className="inline-flex items-center gap-1.5 text-gray-600"><Minus size={14} aria-hidden="true" />Depends</span></td>
+                  <td key={c} className="px-3"><span className="inline-flex items-center gap-1.5 whitespace-nowrap text-muted"><Minus size={14} aria-hidden="true" />Depends</span></td>
                 ))}
               </tr>
             ))}

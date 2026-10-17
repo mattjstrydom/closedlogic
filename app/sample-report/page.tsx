@@ -108,11 +108,11 @@ export default function SampleReport() {
               This is an example of what you receive, built on a fictional account. The company, the figures and the screenshots are illustrative. They are not a client result.
             </p>
             <dl className="bento mt-8 grid max-w-[48rem] grid-cols-1 gap-x-8 gap-y-1 sm:grid-cols-[auto_1fr] sm:gap-y-2">
-              <dt className="text-gray-600">Account</dt>
+              <dt className="text-body">Account</dt>
               <dd className="mb-2 sm:mb-0">Example Co (fictional), B2B software</dd>
-              <dt className="text-gray-600">Stack</dt>
+              <dt className="text-body">Stack</dt>
               <dd className="mb-2 sm:mb-0">HubSpot Marketing Hub Professional, Google Ads, Google Tag Manager</dd>
-              <dt className="text-gray-600">Period compared</dt>
+              <dt className="text-body">Period compared</dt>
               <dd>The last 30 days</dd>
             </dl>
           </section>
@@ -131,7 +131,7 @@ export default function SampleReport() {
 
           <section aria-labelledby="findings-title" className={sectionGap}>
             <h2 id="findings-title" className={h2}>Findings</h2>
-            <p className="mt-3 max-w-[62ch] text-gray-600">
+            <p className="mt-3 max-w-[62ch] text-body">
               Each finding comes with what we saw, why it matters, the change we propose and how to reverse it. In a real report every finding also has a screenshot.
             </p>
             <ol className="mt-8 grid gap-5">
@@ -154,7 +154,7 @@ export default function SampleReport() {
             <div className="bento grid gap-8 lg:grid-cols-[5fr_7fr] lg:gap-12">
               <div>
                 <h2 id="count-title" className={h2}>Side-by-side count</h2>
-                <p className="mt-3 text-gray-600">Same 30 days. Example data.</p>
+                <p className="mt-3 text-body">Same 30 days. Example data.</p>
                 <p className="mt-6 max-w-[64ch] text-text-m">
                   HubSpot says the two counts may not match, so differences alone are not a fault. These ones are explained. SQL in Google Ads is about double because it is sent twice. Customer is zero because the legacy upload is not recording. MQL and Opportunity are close.
                 </p>
@@ -169,7 +169,7 @@ export default function SampleReport() {
             <div className="bento grid gap-8 lg:grid-cols-[5fr_7fr] lg:gap-12">
               <div>
                 <h2 id="log-title" className={h2}>Change log</h2>
-                <p className="mt-3 max-w-[62ch] text-gray-600">
+                <p className="mt-3 max-w-[62ch] text-body">
                   We send the proposed changes first and make only the ones you approve. This log lists what we touched. Each change has its reversal in the findings above.
                 </p>
               </div>
@@ -178,14 +178,14 @@ export default function SampleReport() {
                   <table className="w-full border-collapse text-left text-[0.875rem] leading-[1.4] sm:text-[0.9375rem]">
                     <caption className="sr-only">Changes made, with status</caption>
                     <thead>
-                      <tr className="text-[0.75rem] text-gray-600 sm:text-[0.8125rem]">
+                      <tr className="text-[0.75rem] text-body sm:text-[0.8125rem]">
                         <th scope="col" className="py-3 pl-4 pr-2 font-normal sm:pl-5">Change</th>
                         <th scope="col" className="py-3 pl-2 pr-4 font-normal sm:pr-5">Status</th>
                       </tr>
                     </thead>
                     <tbody>
                       {changeLog.map(([c, s]) => (
-                        <tr key={c} className="border-t border-gray-100 align-top">
+                        <tr key={c} className="border-t border-rule align-top">
                           <td className="py-3.5 pl-4 pr-2 sm:pl-5">{c}</td>
                           <td className="py-3.5 pl-2 pr-4 sm:pr-5"><StatusTag s={s} /></td>
                         </tr>

@@ -43,7 +43,7 @@ export default function AgencyTeardown() {
 
         <section aria-label="Request a teardown" className="container-site pb-20 sm:pb-28">
           <div className="grid items-start gap-5 lg:grid-cols-[5fr_7fr]">
-            <div className="tile max-w-[64ch] border border-solid border-gray-200 p-6 text-text-l sm:p-8">
+            <div className="tile max-w-[64ch] border border-solid border-rule p-6 text-text-l sm:p-8">
               <p>
                 What a teardown can&apos;t show: which conversions you bid on, whether your lifecycle stages reach Google Ads, and how the counts compare. That&apos;s what the pilot covers.
               </p>

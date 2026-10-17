@@ -3,12 +3,12 @@ import CookieSettings from "./cookie-settings";
 import Logo from "./logo";
 import { site } from "../site.config";
 
-// min-h-6: 24px targets (WCAG 2.5.8)
-const link = "inline-flex min-h-6 items-center text-gray-800 underline underline-offset-[0.2em] hover:text-black hover:decoration-2";
+// min-h-6: 24px targets (WCAG 2.5.8). No underline, per the design.
+const link = "inline-flex min-h-6 items-center text-body no-underline hover:text-accent";
 
 export default function Footer({ teardownHref = "/teardown" }: { teardownHref?: string }) {
   return (
-    <footer className="border-t border-gray-100 bg-gray-50 py-10 text-text-s text-gray-600">
+    <footer className="border-t border-solid border-rule bg-white py-10 text-text-s text-body">
       <div className="container-site flex flex-col gap-4">
         <Logo />
         <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-3">
@@ -20,10 +20,10 @@ export default function Footer({ teardownHref = "/teardown" }: { teardownHref?: 
             <Link href={teardownHref} className={link}>Get a free teardown</Link>
           </nav>
         </div>
-        <p className="max-w-[80ch]">
+        <p className="max-w-[80ch] text-muted">
           HubSpot® and Google Ads are trademarks of their respective owners. {site.brand} is an independent service. We are not affiliated with, authorised by, endorsed by, sponsored by or otherwise approved by HubSpot, Inc. or Google LLC.
         </p>
-        <p>© {new Date().getFullYear()} {site.legalName}</p>
+        <p className="text-muted">© {new Date().getFullYear()} {site.legalName}</p>
       </div>
     </footer>
   );

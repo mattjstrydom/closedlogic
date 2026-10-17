@@ -1,7 +1,7 @@
 // Visible placeholder. scripts/check-placeholders.mjs fails the build while any <Ph> or token remains.
 export default function Ph({ children }: { children: string }) {
   return (
-    <mark className="rounded-sm bg-[#ffe27a] px-1 text-black outline-1 outline-dashed outline-[#8a6d00]">
+    <mark className="rounded-sm bg-[#FFF1CC] px-1 text-[#7A5200] outline-1 outline-dashed outline-[#7A5200]">
       {children}
     </mark>
   );

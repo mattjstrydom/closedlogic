@@ -21,7 +21,7 @@ export default function Privacy() {
     <main id="main" tabIndex={-1} className="container-site pb-20 pt-12 sm:pt-16">
       <div className="max-w-[64ch] space-y-5 text-text-l [&_code]:font-mono [&_code]:text-[0.9em]">
         <h1 className="text-title-l">Privacy policy</h1>
-        <p className="text-gray-600">
+        <p className="text-body">
           Last updated <Slot value={site.privacyLastUpdated} />
         </p>
 

@@ -5,7 +5,7 @@ import { TIERS, validate, type Errors, type Fields, type FormType } from "@/app/
 
 const empty: Fields = { name: "", email: "", website: "", tier: "", note: "" };
 const input =
-  "mt-1 block w-full rounded-chip border border-solid border-[#7b8a86] bg-gray-50 px-3 py-2.5 text-[1rem] text-black transition-colors duration-300 hover:border-black";
+  "mt-1 block w-full rounded-[10px] border-2 border-solid border-ink bg-white px-4 py-3 text-[1rem] text-ink";
 
 // email and calUrl come from site.config through the (server) page, so this client bundle doesn't carry the whole config.
 export default function RequestForm({ type = "check", email, calUrl, agency = false }: { type?: FormType; email: string; calUrl: string; agency?: boolean }) {
@@ -46,7 +46,7 @@ export default function RequestForm({ type = "check", email, calUrl, agency = fa
   if (status === "ok")
     return (
       // Focus moves here because the submit button that had it is gone; tabIndex -1 keeps it out of the tab order.
-      <div role="status" tabIndex={-1} ref={(el) => el?.focus()} className="rounded-chip border border-gray-100 bg-surface p-6 focus:outline-none">
+      <div role="status" tabIndex={-1} ref={(el) => el?.focus()} className="card focus:outline-none">
         <p className="text-text-xl font-medium">
           {teardown ? "Thanks. We'll email you the recording." : "Thanks. We'll reply within one business day."}
         </p>
@@ -105,7 +105,7 @@ export default function RequestForm({ type = "check", email, calUrl, agency = fa
         <button type="submit" className="btn w-full cursor-pointer disabled:cursor-wait disabled:opacity-70 sm:w-auto" disabled={status === "sending"}>
           {teardown ? "Request a teardown" : "Request a check"}
         </button>
-        <p className="text-gray-600">
+        <p className="text-body">
           {teardown ? (agency ? "We'll email you the recording, unbranded." : "We'll email you the recording.") : "We reply within one business day."}
         </p>
       </form>

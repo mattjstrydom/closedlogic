@@ -104,8 +104,8 @@ export default function Agencies() {
                 Get a free white-label teardown
               </TeardownButton>
             </div>
-            <p className="text-text-m text-gray-600 max-w-[40rem]">
-              <span className="font-medium text-black">Paid pilot from $900.</span> Our name appears nowhere in what your client sees.
+            <p className="text-text-m text-body max-w-[40rem]">
+              <span className="font-medium text-ink">Paid pilot from $900.</span> Our name appears nowhere in what your client sees.
             </p>
           </div>
         </section>
@@ -186,33 +186,33 @@ export default function Agencies() {
                   Monthly plan: <Accent small>we keep your clients&apos; connections fixed</Accent>
                 </h3>
                 <p className="mt-4 text-text-l">A monitored-account plan, not an hours bank. Pick the number of client accounts you want us to watch.</p>
-                <div className="mt-6 overflow-x-auto rounded-tile border border-solid border-gray-100">
+                <div className="mt-6 overflow-x-auto rounded-tile border border-solid border-rule">
                   <table className="w-full border-collapse text-left text-[0.875rem] leading-snug sm:text-[0.9375rem]">
                     <caption className="sr-only">Monthly plan prices by number of client accounts</caption>
                     <thead>
-                      <tr className="text-[0.75rem] text-gray-600 sm:text-[0.8125rem]">
+                      <tr className="text-[0.75rem] text-body sm:text-[0.8125rem]">
                         <th scope="col" className="py-3 pl-4 pr-2 font-normal sm:pl-5">Plan</th>
                         <th scope="col" className="px-2 py-3 font-normal">Client accounts</th>
                         <th scope="col" className="py-3 pl-2 pr-4 text-right font-normal sm:pr-5">Price a month</th>
                       </tr>
                     </thead>
-                    <tbody className="[&_td]:h-[52px] [&_tr]:border-t [&_tr]:border-gray-100">
+                    <tbody className="[&_td]:h-[52px] [&_tr]:border-t [&_tr]:border-rule">
                       {plans.map(([plan, accounts, price]) => (
                         <tr key={plan}>
                           <td className="pl-4 pr-2 font-medium sm:pl-5">{plan}</td>
-                          <td className="px-2 text-gray-600">{accounts}</td>
+                          <td className="px-2 text-body">{accounts}</td>
                           <td className="pl-2 pr-4 text-right font-mono sm:pr-5">{price}</td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
                 </div>
-                <p className="mt-4 text-text-m text-gray-600">$500 a month per account for your first four accounts, then $400 a month for each account from the fifth.</p>
-                <p className="mt-4 text-text-m text-gray-600">Each account needs its own HubSpot portal and its own Google Ads account. We can&apos;t connect through a manager account, because HubSpot can only connect individual Google Ads accounts.</p>
+                <p className="mt-4 text-text-m text-body">$500 a month per account for your first four accounts, then $400 a month for each account from the fifth.</p>
+                <p className="mt-4 text-text-m text-body">Each account needs its own HubSpot portal and its own Google Ads account. We can&apos;t connect through a manager account, because HubSpot can only connect individual Google Ads accounts.</p>
                 <p className="mt-6 font-medium">On each account, every month we do three things:</p>
                 <TickList items={monthly} className="mt-3" />
-                <p className="mt-4 text-text-m text-gray-600">Other ops work (routing, clean-up, reporting, new builds) is quoted separately in blocks at $150 an hour, 5-hour minimum.</p>
-                <p className="mt-4 text-text-m text-gray-600">The plan has a 3-month minimum, then runs month to month with 30 days&apos; notice. It is billed monthly in advance by Stripe subscription, in USD. You set your own price to your clients. We invoice you, and you invoice them.</p>
+                <p className="mt-4 text-text-m text-body">Other ops work (routing, clean-up, reporting, new builds) is quoted separately in blocks at $150 an hour, 5-hour minimum.</p>
+                <p className="mt-4 text-text-m text-body">The plan has a 3-month minimum, then runs month to month with 30 days&apos; notice. It is billed monthly in advance by Stripe subscription, in USD. You set your own price to your clients. We invoice you, and you invoice them.</p>
                 <p className="mt-6 text-text-m">Want to see whether it fits your client list?</p>
                 <div className="mt-3">
                   <CalButton href={book} className="w-full sm:w-auto">Book a 20-minute agency fit call</CalButton>
@@ -240,7 +240,7 @@ export default function Agencies() {
             <div className="mt-6">
               <CalButton href={book} className="w-full sm:w-auto">Book a 20-minute agency fit call</CalButton>
             </div>
-            <ol className="mt-8 max-w-[64rem] space-y-2 text-text-s text-gray-600">
+            <ol className="mt-8 max-w-[64rem] space-y-2 text-text-s text-body">
               {sources.map((s) => (
                 <li key={s.n}>
                   [{s.n}] {s.title}, {s.detail}:{" "}
@@ -287,7 +287,7 @@ export default function Agencies() {
                 Try it on <Accent dark>one client account</Accent>
               </h2>
               <CalButton href={book} className="mt-8 w-full sm:w-auto" />
-              <p className="mt-6 text-white/90">
+              <p className="mt-6 text-body">
                 Prefer email? <a href={`mailto:${site.email}`} className="link">{site.email}</a>
               </p>
             </div>

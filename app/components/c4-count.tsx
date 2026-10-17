@@ -25,8 +25,7 @@ function BadTag({ n, kind = "bad", children }: { n: number; kind?: "warn" | "bad
     );
   return (
     <span className="tag-bad">
-      <span className="tag-num">{n}</span>
-      <span className="max-md:hidden">{children}</span>
+      <span className="tag-num">{n}</span>{" "}<span className="max-md:hidden">{children}</span>
     </span>
   );
 }
@@ -44,7 +43,7 @@ export function CountTable({ className = "" }: { className?: string }) {
     // overflow-x-auto, not hidden: below about 360px the table is wider than the card, so it scrolls sideways instead of
     // being clipped (WCAG 1.4.10 allows this for data tables). Chrome and Firefox make such scrollers keyboard-focusable.
     <div className={`frag overflow-x-auto ${className}`}>
-      <div className="flex items-center gap-3 border-b border-gray-100 px-4 py-3.5 sm:px-5">
+      <div className="flex items-center gap-3 border-b border-rule px-4 py-3.5 sm:px-5">
         <span className="flex gap-1.5" aria-hidden="true">
           <i className="size-2.5 rounded-full bg-gray-100" />
           <i className="size-2.5 rounded-full bg-gray-100" />
@@ -55,7 +54,7 @@ export function CountTable({ className = "" }: { className?: string }) {
       <table className="w-full border-collapse text-left text-[0.875rem] leading-snug sm:text-[0.9375rem]">
         <caption className="sr-only">Example: HubSpot stage changes against Google Ads conversions, same 30 days</caption>
         <thead>
-          <tr className="text-[0.75rem] text-gray-600 sm:text-[0.8125rem]">
+          <tr className="text-[0.75rem] tracking-[0.06em] text-muted uppercase sm:text-[0.8125rem]">
             <th scope="col" className="py-3 pl-4 pr-2 font-normal sm:pl-5">Stage</th>
             <th scope="col" className="px-2 py-3 text-right font-normal max-sm:px-0.5">
               <span className="max-sm:sr-only">HubSpot, from Google Ads contacts</span>
@@ -68,7 +67,7 @@ export function CountTable({ className = "" }: { className?: string }) {
             <th scope="col" className="py-3 pl-2 pr-4 font-normal sm:pr-5"><span className="sr-only">Notes</span></th>
           </tr>
         </thead>
-        <tbody className="font-mono [&_td]:h-[60px] [&_tr]:border-t [&_tr]:border-gray-100">
+        <tbody className="font-mono [&_td]:h-[60px] [&_tr]:border-t [&_tr]:border-rule">
           {rows.map(([stage, hs, ga, tag]) => (
             <tr key={stage}>
               <td className="pl-4 pr-2 font-sans sm:pl-5">{stage}</td>
@@ -87,14 +86,14 @@ export default function C4Count() {
   return (
     <figure
       aria-labelledby="c4-title"
-      className="mt-5 grid grid-cols-1 gap-8 rounded-card bg-surface p-5 sm:p-10 lg:grid-cols-[5fr_7fr] lg:grid-rows-[1fr_auto] lg:gap-x-12"
+      className="card mt-7 grid grid-cols-1 gap-8 p-6 sm:p-10 lg:grid-cols-[5fr_7fr] lg:grid-rows-[1fr_auto] lg:gap-x-12"
     >
       <div className="flex min-w-0 flex-col lg:col-start-1 lg:row-start-1">
         <Chip>Side-by-side count</Chip>
         <h3 id="c4-title" className="mt-4 text-title-m">
           Which gaps are faults, <Accent small>and which are normal</Accent>
         </h3>
-        <p className="mt-4 text-text-l text-gray-800">Some difference between the two counts is normal. These ones are explained.</p>
+        <p className="mt-4 text-text-l text-body">Some difference between the two counts is normal. These ones are explained.</p>
 
         <ol className="mt-7 space-y-4 text-text-m">
           <li className="flex gap-3 text-green-text">

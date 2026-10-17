@@ -9,7 +9,7 @@ const v = ({ d, t, y, tint }: Vars) =>
 // Goal pills: the shared .goal-primary / .goal-secondary classes in app/globals.css, not copies of them.
 const primary = "goal-primary";
 const secondary = "goal-secondary";
-const row = "m-rise border-t border-solid border-gray-100";
+const row = "m-rise border-t border-solid border-rule";
 const rowVars = (d: string) => v({ d, t: ".9s", y: "16px" });
 
 export default function A2SecondaryToPrimary() {
@@ -24,21 +24,21 @@ export default function A2SecondaryToPrimary() {
         <h3 id="a2-title" className="text-title-m">
           One setting decides <Accent small>what Google Ads learns from</Accent>
         </h3>
-        <p className="text-text-l text-gray-800">Set “HubSpot SQL” to Primary and include it in the account-level goal. Move “Lead form submit” to Secondary. You choose the date, because bidding relearns.</p>
+        <p className="text-text-l text-body">Set “HubSpot SQL” to Primary and include it in the account-level goal. Move “Lead form submit” to Secondary. You choose the date, because bidding relearns.</p>
       </div>
 
-      <div className="m-rise min-w-0 rounded-tile bg-gray-50 p-3 max-lg:row-start-3 max-lg:mt-3 sm:p-6 lg:col-start-2 lg:row-span-2 lg:row-start-1" style={v({ d: "0s" })}>
+      <div className="m-rise min-w-0 rounded-tile bg-pale p-3 max-lg:row-start-3 max-lg:mt-3 sm:p-6 lg:col-start-2 lg:row-span-2 lg:row-start-1" style={v({ d: "0s" })}>
         <div className="frag overflow-hidden">
           <div className="flex items-center justify-between gap-3 px-4 py-3.5 sm:px-5">
             <p className="text-[1rem] font-medium tracking-[-0.02em]">Conversion actions</p>
-            <p className="flex items-center gap-2 whitespace-nowrap font-mono text-[11px] tracking-normal text-gray-600">
+            <p className="flex items-center gap-2 whitespace-nowrap font-mono text-[11px] tracking-normal text-body">
               Account ID <span className="inline-block h-[12px] w-[88px] rounded-[3px] bg-gray-100" role="img" aria-label="Account ID hidden" />
             </p>
           </div>
-          <table className="w-full border-collapse whitespace-nowrap text-left text-[0.8125rem] leading-snug tracking-[-0.01em] sm:text-[0.9375rem]">
+          <table className="w-full border-collapse whitespace-nowrap text-left text-[0.875rem] leading-snug tracking-[-0.01em] sm:text-[0.9375rem]">
             <caption className="sr-only">Example conversion actions after the change</caption>
             <thead>
-              <tr className="text-[0.75rem] text-gray-600 sm:text-[0.8125rem]">
+              <tr className="text-[0.75rem] text-body sm:text-[0.8125rem]">
                 <th scope="col" className="py-2.5 pl-4 pr-2 font-normal sm:pl-5">Conversion action</th>
                 <th scope="col" className="px-2 py-2.5 font-normal max-sm:hidden">Source</th>
                 <th scope="col" className="px-2 py-2.5 font-normal">Goal</th>
@@ -48,7 +48,7 @@ export default function A2SecondaryToPrimary() {
             <tbody>
               <tr className={row} style={rowVars("0.25s")}>
                 <td className="h-14 pl-4 pr-2 sm:pl-5">Lead form submit</td>
-                <td className="px-2 max-sm:hidden"><span className="text-gray-600">Website form</span></td>
+                <td className="px-2 max-sm:hidden"><span className="text-body">Website form</span></td>
                 <td className="px-2">
                   <span className="sw">
                     <span className="m-out" style={v({ d: "2.6s" })} aria-hidden="true"><span className={primary}>Primary</span></span>
@@ -82,7 +82,7 @@ export default function A2SecondaryToPrimary() {
               </tr>
               <tr className={row} style={rowVars("0.61s")}>
                 <td className="h-14 pl-4 pr-2 sm:pl-5">Test conversion</td>
-                <td className="px-2 max-sm:hidden"><span className="text-gray-600">Website</span></td>
+                <td className="px-2 max-sm:hidden"><span className="text-body">Website</span></td>
                 <td className="px-2"><span className={secondary}>Secondary</span></td>
                 <td className="pl-2 pr-4 text-right max-sm:p-0 sm:pr-5" />
               </tr>
@@ -90,17 +90,17 @@ export default function A2SecondaryToPrimary() {
           </table>
         </div>
         <div className="mt-4 flex flex-wrap items-center gap-2 px-1">
-          <span className="text-[0.875rem] font-medium tracking-[-0.02em] text-gray-800">Smart Bidding learns from:</span>
+          <span className="text-[0.875rem] font-medium tracking-[-0.02em] text-body">Smart Bidding learns from:</span>
           <span className="sw">
             <span className="m-out tag-bad" style={v({ d: "3.6s" })} aria-hidden="true">Form fills only</span>
             <span className="m-in tag-ok" style={v({ d: "3.7s" })}>Qualified stages</span>
           </span>
         </div>
         <div className="m-rise frag relative mt-4 p-4 sm:ml-10 sm:p-5" style={v({ d: "4.2s" })}>
-          <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-gray-600">Change log row</p>
+          <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-body">Change log row</p>
           <dl className="mt-3 grid grid-cols-1 gap-x-5 gap-y-3 text-[0.875rem] leading-[1.45] tracking-[-0.01em] md:grid-cols-[1.2fr_1.2fr_0.9fr]">
             <div>
-              <dt className="text-[0.8125rem] text-gray-600">Change</dt>
+              <dt className="text-[0.8125rem] text-body">Change</dt>
               <dd className="mt-1">Set “HubSpot SQL” to Primary and add it to the goal. Move “Lead form submit” to Secondary.</dd>
             </div>
             <div className="rounded-chip bg-green-100 px-3 py-2">
@@ -108,7 +108,7 @@ export default function A2SecondaryToPrimary() {
               <dd className="mt-1">Set “Lead form submit” back to Primary and “HubSpot SQL” back to Secondary.</dd>
             </div>
             <div>
-              <dt className="text-[0.8125rem] text-gray-600">Status</dt>
+              <dt className="text-[0.8125rem] text-body">Status</dt>
               <dd className="mt-1"><span className="tag-info">Approved, scheduled</span></dd>
             </div>
           </dl>

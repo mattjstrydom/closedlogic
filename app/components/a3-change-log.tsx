@@ -30,7 +30,7 @@ function FinalTag({ final, draw }: { final: Final; draw: string }) {
 
 export default function A3ChangeLog() {
   return (
-    <figure data-motion aria-labelledby="a3-title" className="bento-dark on-dark grid grid-cols-1 gap-4 p-5 sm:grid-cols-[1fr_auto] sm:items-end sm:p-10">
+    <figure data-motion aria-labelledby="a3-title" className="card grid grid-cols-1 gap-4 p-6 sm:grid-cols-[1fr_auto] sm:items-end sm:p-9">
       <div className="flex flex-col gap-4 sm:col-start-1 sm:row-start-1">
         <Chip>Change log</Chip>
         <h3 id="a3-title" className="max-w-[560px] text-title-m">
@@ -38,14 +38,14 @@ export default function A3ChangeLog() {
         </h3>
       </div>
 
-      <div className="m-rise frag col-span-full mt-4 overflow-hidden text-black max-sm:row-start-3 sm:row-start-2" style={v({ d: "0s" })}>
+      <div className="m-rise frag col-span-full mt-4 overflow-hidden text-ink max-sm:row-start-3 sm:row-start-2" style={v({ d: "0s" })}>
         <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-4 sm:px-5">
           <p className="text-[1rem] font-medium tracking-[-0.02em]">Changes made, with status</p>
           <div className="flex items-center gap-3">
-            <span className="relative block h-1.5 w-28 overflow-hidden rounded-pill bg-gray-50" aria-hidden="true">
-              <span className="m-grow absolute inset-y-0 left-0 w-2/3 rounded-pill bg-green-500" style={v({ d: "3.2s", t: "1.8s" })} />
+            <span className="relative block h-1.5 w-28 overflow-hidden rounded-pill bg-pale" aria-hidden="true">
+              <span className="m-grow absolute inset-y-0 left-0 w-2/3 rounded-pill bg-accent" style={v({ d: "3.2s", t: "1.8s" })} />
             </span>
-            <span className="sw font-mono text-[12px] tracking-normal text-gray-600">
+            <span className="sw font-mono text-[12px] tracking-normal text-body">
               <span className="m-out" style={v({ d: "3.1s" })} aria-hidden="true">6 proposed</span>
               <span className="m-in" style={v({ d: "3.2s" })}>4 of 6 done</span>
             </span>
@@ -55,11 +55,11 @@ export default function A3ChangeLog() {
           {rows.map((r, i) => (
             <li
               key={r.n}
-              className="m-rise grid grid-cols-1 items-center gap-2 border-t border-solid border-gray-100 px-4 py-3.5 sm:grid-cols-[1fr_auto] sm:gap-6 sm:px-5"
+              className="m-rise grid grid-cols-1 items-center gap-2 border-t border-solid border-rule px-4 py-3.5 sm:grid-cols-[1fr_auto] sm:gap-6 sm:px-5"
               style={v({ d: `${(0.3 + 0.15 * i).toFixed(2)}s`, t: ".9s", y: "24px" })}
             >
               <span className="text-[0.875rem] leading-[1.4] tracking-[-0.01em] sm:text-[0.9375rem]">
-                <span className="mr-2 font-mono text-[11px] tracking-normal text-gray-600">{r.n}</span>
+                <span className="mr-2 font-mono text-[11px] tracking-normal text-body">{r.n}</span>
                 {r.text}
               </span>
               <span className="sw sm:justify-items-end">
@@ -72,7 +72,7 @@ export default function A3ChangeLog() {
             </li>
           ))}
         </ol>
-        <p className="m-fade border-t border-solid border-gray-100 bg-gray-50 px-4 py-3 text-[0.8125rem] leading-[1.45] tracking-[-0.01em] text-gray-600 sm:px-5" style={v({ d: "5.1s" })}>
+        <p className="m-fade border-t border-solid border-rule bg-pale px-4 py-3 text-[0.8125rem] leading-[1.45] tracking-[-0.01em] text-body sm:px-5" style={v({ d: "5.1s" })}>
           Each change has its reversal in the findings. The bidding change goes live on the date you choose.
         </p>
       </div>

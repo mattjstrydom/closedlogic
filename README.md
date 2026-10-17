@@ -84,7 +84,7 @@ JSON-LD, terms, privacy and the Worker. After a rename also:
 | Site facts, brand, and every open placeholder (the one file Matt edits) | `app/site.config.ts` |
 | Placeholder check | `scripts/check-placeholders.mjs` |
 | Design tokens, base layer, components (Tailwind 4 `@theme`) | `app/globals.css` |
-| Fonts (Archivo, Azeret Mono, self-hosted) | `app/fonts/`, `app/layout.tsx` |
+| Fonts (Poppins, Fira Sans, JetBrains Mono, via `next/font/google`) | `app/layout.tsx` |
 | Home page copy and JSON-LD (Organization, WebSite, Service) | `app/page.tsx` |
 | Header, footer, CTAs, FAQ, shared UI | `app/components/header.tsx`, `footer.tsx`, `cta.tsx`, `faq.tsx`, `ui.tsx` |
 | Graphics C1 to C4 | `app/components/c1-report.tsx`, `c2` in `app/page.tsx`, `c3-finding.tsx`, `c4-count.tsx` |

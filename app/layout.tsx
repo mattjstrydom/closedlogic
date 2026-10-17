@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Poppins, Fira_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
 import ConsentBanner from "./components/consent-banner";
@@ -25,23 +25,31 @@ const jsFlag = `document.documentElement.classList.add("js")`;
 // Closes the mobile menu popover when a link inside it is clicked (in-page anchors do not close popovers on their own).
 const menu = `document.getElementById("site-menu")?.addEventListener("click",function(e){if(e.target.closest("a"))e.currentTarget.hidePopover()});`;
 
-const archivo = localFont({
-  src: "./fonts/archivo-latin-var.woff2",
-  weight: "400 700",
-  style: "normal",
-  variable: "--font-archivo",
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-poppins",
   display: "swap",
   preload: true,
-  adjustFontFallback: "Arial",
+  adjustFontFallback: false,
 });
 
-const azeret = localFont({
-  src: "./fonts/azeret-mono-latin-var.woff2",
-  weight: "400 500",
-  style: "normal",
-  variable: "--font-azeret",
+const fira = Fira_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-fira",
+  display: "swap",
+  preload: true,
+  adjustFontFallback: false,
+});
+
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-jetbrains",
   display: "swap",
   preload: false,
+  adjustFontFallback: false,
 });
 
 export const metadata: Metadata = {
@@ -57,7 +65,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-ZA" data-scroll-behavior="smooth" className={`${archivo.variable} ${azeret.variable}`} suppressHydrationWarning>
+    <html lang="en-ZA" data-scroll-behavior="smooth" className={`${poppins.variable} ${fira.variable} ${jetbrains.variable}`} suppressHydrationWarning>
       <body>
         {/* Marks JS as available before first paint, so the A1 loop only runs when its pause control can work (WCAG 2.2.2). */}
         <script dangerouslySetInnerHTML={{ __html: jsFlag }} />

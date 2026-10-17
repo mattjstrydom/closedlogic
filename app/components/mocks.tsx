@@ -1,7 +1,7 @@
 import CodeBlock, { type Tok } from "./code-block";
 
 // Product-style illustrations. Values are literal identifiers / example rows, labelled "Example".
-const frame = "frag overflow-hidden text-[0.8125rem] leading-snug";
+const frame = "frag overflow-hidden text-[0.875rem] leading-snug";
 
 function Caption() {
   return <p className="img-label-quiet m-3">Example</p>;
@@ -19,14 +19,14 @@ export function ConversionMock() {
       <table className="w-full border-collapse text-left">
         <caption className="sr-only">Example conversion action list</caption>
         <thead>
-          <tr className="border-b border-gray-100 text-gray-600">
+          <tr className="border-b border-rule text-[0.75rem] tracking-[0.06em] text-muted uppercase">
             <th scope="col" className="px-3 py-2.5 font-normal">Conversion action</th>
             <th scope="col" className="px-3 py-2.5 font-normal">Goal</th>
           </tr>
         </thead>
         <tbody>
           {rows.map(([n, g]) => (
-            <tr key={n} className="border-b border-gray-100">
+            <tr key={n} className="border-b border-rule">
               <td className="px-3 py-2.5">{n}</td>
               <td className="px-3 py-2.5">
                 <span className={g === "Primary" ? "goal-primary" : "goal-secondary"}>{g}</span>

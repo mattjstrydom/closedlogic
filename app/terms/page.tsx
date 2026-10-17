@@ -29,7 +29,7 @@ export default function Terms() {
       <main id="main" tabIndex={-1} className="container-site pb-20 pt-12 sm:pt-16">
         <article className="max-w-[64ch] space-y-5 text-text-l">
           <h1 className="text-title-l">Terms of service</h1>
-          <p className="text-gray-600">
+          <p className="text-body">
             Last updated <Slot value={site.termsLastUpdated} />
           </p>
 

@@ -20,8 +20,8 @@ export default function HeroTabs({ tabs }: { tabs: { label: string; panel: React
   }
 
   return (
-    <div className="flex min-w-0 flex-col items-center gap-5 lg:items-start">
-      <div role="tablist" aria-label="Hero preview" className="seg" onKeyDown={onKeyDown}>
+    <div className="flex w-full flex-col items-center gap-6">
+      <div role="tablist" aria-label="Hero preview" className="seg justify-center" onKeyDown={onKeyDown}>
         {tabs.map((t, i) => (
           <button
             key={t.label}
@@ -42,7 +42,7 @@ export default function HeroTabs({ tabs }: { tabs: { label: string; panel: React
         ))}
       </div>
       {tabs.map((t, i) => (
-        <div key={t.label} role="tabpanel" id={`${uid}-panel-${i}`} aria-labelledby={`${uid}-tab-${i}`} hidden={active !== i} className="w-full min-w-0 max-w-[460px]">
+        <div key={t.label} role="tabpanel" id={`${uid}-panel-${i}`} aria-labelledby={`${uid}-tab-${i}`} hidden={active !== i} className="w-full min-w-0">
           {t.panel}
         </div>
       ))}

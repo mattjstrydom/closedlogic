@@ -75,13 +75,13 @@ export default function ConsentBanner() {
 
   if (!show) return null;
   const b =
-    "inline-flex min-h-10 items-center justify-center rounded-pill border-[1.5px] border-solid border-black bg-surface px-6 py-2 text-[1rem] leading-[1.3] font-medium text-black transition-colors duration-300 hover:bg-gray-50";
+    "inline-flex min-h-10 items-center justify-center rounded-pill border-[1.5px] border-solid border-black bg-white px-6 py-2 text-[1rem] leading-[1.3] font-medium text-ink transition-colors duration-300 hover:bg-pale";
   return (
     <section
       ref={box}
       tabIndex={-1}
       aria-label="Cookie consent"
-      className="fixed inset-x-0 bottom-0 z-30 border-t border-gray-100 bg-surface py-4 shadow-float outline-none"
+      className="fixed inset-x-4 bottom-4 z-30 rounded-[20px] border-[1.5px] border-solid border-ink bg-white p-5 shadow-card outline-none sm:inset-x-6 sm:bottom-6"
     >
       <div className="container-site flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-[1rem]">

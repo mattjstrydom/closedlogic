@@ -1,5 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" role="img" aria-label="Closed Logic favicon"><title>Closed Logic favicon</title><defs><linearGradient id="cl-signal" x1="15" y1="16" x2="29" y2="16" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#3B82F6"/><stop offset="1" stop-color="#10B981"/></linearGradient></defs><rect width="32" height="32" rx="6" fill="#0B0F17"/><g id="signal-gate">
-  <path id="rejected-signals" fill="#64748B" d="M4 7h8v3H4zm0 16h8v3H4z"/>
-  <path id="gate-and-input" fill="#F8FAFC" d="M15 4h6v8h-6zm0 17h6v7h-6zM4 15h11v3H4z"/>
-  <path id="qualified-signal" fill="url(#cl-signal)" d="M15 15h9v-3l5 4.5-5 4.5v-3h-9z"/>
-</g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#0A0A0A"/><circle cx="32" cy="32" r="19" fill="none" stroke="#FFFFFF" stroke-width="11" stroke-dasharray="94 26" stroke-dashoffset="-8" transform="rotate(-20 32 32)"/><circle cx="52" cy="32" r="9" fill="#FF4B3E"/></svg>

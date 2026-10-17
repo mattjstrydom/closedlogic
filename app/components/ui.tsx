@@ -1,26 +1,22 @@
-// Small shared pieces for the v3 sections. Server components, no client JS.
+// Small shared pieces. Server components, no client JS.
 
-// green-500 is only large text (3:1). In text-title-m headings that is 22px below 768px, under the 24px large-text
-// size, so `small` switches to green-text (5.48:1 on white, 5.03:1 on gray-50) there.
-export function Accent({ children, dark = false, small = false }: { children: React.ReactNode; dark?: boolean; small?: boolean }) {
-  return <span className={dark ? "text-green-200" : small ? "text-green-text md:text-green-500" : "text-green-500"}>{children}</span>;
+// Highlighted words inside a heading or statement. `dark` and `small` are kept so existing call sites
+// type-check; the accent now carries every size, and the navy panel recolours it via .panel-navy .accent.
+export function Accent({ children }: { children: React.ReactNode; dark?: boolean; small?: boolean }) {
+  return <span className="accent">{children}</span>;
 }
 
+/** Accent eyebrow above a heading. */
 export function Chip({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return (
-    <p className={`chip ${className}`}>
-      <span className="chip-dot" aria-hidden="true" />
-      {children}
-    </p>
-  );
+  return <p className={`chip ${className}`}>{children}</p>;
 }
 
-/** Chip, then h2, then optional lead. */
+/** Eyebrow, then h2, then optional lead. */
 export function SectionHead({ id, chip, children, className = "" }: { id: string; chip?: string; children: React.ReactNode; className?: string }) {
   return (
     <>
       {chip && <Chip>{chip}</Chip>}
-      <h2 id={`${id}-title`} className={`text-title-l max-w-[900px] ${chip ? "mt-4" : ""} ${className}`}>
+      <h2 id={`${id}-title`} className={`heading-center text-title-l ${className}`}>
         {children}
       </h2>
     </>
@@ -32,30 +28,37 @@ export function TickPath({ className, style }: { className?: string; style?: Rea
   return <path className={className} style={style} pathLength={1} d="M2.5 6.2l2.3 2.3 4.7-4.9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />;
 }
 
-/** Round green-text circle with a white tick. size 20 (lists) or 22 (notes). */
+/** Accent circle with an ink ring and a white tick. */
 export function Tick({ size = 20, className = "" }: { size?: 20 | 22; className?: string }) {
   return (
-    <span
-      aria-hidden="true"
-      className={`inline-flex shrink-0 items-center justify-center rounded-full bg-green-text text-on-accent ${size === 22 ? "size-[22px]" : "size-5"} ${className}`}
-    >
-      <svg width={size === 22 ? 12 : 11} height={size === 22 ? 12 : 11} viewBox="0 0 12 12" fill="none" focusable="false">
+    <span aria-hidden="true" className={`inline-flex shrink-0 items-center justify-center rounded-full border-2 border-solid border-ink bg-accent text-white ${className}`}
+      style={{ width: 28, height: 28 }}>
+      <svg width={size === 22 ? 13 : 12} height={size === 22 ? 13 : 12} viewBox="0 0 12 12" fill="none" focusable="false">
         <TickPath />
       </svg>
     </span>
   );
 }
 
-/** A list with green ticks. */
+/** A list with accent ticks. */
 export function TickList({ items, className = "", itemClassName = "" }: { items: React.ReactNode[]; className?: string; itemClassName?: string }) {
   return (
-    <ul className={`grid gap-3 ${className}`}>
+    <ul className={`grid gap-[18px] ${className}`}>
       {items.map((t, i) => (
-        <li key={i} className={`flex gap-3 ${itemClassName}`}>
+        <li key={i} className={`flex gap-4 text-text-l ${itemClassName}`}>
           <Tick className="mt-0.5" />
           <span>{t}</span>
         </li>
       ))}
     </ul>
+  );
+}
+
+/** Large accent numeral for the seven checks and the step cards. */
+export function Numeral({ n, pad = false, className = "" }: { n: number; pad?: boolean; className?: string }) {
+  return (
+    <span aria-hidden="true" className={`block font-display text-[4.5rem] leading-none font-bold tracking-[-0.04em] text-accent max-lg:text-[3.4rem] ${className}`}>
+      {pad ? String(n).padStart(2, "0") : n}
+    </span>
   );
 }
