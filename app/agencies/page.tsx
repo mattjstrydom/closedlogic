@@ -6,14 +6,14 @@ import { CalButton, TeardownButton } from "../components/cta";
 import { Accent, SectionHead, TickList } from "../components/ui";
 import C1Report from "../components/c1-report";
 import { site } from "../site.config";
-import { pageMetadata } from "../seo";
+import { pageMetadata, agenciesOgImage, agenciesTwitterImage } from "../seo";
 
 export const metadata = pageMetadata({
   title: "Closed Logic for agencies | HubSpot to Google Ads, under your name",
   description:
     "We check and fix how your client's HubSpot sends lifecycle stages to Google Ads, delivered under your agency's name. Paid pilot from $900.",
   path: "/agencies",
-  absoluteTitle: true,
+  absoluteTitle: true, ogImg: agenciesOgImage, twImg: agenciesTwitterImage,
 });
 
 const pilot: React.ReactNode[] = [
@@ -54,13 +54,13 @@ const sources = [
   {
     n: 1,
     title: "About invalid traffic",
-    detail: "Google Ads Help, opened 17 October 2026",
-    url: "https://support.google.com/google-ads/answer/11182074?hl=en",
+    detail: "Google Ads Help",
+    url: "https://support.google.com/google-ads/answer/11182074",
   },
   {
     n: 2,
     title: "About primary and secondary conversion actions",
-    detail: "Google Ads Help, from search result text, 17 October 2026",
+    detail: "Google Ads Help",
     url: "https://support.google.com/google-ads/answer/11461796",
   },
 ];

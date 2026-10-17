@@ -46,7 +46,7 @@ export default function Terms() {
           </C>
           <C n="2.3">You pay 50% at kickoff and 50% on delivery of the report. Both are by Stripe invoice, due on receipt.</C>
           <C n="2.4">
-            <strong className="font-medium">Monthly plan:</strong> $750 a month for one HubSpot portal and one Google Ads account. For agencies, $500 a month for each client account for the first four accounts, then $400 a month for each account from the fifth. It&apos;s billed monthly in advance by Stripe subscription.
+            <strong className="font-medium">Monthly plan:</strong> $750 a month for one HubSpot portal and one Google Ads account. For agencies, $500 a month for each client account for the first four accounts, then $400 a month for each account from the fifth. Agency plans are also available at $1,500 a month for up to 3 client accounts and $2,400 a month for up to 5 client accounts. It&apos;s billed monthly in advance by Stripe subscription.
           </C>
           <C n="2.5">
             <strong className="font-medium">Extra work:</strong> ops work outside the monthly plan (for example routing, clean-up, reporting or new builds) is sold in blocks at $150 an hour, with a 5-hour minimum. We agree it in writing before we start.

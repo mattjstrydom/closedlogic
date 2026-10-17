@@ -24,7 +24,7 @@ import { site } from "./site.config";
 import { motionScript } from "./motion-script";
 import { sharedOpenGraph, ogImage, twitterImage } from "./seo";
 
-const homeTitle = `${site.brand} | Make Google Ads bid on pipeline`;
+const homeTitle = `${site.brand} | Google Ads should bid on pipeline, not form fills`;
 const description =
   "We fix the HubSpot to Google Ads connection so Smart Bidding learns from the leads your sales team qualifies, not form fills. $1,200, fixed.";
 
@@ -196,7 +196,7 @@ export default function Home() {
             <div className="flex flex-col items-center gap-6 text-center">
               <p className="chip">HubSpot to Google Ads conversion fix</p>
               <h1 id="hero-title" className="heading-center max-w-[17ch] text-title-xl">
-                Stop Google Ads bidding on <Accent>form fills your sales team never qualifies.</Accent>
+                Google Ads should bid on <Accent>pipeline, not form fills.</Accent>
               </h1>
               <p className="lead max-w-[46rem]">
                 We check how HubSpot sends lifecycle stages to Google Ads and fix it inside your own accounts, with your sign-off, so Smart Bidding learns from the stages your sales team qualifies. Fixed $1,200 scope, delivered within 7 business days of access.
