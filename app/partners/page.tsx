@@ -28,16 +28,16 @@ export default function Partners() {
         <section aria-labelledby="partners-title" className="container-site pb-12 pt-14 sm:pt-20">
           <h1 id="partners-title" className="max-w-[22ch] text-title-l">Know a client whose HubSpot and Google Ads numbers don&apos;t add up?</h1>
           <p className="mt-8 max-w-[62ch] text-text-xl">
-            Introduce them. We check and fix how HubSpot sends lifecycle stages to Google Ads, and you get 15% of the first fixed-fee payment we receive.
+            Introduce them. We check and fix how HubSpot sends lifecycle stages to Google Ads, and you get 20% of the first fixed-fee payment we receive.
           </p>
         </section>
 
         <section aria-labelledby="how-title" className="container-site pb-12">
           <h2 id="how-title" className="text-title-m">How a referral works</h2>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/partners/partners-how-it-works.png" alt="Three steps: you introduce a client by name, we run the fix, you get a one-time fee of 15% of the first fixed-fee payment we receive." width={1600} height={700} loading="lazy" className="mt-6 h-auto w-full max-w-[900px] rounded-[10px]" />
+          <img src="/partners/partners-how-it-works.png" alt="Three steps: you introduce a client by name, we run the fix, you get a one-time fee of 20% of the first fixed-fee payment we receive." width={1600} height={700} loading="lazy" className="mt-6 h-auto w-full max-w-[900px] rounded-[10px]" />
           <p className="mt-6 max-w-[62ch] text-text-l">
-            The fee is 15% of the first fixed-fee payment we actually receive from a client you introduce, paid within 14 days of that payment clearing. It&apos;s paid once per client.
+            The fee is 20% of the first fixed-fee payment we actually receive from a client you introduce, paid within 14 days of that payment clearing. It&apos;s paid once per client.
           </p>
           <h3 className="mt-8 text-title-xs">Conditions, agreed in writing before any sale</h3>
           <ul className="mt-3 max-w-[62ch] list-disc space-y-1 pl-6 text-text-l marker:text-green-500">
