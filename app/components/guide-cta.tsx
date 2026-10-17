@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { CalButton, SampleButton } from "./cta";
 import { site } from "../site.config";
 
@@ -20,6 +21,9 @@ export default function GuideCta({ cta }: { cta: "direct" | "agency" }) {
         </CalButton>
         <SampleButton className="w-full sm:w-auto" />
       </div>
+      <p className="mt-4 text-body">
+        Not ready for a call? <Link href="/teardown" className="link">Request a free teardown</Link>.
+      </p>
     </aside>
   );
 }

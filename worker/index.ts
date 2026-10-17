@@ -83,7 +83,9 @@ async function handleRequest(req: Request, env: Env): Promise<Response> {
   // Honeypot: real visitors never fill it. Pretend success so bots don't retry.
   if (str(body.company_fax)) return json({ ok: true });
 
-  const type: FormType = body.type === "teardown" ? "teardown" : "check";
+  const type: FormType = body.type === "teardown" ? "teardown" : body.type === "stagecheck" ? "stagecheck" : "check";
+  // Where the visitor came from (?src= on the page): letters, numbers, dot, dash and underscore only.
+  const source = str(body.source).replace(/[^\w.-]/g, "").slice(0, 40);
   const f: Fields = {
     name: str(body.name).trim(),
     email: str(body.email).trim(),
@@ -99,12 +101,13 @@ async function handleRequest(req: Request, env: Env): Promise<Response> {
   if (!key && !dryRun) return json({ error: "Form is not configured." }, 500);
 
   const headers = { Authorization: `Bearer ${key}`, "Content-Type": "application/json" };
-  const label = type === "teardown" ? "Free teardown" : "Check request";
+  const label = type === "teardown" ? "Free teardown" : type === "stagecheck" ? "Stage check result" : "Check request";
   const rows: [string, string][] = [
     ["Type", label],
-    ["Name", f.name],
+    ...(type === "stagecheck" ? [] : ([["Name", f.name]] as [string, string][])),
     ["Email", f.email],
-    [type === "teardown" ? "Page your ads point to" : "Company website", f.website],
+    ...(type === "stagecheck" ? [] : ([[type === "teardown" ? "Page your ads point to" : "Company website", f.website]] as [string, string][])),
+    ...(source ? ([["Source", source]] as [string, string][]) : []),
     ...(type === "check" ? ([["Marketing Hub tier", f.tier]] as [string, string][]) : []),
     ["Note", f.note || "(none)"],
   ];
@@ -113,13 +116,14 @@ async function handleRequest(req: Request, env: Env): Promise<Response> {
   //    (the default, "skip", leaves existing subscribers untouched).
   const subscriberBody = JSON.stringify({
     email: f.email,
-    firstName: f.name.split(/\s+/)[0],
-    tags: [type === "teardown" ? "teardown" : "check-request"],
+    ...(type === "stagecheck" ? {} : { firstName: f.name.split(/\s+/)[0] }),
+    tags: [type === "teardown" ? "teardown" : type === "stagecheck" ? "stage-check" : "check-request"],
     customAttributes: {
       fullName: f.name,
       note: f.note,
       requestType: type,
-      source: type === "teardown" ? `${site.domain}/teardown` : site.domain,
+      source: type === "teardown" ? `${site.domain}/teardown` : type === "stagecheck" ? `${site.domain}/tools/stage-check` : site.domain,
+      ...(source ? { campaignSource: source } : {}),
       website: f.website,
       ...(type === "check" ? { marketingHubTier: f.tier } : {}),
     },
@@ -131,7 +135,7 @@ async function handleRequest(req: Request, env: Env): Promise<Response> {
   const notifyBody = JSON.stringify({
     to: site.notifyTo,
     replyTo: `${oneLine(f.name) || "Lead"} <${oneLine(f.email)}>`,
-    subject: `${label}: ${oneLine(f.name)}`,
+    subject: `${label}: ${oneLine(type === "stagecheck" ? f.email : f.name)}`,
     html: `<table cellpadding="6" style="border-collapse:collapse;font:15px/1.5 sans-serif">${rows
       .map(([k, v]) => `<tr><td style="color:#5c6764;vertical-align:top"><b>${esc(k)}</b></td><td style="white-space:pre-wrap">${esc(v)}</td></tr>`)
       .join("")}</table>`,

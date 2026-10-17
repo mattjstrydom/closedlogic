@@ -53,9 +53,17 @@ export default function Teardown() {
             <div className="bento">
               <div className="max-w-[36rem]">
                 <RequestForm type="teardown" email={site.email} calUrl={site.bookPath} />
+                <p className="mt-4 text-body">We reply within 3 business days. We take 3 a week.</p>
               </div>
             </div>
           </div>
+        </section>
+
+        <section aria-labelledby="what-you-get-title" className="container-site pb-20 sm:pb-28">
+          <h2 id="what-you-get-title" className="text-title-m">What you get</h2>
+          <p className="mt-3 max-w-[62ch] text-text-l text-body">A short note with what we saw, for example this sample for a made-up site.</p>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/teardown-what-you-get.png" alt="Sample teardown note for a fictional site, with four findings: tags OK, click ID check, HubSpot tracking missing, consent check." width={1600} height={1000} loading="lazy" className="mt-6 h-auto w-full max-w-[900px] rounded-[10px]" />
         </section>
       </main>
       <Footer />

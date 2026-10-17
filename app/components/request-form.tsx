@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { track, readSource } from "@/app/analytics";
 import { TIERS, validate, type Errors, type Fields, type FormType } from "@/app/validate";
 
 const empty: Fields = { name: "", email: "", website: "", tier: "", note: "" };
@@ -14,6 +15,11 @@ export default function RequestForm({ type = "check", email, calUrl, agency = fa
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">("idle");
   const form = useRef<HTMLFormElement>(null);
+  // Hidden "source" field: the ?src= value on the page address, so each request shows its channel.
+  const source = useRef("");
+  useEffect(() => {
+    source.current = readSource();
+  }, []);
 
   const set = (k: keyof Fields) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
     setF((p) => ({ ...p, [k]: e.target.value }));
@@ -32,12 +38,15 @@ export default function RequestForm({ type = "check", email, calUrl, agency = fa
       const res = await fetch("/api/request", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...f, type, company_fax: (form.current?.elements.namedItem("company_fax") as HTMLInputElement | null)?.value }),
+        body: JSON.stringify({ ...f, type, source: source.current, company_fax: (form.current?.elements.namedItem("company_fax") as HTMLInputElement | null)?.value }),
       });
       if (res.status === 422) {
         setErrors((await res.json()).errors);
         setStatus("idle");
-      } else setStatus(res.ok ? "ok" : "error");
+      } else {
+        if (res.ok && teardown) track("teardown_submit", { source: source.current, page_path: window.location.pathname });
+        setStatus(res.ok ? "ok" : "error");
+      }
     } catch {
       setStatus("error");
     }

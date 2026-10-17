@@ -17,6 +17,8 @@ dateModified: 2026-10-17
 
 HubSpot Google Ads conversion tracking has one job: tell Google Ads which ad clicks turned into leads your sales team actually wanted, so Smart Bidding can look for more of them. Getting a form fill into Google Ads is the easy part. The hard part is the chain behind it: the click ID has to survive until the form is submitted, the lifecycle stage has to reach Google Ads once, Google has to match it to a click, and the conversion action has to be one that bidding uses. A break at any link means Google Ads keeps learning from whatever it can still see, which is usually the form fill.
 
+Want a quick read on your own setup first? Try our [two-minute stage check](/tools/stage-check).
+
 This guide walks through each link, what changed in 2026, and how to check your own setup. Every Google and HubSpot fact links to the page it comes from, last checked 17 Oct 2026.
 
 ## How a qualified lead reaches bidding

@@ -45,7 +45,7 @@ export const site = {
     "Nothing in this clause stops either of us from asking any court for urgent interim relief.",
   ],
   // Set both to the publish date at deploy, for example "12 October 2026".
-  privacyLastUpdated: "9 October 2026",
+  privacyLastUpdated: "17 October 2026",
   termsLastUpdated: "9 October 2026",
 
   c3Label: "Example data, fictional account",

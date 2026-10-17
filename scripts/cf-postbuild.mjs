@@ -23,6 +23,9 @@ const headers = [
   rule("/_next/static/*", [["Cache-Control", "public, max-age=31536000, immutable"]]),
   rule("/_img/*", [["Cache-Control", "public, max-age=86400"]]),
   rule("/*", securityHeaders(indexable)),
+  // /partners is unlisted: noindex in the page and in the header (headers from every matching rule apply).
+  rule("/partners", [["X-Robots-Tag", "noindex, nofollow"]]),
+  rule("/partners/", [["X-Robots-Tag", "noindex, nofollow"]]),
 ].join("\n\n");
 writeFileSync(new URL("_headers", out), headers + "\n");
 
