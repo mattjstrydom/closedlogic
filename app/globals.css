@@ -18,6 +18,8 @@
   --color-body: #4b5563;         /* body text */
   --color-muted: #6b7280;        /* captions, table headers, notes */
   --color-accent: #ff4b3e;       /* eyebrows, highlight words, numerals, markers */
+  --color-accent-text: #d1332a;  /* accent for small text: 5:1 on white */
+  --gradient-signal: linear-gradient(92deg, #ffe3dd, #eadfff);
   --color-band: #dcebfa;         /* full width alternating band */
   --color-navy: #0b1626;         /* problem panel, code blocks */
   --color-rule: #e5e7eb;         /* hairlines */
@@ -295,7 +297,7 @@
 
   /* Gradient CTA band with ink rules top and bottom. */
   .ctaband {
-    background: linear-gradient(92deg, #ffe3dd, #eadfff);
+    background: var(--gradient-signal);
     border-block: 2px solid var(--color-ink);
     padding-block: 72px;
   }
@@ -304,15 +306,18 @@
   /* --------------------------------------------------------------- type */
   /* Eyebrow / chip: accent text, no decoration. */
   .chip {
-    display: inline-block;
+    display: block;
     font-family: var(--font-display);
     font-weight: 600;
     font-size: 0.95rem;
     letter-spacing: 0.01em;
-    color: var(--color-accent);
+    color: var(--color-accent-text);
     text-align: center;
     margin-bottom: 14px;
   }
+  .card .chip, .bento .chip, .frag .chip { text-align: left; }
+  .panel-navy .chip { color: var(--color-on-navy-hi); }
+  .panel-navy .card .chip { color: var(--color-accent-text); }
   .chip-dot { display: none; }
 
   /* Highlighted words inside a heading. */
@@ -343,7 +348,7 @@
     line-height: 1.2;
     letter-spacing: -0.01em;
     color: var(--color-ink);
-    background: linear-gradient(92deg, #ffe3dd, #eadfff);
+    background: var(--gradient-signal);
     border: 2px solid var(--color-ink);
     border-radius: var(--radius-btn);
     box-shadow: var(--shadow-card);
@@ -562,7 +567,7 @@
     border-radius: var(--radius-chip);
     border: 1.5px solid var(--color-ink);
     background: var(--color-white);
-    color: var(--color-accent);
+    color: var(--color-accent-text);
     font-family: var(--font-display);
     font-size: 0.95rem;
     font-weight: 700;
@@ -855,7 +860,7 @@
   .guar {
     border-radius: var(--radius-chip);
     padding: 20px 24px;
-    background: linear-gradient(92deg, #ffe3dd, #eadfff);
+    background: var(--gradient-signal);
     border: 1.5px solid var(--color-ink);
   }
   .guar b { display: block; font-family: var(--font-display); font-weight: 600; font-size: 1.1rem; margin-bottom: 6px; }

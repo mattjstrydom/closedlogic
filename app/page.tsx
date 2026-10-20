@@ -208,7 +208,6 @@ export default function Home() {
               <p className="max-w-[40rem] text-[1.05rem] text-body">
                 <span className="font-semibold text-ink">$1,200 fixed.</span> If none of our seven checks finds anything that needs changing, you pay only the first half and keep the report.
               </p>
-              <p className="tag">A named lead on every check</p>
             </div>
             <div className="mt-14 flex flex-col items-center gap-8">
               <HeroTabs
@@ -256,7 +255,7 @@ export default function Home() {
               </SectionHead>
               <p className="big-statement on-navy-text mx-auto mt-8 max-w-[34ch] text-center">HubSpot can show MQLs and SQLs in Google Ads while Smart Bidding ignores them.</p>
               <div className="mt-14 grid gap-7 lg:grid-cols-3">
-                <div className="card text-text-l">
+                <div className="card text-text-m">
                   <p>If HubSpot already sends your lifecycle stages to Google Ads, the question is whether Smart Bidding uses them. A stage set as Secondary is reported but not bid on, unless a custom goal includes it. A Primary stage outside the goal your campaigns bid on isn&apos;t bid on either.</p>
                 </div>
                 <div className="card space-y-4 text-text-m">
@@ -288,7 +287,7 @@ export default function Home() {
             <SectionHead id="checks" chip="The check">
               Seven questions we answer <Accent>in every check</Accent>
             </SectionHead>
-            <ol className="mt-14 grid gap-7 lg:grid-cols-2">
+            <ol className="mt-14 grid items-start gap-7 lg:grid-cols-2">
               {checks.map(({ q, mock }, i) => (
                 <li key={q} className={`group card ${mock && i === 0 ? "lg:col-span-2" : ""}`}>
                   <div className={mock && i === 0 ? "grid gap-8 lg:grid-cols-2 lg:items-center" : ""}>
