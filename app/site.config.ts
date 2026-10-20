@@ -10,6 +10,9 @@ export const site = {
   // Nova's artwork (wordmark, icons, share images), whose text is outlined or baked in (see README, "Renaming").
   // Renamed from the old brand to Closed Logic (Matt, 9 Oct 2026). The old domain's 301 plan is in the dev report.
   brand: "Closed Logic",
+  positioning: "Independent pipeline measurement for B2B SaaS and PE",
+  description:
+    "We make Google Ads, HubSpot and your board deck agree. Independent measurement audits, fractional measurement leadership and portfolio benchmarks. No media-buying incentive.",
   domain: "closedlogic.com", // apex; redirects to url (a Cloudflare redirect rule, see README)
   url: "https://www.closedlogic.com",
   // scripts/check-placeholders.mjs blocks the production build while emailLive is false, so the site never goes live
@@ -25,12 +28,15 @@ export const site = {
     return `${this.brand} is a trading name of ${this.legalEntity}`;
   },
   linkedin: "https://www.linkedin.com/in/mattstrydom",
-  // Booking links. The two Cal.com URLs live in app/booking.json (one place, also read by scripts/cf-postbuild.mjs).
-  // Direct buttons link to bookPath, a redirect to the direct URL written to out/_redirects at build time, so the
-  // homepage never shows a Cal.com address. Agency buttons link straight to the agency URL.
+  // Booking links, all in app/booking.json (one place, also read by scripts/cf-postbuild.mjs). Buttons link to bookPath,
+  // bookPePath or bookPartnerPath: redirects to the Cal.com URLs written to out/_redirects at build time, so pages
+  // never show a Cal.com address. A booking.json entry with no event of its own falls back to the direct link.
   bookPath: "/book",
+  bookPePath: "/book-pe",
+  bookPartnerPath: "/book-partner",
   directBookingUrl: booking.direct,
-  agencyBookingUrl: booking.agency,
+  peBookingUrl: booking.pe,
+  partnerBookingUrl: booking.partner,
   // Only the production build is indexable: the Cloudflare Workers Builds build of main, or any build with
   // SITE_INDEXABLE=1. VERCEL_ENV keeps a Vercel production build working.
   indexable:
@@ -45,9 +51,8 @@ export const site = {
     "Nothing in this clause stops either of us from asking any court for urgent interim relief.",
   ],
   // Set both to the publish date at deploy, for example "12 October 2026".
-  privacyLastUpdated: "17 October 2026",
-  termsLastUpdated: "9 October 2026",
+  privacyLastUpdated: "20 October 2026",
+  termsLastUpdated: "20 October 2026",
 
-  c3Label: "Example data, fictional account",
   caseStudy: null as CaseStudy | null,
 };

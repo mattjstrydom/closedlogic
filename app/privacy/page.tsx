@@ -34,19 +34,10 @@ export default function Privacy() {
 
         <h2 className={h}>What we collect</h2>
         <p>
-          <strong>When you book a call or request a teardown.</strong> If you book a fit call through Cal.com,
-          we receive the details you enter when booking. If you request a teardown, we receive your name, work
-          email, the page your ads point to and any note you choose to write. We use it to reply to you, to
-          decide whether the service is a fit, and to prepare for a call if we have one. If the link you followed to the teardown page carried a source tag (for example from a LinkedIn post), we also record that tag, so we can see which channel the request came from.
-        </p>
-        <p>
-          <strong>When you use the stage check.</strong> The stage check at /tools/stage-check asks seven yes, no
-          or not sure questions about how HubSpot sends lifecycle stages to Google Ads. We don&apos;t connect to
-          your HubSpot or Google Ads accounts and we don&apos;t ask for account data. Your answers are worked out
-          in your browser and aren&apos;t sent to us unless you choose to email us about your result. If you do, we
-          receive your email address, your result and your answers to the seven questions, and the source tag
-          on the link you followed, if it had one. Cookie-based analytics events (starting and finishing the
-          check, the result you got, and which links you click afterwards) are measured only if you accept cookies.
+          <strong>When you book a call or send a request.</strong> If you book a pipeline review through Cal.com,
+          we receive the details you enter when booking. If you send a request through the contact form, we receive your name, work
+          email, company, role, ARR or portfolio size, stack and any note you choose to write. We use it to reply to you, to
+          decide whether the service is a fit, and to prepare for a call if we have one. If the link you followed carried a source tag (for example from a LinkedIn post), we also record that tag, so we can see which channel the request came from.
         </p>
         <p>
           <strong>When you email us.</strong> Your email address and whatever you send.
@@ -103,7 +94,7 @@ export default function Privacy() {
             <a href="https://www.cloudflare.com/cloudflare-customer-dpa/" className="link">DPA</a>)
           </li>
           <li>
-            <strong>Sequenzy (Nic Tech Solutions, LLC)</strong>: stores teardown requests, and stage check results you email to us, and lets us email you about them. (
+            <strong>Sequenzy (Nic Tech Solutions, LLC)</strong>: stores the requests you send through the contact form, and lets us email you about them. (
             <a href="https://www.sequenzy.com/privacy" className="link">privacy policy</a>, <a href="https://www.sequenzy.com/dpa" className="link">DPA</a>)
           </li>
           <li>
@@ -134,9 +125,9 @@ export default function Privacy() {
           </li>
         </ul>
         <p>
-          If you become a client, you will give us access to your Google Ads, HubSpot and Tag Manager
-          accounts. We use that access only to perform the work, we record every change in the change log,
-          and we remove our access at handover unless you&apos;re on the monthly plan. We may also disclose data where the law requires it.
+          If you become a client, you will give us access to your Google Ads, HubSpot or other CRM, analytics and reporting
+          accounts, usually read-only, or exports from them if you prefer. We use that access only to perform the work, and we
+          remove our access when the engagement ends. We may also disclose data where the law requires it.
         </p>
 
         <h2 className={h}>International transfers</h2>
@@ -149,7 +140,7 @@ export default function Privacy() {
 
         <h2 className={h}>How long we keep it</h2>
         <p>
-          Teardown requests, stage check results you email to us, and booking details that don&apos;t lead to an engagement are deleted within 24 months. Details of
+          Contact form requests and booking details that don&apos;t lead to an engagement are deleted within 24 months. Details of
           people we emailed about our service are deleted within 12 months of our last email, apart from do-not-contact entries. If you become a client we
           keep the work records for the length of the engagement and then for as long as tax and accounting
           rules require. Analytics data follows the retention settings of the analytics tool, and Clarity keeps

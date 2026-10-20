@@ -13,3 +13,11 @@ export const abs = (path: string) => (/^https?:/.test(path) ? path : `${site.url
 export function jsonLdScript(graph: object[]) {
   return JSON.stringify({ "@context": "https://schema.org", "@graph": graph }).replace(/</g, "\\u003c");
 }
+
+/** FAQPage node from plain-text question and answer pairs (the page renders the same strings). */
+export function faqNode(items: { q: string; a: string }[]) {
+  return {
+    "@type": "FAQPage",
+    mainEntity: items.map(({ q, a }) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })),
+  };
+}

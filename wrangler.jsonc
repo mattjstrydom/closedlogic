@@ -18,7 +18,7 @@
   "assets": {
     "directory": "out",
     "binding": "ASSETS",
-    // /teardown serves out/teardown.html; /teardown.html and /teardown/ redirect to /teardown
+    // /pricing serves out/pricing.html; /pricing.html and /pricing/ redirect to /pricing
     "html_handling": "auto-trailing-slash",
     // unknown paths get out/404.html with a 404 status, still without running the Worker
     "not_found_handling": "404-page",

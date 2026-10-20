@@ -10,8 +10,8 @@ import { pageMetadata } from "../seo";
 import { site } from "../site.config";
 
 const meta = pageMetadata({
-  title: "Guides: HubSpot to Google Ads conversion tracking",
-  description: "Plain guides to how HubSpot sends lifecycle stages and click IDs to Google Ads, and how to check that bidding uses them.",
+  title: "Guides: HubSpot and Google Ads measurement",
+  description: "Technical notes on HubSpot and Google Ads measurement: how lifecycle stages and click IDs reach Google Ads, and how to check that bidding uses them.",
   path: "/guides",
 });
 
@@ -44,12 +44,12 @@ export default function GuidesIndex() {
           <h1 id="guides-title" className="mt-8 max-w-[22ch] text-title-l">Guides</h1>
           {guides.length === 0 ? (
             <p className="mt-6 max-w-[62ch] text-text-xl text-body">
-              Guides coming soon. Meanwhile, see <Link href="/sample-report" className="link">a sample report</Link> to see what we check.
+              Guides coming soon. Meanwhile, see <Link href="/method" className="link">the method</Link> to see what we check.
             </p>
           ) : (
             <>
               <p className="mt-6 max-w-[62ch] text-text-xl text-body">
-                How HubSpot sends lifecycle stages and click IDs to Google Ads, and how to check that bidding uses them.
+                Technical notes on HubSpot and Google Ads measurement.
               </p>
               {keys.map((k) => (
                 <section key={k} aria-labelledby={`pillar-${k}`} className="mt-12">

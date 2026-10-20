@@ -2,15 +2,17 @@
 
 import { useEffect, useRef, useState } from "react";
 import { track, readSource } from "@/app/analytics";
-import { TIERS, validate, type Errors, type Fields, type FormType } from "@/app/validate";
+import { SIZES, validate, type Errors, type Fields, type FormType } from "@/app/validate";
 
-const empty: Fields = { name: "", email: "", website: "", tier: "", note: "" };
+const empty: Fields = { name: "", email: "", company: "", role: "", size: "", stack: "", note: "" };
 const input =
   "mt-1 block w-full rounded-[10px] border-2 border-solid border-ink bg-white px-4 py-3 text-[1rem] text-ink";
 
-// email and calUrl come from site.config through the (server) page, so this client bundle doesn't carry the whole config.
-export default function RequestForm({ type = "check", email, calUrl, agency = false }: { type?: FormType; email: string; calUrl: string; agency?: boolean }) {
-  const teardown = type === "teardown";
+const typeLabels: Record<FormType, string> = { b2b: "B2B SaaS company", pe: "PE fund", partner: "CRM or RevOps partner" };
+
+// email and bookUrls come from site.config through the (server) page, so this client bundle doesn't carry the whole config.
+export default function RequestForm({ initialType = "b2b", choose = false, email, bookUrls }: { initialType?: FormType; choose?: boolean; email: string; bookUrls: Record<FormType, string> }) {
+  const [type, setType] = useState<FormType>(initialType);
   const [f, setF] = useState<Fields>(empty);
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">("idle");
@@ -26,7 +28,7 @@ export default function RequestForm({ type = "check", email, calUrl, agency = fa
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
-    const errs = validate(f, type);
+    const errs = validate(f);
     setErrors(errs);
     const first = Object.keys(errs)[0];
     if (first) {
@@ -44,7 +46,7 @@ export default function RequestForm({ type = "check", email, calUrl, agency = fa
         setErrors((await res.json()).errors);
         setStatus("idle");
       } else {
-        if (res.ok && teardown) track("teardown_submit", { source: source.current, page_path: window.location.pathname });
+        if (res.ok) track("request_submit", { requestType: type, source: source.current, page_path: window.location.pathname });
         setStatus(res.ok ? "ok" : "error");
       }
     } catch {
@@ -56,9 +58,7 @@ export default function RequestForm({ type = "check", email, calUrl, agency = fa
     return (
       // Focus moves here because the submit button that had it is gone; tabIndex -1 keeps it out of the tab order.
       <div role="status" tabIndex={-1} ref={(el) => el?.focus()} className="card focus:outline-none">
-        <p className="text-text-xl font-medium">
-          {teardown ? "Thanks. We'll email you the recording." : "Thanks. We'll reply within one business day."}
-        </p>
+        <p className="text-text-xl font-medium">Thanks. We&apos;ll reply within one business day.</p>
       </div>
     );
 
@@ -81,23 +81,33 @@ export default function RequestForm({ type = "check", email, calUrl, agency = fa
   return (
     <>
       <form ref={form} onSubmit={submit} noValidate className="space-y-5">
+        {choose && (
+          <fieldset>
+            <legend className="mb-2 block font-medium">I am a</legend>
+            <div className="seg">
+              {(Object.keys(typeLabels) as FormType[]).map((t) => (
+                <span key={t}>
+                  <input type="radio" name="type" id={`type-${t}`} value={t} checked={type === t} onChange={() => setType(t)} className="seg-input sr-only" />
+                  <label htmlFor={`type-${t}`} className="seg-item">{typeLabels[t]}</label>
+                </span>
+              ))}
+            </div>
+          </fieldset>
+        )}
         {field("name", "Name", <input {...aria("name")} required className={input} autoComplete="name" value={f.name} onChange={set("name")} />)}
         {field("email", "Work email", <input {...aria("email")} required type="email" className={input} autoComplete="email" value={f.email} onChange={set("email")} />)}
+        {field("company", "Company", <input {...aria("company")} required className={input} autoComplete="organization" value={f.company} onChange={set("company")} />)}
+        {field("role", "Role (optional)", <input {...aria("role")} className={input} autoComplete="organization-title" value={f.role} onChange={set("role")} />)}
         {field(
-          "website",
-          teardown ? (agency ? "The landing page to review" : "The page your ads point to") : "Company website",
-          <input {...aria("website")} required className={input} autoComplete="url" inputMode="url" value={f.website} onChange={set("website")} />,
+          "size",
+          "ARR or portfolio size",
+          <select {...aria("size")} required className={input} value={f.size} onChange={set("size")}>
+            <option value="">Select a size</option>
+            {SIZES.map((s) => <option key={s}>{s}</option>)}
+          </select>,
         )}
-        {!teardown &&
-          field(
-            "tier",
-            "Marketing Hub tier",
-            <select {...aria("tier")} required className={input} value={f.tier} onChange={set("tier")}>
-              <option value="">Select a tier</option>
-              {TIERS.map((t) => <option key={t}>{t}</option>)}
-            </select>,
-          )}
-        {field("note", "Note (optional)", <textarea {...aria("note")} rows={4} className={input} value={f.note} onChange={set("note")} />)}
+        {field("stack", "Stack (optional)", <input {...aria("stack")} className={input} placeholder="HubSpot, Salesforce, Pipedrive, Google Ads, GA4" value={f.stack} onChange={set("stack")} />)}
+        {field("note", "The number you can’t defend (optional)", <textarea {...aria("note")} rows={4} className={input} value={f.note} onChange={set("note")} />)}
 
         {/* honeypot: hidden from people and assistive tech */}
         <div aria-hidden="true" className="absolute -left-[9999px]">
@@ -112,27 +122,17 @@ export default function RequestForm({ type = "check", email, calUrl, agency = fa
           )}
         </div>
         <button type="submit" className="btn w-full cursor-pointer disabled:cursor-wait disabled:opacity-70 sm:w-auto" disabled={status === "sending"}>
-          {teardown ? "Request a teardown" : "Request a check"}
+          Book the review
         </button>
-        <p className="text-body">
-          {teardown ? (agency ? "We'll email you the recording, unbranded." : "We'll email you the recording.") : "We reply within one business day."}
-        </p>
+        <p className="text-body">We reply within one business day.</p>
       </form>
-      {teardown ? (
-        <p className="mt-6">
-          {agency ? "Ready for a pilot?" : "Ready for the full check?"} <a href={calUrl} target="_blank" rel="noopener noreferrer" className="link">Book a 20-minute fit call<span className="sr-only"> (opens in a new tab)</span></a>
-        </p>
-      ) : (
-        calUrl && (
-          <p className="mt-6">
-            Prefer to talk first?{" "}
-            <a href={calUrl} target="_blank" rel="noopener noreferrer" className="link">
-              Book a 20-minute fit call
-              <span className="sr-only"> (opens in a new tab)</span>
-            </a>
-          </p>
-        )
-      )}
+      <p className="mt-6">
+        Prefer to pick a time now?{" "}
+        <a href={bookUrls[type]} target="_blank" rel="noopener noreferrer" className="link">
+          Book a 20-minute pipeline review
+          <span className="sr-only"> (opens in a new tab)</span>
+        </a>
+      </p>
     </>
   );
 }

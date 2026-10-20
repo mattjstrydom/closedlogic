@@ -3,26 +3,17 @@ import { site } from "../site.config";
 import Logo from "./logo";
 import { hasGuides } from "../guides/content";
 
-const directLinks: [string, string][] = [
-  ["/#how", "How it works"],
-  ["/#pricing", "Pricing"],
-  ["/agencies", "Agencies"],
-  ["/#questions", "Questions"],
+const baseLinks: [string, string][] = [
+  ["/for-b2b-saas", "For B2B SaaS"],
+  ["/for-pe", "For PE"],
+  ["/method", "Method"],
+  ["/pricing", "Pricing"],
 ];
 
-// On the agency pages, Pricing and Questions point at the agency page's own sections.
-const agencyLinks: [string, string][] = [
-  ["/#how", "How it works"],
-  ["/agencies#pricing", "Pricing"],
-  ["/agencies", "Agencies"],
-  ["/agencies#questions", "Questions"],
-];
-
-export default function Header({ path = "/", agency = false }: { path?: string; agency?: boolean }) {
-  const onSample = path === "/sample-report";
+export default function Header({ path = "/" }: { path?: string }) {
   // Guides appears only once a guide is published (automatic, see app/guides/content.ts).
-  const links = [...(agency ? agencyLinks : directLinks), ...(hasGuides() ? ([["/guides", "Guides"]] as [string, string][]) : [])];
-  const bookHref = agency ? site.agencyBookingUrl : site.bookPath;
+  const links: [string, string][] = [...baseLinks, ...(hasGuides() ? ([["/guides", "Guides"]] as [string, string][]) : []), ["/about", "About"]];
+  const current = (href: string) => (path === href || path.startsWith(`${href}/`) ? "page" : undefined);
   return (
     <header className="site-header">
       <div className="container-site flex h-[76px] items-center justify-between gap-6 max-md:h-16">
@@ -32,19 +23,16 @@ export default function Header({ path = "/", agency = false }: { path?: string; 
           <Logo />
         </a>
 
-        <nav aria-label="Main" className="hidden items-center gap-[34px] text-[1rem] font-medium lg:flex">
+        <nav aria-label="Main" className="hidden items-center gap-[30px] text-[1rem] font-medium lg:flex">
           {links.map(([href, label]) => (
-            <Link key={href} href={href} className="inline-flex min-h-[26px] items-center text-ink no-underline hover:text-accent">
+            <Link key={href} href={href} aria-current={current(href)} className="inline-flex min-h-[26px] items-center text-ink no-underline hover:text-accent aria-[current=page]:underline aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-[0.35em]">
               {label}
             </Link>
           ))}
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <Link href="/sample-report" className="btn-outline btn-m-outline" aria-current={onSample ? "page" : undefined}>
-            See a sample report
-          </Link>
-          <a href={bookHref} target="_blank" rel="noopener noreferrer" className="btn btn-m"><span>Book a&nbsp;<span className="max-xl:hidden">20-minute&nbsp;</span>fit call</span><span className="sr-only"> (opens in a new tab)</span></a>
+          <a href={site.bookPath} target="_blank" rel="noopener noreferrer" className="btn btn-m"><span>Book a review</span><span className="sr-only"> (opens in a new tab)</span></a>
         </div>
 
         <button
@@ -64,17 +52,14 @@ export default function Header({ path = "/", agency = false }: { path?: string; 
         <ul className="flex flex-col gap-4">
           {links.map(([href, label]) => (
             <li key={href}>
-              <Link href={href} className="font-display text-[1.25rem] leading-[1.3] font-medium text-ink no-underline">
+              <Link href={href} aria-current={current(href)} className="font-display text-[1.25rem] leading-[1.3] font-medium text-ink no-underline aria-[current=page]:underline aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-[0.35em]">
                 {label}
               </Link>
             </li>
           ))}
         </ul>
         <div className="mt-6 flex flex-col gap-3">
-          <Link href="/sample-report" className="btn-outline w-full" aria-current={onSample ? "page" : undefined}>
-            See a sample report
-          </Link>
-          <a href={bookHref} target="_blank" rel="noopener noreferrer" className="btn w-full">Book a 20-minute fit call<span className="sr-only"> (opens in a new tab)</span></a>
+          <a href={site.bookPath} target="_blank" rel="noopener noreferrer" className="btn w-full">Book a 20-minute pipeline review<span className="sr-only"> (opens in a new tab)</span></a>
         </div>
       </nav>
     </header>

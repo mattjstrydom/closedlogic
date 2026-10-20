@@ -1,11 +1,10 @@
-// The site's only server code: POST /api/request. Only the teardown form is rendered today (the two /teardown pages);
-// the handler also accepts type: "check", which no page posts yet. Everything else is a static file served by Workers
+// The site's only server code: POST /api/request, the contact form (B2B SaaS, PE and partner requests). Everything else is a static file served by Workers
 // static assets without running this Worker (wrangler.jsonc: run_worker_first ["/api/*"]).
 // Free plan budget: 10 ms CPU per request and 100,000 Worker requests a day; this handler does a JSON parse, the
 // shared validation, and two fetches to Sequenzy (waiting on fetch is not CPU time). See the dev report for measurements.
 // Abuse: the honeypot and the Sec-Fetch-Site check below are speed bumps only. Real rate limiting needs a Cloudflare
 // Rate Limiting rule on /api/request or Turnstile (see README, "Before the domain goes public").
-import { validate, type FormType, type Fields } from "../app/validate";
+import { validate, FORM_TYPES, type FormType, type Fields } from "../app/validate";
 import { site } from "../app/site.config";
 
 interface Env {
@@ -83,17 +82,20 @@ async function handleRequest(req: Request, env: Env): Promise<Response> {
   // Honeypot: real visitors never fill it. Pretend success so bots don't retry.
   if (str(body.company_fax)) return json({ ok: true });
 
-  const type: FormType = body.type === "teardown" ? "teardown" : body.type === "stagecheck" ? "stagecheck" : "check";
+  // Pages post b2b, pe or partner. Anything else (a cached page from the old site posting check or teardown) is a B2B request.
+  const type: FormType = FORM_TYPES.includes(body.type as FormType) ? (body.type as FormType) : "b2b";
   // Where the visitor came from (?src= on the page): letters, numbers, dot, dash and underscore only.
   const source = str(body.source).replace(/[^\w.-]/g, "").slice(0, 40);
   const f: Fields = {
     name: str(body.name).trim(),
     email: str(body.email).trim(),
-    website: str(body.website).trim(),
-    tier: type === "check" ? str(body.tier) : "",
+    company: str(body.company).trim(),
+    role: str(body.role).trim(),
+    size: str(body.size),
+    stack: str(body.stack).trim(),
     note: str(body.note).trim(),
   };
-  const errors = validate(f, type);
+  const errors = validate(f);
   if (Object.keys(errors).length) return json({ errors }, 422);
 
   const dryRun = env.FORM_DRY_RUN === "1";
@@ -101,14 +103,17 @@ async function handleRequest(req: Request, env: Env): Promise<Response> {
   if (!key && !dryRun) return json({ error: "Form is not configured." }, 500);
 
   const headers = { Authorization: `Bearer ${key}`, "Content-Type": "application/json" };
-  const label = type === "teardown" ? "Free teardown" : type === "stagecheck" ? "Stage check result" : "Check request";
+  const label = { b2b: "B2B SaaS request", pe: "PE request", partner: "Partner request" }[type];
+  const tag = { b2b: "b2b-saas-request", pe: "pe-request", partner: "partner-request" }[type];
   const rows: [string, string][] = [
     ["Type", label],
-    ...(type === "stagecheck" ? [] : ([["Name", f.name]] as [string, string][])),
+    ["Name", f.name],
     ["Email", f.email],
-    ...(type === "stagecheck" ? [] : ([[type === "teardown" ? "Page your ads point to" : "Company website", f.website]] as [string, string][])),
+    ["Company", f.company],
+    ["Role", f.role || "(none)"],
+    ["Size", f.size],
+    ["Stack", f.stack || "(none)"],
     ...(source ? ([["Source", source]] as [string, string][]) : []),
-    ...(type === "check" ? ([["Marketing Hub tier", f.tier]] as [string, string][]) : []),
     ["Note", f.note || "(none)"],
   ];
 
@@ -116,16 +121,18 @@ async function handleRequest(req: Request, env: Env): Promise<Response> {
   //    (the default, "skip", leaves existing subscribers untouched).
   const subscriberBody = JSON.stringify({
     email: f.email,
-    ...(type === "stagecheck" ? {} : { firstName: f.name.split(/\s+/)[0] }),
-    tags: [type === "teardown" ? "teardown" : type === "stagecheck" ? "stage-check" : "check-request"],
+    firstName: f.name.split(/\s+/)[0],
+    tags: [tag],
     customAttributes: {
       fullName: f.name,
+      company: f.company,
+      role: f.role,
+      size: f.size,
+      stack: f.stack,
       note: f.note,
       requestType: type,
-      source: type === "teardown" ? `${site.domain}/teardown` : type === "stagecheck" ? `${site.domain}/tools/stage-check` : site.domain,
+      source: site.domain,
       ...(source ? { campaignSource: source } : {}),
-      website: f.website,
-      ...(type === "check" ? { marketingHubTier: f.tier } : {}),
     },
     duplicateStrategy: "overwrite",
     enrollInSequences: false,
@@ -135,7 +142,7 @@ async function handleRequest(req: Request, env: Env): Promise<Response> {
   const notifyBody = JSON.stringify({
     to: site.notifyTo,
     replyTo: `${oneLine(f.name) || "Lead"} <${oneLine(f.email)}>`,
-    subject: `${label}: ${oneLine(type === "stagecheck" ? f.email : f.name)}`,
+    subject: `${label}: ${oneLine(f.name)} (${oneLine(f.company)})`,
     html: `<table cellpadding="6" style="border-collapse:collapse;font:15px/1.5 sans-serif">${rows
       .map(([k, v]) => `<tr><td style="color:#5c6764;vertical-align:top"><b>${esc(k)}</b></td><td style="white-space:pre-wrap">${esc(v)}</td></tr>`)
       .join("")}</table>`,

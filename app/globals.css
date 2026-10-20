@@ -295,14 +295,6 @@
     background-size: 44px 44px;
   }
 
-  /* Gradient CTA band with ink rules top and bottom. */
-  .ctaband {
-    background: var(--gradient-signal);
-    border-block: 2px solid var(--color-ink);
-    padding-block: 72px;
-  }
-  @media (max-width: 960px) { .ctaband { padding-block: 48px; } }
-
   /* --------------------------------------------------------------- type */
   /* Eyebrow / chip: accent text, no decoration. */
   .chip {
@@ -318,7 +310,6 @@
   .card .chip, .bento .chip, .frag .chip { text-align: left; }
   .panel-navy .chip { color: var(--color-on-navy-hi); }
   .panel-navy .card .chip { color: var(--color-accent-text); }
-  .chip-dot { display: none; }
 
   /* Highlighted words inside a heading. */
   .accent { color: var(--color-accent); }
@@ -326,15 +317,6 @@
   /* Lead paragraph. */
   .lead { font-size: 1.25rem; line-height: 1.55; color: var(--color-body); }
   @media (max-width: 960px) { .lead { font-size: 1.1rem; } }
-
-  /* Big statement. */
-  .big-statement {
-    font-family: var(--font-display);
-    font-size: clamp(1.4rem, 2.2vw, 1.9rem);
-    line-height: 1.35;
-    font-weight: 600;
-    letter-spacing: -0.015em;
-  }
 
   /* ------------------------------------------------------------- buttons */
   .btn {
@@ -381,25 +363,6 @@
 
   /* Small header variants. */
   .btn-m { padding: 10px 20px; font-size: 0.92rem; min-height: 40px; box-shadow: var(--shadow-card); }
-  .btn-m-outline { padding: 9px 18px; font-size: 0.92rem; min-height: 40px; box-shadow: none; }
-
-  /* Quiet pill: the animation pause control. */
-  .btn-quiet {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 44px;
-    padding: 8px 18px;
-    font-family: var(--font-display);
-    font-weight: 500;
-    font-size: 0.92rem;
-    color: var(--color-ink);
-    background: var(--color-white);
-    border: 1.5px solid var(--color-ink);
-    border-radius: var(--radius-pill);
-    text-decoration: none;
-    cursor: pointer;
-  }
 
   @media (prefers-reduced-motion: no-preference) {
     .btn, .btn-outline, .btn-quiet { transition: transform 0.15s, box-shadow 0.15s, background-color 0.15s; }
@@ -435,24 +398,6 @@
     max-width: none;
   }
   .card h2, .bento h2, .bento-dark h2 { font-size: 1.5rem; line-height: 1.25; }
-  /* Featured pricing card. */
-  .bento-lift { box-shadow: var(--shadow-lift); }
-
-  /* White card sitting on the navy panel. */
-  .bento-dark {
-    background: var(--color-white);
-    border: 1.5px solid var(--color-ink);
-    border-radius: var(--radius-card);
-    box-shadow: var(--shadow-card);
-    padding: 34px;
-    color: var(--color-ink);
-  }
-  @media (max-width: 960px) { .bento-dark { padding: 24px; } }
-
-  /* The old dark-theme helper is a no-op now: ink on white is the default. */
-  .on-dark { color: inherit; }
-  .on-dark .link { color: var(--color-ink); }
-  .on-dark .chip { color: var(--color-accent); }
 
   /* Inset panel that holds a table or fragment inside a card. */
   .frag {
@@ -491,53 +436,9 @@
     white-space: nowrap;
   }
   .tag { font-size: 0.88rem; padding: 7px 16px; }
-  .tag-bad { background: var(--color-bad-bg); border-color: var(--color-bad); color: var(--color-bad); }
   .tag-ok, .goal-primary { background: var(--color-ok-bg); border-color: var(--color-ok); color: var(--color-ok); }
   .tag-warn, .tag-wait { background: var(--color-warn-bg); border-color: var(--color-warn); color: var(--color-warn); }
-  .tag-info { background: var(--color-info-bg); border-color: var(--color-info); color: var(--color-info); }
   .tag-grey, .tag-neutral { background: var(--color-white); border-color: var(--color-ink); color: var(--color-body); }
-
-  .goal-primary { font-weight: 600; }
-  .goal-secondary { font-weight: 600; }
-
-  /* Numeral inside a status tag. */
-  .tag-num {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 16px;
-    height: 16px;
-    border-radius: 999px;
-    background: var(--color-bad);
-    color: var(--color-white);
-    font-family: var(--font-display);
-    font-size: 10px;
-    font-weight: 700;
-  }
-
-  /* Numbered callouts: 32px accent circles with an ink ring and white numerals. */
-  .note-num,
-  .note-ok {
-    display: inline-flex;
-    flex: none;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 999px;
-    background: var(--color-accent);
-    border: 2px solid var(--color-ink);
-    color: var(--color-white);
-    font-family: var(--font-display);
-    font-size: 0.9rem;
-    font-weight: 700;
-    line-height: 1;
-  }
-  .note-ok { background: var(--color-ok); }
-
-  /* Highlight ring around an annotated value. */
-  .anno-box { border-radius: 8px; outline: 2px solid var(--color-accent); outline-offset: 3px; }
-  .anno-ok { border-radius: 8px; outline: 2px solid var(--color-ok); outline-offset: 3px; }
 
   /* Small mono captions on example graphics. */
   .img-label,
@@ -584,12 +485,6 @@
     .step-badge { transition: background-color 0.2s, color 0.2s, border-color 0.2s; }
   }
 
-  /* --------------------------------------------------------- status dots */
-  .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 9999px; flex: none; }
-  .status-dot-ok { background: var(--color-ok); }
-  .status-dot-warn { background: var(--color-warn); }
-  .status-dot-bad { background: var(--color-bad); }
-
   /* ------------------------------------------------------------ skip link */
   .skip-link {
     position: absolute;
@@ -614,8 +509,6 @@
     background: var(--color-white);
     border-bottom: 1px solid var(--color-rule);
   }
-  /* Kept for the existing markup hook; the glass blur is gone in this design. */
-  .glass { background: var(--color-white); }
 
   .site-menu {
     position: fixed;
@@ -727,41 +620,6 @@
 
   /* --------------------------------------------------------- trust pills */
   .pill { min-height: 34px; }
-  .pill-scope {
-    font-size: 0.8rem;
-    font-weight: 600;
-    padding: 4px 14px;
-    background: var(--color-pale);
-    border-color: var(--color-rule);
-    color: var(--color-body);
-  }
-  .on-dark .pill { background: var(--color-white); border-color: var(--color-ink); color: var(--color-ink); }
-  .on-dark .pill-scope { background: var(--color-pale); color: var(--color-body); }
-
-  /* ---------------------------------------------------- tables and data */
-  .data-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 1rem;
-    text-align: left;
-  }
-  .data-table caption { text-align: left; }
-  .data-table th {
-    font-family: var(--font-sans);
-    font-weight: 600;
-    font-size: 0.8rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--color-muted);
-    padding: 12px 14px;
-    border-bottom: 2px solid var(--color-ink);
-  }
-  .data-table td { padding: 16px 14px; border-bottom: 1px solid var(--color-rule); vertical-align: middle; }
-  .data-table tr:last-child td { border-bottom: 0; }
-  .data-table .num { font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; color: var(--color-ink); }
-  @media (max-width: 960px) {
-    .data-table th, .data-table td { padding: 10px; }
-  }
 
   /* Scroll container so tables never widen the page. */
   .table-scroll { overflow-x: auto; }
@@ -819,52 +677,6 @@
   .code-copy:hover { background: rgb(255 255 255 / 0.12); }
   .code-copy:focus-visible { outline: 3px solid var(--color-white); outline-offset: 2px; }
 
-  /* ------------------------------------------------------------- legend */
-  .legend { display: grid; gap: 14px; }
-  .legend > div { display: flex; gap: 14px; align-items: flex-start; font-size: 1.05rem; }
-
-  /* Layout grids whose column count must step up in a known order. These live here rather than in
-     Tailwind utilities because overriding the lg breakpoint puts its media query before sm/md, so a
-     later sm: rule would win over an lg: rule on the same element. */
-  .a1-grid, .pipe-grid, .cap-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
-  .a1-grid { gap: 16px; }
-  .pipe-grid, .cap-grid { gap: 20px; }
-  @media (min-width: 640px) {
-    .a1-grid, .pipe-grid, .cap-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  }
-  @media (min-width: 960px) {
-    .a1-grid, .pipe-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-    .cap-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  }
-
-  /* --------------------------------------------------------- price block */
-  .amt {
-    font-family: var(--font-display);
-    font-size: clamp(3rem, 5vw, 4.4rem);
-    line-height: 1;
-    font-weight: 700;
-    letter-spacing: -0.04em;
-    color: var(--color-ink);
-  }
-  .amt small {
-    font-family: var(--font-sans);
-    font-size: 1.05rem;
-    font-weight: 500;
-    letter-spacing: 0;
-    color: var(--color-body);
-  }
-  /* Guarantee box: gradient fill with an ink hairline. */
-  .guar {
-    border-radius: var(--radius-chip);
-    padding: 20px 24px;
-    background: var(--gradient-signal);
-    border: 1.5px solid var(--color-ink);
-  }
-  .guar b { display: block; font-family: var(--font-display); font-weight: 600; font-size: 1.1rem; margin-bottom: 6px; }
-
   /* Bulleted list with accent dots. */
   .dot-list { list-style: none; padding: 0; display: grid; gap: 14px; margin-top: 20px; }
   .dot-list li { position: relative; padding-left: 26px; font-size: 1.08rem; color: var(--color-body); }
@@ -881,34 +693,50 @@
   }
 
   /* -------------------------------------------------- comparison table */
-  .cmp td:nth-child(2) { color: var(--color-ok); font-weight: 700; background: var(--color-cmp); }
-  .cmp td:nth-child(n + 3) { color: var(--color-muted); }
-  .cmp th:nth-child(2) { color: var(--color-ok); }
-  .cmp td:first-child { font-weight: 600; }
+  /* The last column is Closed Logic. */
+  .cmp td:last-child { color: var(--color-ok); font-weight: 700; background: var(--color-cmp); }
+  .cmp td:not(:last-child) { color: var(--color-muted); }
+  .cmp th:last-child { color: var(--color-ink); background: var(--color-cmp); }
+  .cmp tbody th { font-weight: 600; }
 
-  /* -------------------------------------------------------- change log */
-  .log-row {
-    display: grid;
-    grid-template-columns: 64px 1fr auto;
-    gap: 20px;
-    align-items: center;
-    padding: 20px 28px;
-    border-radius: var(--radius-tile);
-    background: var(--color-white);
-    border: 1.5px solid var(--color-ink);
-    box-shadow: var(--shadow-card);
-    font-size: 1.1rem;
+  /* ------------------------------------------------------- report tables */
+  /* Thin rules, left labels, right-aligned numbers, no zebra stripes. */
+  .report-table { width: 100%; border-collapse: collapse; font-size: 1rem; text-align: left; min-width: 560px; }
+  .report-table th, .report-table td { padding: 14px 16px; border-bottom: 1px solid var(--color-rule); vertical-align: top; }
+  .report-table th:first-child, .report-table td:first-child { padding-left: 0; }
+  .report-table th:last-child, .report-table td:last-child { padding-right: 0; }
+  .report-table thead th {
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--color-muted); border-bottom: 2px solid var(--color-ink);
   }
-  .log-row b { font-family: var(--font-display); font-weight: 700; font-size: 1.4rem; color: var(--color-accent); }
-  @media (max-width: 960px) {
-    .log-row { grid-template-columns: 44px 1fr; gap: 12px; padding: 18px; }
-    .log-row > :last-child { grid-column: 2; justify-self: start; }
+  .report-table tbody th { font-weight: 600; color: var(--color-ink); }
+  .report-table td { color: var(--color-body); }
+  .report-table .r { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .report-table td.r { font-family: var(--font-display); font-weight: 700; color: var(--color-ink); }
+  .report-table tr:last-child th, .report-table tr:last-child td { border-bottom: 0; }
+
+  /* --------------------------------------------------------- three numbers */
+  .tn { display: flex; flex-direction: column; gap: 20px; align-items: flex-start; text-align: left; }
+  .tn-wrap { display: grid; grid-template-columns: minmax(0, 1fr) 24px minmax(0, 12rem); column-gap: 14px; align-items: center; width: 100%; }
+  .tn-rows { list-style: none; margin: 0; padding: 0; }
+  .tn-rows li { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--color-rule); }
+  .tn-rows li:last-child { border-bottom: 0; }
+  .tn-name { display: block; font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; color: var(--color-ink); }
+  .tn-unit { display: block; font-size: 0.9rem; color: var(--color-muted); }
+  .tn-num { font-family: var(--font-display); font-weight: 700; font-size: 3rem; line-height: 1; letter-spacing: -0.04em; color: var(--color-ink); font-variant-numeric: tabular-nums; }
+  .tn-bracket { align-self: stretch; margin-block: 18px; border: 2px solid var(--color-ink); border-left: 0; border-radius: 0 10px 10px 0; }
+  .tn-note { font-family: var(--font-display); font-weight: 600; font-size: 1.2rem; line-height: 1.3; letter-spacing: -0.01em; color: var(--color-ink); }
+  @media (max-width: 640px) {
+    .tn-wrap { grid-template-columns: minmax(0, 1fr); row-gap: 14px; }
+    .tn-bracket { display: none; }
+    .tn-note { border-top: 2px solid var(--color-ink); padding-top: 14px; }
+    .tn-num { font-size: 2.4rem; }
   }
+
 }
 
 /* Mobile floor: small labels stay at or above 14px. Uppercase labels are allowed at 0.75rem. */
 @media (max-width: 960px) {
-  .pill-scope { font-size: 0.875rem; }
   .img-label, .img-label-quiet, .img-label-dark { font-size: 0.875rem; }
   .code-copy { font-size: 0.78rem; }
   .tag { font-size: 0.875rem; }

@@ -54,7 +54,8 @@ const jetbrains = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: { default: `${site.brand} | Make Google Ads bid on pipeline`, template: `%s | ${site.brand}` },
+  title: { default: `${site.brand} | ${site.positioning}`, template: `%s | ${site.brand}` },
+  description: site.description,
   applicationName: site.brand,
   openGraph: { ...sharedOpenGraph, images: [ogImage] },
   twitter: { card: "summary_large_image", images: [twitterImage] },
@@ -65,9 +66,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-ZA" data-scroll-behavior="smooth" className={`${poppins.variable} ${fira.variable} ${jetbrains.variable}`} suppressHydrationWarning>
+    <html lang="en" data-scroll-behavior="smooth" className={`${poppins.variable} ${fira.variable} ${jetbrains.variable}`} suppressHydrationWarning>
       <body>
-        {/* Marks JS as available before first paint, so the A1 loop only runs when its pause control can work (WCAG 2.2.2). */}
+        {/* Marks JS as available before first paint (the .js class). */}
         <script dangerouslySetInnerHTML={{ __html: jsFlag }} />
         <Script id="gtm" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: head }} />
         <a href="#main" className="skip-link">Skip to content</a>

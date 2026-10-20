@@ -1,11 +1,37 @@
-// The seven checks: one source for the checks list and the hero preview. Labels are the phrases from the
-// /agencies "What's in a check" sentence; questions are the homepage questions, word for word.
-export const checkItems: { label: string; q: string }[] = [
-  { label: "Which conversions bidding uses", q: "Which conversions is Smart Bidding actually optimising for, and which are duplicates, tests or leftovers?" },
-  { label: "Lifecycle stages set up and firing", q: "Are your lifecycle stages (MQL, SQL, opportunity, customer) set up as conversions, included in your goals, firing, and carrying the right value?" },
-  { label: "Duplicates", q: "Is any stage sent more than once, through HubSpot, Data Manager or a Zapier automation?" },
-  { label: "Click ID and contact data matching", q: "Does each contact reach Google with a click ID or contact data (email, phone or address), so it can be matched to an ad click? And is Google's combined enhanced conversions setting switched on?" },
-  { label: "Legacy imports", q: "Is anything still on legacy offline import or a custom API upload, or routed through a manager account that HubSpot can't connect?" },
-  { label: "EEA consent signals", q: "Are consent signals set correctly for traffic from the EEA, where Google requires them?" },
-  { label: "Side-by-side count", q: "For the same period, how do HubSpot's stage changes and Google Ads' conversions compare, and what explains the gap?" },
+// The 20 checks of the Pipeline Truth Audit, in the order the copy deck lists them. One source for /method.
+export const checkItems: string[] = [
+  "Tracking and conversion actions",
+  "GCLID coverage",
+  "Enhanced conversions",
+  "Lifecycle stages",
+  "Lead scoring",
+  "Routing",
+  "Deal stages",
+  "Source data",
+  "Consent",
+  "CRM handoff",
+  "Reporting reconciliation",
+  "Dashboard definitions",
+  "Data quality",
+  "Integration health",
+  "UTM discipline",
+  "Offline conversions",
+  "Attribution model",
+  "Funnel conversion rates",
+  "Pipeline velocity",
+  "Data retention",
+];
+
+// The 10 metrics of the Measurement Standard: metric and the question it answers.
+export const metricItems: [string, string][] = [
+  ["CAC", "What does it cost to acquire a customer?"],
+  ["CAC payback", "How long until the customer pays back?"],
+  ["Marketing-sourced pipeline contribution", "How much pipeline did marketing create?"],
+  ["Pipeline velocity", "How fast does pipeline move?"],
+  ["MQL → SQL conversion", "Where does the handoff break?"],
+  ["Win rate", "Are we closing the right deals?"],
+  ["Sales-cycle length", "Is the cycle getting longer?"],
+  ["Net revenue retention", "Does the base grow without new customers?"],
+  ["Marketing-sourced revenue", "What revenue did marketing create?"],
+  ["Data quality", "Can we trust the inputs?"],
 ];
