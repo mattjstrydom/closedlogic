@@ -4,7 +4,7 @@ import PageHero from "../components/page-hero";
 import CtaBand from "../components/cta-band";
 import { BookButton } from "../components/cta";
 import { Accent, TickList } from "../components/ui";
-import { jsonLdScript, mattNode, orgNode } from "../jsonld";
+import { jenniferNode, jsonLdScript, mattNode, orgNode } from "../jsonld";
 import { pageMetadata } from "../seo";
 import { site } from "../site.config";
 
@@ -24,7 +24,7 @@ const beliefs = [
 export default function About() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdScript([orgNode, mattNode]) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdScript([orgNode, mattNode, jenniferNode]) }} />
       <Header path="/about" />
       <main id="main" tabIndex={-1}>
         <PageHero
@@ -50,6 +50,11 @@ export default function About() {
               <h2 id="who-title" className="text-title-m">Matt Strydom, founder.</h2>
               <p className="mt-4 text-body">Technical marketing ops background: HubSpot, Google Ads, tracking, attribution, Cloudflare and Stripe. I have built the systems and lived in the numbers. Closed Logic is the practice that came out of that work.</p>
               <p className="mt-4 text-text-s text-muted">Reubika LLC · US LLC · Built for B2B SaaS and PE-backed companies in the US, UK and Canada.</p>
+            </div>
+            <div id="jennifer" className="card mx-auto mt-6 max-w-[52rem] text-text-l">
+              <h3 className="text-title-m">Jennifer Taylor, revenue operations and MarTech.</h3>
+              <p className="mt-4 text-body">Revenue operations and MarTech background: CRM resets, pipeline upgrades, lead routing and workflow automation, outbound systems, and reporting and attribution for sales and marketing leaders. Jennifer leads the RevOps and MarTech team at GrowthStack, where she has worked since 2020. She starts with clean data and consistent pipelines, so the reporting is something a team can trust.</p>
+              <p className="mt-4 text-text-s text-muted">Based in the United Kingdom.</p>
             </div>
           </div>
         </section>

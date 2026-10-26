@@ -3,10 +3,12 @@ import { site } from "./site.config";
 // The same @ids the home page defines, so every page's graph points at one Organization and one Person.
 export const ORG_ID = `${site.url}/#organization`;
 export const MATT_ID = `${site.url}/#matt`;
+export const JENNIFER_ID = `${site.url}/#jennifer`;
 
 // Minimal copies of the home page nodes, so a page that references the ids also carries the nodes (Google reads one page at a time).
 export const orgNode = { "@type": "Organization", "@id": ORG_ID, name: site.brand, legalName: site.legalName, url: site.url };
 export const mattNode = { "@type": "Person", "@id": MATT_ID, name: "Matt Strydom", sameAs: [site.linkedin] };
+export const jenniferNode = { "@type": "Person", "@id": JENNIFER_ID, name: "Jennifer Taylor", worksFor: { "@id": ORG_ID } };
 
 export const abs = (path: string) => (/^https?:/.test(path) ? path : `${site.url}${path}`);
 
