@@ -37,6 +37,13 @@ const offers: { name: string; price: string; body: string; href: string; link: s
     link: "See the 20-point audit",
   },
   {
+    name: "Measurement Scorecard",
+    price: "$1,500/month · month to month",
+    body: "A monthly reconciliation of your pipeline and revenue numbers across your CRM, ads and finance, plus a one-page scorecard showing what moved and what doesn’t agree. No fix hours: fixes are quoted separately or covered by Fractional.",
+    href: "/pricing",
+    link: "See pricing",
+  },
+  {
     name: "Fractional Measurement Lead",
     price: "$5,000/month · 25 hours · 3-month initial",
     body: "We own the monthly scorecard, the fixes and the Monday number. You keep your agency. We keep the agency honest.",
@@ -64,8 +71,8 @@ const faqs: { q: string; a: string }[] = [
   { q: "Why not just use our CRM partner?", a: "CRM partners implement and standardize the tool. We test whether the numbers the tool produces are true — and whether they compare across companies." },
   { q: "Do you replace our dashboard?", a: "No. We define the metrics, reconcile the sources and own the monthly scorecard. Your dashboard can stay." },
   { q: "How do you work with PE firms?", a: "We work alongside your CRM/RevOps partner. They implement the standard. We provide the independent measurement layer, the KPI dictionary and the portfolio benchmark." },
-  { q: "What does it cost?", a: "Audit $1,500. Fractional $5,000/month. PE pilots $10k–$15k per company. Portfolio rollouts $40k–$75k. Fixed scope. No media percentage." },
-  { q: "What if we’re not sure?", a: "Start with the audit. If we don’t find three material issues, you don’t continue." },
+  { q: "What does it cost?", a: "Audit $1,500. Measurement Scorecard $1,500/month. Fractional $5,000/month. PE pilots $10k–$15k per company. Portfolio rollouts $40k–$75k. Fixed scope. No media percentage." },
+  { q: "What if we’re not sure?", a: "Start with the audit. If the audit doesn’t find at least three material issues, we refund the full $1,500 within 14 days." },
   { q: "How fast?", a: "Audit in 5 business days. Baseline in 30 days. First portfolio readout in 3–4 weeks." },
   { q: "Do you sign NDAs?", a: "Yes." },
 ];
@@ -99,6 +106,11 @@ const graph = [
     priceCurrency: "USD",
     url: `${site.url}/pricing`,
   }),
+  service("scorecard", "Measurement Scorecard", "Measurement reporting", "A monthly reconciliation of pipeline and revenue numbers across CRM, ads and finance, with a one-page scorecard showing what moved and what doesn’t agree. Month to month. No fix hours.", {
+    "@type": "Offer",
+    priceSpecification: { "@type": "UnitPriceSpecification", price: "1500", priceCurrency: "USD", unitText: "MONTH" },
+    url: `${site.url}/pricing`,
+  }),
   service("fractional", "Fractional Measurement Lead", "Fractional measurement leadership", "25 hours a month on tracking, attribution, HubSpot lifecycle and reporting for B2B SaaS, with a monthly scorecard. 3-month initial term.", {
     "@type": "Offer",
     priceSpecification: { "@type": "UnitPriceSpecification", price: "5000", priceCurrency: "USD", unitText: "MONTH" },
@@ -121,7 +133,7 @@ export default function Home() {
           <div className="container-site pb-[110px] pt-24 max-lg:pb-16 max-lg:pt-14">
             <div className="flex flex-col items-center gap-6 text-center">
               <h1 id="hero-title" className="heading-center max-w-[18ch] text-title-xl">
-                Your pipeline numbers don’t agree. <Accent>We make them.</Accent>
+                Your pipeline numbers don’t agree. <Accent>We find out which one is right.</Accent>
               </h1>
               <p className="lead max-w-[46rem]">
                 Closed Logic is the independent measurement layer for B2B SaaS and private equity. We don’t run your ads or implement your CRM. We own the number you take to the board.
@@ -166,9 +178,9 @@ export default function Home() {
         <section id="offers" aria-labelledby="offers-title" className="section-y">
           <div className="container-site">
             <SectionHead id="offers">
-              One measurement standard. <Accent>Three ways to use it.</Accent>
+              One measurement standard. <Accent>Four ways to use it.</Accent>
             </SectionHead>
-            <ul className="mt-14 grid gap-7 lg:grid-cols-3">
+            <ul className="mt-14 grid gap-7 lg:grid-cols-2">
               {offers.map((o) => (
                 <li key={o.name} className={`${card} !p-8`}>
                   <h3 className="text-title-m">{o.name}</h3>

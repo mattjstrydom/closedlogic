@@ -52,7 +52,7 @@ export const site = {
   ],
   // Set both to the publish date at deploy, for example "12 October 2026".
   privacyLastUpdated: "20 October 2026",
-  termsLastUpdated: "20 October 2026",
+  termsLastUpdated: "26 October 2026",
 
   caseStudy: null as CaseStudy | null,
 };

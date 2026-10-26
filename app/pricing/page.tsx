@@ -11,12 +11,13 @@ import { site } from "../site.config";
 
 export const metadata = pageMetadata({
   title: "Pricing: fixed scope, fixed price, no media percentage",
-  description: "Audit $1,500. Fractional $5,000 a month. PE pilots $10k–$15k per portfolio company. Fixed scope, and no percentage of ad spend.",
+  description: "Audit $1,500. Measurement Scorecard $1,500 a month. Fractional $5,000 a month. PE pilots $10k–$15k per portfolio company. Fixed scope, and no percentage of ad spend.",
   path: "/pricing",
 });
 
 const rows: React.ReactNode[][] = [
   ["Pipeline Truth Audit", "$1,500", "5 business days; 20 checks; baseline; 90-day roadmap", "B2B SaaS teams that need a diagnosis"],
+  ["Measurement Scorecard", "$1,500/month", "Month to month; monthly reconciliation of pipeline and revenue across CRM, ads and finance; one-page scorecard of what moved and what doesn’t agree; no fix hours (fixes quoted separately or covered by Fractional)", "B2B SaaS teams that need the numbers checked every month"],
   ["Fractional Measurement Lead", "$5,000/month", "25 hours; 3-month initial; monthly scorecard; fixes", "B2B SaaS teams that need an owner"],
   ["Founding-client rate", "$4,000/month", "First 2 clients; 3 months; case study required", "Early clients who will be references"],
   ["PE Portfolio Pilot", "$10k–$15k", "One portfolio company; 3 weeks; scorecard; readout", "Funds testing the standard"],
@@ -25,7 +26,7 @@ const rows: React.ReactNode[][] = [
   ["Partner white-label", "Custom", "60–70% of end fee; your brand; your relationship", "CRM/RevOps partners"],
 ];
 
-const always = ["A named owner", "A written scope", "A baseline", "A monthly scorecard", "A 30-day escape on the first engagement"];
+const always = ["A named owner", "A written scope", "A baseline", "A monthly scorecard", "Fractional: either side can end it in writing during the first 30 days, and you pay only for that first month."];
 const never = ["Media buying", "Creative or content", "CRM migration", "A new dashboard", "A percentage of ad spend"];
 
 export default function Pricing() {

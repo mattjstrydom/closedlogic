@@ -37,12 +37,12 @@ export default function Terms() {
           <C n="1.1">
             &quot;We&quot; and &quot;us&quot; means {site.legalEntity}, trading as {site.brand}. &quot;You&quot; means the business that buys from us. That can be a B2B SaaS company, a private equity fund, or a CRM or RevOps partner buying for itself or for a client.
           </C>
-          <C n="1.2">These terms apply to the Pipeline Truth Audit, fractional measurement leadership, PE portfolio measurement (pilot, rollout, retainer and advisory) and partner white-label work. They also apply to any extra work we quote in writing. A written scope sets out which of these you are buying.</C>
+          <C n="1.2">These terms apply to the Pipeline Truth Audit, the Measurement Scorecard, fractional measurement leadership, PE portfolio measurement (pilot, rollout, retainer and advisory) and partner white-label work. They also apply to any extra work we quote in writing. A written scope sets out which of these you are buying.</C>
 
           <h2 id="clause-2" className={h2}>2. Prices and payment</h2>
           <C n="2.1">All prices are in US dollars and paid through Stripe.</C>
           <C n="2.2">
-            <strong className="font-medium">B2B SaaS:</strong> Pipeline Truth Audit, $1,500. Fractional Measurement Lead, $5,000 a month for 25 hours, with a 3-month initial term. Founding-client rate, $4,000 a month for 3 months, for the first 2 clients, with a case study required.
+            <strong className="font-medium">B2B SaaS:</strong> Pipeline Truth Audit, $1,500. Measurement Scorecard, $1,500 a month, month to month. Fractional Measurement Lead, $5,000 a month for 25 hours, with a 3-month initial term. Founding-client rate, $4,000 a month for 3 months, for the first 2 clients, with a case study required.
           </C>
           <C n="2.3">
             <strong className="font-medium">PE funds:</strong> Portfolio Measurement Pilot, $10k–$15k for one portfolio company. Portfolio Rollout, $40k–$75k for 4–6 portfolio companies. Measurement Retainer, $5k–$7.5k per portfolio company per month. PE Advisory, $3k–$5k per month. The exact fee is in your written scope.
@@ -61,16 +61,17 @@ export default function Terms() {
             <strong className="font-medium">Not included in any engagement:</strong> media buying, creative, content or web development, CRM migration, a new dashboard, a full-time hire, and a percentage of ad spend.
           </C>
 
-          <h2 id="clause-4" className={h2}>4. If we don&apos;t find three material issues</h2>
-          <C n="4.1">If the audit doesn&apos;t find three material issues, you don&apos;t continue to a retainer. You keep the report, the baseline and the roadmap.</C>
+          <h2 id="clause-4" className={h2}>4. If the audit doesn&apos;t find three material issues</h2>
+          <C n="4.1">If the audit doesn&apos;t find at least three material issues, we refund the full $1,500 within 14 days. You keep the report, the baseline and the roadmap.</C>
           <C n="4.2">If you don&apos;t continue after the audit, there is no lock-in.</C>
 
           <h2 id="clause-5" className={h2}>5. Fractional Measurement Lead and retainers</h2>
           <C n="5.1">Fractional Measurement Lead covers 25 hours a month. Month 1 is the audit, definitions and roadmap. Months 2 and 3 are the monthly scorecard, fixes and a 60-minute review.</C>
           <C n="5.2">Any change we make to your accounts is agreed with you first.</C>
           <C n="5.3">The initial term is 3 months. After that, the engagement runs month to month until either of us gives 30 days&apos; written notice.</C>
-          <C n="5.4">Your first engagement includes a 30-day escape, as set out in its written scope.</C>
+          <C n="5.4">Fractional: either side can end it in writing during the first 30 days, and you pay only for that first month.</C>
           <C n="5.5">We don&apos;t guarantee ad performance, pipeline or revenue. We promise a defensible number and a documented method, not perfect attribution.</C>
+          <C n="5.6">The Measurement Scorecard is $1,500 a month, month to month. It covers a monthly reconciliation of your pipeline and revenue numbers across your CRM, ads and finance, plus a one-page scorecard showing what moved and what doesn&apos;t agree. It includes no fix hours: fixes are quoted separately or covered by Fractional.</C>
 
           <h2 id="clause-6" className={h2}>6. PE portfolio measurement</h2>
           <C n="6.1">A Portfolio Measurement Pilot covers one portfolio company over about 3 weeks: KPI dictionary, 20-point audit, baseline, 90-day roadmap and a one-page scorecard.</C>
@@ -79,7 +80,7 @@ export default function Terms() {
           <C n="6.4">Other work is quoted separately under clause 2.5.</C>
 
           <h2 id="clause-7" className={h2}>7. Refunds</h2>
-          <C n="7.1">Once work starts, fees for it are non-refundable, except as set out in your written scope.</C>
+          <C n="7.1">Once work starts, fees for it are non-refundable, except for the audit refund in clause 4.1 and as set out in your written scope.</C>
           <C n="7.2">There are no refunds for part months on a monthly engagement.</C>
 
           <h2 id="clause-8" className={h2}>8. Your responsibilities</h2>

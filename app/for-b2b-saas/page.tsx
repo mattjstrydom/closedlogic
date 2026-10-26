@@ -141,6 +141,7 @@ export default function ForB2bSaas() {
                 right={[1]}
                 rows={[
                   ["Pipeline Truth Audit", "$1,500", "5 business days; 20 checks; baseline; roadmap"],
+                  ["Measurement Scorecard", "$1,500/month", "Month to month; monthly reconciliation across CRM, ads and finance; one-page scorecard; no fix hours"],
                   ["Fractional Measurement Lead", "$5,000/month", "25 hours; 3-month initial; monthly scorecard"],
                   ["Founding-client rate", "$4,000/month", "First 2 clients; 3 months; case study required"],
                 ]}
@@ -158,7 +159,7 @@ export default function ForB2bSaas() {
           </div>
         </section>
 
-        <CtaBand id="start" title="Start with the audit." body="Five business days. 20 checks. If we don’t find three material issues, you don’t continue.">
+        <CtaBand id="start" title="Start with the audit." body="Five business days. 20 checks. If the audit doesn’t find at least three material issues, we refund the full $1,500 within 14 days.">
           <BookButton className="w-full sm:w-auto">Book the audit</BookButton>
           <a href={`mailto:${site.email}`} className="btn-outline w-full sm:w-auto">Email us</a>
         </CtaBand>
