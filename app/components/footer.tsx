@@ -17,7 +17,6 @@ export default function Footer() {
           <p>{site.legalLine}.</p>
           <nav aria-label="Footer" className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <Link href="/for-b2b-saas" className={link}>For B2B SaaS</Link>
-            <Link href="/for-pe" className={link}>For PE</Link>
             <Link href="/method" className={link}>Method</Link>
             <Link href="/pricing" className={link}>Pricing</Link>
             {hasGuides() && <Link href="/guides" className={link}>Guides</Link>}

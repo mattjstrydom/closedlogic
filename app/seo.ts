@@ -8,7 +8,7 @@ export const sharedOpenGraph = { siteName: site.brand, locale: "en_US", type: "w
 // alt text comes from here. Every page that sets its own openGraph/twitter object must list it again (shallow merge).
 // 1200x630 for Open Graph, 1200x600 for X/Twitter. Rendered from scripts/og-v3.html with scripts/make-og.mjs; the
 // text is baked into the PNGs, so re-render them when the positioning changes.
-const ogAlt = `${site.brand}: independent pipeline measurement for B2B SaaS and PE. Google Ads 42, HubSpot 31, board deck 18. One number is wrong. We find out which.`;
+const ogAlt = `${site.brand}: independent pipeline measurement for B2B SaaS. Google Ads 42, HubSpot 31, board deck 18. One number is wrong. We find out which.`;
 export const ogImage = { url: "/closedlogic-og-v3-1200x630.png", width: 1200, height: 630, alt: ogAlt, type: "image/png" };
 export const twitterImage = { url: "/closedlogic-og-v3-x-1200x600.png", width: 1200, height: 600, alt: ogAlt, type: "image/png" };
 

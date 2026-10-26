@@ -12,11 +12,15 @@ import { pageMetadata } from "../seo";
 import { site } from "../site.config";
 import Link from "next/link";
 
-export const metadata = pageMetadata({
-  title: "Portfolio measurement for private equity",
-  description: "One measurement standard across your portfolio companies. Comparable pipeline numbers without migrating CRMs. Built for operating partners.",
-  path: "/for-pe",
-});
+// Hidden (Matt, 26 Oct 2026): unlinked from the nav, footer and home page, out of the sitemap and noindex. The page still builds and returns 200.
+export const metadata = {
+  ...pageMetadata({
+    title: "Portfolio measurement for private equity",
+    description: "One measurement standard across your portfolio companies. Comparable pipeline numbers without migrating CRMs. Built for operating partners.",
+    path: "/for-pe",
+  }),
+  robots: { index: false, follow: false },
+};
 
 const offers: [string, string, string][] = [
   ["Portfolio Measurement Pilot", "$10k–$15k · 3 weeks", "One portfolio company. KPI dictionary, 20-point audit, baseline, 90-day roadmap and a one-page scorecard. The pilot is the proof."],

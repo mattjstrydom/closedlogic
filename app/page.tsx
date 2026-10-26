@@ -50,13 +50,6 @@ const offers: { name: string; price: string; body: string; href: string; link: s
     href: "/for-b2b-saas",
     link: "For B2B SaaS",
   },
-  {
-    name: "Portfolio Measurement",
-    price: "For PE funds · $10k–$15k per portfolio company",
-    body: "One standard across 5–20 portfolio companies. We make the numbers comparable without migrating the CRMs.",
-    href: "/for-pe",
-    link: "For PE",
-  },
 ];
 
 const steps: [string, string][] = [
@@ -70,10 +63,9 @@ const faqs: { q: string; a: string }[] = [
   { q: "Why not just use our agency?", a: "Because the agency that runs your ads has an incentive to report them favorably. We don’t run media. We audit the number." },
   { q: "Why not just use our CRM partner?", a: "CRM partners implement and standardize the tool. We test whether the numbers the tool produces are true — and whether they compare across companies." },
   { q: "Do you replace our dashboard?", a: "No. We define the metrics, reconcile the sources and own the monthly scorecard. Your dashboard can stay." },
-  { q: "How do you work with PE firms?", a: "We work alongside your CRM/RevOps partner. They implement the standard. We provide the independent measurement layer, the KPI dictionary and the portfolio benchmark." },
-  { q: "What does it cost?", a: "Audit $1,500. Measurement Scorecard $1,500/month. Fractional $5,000/month. PE pilots $10k–$15k per company. Portfolio rollouts $40k–$75k. Fixed scope. No media percentage." },
+  { q: "What does it cost?", a: "Audit $1,500. Measurement Scorecard $1,500/month. Fractional $5,000/month. Fixed scope. No media percentage." },
   { q: "What if we’re not sure?", a: "Start with the audit. If the audit doesn’t find at least three material issues, we refund the full $1,500 within 14 days." },
-  { q: "How fast?", a: "Audit in 5 business days. Baseline in 30 days. First portfolio readout in 3–4 weeks." },
+  { q: "How fast?", a: "Audit in 5 business days. Baseline in 30 days." },
   { q: "Do you sign NDAs?", a: "Yes." },
 ];
 const faqItems: FaqItem[] = faqs.map(({ q, a }) => ({ q, a }));
@@ -116,7 +108,6 @@ const graph = [
     priceSpecification: { "@type": "UnitPriceSpecification", price: "5000", priceCurrency: "USD", unitText: "MONTH" },
     url: `${site.url}/for-b2b-saas`,
   }),
-  service("portfolio", "Portfolio Measurement", "Portfolio measurement for private equity", "One measurement standard across a fund’s portfolio companies, alongside the fund’s CRM partner, without migrating CRMs.", undefined),
   faqNode(faqs),
 ];
 
@@ -136,7 +127,7 @@ export default function Home() {
                 Your pipeline numbers don’t agree. <Accent>We find out which one is right.</Accent>
               </h1>
               <p className="lead max-w-[46rem]">
-                Closed Logic is the independent measurement layer for B2B SaaS and private equity. We don’t run your ads or implement your CRM. We own the number you take to the board.
+                Closed Logic is the independent measurement layer for B2B SaaS. We don’t run your ads or implement your CRM. We own the number you take to the board.
               </p>
               <div className="mt-2 flex w-full flex-col items-center justify-center gap-4 sm:w-auto sm:flex-row sm:flex-wrap">
                 <BookButton className="w-full sm:w-auto" />
@@ -178,9 +169,9 @@ export default function Home() {
         <section id="offers" aria-labelledby="offers-title" className="section-y">
           <div className="container-site">
             <SectionHead id="offers">
-              One measurement standard. <Accent>Four ways to use it.</Accent>
+              One measurement standard. <Accent>Three ways to use it.</Accent>
             </SectionHead>
-            <ul className="mt-14 grid gap-7 lg:grid-cols-2">
+            <ul className="mt-14 grid gap-7 lg:grid-cols-3">
               {offers.map((o) => (
                 <li key={o.name} className={`${card} !p-8`}>
                   <h3 className="text-title-m">{o.name}</h3>
@@ -230,21 +221,14 @@ export default function Home() {
         <section id="for" aria-labelledby="for-title" className="section-y band">
           <div className="container-site">
             <SectionHead id="for">Who this is for.</SectionHead>
-            <div className="mt-14 grid gap-7 lg:grid-cols-2">
-              <div className={card}>
-                <h3 className="text-title-m">For B2B SaaS</h3>
-                <p>$10–50M ARR · 20–200 employees · HubSpot Professional or Enterprise · Google Ads $10k+/month · sales-led or hybrid · 2–15 marketing staff · US, UK or Canada.</p>
-                <p className="mt-auto pt-2"><Link href="/for-b2b-saas" className="link font-semibold">For B2B SaaS →</Link></p>
-              </div>
-              <div className={card}>
-                <h3 className="text-title-m">For PE funds</h3>
-                <p>5–20 B2B software portfolio companies · mixed CRMs · quarterly portfolio reviews · an operating partner who needs one number, not six definitions.</p>
-                <p className="mt-auto pt-2"><Link href="/for-pe" className="link font-semibold">For PE →</Link></p>
-              </div>
+            <div className={`${card} mx-auto mt-14 max-w-[60rem]`}>
+              <h3 className="text-title-m">For B2B SaaS</h3>
+              <p>$10–50M ARR · 20–200 employees · HubSpot Professional or Enterprise · Google Ads $10k+/month · sales-led or hybrid · 2–15 marketing staff · US, UK or Canada.</p>
+              <p className="mt-auto pt-2"><Link href="/for-b2b-saas" className="link font-semibold">For B2B SaaS →</Link></p>
             </div>
             <div className="card mx-auto mt-7 max-w-[60rem] text-text-m">
               <h3 className="text-title-xs">Who this is not for</h3>
-              <p className="mt-2">Ecommerce with a uniform average order value. Pre-PMF startups. Companies that want a body shop. Funds that want a CRM migration.</p>
+              <p className="mt-2">Ecommerce with a uniform average order value. Pre-PMF startups. Companies that want a body shop.</p>
             </div>
           </div>
         </section>
@@ -255,10 +239,9 @@ export default function Home() {
             <SectionHead id="samples">
               See the work <Accent>before you buy.</Accent>
             </SectionHead>
-            <p className="lead lead-center mt-6 max-w-[44rem]">We don’t publish logos we haven’t earned. What we can show you is the work: the 20-point checklist, a sample scorecard and the method behind both.</p>
+            <p className="lead lead-center mt-6 max-w-[44rem]">We don’t publish logos we haven’t earned. What we can show you is the work: the 20-point checklist and the method behind it.</p>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link href="/method#checks" className="btn-outline w-full sm:w-auto">See the 20-point checklist →</Link>
-              <Link href="/for-pe#sample" className="btn-outline w-full sm:w-auto">See a sample Portfolio Scorecard →</Link>
             </div>
             <p className="mt-6 text-center text-muted">Samples are illustrative, not client results.</p>
           </div>

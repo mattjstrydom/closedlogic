@@ -10,9 +10,9 @@ export const site = {
   // Nova's artwork (wordmark, icons, share images), whose text is outlined or baked in (see README, "Renaming").
   // Renamed from the old brand to Closed Logic (Matt, 9 Oct 2026). The old domain's 301 plan is in the dev report.
   brand: "Closed Logic",
-  positioning: "Independent pipeline measurement for B2B SaaS and PE",
+  positioning: "Independent pipeline measurement for B2B SaaS",
   description:
-    "Your pipeline numbers don’t agree. We find out which one is right. Independent measurement audits, fractional measurement leadership and portfolio benchmarks. No media-buying incentive.",
+    "Your pipeline numbers don’t agree. We find out which one is right. Independent measurement audits and fractional measurement leadership. No media-buying incentive.",
   domain: "closedlogic.com", // apex; redirects to url (a Cloudflare redirect rule, see README)
   url: "https://www.closedlogic.com",
   // scripts/check-placeholders.mjs blocks the production build while emailLive is false, so the site never goes live

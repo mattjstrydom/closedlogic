@@ -8,7 +8,7 @@ export const dynamic = "force-static";
 // No lastModified, changeFrequency or priority on the fixed pages: Google ignores the last two, and a wrong lastModified is worse than none.
 // Guides: only published, not future dated posts (drafts are never built, see app/guides/content.ts), each with lastModified from its dateModified. /guides appears once one exists.
 export default function sitemap(): MetadataRoute.Sitemap {
-  const pages: MetadataRoute.Sitemap = ["/", "/for-b2b-saas", "/for-pe", "/method", "/pricing", "/about", "/contact", "/privacy", "/terms"].map((p) => ({ url: p === "/" ? site.url : `${site.url}${p}` }));
+  const pages: MetadataRoute.Sitemap = ["/", "/for-b2b-saas", "/method", "/pricing", "/about", "/contact", "/privacy", "/terms"].map((p) => ({ url: p === "/" ? site.url : `${site.url}${p}` }));
   const live = allGuides().filter((g) => !g.isDraft);
   if (!hasLiveGuides()) return pages;
   const newest = live.map((g) => g.dateModified).sort().pop();

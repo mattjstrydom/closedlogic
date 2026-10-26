@@ -5,7 +5,6 @@ import { hasGuides } from "../guides/content";
 
 const baseLinks: [string, string][] = [
   ["/for-b2b-saas", "For B2B SaaS"],
-  ["/for-pe", "For PE"],
   ["/method", "Method"],
   ["/pricing", "Pricing"],
 ];
