@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import PageHero from "../components/page-hero";
@@ -20,6 +21,42 @@ const beliefs = [
   "A standard is more useful than another tool.",
   "If the audit doesn’t find at least three material issues, we refund the full $1,500 within 14 days.",
 ];
+
+// Team cards. To add a headshot: put a square JPG in public/team/, list it in images.manifest.json with [96, 192],
+// run `node scripts/build-images.mjs`, then set photo below. Without a photo the card shows the initials in the same circle.
+type Person = { id: string; name: string; initials: string; heading: string; bio: string; photo?: string; alt?: string };
+const team: Person[] = [
+  {
+    id: "matt",
+    name: "Matt Strydom",
+    initials: "MS",
+    heading: "Matt Strydom, founder.",
+    bio: "Technical marketing ops background: HubSpot, Google Ads, tracking, attribution, Cloudflare and Stripe. I have built the systems and lived in the numbers. Closed Logic is the practice that came out of that work.",
+    photo: "/team/matt.jpg",
+    alt: "Matt Strydom, founder of Closed Logic",
+  },
+  {
+    id: "jennifer",
+    name: "Jennifer Taylor",
+    initials: "JT",
+    heading: "Jennifer Taylor, revenue operations and MarTech.",
+    bio: "Revenue operations and MarTech background: CRM resets, pipeline upgrades, lead routing and workflow automation, outbound systems, and reporting and attribution for sales and marketing leaders. Jennifer leads the RevOps and MarTech team at GrowthStack, where she has worked since 2020. She starts with clean data and consistent pipelines, so the reporting is something a team can trust.",
+    // photo: "/team/jennifer.jpg", alt: "Jennifer Taylor, revenue operations and MarTech at Closed Logic",
+  },
+];
+
+const headshot = "size-24 shrink-0 rounded-full border-2 border-solid border-ink";
+
+function Headshot({ person }: { person: Person }) {
+  if (person.photo) {
+    return <Image src={person.photo} alt={person.alt ?? person.name} width={96} height={96} sizes="96px" className={`${headshot} object-cover`} />;
+  }
+  return (
+    <div role="img" aria-label={person.name} className={`${headshot} flex items-center justify-center bg-band font-display text-[1.75rem] font-bold tracking-[-0.03em] text-ink`}>
+      <span aria-hidden="true">{person.initials}</span>
+    </div>
+  );
+}
 
 export default function About() {
   return (
@@ -46,15 +83,19 @@ export default function About() {
 
         <section id="who" aria-labelledby="who-title" className="section-y">
           <div className="container-site">
-            <div className="card mx-auto max-w-[52rem] text-text-l">
-              <h2 id="who-title" className="text-title-m">Matt Strydom, founder.</h2>
-              <p className="mt-4 text-body">Technical marketing ops background: HubSpot, Google Ads, tracking, attribution, Cloudflare and Stripe. I have built the systems and lived in the numbers. Closed Logic is the practice that came out of that work.</p>
-              <p className="mt-4 text-text-s text-muted">Reubika LLC · US LLC · Built for B2B SaaS and PE-backed companies in the US, UK and Canada.</p>
-            </div>
-            <div id="jennifer" className="card mx-auto mt-6 max-w-[52rem] text-text-l">
-              <h3 className="text-title-m">Jennifer Taylor, revenue operations and MarTech.</h3>
-              <p className="mt-4 text-body">Revenue operations and MarTech background: CRM resets, pipeline upgrades, lead routing and workflow automation, outbound systems, and reporting and attribution for sales and marketing leaders. Jennifer leads the RevOps and MarTech team at GrowthStack, where she has worked since 2020. She starts with clean data and consistent pipelines, so the reporting is something a team can trust.</p>
-              <p className="mt-4 text-text-s text-muted">Based in the United Kingdom.</p>
+            <div className="mx-auto flex max-w-[52rem] flex-col gap-6">
+              {team.map((p, i) => {
+                const Heading = i === 0 ? "h2" : "h3";
+                return (
+                  <div key={p.id} id={p.id} className="card flex flex-col gap-5 text-text-l sm:flex-row sm:items-start sm:gap-7">
+                    <Headshot person={p} />
+                    <div className="min-w-0">
+                      <Heading id={i === 0 ? "who-title" : undefined} className="text-title-m">{p.heading}</Heading>
+                      <p className="mt-4 text-body">{p.bio}</p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
