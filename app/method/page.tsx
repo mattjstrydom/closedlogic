@@ -21,7 +21,8 @@ const cadence: [string, string][] = [
   ["5 business days", "The audit."],
   ["30 days", "The baseline and the roadmap."],
   ["Monthly", "The scorecard and the review."],
-  ["Quarterly", "The portfolio roll-up and the benchmark."],
+  // The quarterly portfolio roll-up is a PE deliverable: shown only when site.showPE is true (app/flags.ts).
+  ...(site.showPE ? ([["Quarterly", "The portfolio roll-up and the benchmark."]] as [string, string][]) : []),
 ];
 
 export default function Method() {

@@ -1,6 +1,7 @@
 // Site facts and every open placeholder. scripts/check-placeholders.mjs fails the
 // production build while any double-brace token is left in app/.
 import booking from "./booking.json";
+import { SHOW_PE } from "./flags";
 
 export type CaseStudy = { title: string; body: string; attribution: string };
 
@@ -10,6 +11,8 @@ export const site = {
   // Nova's artwork (wordmark, icons, share images), whose text is outlined or baked in (see README, "Renaming").
   // Renamed from the old brand to Closed Logic (Matt, 9 Oct 2026). The old domain's 301 plan is in the dev report.
   brand: "Closed Logic",
+  // Single PE switch, set in app/flags.ts.
+  showPE: SHOW_PE,
   positioning: "Independent pipeline measurement for B2B SaaS",
   description:
     "Your pipeline numbers don’t agree. We find out which one is right. Independent measurement audits and fractional measurement leadership. No media-buying incentive.",

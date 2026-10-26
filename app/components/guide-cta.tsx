@@ -1,9 +1,11 @@
 import { AuditButton, BookButton, BookPeButton } from "./cta";
+import { SHOW_PE } from "../flags";
 
 // cta: direct sends B2B SaaS readers to the audit and the fractional offer; cta: agency (the frontmatter value kept
 // from the old site) sends PE readers to the portfolio offer. Both book through the /book redirects.
 export default function GuideCta({ cta }: { cta: "direct" | "agency" }) {
-  const pe = cta === "agency";
+  // While SHOW_PE is false (app/flags.ts) every guide gets the B2B SaaS fit-call CTA (/book, the 20min-fit event).
+  const pe = SHOW_PE && cta === "agency";
   return (
     <aside aria-labelledby="guide-cta-title" className="bento mt-14">
       <h2 id="guide-cta-title" className="text-title-m">

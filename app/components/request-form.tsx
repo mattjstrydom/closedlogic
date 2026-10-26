@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { track, readSource } from "@/app/analytics";
-import { SIZES, validate, type Errors, type Fields, type FormType } from "@/app/validate";
+import { FORM_TYPES, SIZES, SIZE_LABEL, validate, type Errors, type Fields, type FormType } from "@/app/validate";
 
 const empty: Fields = { name: "", email: "", company: "", role: "", size: "", stack: "", note: "" };
 const input =
@@ -11,7 +11,7 @@ const input =
 const typeLabels: Record<FormType, string> = { b2b: "B2B SaaS company", pe: "PE fund", partner: "CRM or RevOps partner" };
 
 // email and bookUrls come from site.config through the (server) page, so this client bundle doesn't carry the whole config.
-export default function RequestForm({ initialType = "b2b", choose = false, email, bookUrls }: { initialType?: FormType; choose?: boolean; email: string; bookUrls: Record<FormType, string> }) {
+export default function RequestForm({ initialType = "b2b", choose = false, email, bookUrls }: { initialType?: FormType; choose?: boolean; email: string; bookUrls: Partial<Record<FormType, string>> }) {
   const [type, setType] = useState<FormType>(initialType);
   const [f, setF] = useState<Fields>(empty);
   const [errors, setErrors] = useState<Errors>({});
@@ -85,7 +85,7 @@ export default function RequestForm({ initialType = "b2b", choose = false, email
           <fieldset>
             <legend className="mb-2 block font-medium">I am a</legend>
             <div className="seg">
-              {(Object.keys(typeLabels) as FormType[]).map((t) => (
+              {FORM_TYPES.map((t) => (
                 <span key={t}>
                   <input type="radio" name="type" id={`type-${t}`} value={t} checked={type === t} onChange={() => setType(t)} className="seg-input sr-only" />
                   <label htmlFor={`type-${t}`} className="seg-item">{typeLabels[t]}</label>
@@ -100,7 +100,7 @@ export default function RequestForm({ initialType = "b2b", choose = false, email
         {field("role", "Role (optional)", <input {...aria("role")} className={input} autoComplete="organization-title" value={f.role} onChange={set("role")} />)}
         {field(
           "size",
-          "ARR or portfolio size",
+          SIZE_LABEL,
           <select {...aria("size")} required className={input} value={f.size} onChange={set("size")}>
             <option value="">Select a size</option>
             {SIZES.map((s) => <option key={s}>{s}</option>)}
@@ -128,7 +128,7 @@ export default function RequestForm({ initialType = "b2b", choose = false, email
       </form>
       <p className="mt-6">
         Prefer to pick a time now?{" "}
-        <a href={bookUrls[type]} target="_blank" rel="noopener noreferrer" className="link">
+        <a href={bookUrls[type] ?? bookUrls.b2b} target="_blank" rel="noopener noreferrer" className="link">
           Book a 20-minute pipeline review
           <span className="sr-only"> (opens in a new tab)</span>
         </a>

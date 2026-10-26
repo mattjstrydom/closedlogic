@@ -36,7 +36,7 @@ export default function Privacy() {
         <p>
           <strong>When you book a call or send a request.</strong> If you book a pipeline review through Cal.com,
           we receive the details you enter when booking. If you send a request through the contact form, we receive your name, work
-          email, company, role, ARR or portfolio size, stack and any note you choose to write. We use it to reply to you, to
+          email, company, role, {site.showPE ? "ARR or portfolio size" : "ARR"}, stack and any note you choose to write. We use it to reply to you, to
           decide whether the service is a fit, and to prepare for a call if we have one. If the link you followed carried a source tag (for example from a LinkedIn post), we also record that tag, so we can see which channel the request came from.
         </p>
         <p>
