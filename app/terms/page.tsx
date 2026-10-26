@@ -62,16 +62,16 @@ export default function Terms() {
           </C>
 
           <h2 id="clause-4" className={h2}>4. If the audit doesn&apos;t find three material issues</h2>
-          <C n="4.1">If the audit doesn&apos;t find at least three material issues, we refund the full $1,500 within 14 days. You keep the report, the baseline and the roadmap.</C>
+          <C n="4.1">If the audit doesn&apos;t find at least three material issues, we refund the full $1,500 within 14 days of the audit readout. You keep the report, the baseline and the roadmap.</C>
           <C n="4.2">If you don&apos;t continue after the audit, there is no lock-in.</C>
 
           <h2 id="clause-5" className={h2}>5. Fractional Measurement Lead and retainers</h2>
           <C n="5.1">Fractional Measurement Lead covers 25 hours a month. Month 1 is the audit, definitions and roadmap. Months 2 and 3 are the monthly scorecard, fixes and a 60-minute review.</C>
           <C n="5.2">Any change we make to your accounts is agreed with you first.</C>
           <C n="5.3">The initial term is 3 months. After that, the engagement runs month to month until either of us gives 30 days&apos; written notice.</C>
-          <C n="5.4">Fractional: either side can end it in writing during the first 30 days, and you pay only for that first month.</C>
+          <C n="5.4">Fractional: either side can end it in writing during the first 30 days, and you pay only for that first month. This overrides the 3-month initial term in clause 5.3.</C>
           <C n="5.5">We don&apos;t guarantee ad performance, pipeline or revenue. We promise a defensible number and a documented method, not perfect attribution.</C>
-          <C n="5.6">The Measurement Scorecard is $1,500 a month, month to month. It covers a monthly reconciliation of your pipeline and revenue numbers across your CRM, ads and finance, plus a one-page scorecard showing what moved and what doesn&apos;t agree. It includes no fix hours: fixes are quoted separately or covered by Fractional.</C>
+          <C n="5.6">The Measurement Scorecard is $1,500 a month, month to month. It covers a monthly reconciliation of your pipeline and revenue numbers across your CRM, ads and finance, plus a one-page scorecard showing what moved and what doesn&apos;t agree. It includes no fix hours: fixes are quoted separately or covered by Fractional. Either of us can cancel it with 30 days&apos; written notice.</C>
 
           <h2 id="clause-6" className={h2}>6. PE portfolio measurement</h2>
           <C n="6.1">A Portfolio Measurement Pilot covers one portfolio company over about 3 weeks: KPI dictionary, 20-point audit, baseline, 90-day roadmap and a one-page scorecard.</C>

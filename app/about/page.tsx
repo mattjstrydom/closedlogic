@@ -18,7 +18,7 @@ const beliefs = [
   "The number should reconcile to the CRM, not to the dashboard.",
   "Independence is a feature, not a positioning line.",
   "A standard is more useful than another tool.",
-  "If we can’t find three material issues, we shouldn’t take the retainer.",
+  "If the audit doesn’t find at least three material issues, we refund the full $1,500 within 14 days.",
 ];
 
 export default function About() {
