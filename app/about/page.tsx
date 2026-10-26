@@ -41,7 +41,8 @@ const team: Person[] = [
     initials: "JT",
     heading: "Jennifer Taylor, revenue operations and MarTech.",
     bio: "Revenue operations and MarTech background: CRM resets, pipeline upgrades, lead routing and workflow automation, outbound systems, and reporting and attribution for sales and marketing leaders. Jennifer leads the RevOps and MarTech team at GrowthStack, where she has worked since 2020. She starts with clean data and consistent pipelines, so the reporting is something a team can trust.",
-    // photo: "/team/jennifer.jpg", alt: "Jennifer Taylor, revenue operations and MarTech at Closed Logic",
+    photo: "/team/jennifer.jpg",
+    alt: "Jennifer Taylor, Closed Logic",
   },
 ];
 
