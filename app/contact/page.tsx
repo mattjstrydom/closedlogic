@@ -41,7 +41,7 @@ export default function Contact() {
               <RequestForm
                 choose
                 email={site.email}
-                bookUrls={{ b2b: site.bookPath, partner: site.bookPartnerPath, ...(site.showPE ? { pe: site.bookPePath } : {}) }}
+                bookUrls={{ b2b: site.bookPath, ...(site.showPE ? { pe: site.bookPePath } : {}) }}
               />
             </div>
             <div className="space-y-7">

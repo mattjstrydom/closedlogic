@@ -31,15 +31,13 @@ export const site = {
     return `${this.brand} is a trading name of ${this.legalEntity}`;
   },
   linkedin: "https://www.linkedin.com/in/mattstrydom",
-  // Booking links, all in app/booking.json (one place, also read by scripts/cf-postbuild.mjs). Buttons link to bookPath,
-  // bookPePath or bookPartnerPath: redirects to the Cal.com URLs written to out/_redirects at build time, so pages
+  // Booking links, all in app/booking.json (one place, also read by scripts/cf-postbuild.mjs). Buttons link to bookPath
+  // or bookPePath: redirects to the Cal.com URLs written to out/_redirects at build time, so pages
   // never show a Cal.com address. A booking.json entry with no event of its own falls back to the direct link.
   bookPath: "/book",
   bookPePath: "/book-pe",
-  bookPartnerPath: "/book-partner",
   directBookingUrl: booking.direct,
   peBookingUrl: booking.pe,
-  partnerBookingUrl: booking.partner,
   // Only the production build is indexable: the Cloudflare Workers Builds build of main, or any build with
   // SITE_INDEXABLE=1. VERCEL_ENV keeps a Vercel production build working.
   indexable:
@@ -55,7 +53,7 @@ export const site = {
   ],
   // Set both to the publish date at deploy, for example "12 October 2026".
   privacyLastUpdated: "20 October 2026",
-  termsLastUpdated: "26 October 2026",
+  termsLastUpdated: "27 October 2026",
 
   caseStudy: null as CaseStudy | null,
 };

@@ -2,18 +2,19 @@ import { SHOW_PE } from "./flags";
 
 const ALL_SIZES = [
   "Under $5M ARR",
-  "$5–10M ARR",
-  "$10–25M ARR",
-  "$25–50M ARR",
+  "$5M to $10M ARR",
+  "$10M to $25M ARR",
+  "$25M to $50M ARR",
   "$50M+ ARR",
-  "PE fund (5–20 portfolio companies)",
+  "PE fund (5 to 20 portfolio companies)",
   "Other",
 ] as const;
 export const SIZES: readonly string[] = SHOW_PE ? ALL_SIZES : ALL_SIZES.filter((s) => !s.startsWith("PE fund"));
 export const SIZE_LABEL = SHOW_PE ? "ARR or portfolio size" : "ARR";
 
-export type FormType = "b2b" | "pe" | "partner";
-export const FORM_TYPES: readonly FormType[] = SHOW_PE ? ["b2b", "pe", "partner"] : ["b2b", "partner"];
+// The partner white-label offer was removed on 27 Oct 2026: there is no partner request type any more.
+export type FormType = "b2b" | "pe";
+export const FORM_TYPES: readonly FormType[] = SHOW_PE ? ["b2b", "pe"] : ["b2b"];
 export type Fields = { name: string; email: string; company: string; role: string; size: string; stack: string; note: string };
 export type Errors = Partial<Record<keyof Fields, string>>;
 

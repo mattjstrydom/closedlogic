@@ -1,4 +1,4 @@
-// The site's only server code: POST /api/request, the contact form (B2B SaaS, PE and partner requests). Everything else is a static file served by Workers
+// The site's only server code: POST /api/request, the contact form (B2B SaaS requests, and PE requests when SHOW_PE is on). Everything else is a static file served by Workers
 // static assets without running this Worker (wrangler.jsonc: run_worker_first ["/api/*"]).
 // Free plan budget: 10 ms CPU per request and 100,000 Worker requests a day; this handler does a JSON parse, the
 // shared validation, and two fetches to Sequenzy (waiting on fetch is not CPU time). See the dev report for measurements.
@@ -82,7 +82,8 @@ async function handleRequest(req: Request, env: Env): Promise<Response> {
   // Honeypot: real visitors never fill it. Pretend success so bots don't retry.
   if (str(body.company_fax)) return json({ ok: true });
 
-  // Pages post b2b, pe or partner. Anything else (a cached page from the old site posting check or teardown) is a B2B request.
+  // Pages post b2b (or pe when SHOW_PE is on). Anything else (a cached page from the old site posting check, teardown or
+  // partner) is a B2B request.
   const type: FormType = FORM_TYPES.includes(body.type as FormType) ? (body.type as FormType) : "b2b";
   // Where the visitor came from (?src= on the page): letters, numbers, dot, dash and underscore only.
   const source = str(body.source).replace(/[^\w.-]/g, "").slice(0, 40);
@@ -103,8 +104,8 @@ async function handleRequest(req: Request, env: Env): Promise<Response> {
   if (!key && !dryRun) return json({ error: "Form is not configured." }, 500);
 
   const headers = { Authorization: `Bearer ${key}`, "Content-Type": "application/json" };
-  const label = { b2b: "B2B SaaS request", pe: "PE request", partner: "Partner request" }[type];
-  const tag = { b2b: "b2b-saas-request", pe: "pe-request", partner: "partner-request" }[type];
+  const label = { b2b: "B2B SaaS request", pe: "PE request" }[type];
+  const tag = { b2b: "b2b-saas-request", pe: "pe-request" }[type];
   const rows: [string, string][] = [
     ["Type", label],
     ["Name", f.name],

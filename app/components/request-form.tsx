@@ -8,7 +8,7 @@ const empty: Fields = { name: "", email: "", company: "", role: "", size: "", st
 const input =
   "mt-1 block w-full rounded-[10px] border-2 border-solid border-ink bg-white px-4 py-3 text-[1rem] text-ink";
 
-const typeLabels: Record<FormType, string> = { b2b: "B2B SaaS company", pe: "PE fund", partner: "CRM or RevOps partner" };
+const typeLabels: Record<FormType, string> = { b2b: "B2B SaaS company", pe: "PE fund" };
 
 // email and bookUrls come from site.config through the (server) page, so this client bundle doesn't carry the whole config.
 export default function RequestForm({ initialType = "b2b", choose = false, email, bookUrls }: { initialType?: FormType; choose?: boolean; email: string; bookUrls: Partial<Record<FormType, string>> }) {
@@ -81,7 +81,8 @@ export default function RequestForm({ initialType = "b2b", choose = false, email
   return (
     <>
       <form ref={form} onSubmit={submit} noValidate className="space-y-5">
-        {choose && (
+        {/* The "I am a" choice only shows when there is more than one request type to choose from. */}
+        {choose && FORM_TYPES.length > 1 && (
           <fieldset>
             <legend className="mb-2 block font-medium">I am a</legend>
             <div className="seg">

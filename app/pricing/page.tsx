@@ -28,7 +28,6 @@ const rows: React.ReactNode[][] = [
   ["Founding-client rate", "$4,000/month", "First 2 clients; 3 months; case study required", "Early clients who will be references"],
   // PE rows: shown only when site.showPE is true (app/flags.ts).
   ...(site.showPE ? peRows : []),
-  ["Partner white-label", "Custom", "60–70% of end fee; your brand; your relationship", "CRM/RevOps partners"],
 ];
 
 const always = ["A named owner", "A written scope", "A baseline", "A monthly scorecard", "Fractional: either side can end it in writing during the first 30 days, and you pay only for that first month."];

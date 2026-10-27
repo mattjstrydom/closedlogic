@@ -8,13 +8,15 @@ import { pageMetadata } from "../seo";
 // PE switch (app/flags.ts). While site.showPE is false, clause 6 (PE portfolio measurement) and the PE price in 2.3 are
 // left out, and the numbers after them close up: cl() renumbers clauses 7 to 13, s2() renumbers 2.4 to 2.6, and every
 // cross-reference below uses them, so the numbering stays right either way.
+// The partner white-label offer (old 2.4 and old clause 10) was removed on 27 Oct 2026. Both helpers skip those numbers,
+// so the clauses after them close up too.
 const pe = site.showPE;
-const cl = (k: number) => (pe || k < 6 ? k : k - 1);
-const s2 = (k: number) => (pe || k < 3 ? k : k - 1);
+const cl = (k: number) => (pe || k < 6 ? k : k - 1) - (k > 10 ? 1 : 0);
+const s2 = (k: number) => (pe || k < 3 ? k : k - 1) - (k > 4 ? 1 : 0);
 
 export const metadata = pageMetadata({
   title: "Terms of service",
-  description: `Terms for ${site.brand} measurement work: the Pipeline Truth Audit, fractional measurement leadership${pe ? ", PE portfolio measurement and " : " and "}partner white-label work. Prices, scope, refunds, access and liability.`,
+  description: `Terms for ${site.brand} measurement work: the Pipeline Truth Audit${pe ? ", fractional measurement leadership and PE portfolio measurement" : " and fractional measurement leadership"}. Prices, scope, refunds, access and liability.`,
   path: "/terms",
 });
 
@@ -42,9 +44,9 @@ export default function Terms() {
 
           <h2 id="clause-1" className={h2}>1. Who we are</h2>
           <C n="1.1">
-            &quot;We&quot; and &quot;us&quot; means {site.legalEntity}, trading as {site.brand}. &quot;You&quot; means the business that buys from us. {pe ? "That can be a B2B SaaS company, a private equity fund, or a CRM or RevOps partner buying for itself or for a client." : "That can be a B2B SaaS company, or a CRM or RevOps partner buying for itself or for a client."}
+            &quot;We&quot; and &quot;us&quot; means {site.legalEntity}, trading as {site.brand}. &quot;You&quot; means the business that buys from us. {pe ? "That can be a B2B SaaS company or a private equity fund." : "That can be a B2B SaaS company."}
           </C>
-          <C n="1.2">These terms apply to the Pipeline Truth Audit, the Measurement Scorecard, fractional measurement leadership{pe ? ", PE portfolio measurement (pilot, rollout, retainer and advisory) and " : " and "}partner white-label work. They also apply to any extra work we quote in writing. A written scope sets out which of these you are buying.</C>
+          <C n="1.2">These terms apply to the Pipeline Truth Audit, the Measurement Scorecard{pe ? ", fractional measurement leadership and PE portfolio measurement (pilot, rollout, retainer and advisory)" : " and fractional measurement leadership"}. They also apply to any extra work we quote in writing. A written scope sets out which of these you are buying.</C>
 
           <h2 id="clause-2" className={h2}>2. Prices and payment</h2>
           <C n="2.1">All prices are in US dollars and paid through Stripe.</C>
@@ -56,9 +58,6 @@ export default function Terms() {
               <strong className="font-medium">PE funds:</strong> Portfolio Measurement Pilot, $10k–$15k for one portfolio company. Portfolio Rollout, $40k–$75k for 4–6 portfolio companies. Measurement Retainer, $5k–$7.5k per portfolio company per month. PE Advisory, $3k–$5k per month. The exact fee is in your written scope.
             </C>
           )}
-          <C n={`2.${s2(4)}`}>
-            <strong className="font-medium">Partner white-label:</strong> custom. The partner pays 60–70% of the end fee, and the written scope sets the exact share.
-          </C>
           <C n={`2.${s2(5)}`}>Prices are fixed for the scope in writing. We never charge a percentage of ad spend. Anything outside the written scope is quoted before any work starts. Your written scope sets out when each invoice is due.</C>
           <C n={`2.${s2(6)}`}>If you continue from the Pipeline Truth Audit to the Fractional Measurement Lead, we credit the audit fee against the first month.</C>
 
@@ -109,7 +108,7 @@ export default function Terms() {
           <C n={`${cl(9)}.4`}>We delete working files within 30 days of the work ending.</C>
           <C n={`${cl(9)}.5`}>For personal data in your accounts, we act only on your instructions, as a processor.</C>
           <C n={`${cl(9)}.6`}>
-            <strong className="font-medium">Data processing terms.</strong> When we process personal data for you under these terms, this clause is our data processing agreement, including for article 28 of the UK GDPR and the EU GDPR. If you&apos;re a partner acting for your client, we act as your sub-processor on the same terms.
+            <strong className="font-medium">Data processing terms.</strong> When we process personal data for you under these terms, this clause is our data processing agreement, including for article 28 of the UK GDPR and the EU GDPR.
           </C>
           <div className="space-y-3 pl-6">
             <p>
@@ -172,15 +171,6 @@ export default function Terms() {
               <strong className="font-medium">(n) Signed copy:</strong> if you need a signed copy of these data processing terms, ask before kickoff and we&apos;ll sign one.
             </p>
           </div>
-
-          <h2 id={`clause-${cl(10)}`} className={h2}>{cl(10)}. White-label work for partners</h2>
-          <C n={`${cl(10)}.1`}>We never contact your client unless you invite us.</C>
-          <C n={`${cl(10)}.2`}>Our name appears nowhere in the deliverables.</C>
-          <C n={`${cl(10)}.3`}>We don&apos;t publicise the work without your written consent.</C>
-          <C n={`${cl(10)}.4`}>A case study only applies where we agree it in writing, for example under the founding-client rate, and it uses wording you approve.</C>
-          <C n={`${cl(10)}.5`}>
-            For 12 months after our last work for you, we won&apos;t sell directly to the clients we worked on through you, unless you agree in writing. If one of those clients contacts us directly, we refer them back to you.
-          </C>
 
           <h2 id={`clause-${cl(11)}`} className={h2}>{cl(11)}. Liability</h2>
           <C n={`${cl(11)}.1`}>Our total liability is capped. For {pe ? "an audit, pilot or rollout" : "an audit"}, the cap is the fees you paid for it. For a monthly engagement, it&apos;s the fees you paid in the last 3 months.</C>
