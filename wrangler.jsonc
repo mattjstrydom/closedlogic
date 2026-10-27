@@ -1,7 +1,7 @@
 // Cloudflare Workers config. The site is a Next.js static export (out/) served by Workers static assets: page and
 // file requests never run code and don't count towards the free plan's 100,000 Worker requests a day. The Worker
 // (worker/index.ts) runs only for /api/*. Nothing here creates account resources: no R2, KV, D1, Durable Objects,
-// Images binding or image transformations.
+// Images binding or image transformations. The one binding is FORM_LIMITER, a free rate limit counter.
 // Runtime secret: SEQUENZY_API_KEY (`npx wrangler secret put SEQUENZY_API_KEY` or the dashboard, never here).
 {
   "$schema": "node_modules/wrangler/config-schema.json",
@@ -30,6 +30,12 @@
   // No plain-text variables: everything sensitive is a secret. Declared empty so the dashboard and this file agree,
   // and a variable added in the dashboard by mistake is removed on the next deploy.
   "vars": {},
+  // Contact form rate limit (worker/index.ts): 5 posts per IP per 60 seconds in each Cloudflare location, then 429.
+  // Workers Rate Limiting is included on the free plan and creates no billable resource. namespace_id is any
+  // integer unique within the account.
+  "ratelimits": [
+    { "name": "FORM_LIMITER", "namespace_id": "1001", "simple": { "limit": 5, "period": 60 } }
+  ],
   "secrets": { "required": ["SEQUENZY_API_KEY"] },
   "observability": { "enabled": true }
 }

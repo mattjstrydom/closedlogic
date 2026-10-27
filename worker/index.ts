@@ -2,13 +2,20 @@
 // static assets without running this Worker (wrangler.jsonc: run_worker_first ["/api/*"]).
 // Free plan budget: 10 ms CPU per request and 100,000 Worker requests a day; this handler does a JSON parse, the
 // shared validation, and two fetches to Sequenzy (waiting on fetch is not CPU time). See the dev report for measurements.
-// Abuse: the honeypot and the Sec-Fetch-Site check below are speed bumps only. The rate limit is a Cloudflare WAF
-// rate limiting rule on the zone (free plan, set 27 Oct 2026): POST /api/request, per IP, blocked with a 429 before
-// this Worker runs once the limit is passed. It lives in the dashboard (Security > WAF > Rate limiting rules), not here.
+// Abuse: the honeypot and the Sec-Fetch-Site check below are speed bumps only. The rate limit is the FORM_LIMITER
+// binding (wrangler.jsonc): more than 5 posts from one IP in 60 seconds get a 429 before anything is parsed or sent.
+// It is approximate and per Cloudflare location, which is enough for a contact form.
 import { validate, FORM_TYPES, type FormType, type Fields } from "../app/validate";
 import { site } from "../app/site.config";
 
+// The Workers Rate Limiting binding (wrangler.jsonc "ratelimits"; free on every Workers plan). Typed here because the
+// project doesn't pull in @cloudflare/workers-types.
+interface RateLimiter {
+  limit(options: { key: string }): Promise<{ success: boolean }>;
+}
+
 interface Env {
+  FORM_LIMITER?: RateLimiter; // 5 form posts per IP per 60 s in each Cloudflare location (wrangler.jsonc)
   SEQUENZY_API_KEY?: string; // runtime secret (never in wrangler.jsonc or the repo)
   FORM_DRY_RUN?: string; // "1" builds both Sequenzy requests but sends nothing. Local testing only; never set in production.
 }
@@ -174,6 +181,12 @@ const worker = {
     const { pathname } = new URL(req.url);
     if (pathname !== "/api/request") return json({ error: "Not found." }, 404);
     if (req.method !== "POST") return json({ error: "Method not allowed." }, 405, { Allow: "POST" });
+    // Rate limit first, so a flood costs no parsing and never reaches Sequenzy.
+    const ip = req.headers.get("cf-connecting-ip");
+    if (env.FORM_LIMITER && ip) {
+      const { success } = await env.FORM_LIMITER.limit({ key: `request:${ip}` });
+      if (!success) return json({ error: "Too many requests. Wait a minute and try again." }, 429, { "Retry-After": "60" });
+    }
     return handleRequest(req, env);
   },
 };
