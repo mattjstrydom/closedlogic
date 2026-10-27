@@ -99,7 +99,7 @@ A fixed value per stage works well with target CPA on one stage. Value-based bid
 > 5. With your sign-off, set the chosen stage as the bidding conversion and the form fill as Secondary, and log how to reverse it.
 > 6. Compare HubSpot's stage count with Google Ads' count for the same period, then recheck at day 30.
 >
-> See the [sample report](/sample-report) built on a fictional account.
+> See the [sample report](/method) built on a fictional account.
 
 ## Want help choosing the stage?
 

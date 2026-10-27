@@ -74,21 +74,22 @@ export default function ConsentBanner() {
   };
 
   if (!show) return null;
+  // Site button style (10 px radius, ink border, ink offset shadow), compact so the banner stays a short bar on a phone.
   const b =
-    "inline-flex min-h-10 items-center justify-center rounded-pill border-[1.5px] border-solid border-black bg-white px-6 py-2 text-[1rem] leading-[1.3] font-medium text-ink transition-colors duration-300 hover:bg-pale";
+    "inline-flex min-h-8 items-center justify-center rounded-[10px] border-2 border-solid border-ink bg-white px-4 py-1 font-display text-[0.9375rem] leading-[1.2] font-semibold text-ink shadow-[3px_3px_0_0_#0a0a0a] transition-colors duration-300 hover:bg-pale sm:min-h-10 sm:px-5 sm:text-[1rem]";
   return (
     <section
       ref={box}
       tabIndex={-1}
       aria-label="Cookie consent"
-      className="fixed inset-x-4 bottom-4 z-30 rounded-[20px] border-[1.5px] border-solid border-ink bg-white p-5 shadow-card outline-none sm:inset-x-6 sm:bottom-6"
+      className="fixed inset-x-2 bottom-2 z-30 rounded-[10px] border-2 border-solid border-ink bg-white px-3 py-2.5 shadow-card outline-none sm:inset-x-6 sm:bottom-6 sm:p-5"
     >
-      <div className="container-site flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-[1rem]">
+      <div className="mx-auto flex max-w-[1200px] items-center gap-3 sm:justify-between">
+        <p className="min-w-0 flex-1 text-[0.8125rem] leading-[1.35] sm:text-[1rem]">
           This site uses cookies for analytics and advertising measurement.{" "}
           <a href="/privacy" className="link">Privacy policy</a>
         </p>
-        <div className="flex gap-3">
+        <div className="flex shrink-0 flex-col gap-1.5 min-[480px]:flex-row min-[480px]:gap-2 sm:gap-3">
           <button type="button" className={b} onClick={() => choose(true)}>Accept</button>
           <button type="button" className={b} onClick={() => choose(false)}>Decline</button>
         </div>

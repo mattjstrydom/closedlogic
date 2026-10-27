@@ -151,11 +151,11 @@ export default function ForPe() {
             <div className="mt-14 grid gap-7 lg:grid-cols-2">
               <div className={card}>
                 <h3 className="text-title-m">For funds</h3>
-                <p>5–20 B2B software portfolio companies · mixed CRMs · quarterly portfolio reviews · an operating partner who needs one number.</p>
+                <p>5 to 20 B2B software portfolio companies · mixed CRMs · quarterly portfolio reviews · an operating partner who needs one number.</p>
               </div>
               <div className={card}>
                 <h3 className="text-title-m">For portfolio companies</h3>
-                <p>$10–50M revenue · 20–200 employees · HubSpot, Salesforce or Pipedrive · a marketing team of 2–15 · a board or investor asking for pipeline.</p>
+                <p>$10M to $50M revenue · 20 to 200 employees · HubSpot, Salesforce or Pipedrive · a marketing team of 2 to 15 · a board or investor asking for pipeline.</p>
               </div>
             </div>
           </div>

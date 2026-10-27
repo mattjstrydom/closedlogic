@@ -2,8 +2,9 @@
 // static assets without running this Worker (wrangler.jsonc: run_worker_first ["/api/*"]).
 // Free plan budget: 10 ms CPU per request and 100,000 Worker requests a day; this handler does a JSON parse, the
 // shared validation, and two fetches to Sequenzy (waiting on fetch is not CPU time). See the dev report for measurements.
-// Abuse: the honeypot and the Sec-Fetch-Site check below are speed bumps only. Real rate limiting needs a Cloudflare
-// Rate Limiting rule on /api/request or Turnstile (see README, "Before the domain goes public").
+// Abuse: the honeypot and the Sec-Fetch-Site check below are speed bumps only. The rate limit is a Cloudflare WAF
+// rate limiting rule on the zone (free plan, set 27 Oct 2026): POST /api/request, per IP, blocked with a 429 before
+// this Worker runs once the limit is passed. It lives in the dashboard (Security > WAF > Rate limiting rules), not here.
 import { validate, FORM_TYPES, type FormType, type Fields } from "../app/validate";
 import { site } from "../app/site.config";
 

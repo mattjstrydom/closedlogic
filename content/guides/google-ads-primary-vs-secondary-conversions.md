@@ -76,7 +76,7 @@ Before you do:
 > 4. Flag duplicates, tests and leftovers sitting in a bidding goal.
 > 5. Compare "Conversions" and "All conv." per action for the same period.
 >
-> Any change is made only with your sign-off, with a note on how to reverse it. See the [sample report](/sample-report) for how this is written up.
+> Any change is made only with your sign-off, with a note on how to reverse it. See the [sample report](/method) for how this is written up.
 
 ## Want a second pair of eyes?
 

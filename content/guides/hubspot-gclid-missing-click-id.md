@@ -77,7 +77,7 @@ For traffic from the EEA, Google requires consent for the use of personal data a
 > 4. Measure how many recent paid search contacts have a click ID or shared contact data.
 > 5. Check the combined enhanced conversions setting and the consent property used for syncing.
 >
-> We change only what you approve and log how to reverse it. See the [sample report](/sample-report) for an example finding on click IDs.
+> We change only what you approve and log how to reverse it. See the [sample report](/method) for an example finding on click IDs.
 
 ## Want us to run these tests?
 

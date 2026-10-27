@@ -68,7 +68,7 @@ The account rule is the one most likely to trip up agency setups that upload for
 > 4. Check that uploads go to the account that owns the conversion action, and flag manager account setups HubSpot can't connect.
 > 5. Note what needs a developer, since we work in settings, not code, and say so plainly in the report.
 >
-> We make only the changes you approve, with a note on how to reverse each one. See the [sample report](/sample-report).
+> We make only the changes you approve, with a note on how to reverse each one. See the [sample report](/method).
 
 ## Want us to check your routes?
 

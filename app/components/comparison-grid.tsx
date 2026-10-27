@@ -17,8 +17,9 @@ const icon = { Yes: Check, No: X, Depends: Minus };
 export default function ComparisonGrid() {
   return (
     <div className="card mt-10 overflow-hidden !p-0">
-      <div className="table-scroll">
-        <table className="cmp w-full min-w-[640px] border-collapse text-left text-[0.95rem]">
+      {/* Focusable, labelled scroll region; the Closed Logic column stays pinned to the right edge on small screens (.cmp in globals.css). */}
+      <div className="table-scroll" tabIndex={0} role="region" aria-label="Comparison by role">
+        <table className="cmp w-full min-w-[560px] sm:min-w-[640px] border-collapse text-left text-[0.95rem]">
           <caption className="sr-only">Comparison of a media agency, a CRM partner, a dashboard and Closed Logic by role</caption>
           <thead>
             <tr className="border-b border-rule text-[0.8125rem] text-body">

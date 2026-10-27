@@ -11,7 +11,7 @@ export default function Breadcrumbs({ items }: { items: Crumb[] }) {
           <li key={c.name} className="inline-flex items-center gap-2">
             {i > 0 && <span aria-hidden="true" className="text-muted">/</span>}
             {c.href ? (
-              <Link href={c.href} className="text-body no-underline hover:text-accent">{c.name}</Link>
+              <Link href={c.href} className="text-body no-underline hover:text-accent-text">{c.name}</Link>
             ) : (
               <span aria-current={i === items.length - 1 ? "page" : undefined} className="text-ink">{c.name}</span>
             )}

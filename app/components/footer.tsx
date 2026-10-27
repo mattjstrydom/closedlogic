@@ -5,7 +5,7 @@ import { site } from "../site.config";
 import { hasGuides } from "../guides/content";
 
 // min-h-6: 24px targets (WCAG 2.5.8). No underline, per the design.
-const link = "inline-flex min-h-6 items-center text-body no-underline hover:text-accent";
+const link = "inline-flex min-h-6 items-center text-body no-underline hover:text-accent-text";
 
 export default function Footer() {
   return (

@@ -57,7 +57,7 @@ export function TickList({ items, className = "", itemClassName = "" }: { items:
 /** Large accent numeral for the seven checks and the step cards. */
 export function Numeral({ n, pad = false, className = "" }: { n: number; pad?: boolean; className?: string }) {
   return (
-    <span aria-hidden="true" className={`block font-display text-[4.5rem] leading-none font-bold tracking-[-0.04em] text-accent max-lg:text-[3.4rem] ${className}`}>
+    <span aria-hidden="true" className={`block font-display text-[4.5rem] leading-none font-bold tracking-[-0.04em] text-accent-text max-lg:text-[3.4rem] ${className}`}>
       {pad ? String(n).padStart(2, "0") : n}
     </span>
   );

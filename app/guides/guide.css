@@ -6,7 +6,7 @@
 .guide-prose h4 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; color: var(--color-ink); margin-top: 1.5em; }
 .guide-prose strong { color: var(--color-ink); font-weight: 600; }
 .guide-prose a { color: var(--color-ink); text-decoration: underline; text-decoration-color: var(--color-accent); text-underline-offset: 3px; text-decoration-thickness: 2px; }
-.guide-prose a:hover { color: var(--color-accent); }
+.guide-prose a:hover { color: var(--color-accent-text); }
 .guide-prose ul, .guide-prose ol { padding-left: 1.4em; }
 .guide-prose ul { list-style: disc; }
 .guide-prose ol { list-style: decimal; }

@@ -24,7 +24,7 @@ export default function Header({ path = "/" }: { path?: string }) {
 
         <nav aria-label="Main" className="hidden items-center gap-[30px] text-[1rem] font-medium lg:flex">
           {links.map(([href, label]) => (
-            <Link key={href} href={href} aria-current={current(href)} className="inline-flex min-h-[26px] items-center text-ink no-underline hover:text-accent aria-[current=page]:underline aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-[0.35em]">
+            <Link key={href} href={href} aria-current={current(href)} className="inline-flex min-h-[26px] items-center text-ink no-underline hover:text-accent-text aria-[current=page]:underline aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-[0.35em]">
               {label}
             </Link>
           ))}

@@ -100,7 +100,7 @@ Whatever you choose, write it down: stage, route, Google Ads conversion action, 
 > 4. Check each HubSpot event's value, consent property, data sharing and sync status.
 > 5. Look for legacy imports and manager account setups HubSpot can't connect.
 >
-> We change only what you approve and log how to reverse each change. The [sample report](/sample-report) shows how this is written up.
+> We change only what you approve and log how to reverse each change. The [sample report](/method) shows how this is written up.
 
 ## Not sure which routes you have?
 

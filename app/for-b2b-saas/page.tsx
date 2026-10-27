@@ -84,7 +84,7 @@ export default function ForB2bSaas() {
               <div className="card flex flex-col gap-3 text-text-m">
                 <h3 className="text-title-m">Fractional Measurement Lead</h3>
                 <p className="font-display text-[1.05rem] font-bold text-ink">$5,000/month · 25 hours · 3-month initial</p>
-                <p className="text-body">Month 1: audit, definitions and roadmap. Months 2–3: monthly scorecard, fixes and a 60-minute review. You keep your agency; we keep the number true.</p>
+                <p className="text-body">Month 1: audit, definitions and roadmap. Months 2 and 3: monthly scorecard, fixes and a 60-minute review. You keep your agency; we keep the number true.</p>
               </div>
             </div>
           </div>
@@ -126,7 +126,7 @@ export default function ForB2bSaas() {
           <div className="container-site">
             <SectionHead id="for">Who it’s for.</SectionHead>
             <p className="card mx-auto mt-10 max-w-[52rem] text-text-l">
-              $10–50M ARR · 20–200 employees · HubSpot Professional or Enterprise · Google Ads $10k+/month · sales-led or hybrid · 2–15 marketing staff · US, UK or Canada.
+              $10M to $50M ARR · 20 to 200 employees · HubSpot Professional or Enterprise · Google Ads $10k+/month · sales-led or hybrid · 2 to 15 marketing staff · US, UK or Canada.
             </p>
           </div>
         </section>
