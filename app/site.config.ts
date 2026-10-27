@@ -44,7 +44,7 @@ export const site = {
     process.env.VERCEL_ENV === "production" || process.env.SITE_INDEXABLE === "1" || process.env.WORKERS_CI_BRANCH === "main",
 
   replyTime: "Within one business day",
-  // Terms clause 12 (Reubika LLC is a New Mexico LLC), text from matt-decisions-drafts.md section 5.
+  // Terms clause 10 (clause 11 with PE on; Reubika LLC is a New Mexico LLC), text from matt-decisions-drafts.md section 5.
   governingLaw: [
     "These terms, and any dispute arising from them, are governed by the laws of the State of New Mexico, USA, without regard to its conflict-of-law rules.",
     "Before starting legal proceedings, each of us will try in good faith to settle the dispute by email for 30 days.",

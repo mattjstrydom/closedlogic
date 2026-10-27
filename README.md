@@ -124,7 +124,7 @@ JSON-LD, terms, privacy and the Worker. After a rename also:
 |---|---|---|---|
 | P2 | `replyTime` | C2 "Reply time" | Filled: Within one business day |
 | P3 | `app/booking.json` | every "Book" CTA | Done: direct `https://cal.com/closedlogic/20min-fit` (via `/book`); `pe` falls back to direct; `partner` is `https://cal.com/closedlogic/20-minute-fit-agency` (the old agency event) |
-| P7 | `governingLaw` | Terms clause 12 | Filled: New Mexico (12.1 to 12.4) |
+| P7 | `governingLaw` | Terms clause 10 (11 with PE on) | Filled: New Mexico (10.1 to 10.4) |
 | P13 | `email`, `emailLive`, `notifyTo` | contact links, privacy, form notifications | Done: `hello@closedlogic.com` is live and receives form notifications |
 | P10 | `privacyLastUpdated`, `termsLastUpdated` | Privacy and Terms headers | Set to 20 October 2026 (both rewritten for the new services; legal review items are in `CHANGES.md`) |
 | P11 | `caseStudy` | Not shown anywhere today | `null`. There is no proof section: no logos, testimonials or client names until written permission exists |

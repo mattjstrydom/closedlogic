@@ -1,3 +1,4 @@
+import { guaranteeFaqs } from "./guarantee";
 import Link from "next/link";
 import type { Metadata } from "next";
 import Header from "./components/header";
@@ -31,21 +32,21 @@ const problems: [string, string][] = [
 const offers: { name: string; price: string; body: string; href: string; link: string }[] = [
   {
     name: "Pipeline Truth Audit",
-    price: "$1,500 · 5 business days",
-    body: "20 checks across Google Ads, HubSpot and your reporting. You get a baseline, a 90-day roadmap and the three issues that matter, ranked by revenue impact.",
+    price: "$1,500 · 10 business days",
+    body: "20 checks across Google Ads, HubSpot and your reporting. You get a baseline, a 90-day roadmap and the material issues we find, with the top three ranked by revenue impact.",
     href: "/method#checks",
     link: "See the 20-point audit",
   },
   {
     name: "Measurement Scorecard",
-    price: "$1,500/month · month to month",
+    price: "$1,500/month · month to month, no notice period",
     body: "A monthly reconciliation of your pipeline and revenue numbers across your CRM, ads and finance, plus a one-page scorecard showing what moved and what doesn’t agree. No fix hours: fixes are quoted separately or covered by Fractional.",
     href: "/pricing",
     link: "See pricing",
   },
   {
     name: "Fractional Measurement Lead",
-    price: "$5,000/month · 25 hours · 3-month initial",
+    price: "$5,000/month · 25 hours · 3-month initial, 30-day exit",
     body: "We own the monthly scorecard, the fixes and the Monday number. You keep your agency. We keep the agency honest.",
     href: "/for-b2b-saas",
     link: "For B2B SaaS",
@@ -54,8 +55,8 @@ const offers: { name: string; price: string; body: string; href: string; link: s
 
 const steps: [string, string][] = [
   ["Book a 20-minute review.", "Bring your Google Ads conversions, your HubSpot pipeline and the number in your board deck. No deck. No pitch. A diagnosis."],
-  ["We find the gap.", "20 checks in 5 business days: tracking, GCLID coverage, lifecycle stages, lead scoring, routing, attribution, reporting reconciliation."],
-  ["You get one number.", "A baseline, a one-page scorecard and a 90-day roadmap. The three material issues, ranked by revenue impact."],
+  ["We find the gap.", "20 checks in 10 business days from read access: tracking, GCLID coverage, lifecycle stages, lead scoring, routing, attribution, reporting reconciliation."],
+  ["You get one number.", "A baseline, a one-page scorecard and a 90-day roadmap. The material issues we find, with the top three ranked by revenue impact."],
   ["We keep it true.", "A monthly scorecard, a fix list and a 60-minute review. The number stays defensible after the audit ends."],
 ];
 
@@ -63,9 +64,10 @@ const faqs: { q: string; a: string }[] = [
   { q: "Why not just use our agency?", a: "Because the agency that runs your ads has an incentive to report them favorably. We don’t run media. We audit the number." },
   { q: "Why not just use our CRM partner?", a: "CRM partners implement and standardize the tool. We test whether the numbers the tool produces are true — and whether they compare across companies." },
   { q: "Do you replace our dashboard?", a: "No. We define the metrics, reconcile the sources and own the monthly scorecard. Your dashboard can stay." },
-  { q: "What does it cost?", a: "Audit $1,500. Measurement Scorecard $1,500/month. Fractional $5,000/month. Fixed scope. No media percentage." },
-  { q: "What if we’re not sure?", a: "Start with the audit. If the audit doesn’t find at least three material issues, we refund the full $1,500 within 14 days." },
-  { q: "How fast?", a: "Audit in 5 business days. Baseline in 30 days." },
+  { q: "What does it cost?", a: "Audit $1,500. Measurement Scorecard $1,500/month, no notice period. Fractional $5,000/month, with a 30-day exit. Fixed scope. No media percentage." },
+  { q: "What if we’re not sure?", a: "Start with the audit. If the audit doesn’t find at least three material issues, we refund the full $1,500 within 14 days of the audit readout. You keep the report, the baseline and the roadmap." },
+  ...guaranteeFaqs,
+  { q: "How fast?", a: "Audit in 10 business days from read access. Baseline in 30 days." },
   { q: "Do you sign NDAs?", a: "Yes." },
 ];
 const faqItems: FaqItem[] = faqs.map(({ q, a }) => ({ q, a }));
@@ -92,18 +94,18 @@ const graph = [
     founder: { "@type": "Person", "@id": `${site.url}/#matt`, name: "Matt Strydom", sameAs: [site.linkedin] },
   },
   { "@type": "WebSite", "@id": `${site.url}/#website`, url: site.url, name: site.brand, inLanguage: "en", publisher: { "@id": ORG } },
-  service("audit", "Pipeline Truth Audit", "Measurement audit", "20 checks across Google Ads, HubSpot and reporting in 5 business days, with a baseline, a one-page scorecard and a 90-day roadmap.", {
+  service("audit", "Pipeline Truth Audit", "Measurement audit", "20 checks across Google Ads, HubSpot and reporting in 10 business days from read access, with a baseline, a one-page scorecard and a 90-day roadmap.", {
     "@type": "Offer",
     price: "1500",
     priceCurrency: "USD",
     url: `${site.url}/pricing`,
   }),
-  service("scorecard", "Measurement Scorecard", "Measurement reporting", "A monthly reconciliation of pipeline and revenue numbers across CRM, ads and finance, with a one-page scorecard showing what moved and what doesn’t agree. Month to month. No fix hours.", {
+  service("scorecard", "Measurement Scorecard", "Measurement reporting", "A monthly reconciliation of pipeline and revenue numbers across CRM, ads and finance, with a one-page scorecard showing what moved and what doesn’t agree. Month to month, no notice period. No fix hours.", {
     "@type": "Offer",
     priceSpecification: { "@type": "UnitPriceSpecification", price: "1500", priceCurrency: "USD", unitText: "MONTH" },
     url: `${site.url}/pricing`,
   }),
-  service("fractional", "Fractional Measurement Lead", "Fractional measurement leadership", "25 hours a month on tracking, attribution, HubSpot lifecycle and reporting for B2B SaaS, with a monthly scorecard. 3-month initial term.", {
+  service("fractional", "Fractional Measurement Lead", "Fractional measurement leadership", "25 hours a month on tracking, attribution, HubSpot lifecycle and reporting for B2B SaaS, with a monthly scorecard. 3-month initial term; either side can end it in writing during the first 30 days.", {
     "@type": "Offer",
     priceSpecification: { "@type": "UnitPriceSpecification", price: "5000", priceCurrency: "USD", unitText: "MONTH" },
     url: `${site.url}/for-b2b-saas`,

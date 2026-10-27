@@ -19,7 +19,7 @@ const beliefs = [
   "The number should reconcile to the CRM, not to the dashboard.",
   "Independence is a feature, not a positioning line.",
   "A standard is more useful than another tool.",
-  "If the audit doesn’t find at least three material issues, we refund the full $1,500 within 14 days.",
+  "If the audit doesn’t find at least three material issues, we refund the full $1,500 within 14 days of the audit readout. You keep the report, the baseline and the roadmap.",
 ];
 
 // Team cards. To add a headshot: put a square JPG in public/team/, list it in images.manifest.json with [96, 192],

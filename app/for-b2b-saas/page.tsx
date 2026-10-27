@@ -1,3 +1,4 @@
+import { guaranteeFaqs } from "../guarantee";
 import Faq from "../components/faq";
 import Header from "../components/header";
 import Footer from "../components/footer";
@@ -31,7 +32,7 @@ const weeks: [string, string, string][] = [
   ["Week 1", "Access and definitions.", "Read-only access to Google Ads, HubSpot and your reporting. One KPI dictionary. One definition of a lead, an opportunity and pipeline."],
   ["Week 2", "The audit.", "20 checks. GCLID coverage, lifecycle, scoring, routing, attribution, reporting reconciliation."],
   ["Week 3", "The baseline.", "Last 90 days. Where the numbers disagree, why, and what it costs."],
-  ["Week 4", "The scorecard and the roadmap.", "One page. Three material issues. A 90-day plan. A readout with your team."],
+  ["Week 4", "The scorecard and the roadmap.", "One page. The top three material issues. A 90-day plan. A readout with your team."],
 ];
 
 const faqs = [
@@ -39,6 +40,7 @@ const faqs = [
   { q: "Do you replace our CRM admin?", a: "No. We define what the CRM should measure and test whether it does." },
   { q: "How much of our time will this take?", a: "Two hours in week one, one hour in week four, then 60 minutes a month." },
   { q: "What happens after the audit if we don’t continue?", a: "You keep the report, the baseline and the roadmap. No lock-in." },
+  ...guaranteeFaqs,
   { q: "Can you work with our stack?", a: "HubSpot and Google Ads are the core. If your stack is different, we’ll tell you before you buy." },
 ];
 
@@ -53,7 +55,7 @@ export default function ForB2bSaas() {
         <PageHero
           id="b2b"
           title="Fractional measurement leadership for B2B SaaS."
-          sub="We own the tracking, attribution, HubSpot lifecycle and reporting layer — 25 hours a month, $5,000, independent of your media agency."
+          sub="We own the tracking, attribution, HubSpot lifecycle and reporting layer: 25 hours a month, $5,000, independent of your media agency, with a 30-day exit."
           micro={["You keep your agency. We keep the number true.", "No media-buying incentive. No CRM implementation. Just the number."]}
         >
           <BookButton className="w-full sm:w-auto" />
@@ -78,13 +80,13 @@ export default function ForB2bSaas() {
             <div className="mt-14 grid gap-7 lg:grid-cols-2">
               <div className="card flex flex-col gap-3 text-text-m">
                 <h3 className="text-title-m">Pipeline Truth Audit</h3>
-                <p className="font-display text-[1.05rem] font-bold text-ink">$1,500 · 5 business days</p>
-                <p className="text-body">20 checks. A baseline of the last 90 days. A one-page scorecard. A 90-day roadmap. The three material issues, ranked by revenue impact. Credited against the first month if you continue.</p>
+                <p className="font-display text-[1.05rem] font-bold text-ink">$1,500 · 10 business days</p>
+                <p className="text-body">20 checks. A baseline of the last 90 days. A one-page scorecard. A 90-day roadmap. The material issues we find, with the top three ranked by revenue impact. Credited against the first month if you continue.</p>
               </div>
               <div className="card flex flex-col gap-3 text-text-m">
                 <h3 className="text-title-m">Fractional Measurement Lead</h3>
-                <p className="font-display text-[1.05rem] font-bold text-ink">$5,000/month · 25 hours · 3-month initial</p>
-                <p className="text-body">Month 1: audit, definitions and roadmap. Months 2 and 3: monthly scorecard, fixes and a 60-minute review. You keep your agency; we keep the number true.</p>
+                <p className="font-display text-[1.05rem] font-bold text-ink">$5,000/month · 25 hours · 3-month initial, 30-day exit</p>
+                <p className="text-body">Month 1: audit, definitions and roadmap. Months 2 and 3: monthly scorecard, fixes and a 60-minute review. Either side can end it in writing during the first 30 days, and you pay only for that first month. You keep your agency; we keep the number true.</p>
               </div>
             </div>
           </div>
@@ -140,9 +142,9 @@ export default function ForB2bSaas() {
                 head={["Offer", "Price", "Scope"]}
                 right={[1]}
                 rows={[
-                  ["Pipeline Truth Audit", "$1,500", "5 business days; 20 checks; baseline; roadmap"],
-                  ["Measurement Scorecard", "$1,500/month", "Month to month; monthly reconciliation across CRM, ads and finance; one-page scorecard; no fix hours"],
-                  ["Fractional Measurement Lead", "$5,000/month", "25 hours; 3-month initial; monthly scorecard"],
+                  ["Pipeline Truth Audit", "$1,500", "10 business days from read access; 20 checks; baseline; roadmap"],
+                  ["Measurement Scorecard", "$1,500/month", "Month to month, no notice period; monthly reconciliation across CRM, ads and finance; one-page scorecard; no fix hours"],
+                  ["Fractional Measurement Lead", "$5,000/month", "25 hours; 3-month initial, 30-day exit; monthly scorecard"],
                   ["Founding-client rate", "$4,000/month", "First 2 clients; 3 months; case study required"],
                 ]}
               />
@@ -159,7 +161,7 @@ export default function ForB2bSaas() {
           </div>
         </section>
 
-        <CtaBand id="start" title="Start with the audit." body="Five business days. 20 checks. If the audit doesn’t find at least three material issues, we refund the full $1,500 within 14 days.">
+        <CtaBand id="start" title="Start with the audit." body="Ten business days from read access. 20 checks. If the audit doesn’t find at least three material issues, we refund the full $1,500 within 14 days of the audit readout. You keep the report, the baseline and the roadmap.">
           <BookButton className="w-full sm:w-auto">Book the audit</BookButton>
           <a href={`mailto:${site.email}`} className="btn-outline w-full sm:w-auto">Email us</a>
         </CtaBand>

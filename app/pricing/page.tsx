@@ -5,7 +5,9 @@ import CtaBand from "../components/cta-band";
 import ReportTable from "../components/report-table";
 import { BookButton } from "../components/cta";
 import { TickList } from "../components/ui";
-import { jsonLdScript, orgNode } from "../jsonld";
+import Faq from "../components/faq";
+import { faqNode, jsonLdScript, orgNode } from "../jsonld";
+import { guaranteeFaqs } from "../guarantee";
 import { pageMetadata } from "../seo";
 import { site } from "../site.config";
 
@@ -22,21 +24,21 @@ const peRows: React.ReactNode[][] = [
 ];
 
 const rows: React.ReactNode[][] = [
-  ["Pipeline Truth Audit", "$1,500", "5 business days; 20 checks; baseline; 90-day roadmap", "B2B SaaS teams that need a diagnosis"],
-  ["Measurement Scorecard", "$1,500/month", "Month to month; monthly reconciliation of pipeline and revenue across CRM, ads and finance; one-page scorecard of what moved and what doesn’t agree; no fix hours (fixes quoted separately or covered by Fractional)", "B2B SaaS teams that need the numbers checked every month"],
-  ["Fractional Measurement Lead", "$5,000/month", "25 hours; 3-month initial; monthly scorecard; fixes", "B2B SaaS teams that need an owner"],
+  ["Pipeline Truth Audit", "$1,500", "10 business days from read access; 20 checks; baseline; 90-day roadmap", "B2B SaaS teams that need a diagnosis"],
+  ["Measurement Scorecard", "$1,500/month", "Month to month, no notice period; monthly reconciliation of pipeline and revenue across CRM, ads and finance; one-page scorecard of what moved and what doesn’t agree; no fix hours (fixes quoted separately or covered by Fractional)", "B2B SaaS teams that need the numbers checked every month"],
+  ["Fractional Measurement Lead", "$5,000/month", "25 hours; 3-month initial, 30-day exit; monthly scorecard; fixes", "B2B SaaS teams that need an owner"],
   ["Founding-client rate", "$4,000/month", "First 2 clients; 3 months; case study required", "Early clients who will be references"],
   // PE rows: shown only when site.showPE is true (app/flags.ts).
   ...(site.showPE ? peRows : []),
 ];
 
-const always = ["A named owner", "A written scope", "A baseline", "A monthly scorecard", "Fractional: either side can end it in writing during the first 30 days, and you pay only for that first month."];
+const always = ["A named owner", "A written scope", "A baseline", "A monthly scorecard"];
 const never = ["Media buying", "Creative or content", "CRM migration", "A new dashboard", "A percentage of ad spend"];
 
 export default function Pricing() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdScript([orgNode]) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdScript([orgNode, faqNode(guaranteeFaqs)]) }} />
       <Header path="/pricing" />
       <main id="main" tabIndex={-1}>
         <PageHero
@@ -51,6 +53,9 @@ export default function Pricing() {
             <div className="card mx-auto max-w-[72rem]">
               <ReportTable caption="Offers, prices, scope and who each is best for" head={["Offer", "Price", "Scope", "Best for"]} right={[1]} rows={rows} />
             </div>
+            <p className="mx-auto mt-5 max-w-[72rem] text-text-m text-body">
+              Fractional: either side can end it in writing during the first 30 days, and you pay only for that first month.
+            </p>
           </div>
         </section>
 
@@ -69,10 +74,19 @@ export default function Pricing() {
           </div>
         </section>
 
-        <CtaBand id="start" title="Not sure which one?" body="Start with the audit. It is the cheapest way to find out whether the bigger engagement is justified.">
+        <CtaBand id="start" title="Not sure which one?" body="Start with the audit. It is the cheapest way to find out whether the bigger engagement is justified. If the audit doesn’t find at least three material issues, we refund the full $1,500 within 14 days of the audit readout. You keep the report, the baseline and the roadmap.">
           <BookButton className="w-full sm:w-auto">Book the audit</BookButton>
           <a href={`mailto:${site.email}`} className="btn-outline w-full sm:w-auto">Email us</a>
         </CtaBand>
+
+        <section id="guarantee-questions" aria-labelledby="guarantee-questions-title" className="section-y">
+          <div className="container-site">
+            <h2 id="guarantee-questions-title" className="heading-center text-center text-title-m">How the guarantee works</h2>
+            <div className="mx-auto mt-10 max-w-[900px]">
+              <Faq items={guaranteeFaqs} />
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </>
