@@ -26,10 +26,11 @@ export default function Privacy() {
         </p>
 
         <p>
-          This policy explains what personal data {site.domain} collects, why, who sees it and what
-          your choices are. {site.legalLine} (&quot;we&quot;,
+          This policy explains what personal data {site.brand} collects through {site.domain} and through our
+          business outreach by email and LinkedIn, why, who sees it and what your choices are. {site.legalLine} (&quot;we&quot;,
           &quot;us&quot;). We are the controller of the data described here. Contact us at{" "}
-          <a href={`mailto:${site.email}`} className="link">{site.email}</a>.
+          <a href={`mailto:${site.email}`} className="link">{site.email}</a>. Our postal address is Reubika LLC,
+          530-B Harkle Road, STE 100, Santa Fe, NM 87505.
         </p>
 
         <h2 className={h}>What we collect</h2>
@@ -66,11 +67,31 @@ export default function Privacy() {
           <strong>Technical logs.</strong> Our host records standard request data, such as IP address and
           user agent, to deliver the site and keep it secure. This happens whether or not you accept cookies.
         </p>
+        <p>
+          <strong>If we contact you about our service.</strong> We may contact people in marketing, revenue and operations
+          roles at business-to-business software companies. To do that we collect your name, job title, company, work email
+          address, the company&apos;s website and your public LinkedIn profile URL. We also keep a short note on why we thought
+          our service might be relevant to your company, for example a public job posting.
+        </p>
+        <p>
+          We get this from public business sources: your company&apos;s website and job postings, your public LinkedIn profile
+          and company page, and prospecting tools that supply or check business contact details. We don&apos;t buy or use
+          personal email addresses.
+        </p>
+        <p>
+          If we contact you on LinkedIn, we do it through the LinkedIn account of Jennifer Taylor, who works with us. We keep a
+          record of what happens there: that we viewed your profile, whether we sent a connection request, whether you accepted
+          it, and the messages we exchange with you.
+        </p>
+        <p>If you reply by email or on LinkedIn, we keep your reply and any details you choose to share.</p>
         <p>We do not ask for payment details on this site and we do not knowingly collect data from children.</p>
 
         <h2 className={h}>Why we use it, and our legal basis</h2>
         <ul className="list-disc space-y-2 pl-6">
           <li>Replying to your request and taking steps you ask for before any agreement: legitimate interests, and steps at your request before entering a contract.</li>
+          <li>Contacting people at businesses about our service by email and on LinkedIn (viewing your profile, sending a connection request, and sending messages), and keeping a record of who we contacted and who asked us to stop: legitimate interests, namely telling businesses that may need it about our service. We only contact you in your work role, we keep it to a few messages, and you can stop it at any time.</li>
+          <li>In the United States, we contact you as a business contact in line with US federal email law (the CAN-SPAM Act): every email says who we are, gives our postal address and lets you opt out, and we honour opt-outs promptly.</li>
+          <li>In Canada, we don&apos;t send you outreach unless we have recorded a basis for it under Canada&apos;s anti-spam law (CASL) for you specifically.</li>
           <li>Running a service you have bought, including access to your accounts: performance of a contract.</li>
           <li>Analytics and session replay cookies: your consent, which you can withdraw at any time.</li>
           <li>Keeping the site secure and preventing spam, and cookie-free visit statistics from Cloudflare Web Analytics: legitimate interests.</li>
@@ -87,7 +108,7 @@ export default function Privacy() {
         </p>
 
         <h2 className={h}>Who we share it with</h2>
-        <p>We do not sell your personal data. We use these providers to run the site and the service:</p>
+        <p>We do not sell your personal data. We use these providers to run the site, our outreach and the service:</p>
         <ul className="list-disc space-y-2 pl-6">
           <li>
             <strong>Cloudflare</strong>: hosts the site, protects it from abuse and, through Web Analytics, counts visits without cookies. (<a href="https://www.cloudflare.com/privacypolicy/" className="link">privacy policy</a>,{" "}
@@ -123,11 +144,21 @@ export default function Privacy() {
             <a href="https://cloud.google.com/terms/cloud-privacy-notice" className="link">Google Cloud privacy notice</a>,{" "}
             <a href="https://cloud.google.com/terms/data-processing-addendum" className="link">data processing addendum</a>)
           </li>
+          <li>
+            <strong>Outboundry</strong>: our outreach platform. It stores the details of people we contact, sends our outreach emails
+            from our work mailboxes, carries out our LinkedIn steps (profile views, connection requests and messages) through Jennifer
+            Taylor&apos;s LinkedIn account, and records replies. Outboundry acts as our processor and handles the data only on our instructions.
+          </li>
         </ul>
         <p>
           If you become a client, you will give us access to your Google Ads, HubSpot or other CRM, analytics and reporting
           accounts, usually read-only, or exports from them if you prefer. We use that access only to perform the work, and we
           remove our access when the engagement ends. We may also disclose data where the law requires it.
+        </p>
+        <p>
+          <strong>LinkedIn.</strong> When we contact you on LinkedIn, LinkedIn also processes the data involved, as its own controller
+          and under its own terms. LinkedIn&apos;s User Agreement and Privacy Policy apply to your use of LinkedIn, and your LinkedIn
+          settings control what we can see on your profile and whether we can message you.
         </p>
 
         <h2 className={h}>International transfers</h2>
@@ -141,7 +172,10 @@ export default function Privacy() {
         <h2 className={h}>How long we keep it</h2>
         <p>
           Contact form requests and booking details that don&apos;t lead to an engagement are deleted within 24 months. Details of
-          people we emailed about our service are deleted within 12 months of our last email, apart from do-not-contact entries. If you become a client we
+          people we contacted about our service, by email or on LinkedIn, are deleted within 12 months of our last email or LinkedIn
+          message, apart from do-not-contact entries. A connection request that isn&apos;t accepted is withdrawn after 14 days. If you
+          ask us to stop, we keep only your name, work email address, LinkedIn profile URL, company and the date you asked, so we
+          don&apos;t contact you again. If you become a client we
           keep the work records for the length of the engagement and then for as long as tax and accounting
           rules require. Analytics data follows the retention settings of the analytics tool, and Clarity keeps
           recordings for up to 30 days. Google Analytics and Clarity data is not collected if you decline cookies. You can ask us to delete your data sooner.
@@ -155,6 +189,20 @@ export default function Privacy() {
           Email{" "}
           <a href={`mailto:${site.email}`} className="link">{site.email}</a> and we will
           respond within one month. You can also complain to your local data protection authority.
+        </p>
+        <p>
+          <strong>If we contacted you about our service.</strong> You can tell us to stop at any time, and we will. You don&apos;t need
+          to give a reason.
+        </p>
+        <ul className="list-disc space-y-2 pl-6">
+          <li>By email: reply &quot;stop&quot; to any of our emails, or email{" "}
+            <a href={`mailto:${site.email}`} className="link">{site.email}</a>.</li>
+          <li>On LinkedIn: reply &quot;stop&quot; to our message, or simply decline or ignore our connection request. You can also remove the connection or block the account on LinkedIn at any time.</li>
+        </ul>
+        <p>
+          Once you ask us to stop, we stop all outreach to you on both channels and add you to our do-not-contact list. You can also
+          ask us to tell you what we hold about you and where we got it, or to delete it. If you ask us to delete it, we keep only the
+          do-not-contact entry described above, so we don&apos;t contact you again.
         </p>
         <p>We do not sell or share personal information for cross-context behavioural advertising as those terms are defined in California law.</p>
 
