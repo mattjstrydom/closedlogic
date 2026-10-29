@@ -51,11 +51,13 @@ export default function Privacy() {
           from it, deleted within 14 days.
         </p>
         <p>
-          <strong>When you visit the site, and only if you accept cookies: session replays and heatmaps.</strong>{" "}
+          <strong>When you visit the site: session replays and heatmaps.</strong>{" "}
           Microsoft Clarity records how visitors use the site: clicks, scrolling and mouse movement, shown as session
           replays and heatmaps, with the page, referrer, device, browser and approximate location. It sets cookies to
-          recognise your browser across pages. What you type into form fields is always masked. It&apos;s loaded
-          through Tag Manager and switched off until you press Accept. Clarity keeps recordings for up to 30 days.
+          recognise your browser across pages. What you type into form fields is always masked. On most pages it&apos;s loaded
+          through Tag Manager and switched off until you press Accept. The exception is the personal video pages we send to
+          individual prospects (addresses starting /v/), which aren&apos;t linked from the rest of the site. Clarity runs on
+          those straight away, so we can see whether the video was watched. Clarity keeps recordings for up to 30 days.
         </p>
         <p>
           <strong>Cookie-free visit statistics, whether or not you accept cookies.</strong> Cloudflare Web
@@ -93,7 +95,7 @@ export default function Privacy() {
           <li>In the United States, we contact you as a business contact in line with US federal email law (the CAN-SPAM Act): every email says who we are, gives our postal address and lets you opt out, and we honour opt-outs promptly.</li>
           <li>In Canada, we don&apos;t send you outreach unless we have recorded a basis for it under Canada&apos;s anti-spam law (CASL) for you specifically.</li>
           <li>Running a service you have bought, including access to your accounts: performance of a contract.</li>
-          <li>Analytics and session replay cookies: your consent, which you can withdraw at any time.</li>
+          <li>Analytics and session replay cookies: your consent, which you can withdraw at any time. Session replay on our personal video pages: legitimate interests, namely understanding whether our outreach is useful to the person we sent it to.</li>
           <li>Keeping the site secure and preventing spam, and cookie-free visit statistics from Cloudflare Web Analytics: legitimate interests.</li>
           <li>Keeping records we are legally required to keep, such as invoices: legal obligation.</li>
         </ul>
@@ -120,12 +122,12 @@ export default function Privacy() {
           </li>
           <li>
             <strong>Google (Tag Manager, and Google Analytics 4 loaded through it)</strong>: measures how the site is used, only after you accept
-            cookies. Google Analytics 4 and Microsoft Clarity are the only tags we load. We&apos;ll update this policy before we add any advertising tags. (<a href="https://policies.google.com/privacy" className="link">privacy policy</a>,{" "}
+            cookies (Microsoft Clarity also runs without asking on our personal video pages). Google Analytics 4 and Microsoft Clarity are the only tags we load. We&apos;ll update this policy before we add any advertising tags. (<a href="https://policies.google.com/privacy" className="link">privacy policy</a>,{" "}
             <a href="https://policies.google.com/technologies/partner-sites" className="link">how Google uses data from sites that use its services</a>)
           </li>
           <li>
-            <strong>Microsoft (Clarity)</strong>: records how the site is used, as session replays and heatmaps, only after you accept
-            cookies. (<a href="https://www.microsoft.com/privacy/privacystatement" className="link">privacy statement</a>)
+            <strong>Microsoft (Clarity)</strong>: records how the site is used, as session replays and heatmaps, after you accept
+            cookies, and straight away on our personal video pages. (<a href="https://www.microsoft.com/privacy/privacystatement" className="link">privacy statement</a>)
           </li>
           <li>
             <strong>Cal.com</strong>: books fit calls and receives the details you enter when you book. (
@@ -178,7 +180,7 @@ export default function Privacy() {
           don&apos;t contact you again. If you become a client we
           keep the work records for the length of the engagement and then for as long as tax and accounting
           rules require. Analytics data follows the retention settings of the analytics tool, and Clarity keeps
-          recordings for up to 30 days. Google Analytics and Clarity data is not collected if you decline cookies. You can ask us to delete your data sooner.
+          recordings for up to 30 days. Google Analytics and Clarity data is not collected if you decline cookies, except Clarity on our personal video pages. You can ask us to delete your data sooner.
         </p>
 
         <h2 className={h}>Your rights</h2>
