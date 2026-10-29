@@ -14,14 +14,17 @@
 const G =
   "https://*.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://*.g.doubleclick.net https://*.google.com https://pagead2.googlesyndication.com";
 
+// GTM Preview Mode / Tag Assistant (Matt, 29 Oct 2026: loosen the CSP so preview works), from the same Google guide's
+// "Preview Mode" table: tagmanager.google.com on script-src, the debug badge's stylesheets on style-src, gstatic images on
+// img-src and Google Fonts on font-src.
 // 'unsafe-inline' for scripts is deliberate: the pages are static files, so there is no per-request nonce. No 'unsafe-eval'.
 export const csp = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://*.googletagmanager.com https://static.cloudflareinsights.com https://*.clarity.ms",
-  "style-src 'self' 'unsafe-inline'",
-  `img-src 'self' data: ${G} https://*.clarity.ms https://c.bing.com`,
+  "script-src 'self' 'unsafe-inline' https://*.googletagmanager.com https://static.cloudflareinsights.com https://*.clarity.ms https://tagmanager.google.com",
+  "style-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://tagmanager.google.com https://fonts.googleapis.com",
+  `img-src 'self' data: ${G} https://*.clarity.ms https://c.bing.com https://ssl.gstatic.com https://www.gstatic.com`,
   `connect-src 'self' https://cloudflareinsights.com ${G} https://*.clarity.ms https://c.bing.com`,
-  "font-src 'self'",
+  "font-src 'self' https://fonts.gstatic.com data:",
   "frame-src https://*.googletagmanager.com",
   "base-uri 'self'",
   "form-action 'self'",
