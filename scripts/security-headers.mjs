@@ -4,7 +4,7 @@
 
 // Cloudflare Web Analytics (Matt, 9 Oct 2026: keep it on) loads static.cloudflareinsights.com/beacon.min.js and reports to
 // the site's own /cdn-cgi/rum ('self') and cloudflareinsights.com; Cloudflare injects the script automatically.
-// Microsoft Clarity (loaded from GTM, Matt 12 Oct 2026) needs https://*.clarity.ms and https://c.bing.com, per Microsoft's
+// Microsoft Clarity (loaded from GTM, Matt 12 Oct 2026; and directly via /v/clarity.js on the /v/ pages, Matt 29 Oct 2026) needs https://*.clarity.ms and https://c.bing.com, per Microsoft's
 // CSP guide (learn.microsoft.com/clarity/setup-and-installation/clarity-csp), on script-src, connect-src and img-src.
 // Google hosts for GA4 through GTM only (Matt, 8 Oct 2026: no other tags), from Google's tag CSP guide
 // (https://developers.google.com/tag-platform/security/guides/csp, "Google Analytics" with Ads-linked features, checked

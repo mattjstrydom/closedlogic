@@ -5,7 +5,7 @@
 //   the Cal.com link in app/booking.json. Every source also gets a trailing-slash twin (/book/ and so on), because
 //   _redirects matches the path exactly and /book/ would otherwise be a 404.
 // (out/favicon.ico comes straight from app/favicon.ico, Nova's 16/32/48 px file.)
-import { existsSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { securityHeaders } from "./security-headers.mjs";
 
@@ -26,11 +26,25 @@ const headers = [
   rule("/_next/static/*", [["Cache-Control", "public, max-age=31536000, immutable"]]),
   rule("/_img/*", [["Cache-Control", "public, max-age=86400"]]),
   // Unlisted outreach video pages (public/v/, Matt 29 Oct 2026): plain static HTML outside the Next layout, so no GTM,
-  // Clarity or consent code. Never indexed or followed, and no-transform stops Cloudflare injecting anything into them.
+  // GA4 or consent code. Clarity loads directly from /v/clarity.js without a consent wait (Matt, 29 Oct 2026; see the
+  // injection step below). Never indexed or followed, and no-transform stops Cloudflare injecting anything into them.
   rule("/v/*", [["X-Robots-Tag", "noindex, nofollow"], ["Cache-Control", "public, max-age=0, must-revalidate, no-transform"]]),
   rule("/*", securityHeaders(indexable)),
 ].join("\n\n");
 writeFileSync(new URL("_headers", out), headers + "\n");
+
+// Every /v/ page gets Clarity (Matt, 29 Oct 2026: no consent gating on the video pages), including new pages added to
+// public/v/ without the tag: add <script src="/v/clarity.js" async> before </head> where it is missing.
+const vDir = new URL("v/", out);
+if (existsSync(vDir)) {
+  for (const f of readdirSync(vDir).filter((n) => n.endsWith(".html"))) {
+    const file = new URL(f, vDir);
+    const html = readFileSync(file, "utf8");
+    if (html.includes("/v/clarity.js") || !html.includes("</head>")) continue;
+    writeFileSync(file, html.replace("</head>", '<script src="/v/clarity.js" async></script>\n</head>'));
+    console.log(`cf-postbuild: added Clarity to v/${f}`);
+  }
+}
 
 // Cal.com links, one per booking route. An entry that is empty falls back to the direct link, so a page never sends a
 // visitor to a booking route that goes nowhere. A pe event can be added to app/booking.json later.
