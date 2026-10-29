@@ -22,8 +22,8 @@
     "html_handling": "auto-trailing-slash",
     // unknown paths get out/404.html with a 404 status, still without running the Worker
     "not_found_handling": "404-page",
-    // the one path that needs code
-    "run_worker_first": ["/api/*"]
+    // the paths that need code: the contact form, and byte ranges for the unlisted video files (worker/index.ts)
+    "run_worker_first": ["/api/*", "/v/*.mp4"]
   },
   // Declares the runtime secret so the dashboard and wrangler agree on it. The value is set in the dashboard or with
   // `wrangler secret put` and never lives in this file.

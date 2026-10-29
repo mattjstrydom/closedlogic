@@ -1,5 +1,6 @@
-// The site's only server code: POST /api/request, the contact form (B2B SaaS requests, and PE requests when SHOW_PE is on). Everything else is a static file served by Workers
-// static assets without running this Worker (wrangler.jsonc: run_worker_first ["/api/*"]).
+// The site's only server code: POST /api/request, the contact form (B2B SaaS requests, and PE requests when SHOW_PE is on),
+// and byte ranges for the unlisted video files (/v/*.mp4, see serveVideo). Everything else is a static file served by Workers
+// static assets without running this Worker (wrangler.jsonc: run_worker_first ["/api/*", "/v/*.mp4"]).
 // Free plan budget: 10 ms CPU per request and 100,000 Worker requests a day; this handler does a JSON parse, the
 // shared validation, and two fetches to Sequenzy (waiting on fetch is not CPU time). See the dev report for measurements.
 // Abuse: the honeypot and the Sec-Fetch-Site check below are speed bumps only. The rate limit is the FORM_LIMITER
@@ -15,6 +16,7 @@ interface RateLimiter {
 }
 
 interface Env {
+  ASSETS?: { fetch(req: Request): Promise<Response> }; // static assets binding (wrangler.jsonc "assets")
   FORM_LIMITER?: RateLimiter; // 5 form posts per IP per 60 s in each Cloudflare location (wrangler.jsonc)
   SEQUENZY_API_KEY?: string; // runtime secret (never in wrangler.jsonc or the repo)
   FORM_DRY_RUN?: string; // "1" builds both Sequenzy requests but sends nothing. Local testing only; never set in production.
@@ -176,9 +178,47 @@ async function handleRequest(req: Request, env: Env): Promise<Response> {
   return json({ ok: true });
 }
 
+// Workers static assets answer a Range request with the whole file (200), and Safari on iPhone and Mac won't play an MP4
+// that way. The video pages' files are about 1.3 MB, so this reads the file from ASSETS and returns the asked-for slice
+// as a 206. One Worker request per range; free plan.
+async function serveVideo(req: Request, env: Env): Promise<Response> {
+  if (!env.ASSETS) return new Response("Not found.", { status: 404 });
+  if (req.method !== "GET" && req.method !== "HEAD") return new Response(null, { status: 405, headers: { Allow: "GET, HEAD" } });
+  const url = new URL(req.url);
+  const asset = await env.ASSETS.fetch(new Request(url.toString(), { method: "GET" }));
+  if (!asset.ok) return asset;
+  const buf = await asset.arrayBuffer();
+  const size = buf.byteLength;
+  const headers = new Headers({
+    "Content-Type": "video/mp4",
+    "Accept-Ranges": "bytes",
+    "Cache-Control": "public, max-age=3600, no-transform",
+    "X-Robots-Tag": "noindex, nofollow",
+    "X-Content-Type-Options": "nosniff",
+  });
+  const etag = asset.headers.get("ETag");
+  if (etag) headers.set("ETag", etag);
+  const m = /^bytes=(\d*)-(\d*)$/.exec(req.headers.get("Range")?.trim() ?? "");
+  if (!m || (m[1] === "" && m[2] === "")) {
+    headers.set("Content-Length", String(size));
+    return new Response(req.method === "HEAD" ? null : buf, { status: 200, headers });
+  }
+  let start: number, end: number;
+  if (m[1] === "") { start = Math.max(0, size - Number(m[2])); end = size - 1; } // suffix range: the last N bytes
+  else { start = Number(m[1]); end = m[2] === "" ? size - 1 : Math.min(Number(m[2]), size - 1); }
+  if (start >= size || start > end) {
+    headers.set("Content-Range", `bytes */${size}`);
+    return new Response(null, { status: 416, headers });
+  }
+  headers.set("Content-Range", `bytes ${start}-${end}/${size}`);
+  headers.set("Content-Length", String(end - start + 1));
+  return new Response(req.method === "HEAD" ? null : buf.slice(start, end + 1), { status: 206, headers });
+}
+
 const worker = {
   async fetch(req: Request, env: Env): Promise<Response> {
     const { pathname } = new URL(req.url);
+    if (pathname.startsWith("/v/") && pathname.endsWith(".mp4")) return serveVideo(req, env);
     if (pathname !== "/api/request") return json({ error: "Not found." }, 404);
     if (req.method !== "POST") return json({ error: "Method not allowed." }, 405, { Allow: "POST" });
     // Rate limit first, so a flood costs no parsing and never reaches Sequenzy.
