@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins, Fira_Sans, JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import Script from "next/script";
 import ConsentBanner from "./components/consent-banner";
@@ -25,27 +25,36 @@ const jsFlag = `document.documentElement.classList.add("js")`;
 // Closes the mobile menu popover when a link inside it is clicked (in-page anchors do not close popovers on their own).
 const menu = `document.getElementById("site-menu")?.addEventListener("click",function(e){if(e.target.closest("a"))e.currentTarget.hidePopover()});`;
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+// Fonts are self-hosted from app/fonts (the Google Fonts latin subset, woff2), so the build never fetches Google Fonts.
+// A failed fetch broke the Cloudflare build on 30 Oct 2026. Same weights, variables and settings as the old
+// next/font/google setup. Characters outside the latin subset (e.g. the arrow) fall back exactly as before.
+const poppins = localFont({
+  src: [
+    { path: "./fonts/poppins-latin-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/poppins-latin-500.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/poppins-latin-600.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/poppins-latin-700.woff2", weight: "700", style: "normal" },
+  ],
   variable: "--font-poppins",
   display: "swap",
   preload: true,
-  adjustFontFallback: false,
+  adjustFontFallback: "Arial",
 });
 
-const fira = Fira_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
+const fira = localFont({
+  src: [
+    { path: "./fonts/firasans-latin-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/firasans-latin-500.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/firasans-latin-600.woff2", weight: "600", style: "normal" },
+  ],
   variable: "--font-fira",
   display: "swap",
   preload: true,
-  adjustFontFallback: false,
+  adjustFontFallback: "Arial",
 });
 
-const jetbrains = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
+const jetbrains = localFont({
+  src: [{ path: "./fonts/jetbrainsmono-latin-var.woff2", weight: "400 500", style: "normal" }],
   variable: "--font-jetbrains",
   display: "swap",
   preload: false,
