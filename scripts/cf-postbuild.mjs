@@ -39,10 +39,23 @@ const vDir = new URL("v/", out);
 if (existsSync(vDir)) {
   for (const f of readdirSync(vDir).filter((n) => n.endsWith(".html"))) {
     const file = new URL(f, vDir);
-    const html = readFileSync(file, "utf8");
-    if (html.includes("/v/clarity.js") || !html.includes("</head>")) continue;
-    writeFileSync(file, html.replace("</head>", '<script src="/v/clarity.js" async></script>\n</head>'));
-    console.log(`cf-postbuild: added Clarity to v/${f}`);
+    let html = readFileSync(file, "utf8");
+    if (!html.includes("/v/clarity.js") && html.includes("</head>")) {
+      html = html.replace("</head>", '<script src="/v/clarity.js" async></script>\n</head>');
+      writeFileSync(file, html);
+      console.log(`cf-postbuild: added Clarity to v/${f}`);
+    }
+    // "Book a 20-minute call" button (Matt, 30 Oct 2026; template in scripts/v-template.html). cta.js records the
+    // click in Clarity. Add it where a page has the button but not the script, and warn when a page has no button or
+    // its utm_campaign does not match the page slug.
+    const slug = f.replace(/\.html$/, "");
+    if (html.includes('data-cta="book"') && !html.includes("/v/cta.js") && html.includes("</head>")) {
+      html = html.replace("</head>", '<script src="/v/cta.js" defer></script>\n</head>');
+      writeFileSync(file, html);
+      console.log(`cf-postbuild: added cta.js to v/${f}`);
+    }
+    if (!html.includes('data-cta="book"')) console.warn(`cf-postbuild: WARNING v/${f} has no Book button (see scripts/v-template.html)`);
+    else if (!html.includes(`utm_campaign=${slug}"`)) console.warn(`cf-postbuild: WARNING v/${f} Book button utm_campaign does not match the slug ${slug}`);
   }
 }
 
