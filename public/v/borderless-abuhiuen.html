@@ -78,7 +78,7 @@ footer a{color:inherit}
 <source src="/v/borderless-abuhiuen-v10.mp4" type="video/mp4">
 </video>
 <p class="vo">AI voiceover</p>
-<p class="nopitch">No pitch: here&#8217;s what we found, and the fix is below.</p>
+<p class="nopitch">Here&#8217;s what we found, and the fix is below.</p>
 
 <h2>What we checked</h2>
 <ul>
@@ -177,6 +177,7 @@ footer a{color:inherit}
     if (!d || typeof d !== &quot;object&quot;) return;
     if (d.type === &quot;hsFormCallback&quot; &amp;&amp; d.eventName === &quot;onFormSubmitted&quot; &amp;&amp;
         (d.id === FORM_ID || (d.data &amp;&amp; d.data.formGuid === FORM_ID))) push(&quot;demo_form_submitted&quot;);
+    // RevenueHero's booking popup is served from popup.schedulehero.io, so keep schedulehero.io; revenuehero.io is allowed too.
     if (d.type === &quot;MEETING_BOOKED&quot; &amp;&amp;
         /^https:\/\/([a-z0-9-]+\.)?(schedulehero|revenuehero)\.io$/.test(e.origin)) push(&quot;demo_meeting_booked&quot;);
   });

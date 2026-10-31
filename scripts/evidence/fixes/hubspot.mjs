@@ -34,6 +34,7 @@ export default {
     if (!d || typeof d !== "object") return;
     if (d.type === "hsFormCallback" && d.eventName === "onFormSubmitted" &&
         (d.id === FORM_ID || (d.data && d.data.formGuid === FORM_ID))) push("demo_form_submitted");
+    // RevenueHero's booking popup is served from popup.schedulehero.io, so keep schedulehero.io; revenuehero.io is allowed too.
     if (d.type === "MEETING_BOOKED" &&
         /^https:\\/\\/([a-z0-9-]+\\.)?(schedulehero|revenuehero)\\.io$/.test(e.origin)) push("demo_meeting_booked");
   });
