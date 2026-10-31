@@ -5,52 +5,198 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <meta name="referrer" content="no-referrer">
-<title>A question about Borderless&#8217;s Google Ads tracking | Closed Logic</title>
+<title>Borderless: a Google Ads conversion fires before anyone asks for a demo | Closed Logic</title>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <script src="/v/clarity.js" async></script>
-<script src="/v/cta.js" defer></script>
+<script src="/v/report.js" defer></script>
 <link rel="preload" href="/v/poppins-semibold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/v/fira-sans-regular.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-@font-face{font-family:Poppins;font-weight:400;font-style:normal;font-display:swap;src:url(/v/poppins-regular.woff2) format("woff2")}
 @font-face{font-family:Poppins;font-weight:600;font-style:normal;font-display:swap;src:url(/v/poppins-semibold.woff2) format("woff2")}
+@font-face{font-family:"Fira Sans";font-weight:400;font-style:normal;font-display:swap;src:url(/v/fira-sans-regular.woff2) format("woff2")}
+@font-face{font-family:"Fira Sans";font-weight:600;font-style:normal;font-display:swap;src:url(/v/fira-sans-semibold.woff2) format("woff2")}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:#fff;color:#0a0a0a;font-family:Poppins,Arial,sans-serif;line-height:1.5}
-.wrap{max-width:960px;margin:0 auto;padding:24px 20px 40px}
-.logo{display:inline-flex;align-items:center;gap:10px;font-size:1.3rem;letter-spacing:-0.03em;line-height:1}
+body{margin:0;background:#fff;color:#0a0a0a;font-family:"Fira Sans",Arial,sans-serif;font-size:1.0625rem;line-height:1.6}
+.wrap{max-width:820px;margin:0 auto;padding:24px 20px 40px}
+.logo{display:inline-flex;align-items:center;gap:10px;font-family:Poppins,Arial,sans-serif;font-size:1.3rem;letter-spacing:-0.03em;line-height:1}
 .logo svg{width:32px;height:32px}
 a.logo{color:inherit;text-decoration:none;border-radius:6px}
-a.logo:focus-visible{outline:3px solid #ff4b3e;outline-offset:4px}
-h1{font-weight:600;font-size:clamp(1.5rem,4.2vw,2.4rem);line-height:1.2;letter-spacing:-0.02em;margin:40px 0 24px;border-left:5px solid #ff4b3e;padding-left:16px}
-video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#0a0a0a;border-radius:8px}
-.vo{font-size:0.8rem;color:#6b6b6b;margin:8px 0 0}
-.note{font-size:1.05rem;margin:20px 0 0}
-.cta{margin:24px 0 0}
+a:focus-visible,button:focus-visible{outline:3px solid #ff4b3e;outline-offset:3px}
+h1,h2{font-family:Poppins,Arial,sans-serif;font-weight:600;letter-spacing:-0.02em;line-height:1.2}
+h1{font-size:clamp(1.5rem,4.6vw,2.3rem);margin:36px 0 16px;border-left:5px solid #ff4b3e;padding-left:16px}
+h2{font-size:clamp(1.2rem,3.4vw,1.5rem);margin:44px 0 12px}
+p,li{max-width:68ch}
+ul,ol{padding-left:1.3em}
+li{margin:6px 0}
+video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#0a0a0a;border-radius:8px;margin-top:20px}
+.vo{font-size:.8rem;color:#6b6b6b;margin:8px 0 0}
+.nopitch{font-weight:600;margin:16px 0 0}
+blockquote{margin:12px 0;padding:4px 0 4px 16px;border-left:3px solid #ff4b3e;color:#333}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.85em;background:#f3f3f3;border-radius:4px;padding:1px 4px;overflow-wrap:anywhere}
+.finding{background:#0a0a0a;color:#fff;border-radius:8px;padding:18px 20px}
+.finding code{background:#262626;color:#fff}
+.finding li::marker{color:#ff4b3e;font-weight:600}
+.spend{border-left:5px solid #ff4b3e;padding:8px 0 8px 14px;font-weight:600}
+figure{margin:20px 0}
+figure img{display:block;width:100%;height:auto;border:1px solid #e5e5e5;border-radius:8px;background:#f5f0e8}
+figcaption{font-size:.85rem;color:#555;margin-top:6px}
+.tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid #e5e5e5;border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:.85rem;min-width:560px}
+caption{text-align:left;font-size:.8rem;color:#555;padding:10px 12px;caption-side:top}
+th,td{text-align:left;vertical-align:top;padding:8px 12px;border-top:1px solid #e5e5e5}
+thead th{background:#0a0a0a;color:#fff;border-top:0}
+tbody th{font-weight:600}
+pre{margin:0;overflow-x:auto;padding:14px 16px;background:#0a0a0a;color:#f5f5f5;border-radius:8px;font-size:.8rem;line-height:1.5}
+pre code{background:none;padding:0;color:inherit;font-size:inherit;overflow-wrap:normal}
+.fix{border:1px solid #0a0a0a;border-radius:8px;overflow:hidden;margin-top:16px}
+.fix pre{border-radius:0}
+.fixbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 12px;font-size:.8rem;background:#f3f3f3}
+.copy{font-family:Poppins,Arial,sans-serif;font-weight:600;font-size:.9rem;min-height:40px;min-width:88px;padding:6px 16px;border:0;border-radius:8px;background:#ff4b3e;color:#0a0a0a;cursor:pointer}
+.copy:hover{background:#ff6a5f}
+.triggers{margin:0;padding:10px 12px 10px 32px;font-size:.85rem;background:#f3f3f3}
+.cta{margin-top:44px;padding:24px 20px;border-radius:8px;background:#fff4f3;border:1px solid #ffd2ce}
+.cta h2{margin-top:0}
 .btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;padding:12px 28px;background:#ff4b3e;color:#0a0a0a;font-family:Poppins,Arial,sans-serif;font-weight:600;font-size:1.05rem;line-height:1.2;text-decoration:none;border-radius:8px}
 .btn:hover{background:#ff6a5f}
-.btn:focus-visible{outline:3px solid #0a0a0a;outline-offset:3px}
-.cta .note{margin-top:12px}
 @media (min-width:640px){.btn{display:inline-flex;width:auto}}
 footer{border-top:1px solid #e5e5e5;margin-top:48px;padding-top:16px;font-size:.85rem;color:#444}
+footer a{color:inherit}
 </style>
 </head>
 <body>
 <div class="wrap">
 <header>
-<a class="logo" href="https://www.closedlogic.com/" aria-label="Closed Logic home"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><circle cx="32" cy="32" r="22" fill="none" stroke="#0a0a0a" stroke-width="9" stroke-dasharray="104 34" stroke-dashoffset="-10" transform="rotate(-20 32 32)"/><circle cx="53" cy="32" r="7" fill="#ff4b3e" stroke="#0a0a0a" stroke-width="3"/></svg><span><b style="font-weight:600">Closed</b> Logic</span></a>
+<a class="logo" href="https://www.closedlogic.com/?utm_source=video-page&amp;utm_campaign=borderless-abuhiuen&amp;utm_content=logo" aria-label="Closed Logic home"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><circle cx="32" cy="32" r="22" fill="none" stroke="#0a0a0a" stroke-width="9" stroke-dasharray="104 34" stroke-dashoffset="-10" transform="rotate(-20 32 32)"/><circle cx="53" cy="32" r="7" fill="#ff4b3e" stroke="#0a0a0a" stroke-width="3"/></svg><span><b style="font-weight:600">Closed</b> Logic</span></a>
 </header>
 <main>
-<h1>A question about Borderless&#8217;s Google Ads tracking</h1>
+<h1>Borderless: a Google Ads conversion fires before anyone asks for a demo</h1>
+<p>Matthew, this is the check I mentioned in my email. I looked at what getborderless.co.uk sends to Google Ads, from outside your site, on 31 October 2026. No logins, no access to your accounts, and I didn&#8217;t submit your form.</p>
 <video controls playsinline preload="metadata" poster="/v/borderless-abuhiuen-v9.webp" width="1280" height="720">
 <source src="/v/borderless-abuhiuen-v9.mp4" type="video/mp4">
 </video>
 <p class="vo">AI voiceover</p>
-<div class="cta">
-<a class="btn" data-cta="book" data-v-slug="borderless-abuhiuen" href="https://cal.com/closedlogic/20min-fit?utm_source=video-page&amp;utm_campaign=borderless-abuhiuen" target="_blank" rel="noopener">Book a 20-minute call</a>
-<p class="note">Reply to the email or message if you&#8217;d like a hand getting it fixed.</p>
-</div>
+<p class="nopitch">No pitch: here&#8217;s what we found, and the fix is below.</p>
+
+<h2>What we checked</h2>
+<ul>
+<li>Your live Google Tag Manager container (<code>GTM-WN5PP9J7</code>) and the Google Ads tag it loads (<code>AW-11304873022</code>).</li>
+<li>What the browser sends to Google Ads when someone opens /demo and clicks on the page.</li>
+<li>The fields and script on your demo form.</li>
+<li>Your ads on record in Google&#8217;s Ads Transparency Centre.</li>
+<li>Your Head of Marketing job ad.</li>
+</ul>
+
+<h2>Why now</h2>
+<p>Your Head of Marketing ad, posted 16 October 2026, says:</p>
+<blockquote><p>&#8220;In your first 30 days: &#8230; Agree a plan with RevOps to fix HubSpot routing, lead scoring and attribution&#8221;</p>
+<p>&#8220;By 12 months: 3x increase in inbound pipeline, with cost per demo falling&#8221;</p></blockquote>
+<p>Cost per demo only means something if Google Ads is counting demos.</p>
+
+<h2>The main finding: two Google Ads conversions before the form</h2>
+<ol class="finding">
+<li>Opening /demo sends a Google Ads conversion (event <code>page_view</code>, conversion label <code>0iTHCK7X0coZEL7Yyo4q</code>). It comes from a page-view rule set in your Google Ads tag for www.getborderless.co.uk/demo.</li>
+<li>Clicking a link to /demo sends a second one (label <code>9ESjCOrlxvAcEL7Yyo4q</code>). The rule counts any click on something whose link contains /demo, so in our test it also fired when we clicked Accept on your cookie banner on /demo.</li>
+</ol>
+<p>Your container also has separate conversions for the real form submit (label <code>I67YCMqhwPAcEL7Yyo4q</code>) and a ScheduleHero booking (label <code>tKbOCOuyu_AcEL7Yyo4q</code>). So up to four conversions are set up along one path to a demo. We saw the first two fire. We didn&#8217;t test the other two.</p>
+<p class="spend">What it means for your ad spend: if either of the first two is set to Primary, Google Ads is bidding towards people who open /demo, not people who ask for a demo, and the cost per demo it reports will look lower than it really is.</p>
+
+<h2>Evidence</h2>
+<p>The request your site sent to Google Ads when we opened /demo, before any click:</p>
+<!-- ev:proof -->
+<pre class="req" tabindex="0"><code>GET https://www.googleadservices.com/pagead/conversion/11304873022/
+  en=page_view
+  label=0iTHCK7X0coZEL7Yyo4q
+  page_path=/demo</code></pre>
+<!-- /ev:proof -->
+<figure>
+<picture>
+<source media="(max-width:639px)" srcset="/v/evidence/borderless-abuhiuen/form-mobile.webp" width="390" height="1400">
+<img src="/v/evidence/borderless-abuhiuen/form-desktop.webp" width="1200" height="1029" loading="lazy" decoding="async" alt="The Borderless demo form on getborderless.co.uk/demo, outlined in red. The conversion above was sent before anyone touched it.">
+</picture>
+<figcaption>The demo form on /demo (outlined). The conversion above was sent before anyone touched it.</figcaption>
+</figure>
+<!-- ev:tags -->
+<div class="tablewrap"><table class="tags">
+<caption>What loaded and what was sent at each step (31 Oct 2026, 17:00 SAST, fresh browser, no consent choice made)</caption>
+<thead><tr><th scope="col">Tag</th><th scope="col">Loads</th><th scope="col">Click “Book a demo” on the homepage</th><th scope="col">Open /demo</th><th scope="col">Click Accept on the cookie banner</th></tr></thead>
+<tbody>
+<tr><th scope="row">GA4<br><code>G-E9RNH347SJ</code></th><td>Yes</td><td>–</td><td>–</td><td>–</td></tr>
+<tr><th scope="row">HubSpot tracking</th><td>Yes</td><td><code>✓</code></td><td><code>✓</code></td><td><code>✓</code></td></tr>
+<tr><th scope="row">Google Tag Manager<br><code>GTM-WN5PP9J7</code></th><td>Yes</td><td>–</td><td>–</td><td>–</td></tr>
+<tr><th scope="row">Google Ads conversion<br><code>AW-11304873022</code></th><td>Yes</td><td><code>9ESjCOrlxvAcEL7Yyo4q</code></td><td><code>0iTHCK7X0coZEL7Yyo4q</code></td><td><code>9ESjCOrlxvAcEL7Yyo4q</code></td></tr>
+<tr><th scope="row">Google Ads remarketing<br><code>AW-11304873022</code></th><td>–</td><td>–</td><td><code>page_view</code></td><td><code>form_start</code></td></tr>
+<tr><th scope="row">LinkedIn Insight<br><code>LinkedIn 6118002</code></th><td>Yes</td><td><code>✓</code></td><td><code>✓</code></td><td><code>✓</code></td></tr>
+<tr><th scope="row">Meta pixel<br><code>Meta 1140851134740417</code></th><td>Yes</td><td><code>Contact</code></td><td><code>PageView</code></td><td><code>✓</code></td></tr>
+</tbody></table></div>
+<!-- /ev:tags -->
+<figure>
+<img src="/v/evidence/borderless-abuhiuen/ads-transparency.webp" width="850" height="500" loading="lazy" decoding="async" alt="Google Ads Transparency Centre showing 14 ads on record for getborderless.co.uk.">
+<figcaption>Google Ads Transparency Centre, 31 October 2026: 14 ads on record pointing to getborderless.co.uk.</figcaption>
+</figure>
+
+<h2>What we can&#8217;t see from outside</h2>
+<p>Which of these conversions are primary (used for bidding) and which are secondary (reporting only). That&#8217;s the one thing that decides whether this matters, and it&#8217;s a 5-minute check.</p>
+
+<h2>Your 5-minute self-check in Google Ads</h2>
+<ol>
+<li>In Google Ads, go to Goals, then Conversions, then Summary.</li>
+<li>Look for conversion actions that count a page view of /demo, or a click to /demo. In the details of each one, the tag label will match one of these: <code>0iTHCK7X0coZEL7Yyo4q</code> (demo page view) or <code>9ESjCOrlxvAcEL7Yyo4q</code> (click to /demo).</li>
+<li>Check the column that says whether each action is Primary or Secondary.</li>
+<li>If either of them is Primary, your campaigns are bidding for page views and clicks as well as real demo requests.</li>
+<li>While you&#8217;re there, check that the form submit (<code>I67YCMqhwPAcEL7Yyo4q</code>) and the ScheduleHero booking (<code>tKbOCOuyu_AcEL7Yyo4q</code>) are the ones you actually want to bid towards.</li>
+</ol>
+
+<h2>For your developer: the fix</h2>
+<ol>
+<li>In Google Ads, set the demo page view (<code>0iTHCK7X0coZEL7Yyo4q</code>) and click to /demo (<code>9ESjCOrlxvAcEL7Yyo4q</code>) actions to Secondary, or remove them. Keep the form submit and the booking as Primary.</li>
+<li>In GTM-WN5PP9J7, pause the Google Ads conversion tag with label <code>9ESjCOrlxvAcEL7Yyo4q</code>. Its trigger is any click whose link contains /demo.</li>
+<li>Add the listener below as a Custom HTML tag on /demo, create the two Custom Event triggers, and use them as the only triggers on the form-submit (<code>I67YCMqhwPAcEL7Yyo4q</code>) and booking (<code>tKbOCOuyu_AcEL7Yyo4q</code>) tags. It counts one submit per page, even though the form is embedded twice on /demo, and it sends no form answers to the dataLayer.</li>
+<li>Test it in 2 minutes: open GTM Preview on /demo and click Accept. No Google Ads conversion tag should fire. Then submit one test request: <code>demo_form_submitted</code> should appear once, with the form-submit tag under Tags Fired. Delete the test contact in HubSpot afterwards.</li>
+</ol>
+<!-- ev:fix -->
+<div class="fix"><div class="fixbar"><span>GTM: Custom HTML, named &quot;CL - demo form listener&quot;, trigger: Page View where Page Path contains /demo</span><button type="button" class="copy" data-copy="fix-snippet">Copy</button></div>
+<pre tabindex="0"><code id="fix-snippet">&lt;script&gt;
+/* One Google Ads conversion per real demo request.
+   HubSpot form events: https://developers.hubspot.com/docs/cms/start-building/features/forms/legacy-forms
+   RevenueHero events:  https://help.revenuehero.io/integrations/javascript-events */
+(function () {
+  var FORM_ID = &quot;54ee3573-251e-44c8-adbc-c03c48bc5566&quot;;
+  var sent = {};
+  function push(name) {
+    if (sent[name]) return; // the form is embedded twice on /demo: count it once
+    sent[name] = true;
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: name, form_id: FORM_ID });
+  }
+  window.addEventListener(&quot;message&quot;, function (e) {
+    var d = e.data;
+    if (typeof d === &quot;string&quot;) { try { d = JSON.parse(d); } catch (err) { return; } }
+    if (!d || typeof d !== &quot;object&quot;) return;
+    if (d.type === &quot;hsFormCallback&quot; &amp;&amp; d.eventName === &quot;onFormSubmitted&quot; &amp;&amp;
+        (d.id === FORM_ID || (d.data &amp;&amp; d.data.formGuid === FORM_ID))) push(&quot;demo_form_submitted&quot;);
+    if (d.type === &quot;MEETING_BOOKED&quot; &amp;&amp;
+        /^https:\/\/([a-z0-9-]+\.)?(schedulehero|revenuehero)\.io$/.test(e.origin)) push(&quot;demo_meeting_booked&quot;);
+  });
+})();
+&lt;/script&gt;</code></pre>
+<ul class="triggers"><li>Custom Event &quot;demo_form_submitted&quot; → use as the only trigger on the form-submit conversion tag</li><li>Custom Event &quot;demo_meeting_booked&quot; → use as the only trigger on the booking conversion tag</li></ul></div>
+<!-- /ev:fix -->
+
+<h2>Secondary findings</h2>
+<ol>
+<li>Clicks to pricing and case studies count as conversions. A click on a link to getborderless.co.uk/pricing or /case-study sends a Google Ads conversion (label <code>w-7yCJq2xPAcEL7Yyo4q</code>). Phone-number clicks (tel: links) send another (label <code>sxhDCO29lfEcEL7Yyo4q</code>). We read this from your container; we didn&#8217;t click them.</li>
+<li>The ad click doesn&#8217;t travel with the demo request. The demo form has no hidden field for gclid or UTMs, and the &#8220;Book a demo&#8221; buttons on your homepage go to /demo with only a page label added (<code>demo_source_page</code>), so someone who lands on the homepage from an ad submits the form without them. Google Ads&#8217; own tags still credit the ad through its first-party cookie, but anything built on the HubSpot record, such as offline conversion imports, won&#8217;t have it.</li>
+</ol>
+
+<section class="cta" aria-labelledby="cta-h">
+<h2 id="cta-h">Want the fix notes?</h2>
+<p>Reply &#8220;fix&#8221; to my email and I&#8217;ll send the fix notes for your developer.</p>
+<p><a class="btn" data-cta="reply" data-v-slug="borderless-abuhiuen" href="mailto:matt@closedlogic.co?subject=fix%3A%20Borderless%20Google%20Ads%20tracking">Reply &#8220;fix&#8221;</a></p>
+<p>If you&#8217;d prefer a short call, reply and I&#8217;ll send my Cal.com link.</p>
+</section>
 </main>
-<footer>Closed Logic is a trading name of Reubika LLC, 530-B Harkle Road, STE 100, Santa Fe, NM 87505.</footer>
+<footer>Closed Logic is a trading name of Reubika LLC, 530-B Harkle Road, STE 100, Santa Fe, NM 87505, USA. Privacy: <a href="https://www.closedlogic.com/privacy?utm_source=video-page&amp;utm_campaign=borderless-abuhiuen&amp;utm_content=privacy">closedlogic.com/privacy</a></footer>
 </div>
 </body>
 </html>
