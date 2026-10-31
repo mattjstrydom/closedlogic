@@ -98,7 +98,7 @@ footer a{color:inherit}
 <li>Opening /demo sends a Google Ads conversion (event <code>page_view</code>, conversion label <code>0iTHCK7X0coZEL7Yyo4q</code>). It comes from a page-view rule set in your Google Ads tag for www.getborderless.co.uk/demo.</li>
 <li>Clicking a link to /demo sends a second one (label <code>9ESjCOrlxvAcEL7Yyo4q</code>). The rule counts any click on something whose link contains /demo, so in our test it also fired when we clicked Accept on your cookie banner on /demo.</li>
 </ol>
-<p>Your container also has separate conversions for the real form submit (label <code>I67YCMqhwPAcEL7Yyo4q</code>) and a ScheduleHero booking (label <code>tKbOCOuyu_AcEL7Yyo4q</code>). So up to four conversions are set up along one path to a demo. We saw the first two fire. We didn&#8217;t test the other two.</p>
+<p>Your container also has separate conversions for the real form submit (label <code>I67YCMqhwPAcEL7Yyo4q</code>) and a RevenueHero booking (label <code>tKbOCOuyu_AcEL7Yyo4q</code>). So up to four conversions are set up along one path to a demo. We saw the first two fire. We didn&#8217;t test the other two.</p>
 <p class="spend">What it means for your ad spend: if either of the first two is set to Primary, Google Ads is bidding towards people who open /demo, not people who ask for a demo, and the cost per demo it reports will look lower than it really is.</p>
 
 <h2>Evidence</h2>
@@ -144,7 +144,7 @@ footer a{color:inherit}
 <li>Look for conversion actions that count a page view of /demo, or a click to /demo. In the details of each one, the tag label will match one of these: <code>0iTHCK7X0coZEL7Yyo4q</code> (demo page view) or <code>9ESjCOrlxvAcEL7Yyo4q</code> (click to /demo).</li>
 <li>Check the column that says whether each action is Primary or Secondary.</li>
 <li>If either of them is Primary, your campaigns are bidding for page views and clicks as well as real demo requests.</li>
-<li>While you&#8217;re there, check that the form submit (<code>I67YCMqhwPAcEL7Yyo4q</code>) and the ScheduleHero booking (<code>tKbOCOuyu_AcEL7Yyo4q</code>) are the ones you actually want to bid towards.</li>
+<li>While you&#8217;re there, check that the form submit (<code>I67YCMqhwPAcEL7Yyo4q</code>) and the RevenueHero booking (<code>tKbOCOuyu_AcEL7Yyo4q</code>) are the ones you actually want to bid towards.</li>
 </ol>
 
 <h2>For your developer: the fix</h2>
@@ -152,7 +152,7 @@ footer a{color:inherit}
 <li>In Google Ads, set the demo page view (<code>0iTHCK7X0coZEL7Yyo4q</code>) and click to /demo (<code>9ESjCOrlxvAcEL7Yyo4q</code>) actions to Secondary, or remove them. Keep the form submit and the booking as Primary.</li>
 <li>In GTM-WN5PP9J7, pause the Google Ads conversion tag with label <code>9ESjCOrlxvAcEL7Yyo4q</code>. Its trigger is any click whose link contains /demo.</li>
 <li>Add the listener below as a Custom HTML tag on /demo, create the two Custom Event triggers, and use them as the only triggers on the form-submit (<code>I67YCMqhwPAcEL7Yyo4q</code>) and booking (<code>tKbOCOuyu_AcEL7Yyo4q</code>) tags. It counts one submit per page, even though the form is embedded twice on /demo, and it sends no form answers to the dataLayer.</li>
-<li>Test it in 2 minutes: open GTM Preview on /demo and click Accept. No Google Ads conversion tag should fire. Then submit one test request: <code>demo_form_submitted</code> should appear once, with the form-submit tag under Tags Fired. Delete the test contact in HubSpot afterwards.</li>
+<li>Test it in 2 minutes: open GTM Preview on /demo and click Accept. The tag with label <code>9ESjCOrlxvAcEL7Yyo4q</code> should not appear under Tags Fired. Then submit one test request: <code>demo_form_submitted</code> should appear once, with the form-submit tag under Tags Fired. Delete the test contact in HubSpot afterwards.</li>
 </ol>
 <!-- ev:fix -->
 <div class="fix"><div class="fixbar"><span>GTM: Custom HTML, named &quot;CL - demo form listener&quot;, trigger: Page View where Page Path contains /demo</span><button type="button" class="copy" data-copy="fix-snippet">Copy</button></div>
