@@ -16,7 +16,8 @@
 //      and their triggers, so a claim can be proved from the published config when it can't be proved by a submit.
 //
 // Ad and analytics collect requests the prospect's page sends are recorded and then aborted (blocked) by this script,
-// so our test visits are not counted in their Google Ads, GA4, Meta or LinkedIn reports.
+// so our test visits are not counted in their Google Ads, GA4, Meta or LinkedIn reports. This is the default and the
+// standard; see README.md. --allow-tracking turns it off and needs Matt's explicit approval for that prospect.
 //
 // Privacy: the output keeps cookie NAMES only, never values, and keeps only a whitelist of URL parameters (tag ids,
 // conversion labels, event names, consent STATE flags). No client ids, session ids, consent ids, gclids or user data.
@@ -37,7 +38,7 @@ const args = Object.fromEntries(
   }, []),
 );
 if (!args.url || !args.form || !args.slug) {
-  console.error("usage: capture.mjs --url https://example.com --form /demo --slug name-xxxx --out dir [--simulate]");
+  console.error("usage: capture.mjs --url https://example.com --form /demo --slug name-xxxx --out dir [--simulate] [--allow-tracking]");
   process.exit(2);
 }
 const SITE = new URL(args.url);
@@ -84,8 +85,29 @@ const RULES = [
   ["Cookiebot", "script", /consent\.cookiebot\.com/],
   ["OneTrust", "script", /cdn\.cookielaw\.org|onetrust/],
 ];
-// Collect hits are aborted after being recorded, so our visits never count in the prospect's reports.
-const BLOCK = /\/g\/collect|pagead\/conversion\/|1p-conversion|1p-user-list|viewthroughconversion|\/ccm\/|pagead\/form-data|facebook\.com\/tr|px\.ads\.linkedin|linkedin\.com\/px|bat\.bing\.com\/action|clarity\.ms\/collect|__ptq\.gif|\/__pt|td\.doubleclick\.net|forms[\w-]*\.hubspot\.com\/submissions|hsforms\.com\/submissions|growsurf\.com\/api|ingest/;
+// BLOCKED BY DEFAULT (31 Oct 2026): every tracking hit the prospect's page sends is recorded and then aborted, so our
+// visits never count in their reports. Tag libraries (gtm.js, gtag/js, fbevents.js, insight.min.js, hs-analytics) still
+// load, because the evidence is what they TRY to send; the hits themselves never leave the browser. Visitor
+// identification scripts (RB2B, Vector, 6sense, Clearbit, Koala, Warmly) are blocked outright, because loading them is
+// itself the hit. The list is the union of this script's earlier list and Maddy's visit.py TRACK list (diffed 31 Oct).
+// --allow-tracking turns blocking off. Only use it with Matt's explicit say-so for that prospect: it sends real hits.
+const BLOCK = new RegExp([
+  // Google: GA4, Ads conversions and remarketing, Floodlight, enhanced conversions, consent-mode pings
+  String.raw`/g/collect|/g/s/collect|google-analytics\.com/(?:g/|j/|r/)?collect|analytics\.google\.com/g/`,
+  String.raw`pagead/conversion/|1p-conversion|1p-user-list|viewthroughconversion|/ccm/|/rmkt/collect|/ads/ga-audiences`,
+  String.raw`pagead/form-data|googleads\.g\.doubleclick\.net/pagead/id|td\.doubleclick\.net|ad\.doubleclick\.net|static\.doubleclick\.net/instream`,
+  // Meta, LinkedIn, Microsoft, X, Pinterest, TikTok, Reddit, Quora
+  String.raw`facebook\.com/tr|px\.ads\.linkedin|linkedin\.com/px|bat\.bing\.com/action|clarity\.ms/collect`,
+  String.raw`t\.co/i/adsct|analytics\.twitter\.com|ct\.pinterest\.com|analytics\.tiktok\.com/api/v2/pixel|alb\.reddit\.com|q\.quora\.com`,
+  // HubSpot tracking hits, collected-forms and every form submission endpoint (the form is never submitted anyway)
+  String.raw`__ptq\.gif|/__pt|forms\.hubspot\.com/collected-forms|forms[\w-]*\.hubspot\.com/submissions|hsforms\.com/submissions|hsforms\.com/embed/v3/counters`,
+  // Product analytics, session replay, CDPs, error and log ingest
+  String.raw`segment\.(?:io|com)/v1|api\.segment|heapanalytics\.com/h|hotjar\.(?:com|io)/.*(?:api|track)|api-js\.mixpanel|api\.amplitude|growsurf\.com/api|ingest`,
+  // Visitor identification: block the scripts as well as the hits
+  String.raw`rb2b|reb2b|vector\.co|6sc\.co|clearbit|getkoala|koala\.live|warmly`,
+].join("|"), "i");
+const ALLOW_TRACKING = args["allow-tracking"] === true;
+if (ALLOW_TRACKING) console.error("WARNING: --allow-tracking: tracking hits are NOT blocked. Real hits will reach the prospect's accounts.");
 // URL parameters worth keeping: tag ids, labels, event names and consent STATE flags. Nothing that identifies a person.
 const KEEP = new Set(["id", "tid", "label", "en", "ev", "pid", "conversionId", "gcs", "gcd", "npa", "dma", "fmt", "url_path"]);
 
@@ -146,7 +168,7 @@ async function blockCollect(context, rec) {
       if (route.request().isNavigationRequest()) rec.navigations.push({ phase: rec.phase, url: clean(u), hadQueryString: u.includes("?"), blocked: true });
       return route.abort();
     }
-    return BLOCK.test(u) ? route.abort() : route.continue();
+    return !ALLOW_TRACKING && BLOCK.test(u) ? route.abort() : route.continue();
   });
 }
 // Listens to window messages (type, eventName, whether data is a string or an object, origin). No values kept.
@@ -309,7 +331,8 @@ const evidence = {
   formUrl: FORM_URL,
   capturedAt: new Date().toISOString(),
   capturedFrom: process.env.CAPTURE_FROM || "unknown location (set CAPTURE_FROM, e.g. 'South Africa'); consent banners can differ by country",
-  method: "Public pages only, fresh browser, no consent choice unless stated. Collect requests recorded then blocked by the script. Form never submitted.",
+  method: ALLOW_TRACKING ? "Public pages only, fresh browser, no consent choice unless stated. TRACKING NOT BLOCKED (--allow-tracking). Form never submitted." : "Public pages only, fresh browser, no consent choice unless stated. Collect requests recorded then blocked by the script. Form never submitted.",
+  trackingBlocked: !ALLOW_TRACKING,
   phases: {},
 };
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));

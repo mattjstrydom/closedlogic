@@ -57,7 +57,7 @@ if (existsSync(vDir)) {
     // Evidence pages (v-evidence-pilot, 31 Oct 2026) can use a reply-by-email CTA (data-cta="reply", report.js) in place
     // of the Book button; every http(s) link on them must carry utm_campaign=<slug>.
     if (!html.includes('data-cta="book"') && !html.includes('data-cta="reply"')) console.warn(`cf-postbuild: WARNING v/${f} has no Book or Reply button (see scripts/v-template.html)`);
-    else if (html.includes('data-cta="book"') && !html.includes(`utm_campaign=${slug}"`)) console.warn(`cf-postbuild: WARNING v/${f} Book button utm_campaign does not match the slug ${slug}`);
+    else if (html.includes('data-cta="book"') && !html.includes(`utm_campaign=${slug}"`) && !html.includes(`utm_campaign=${slug}&amp;`)) console.warn(`cf-postbuild: WARNING v/${f} Book button utm_campaign does not match the slug ${slug}`);
     if (html.includes('data-cta="reply"')) {
       const bad = [...html.matchAll(/href="(https?:[^"]+)"/g)].map((m) => m[1]).filter((u) => !u.includes(`utm_campaign=${slug}&amp;utm_content=`));
       if (bad.length) console.warn(`cf-postbuild: WARNING v/${f} links without utm_campaign/utm_content: ${bad.join(" ")}`);

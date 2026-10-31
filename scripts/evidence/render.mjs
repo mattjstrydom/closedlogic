@@ -50,13 +50,13 @@ const cell = (r, ph) => {
   const f = r.fired[ph] || (ph === "form_load" ? r.fired.form_load_after_click : null);
   const named = (f || []).filter((x) => x !== "\u2713");
   if (named.length) return named.map((x) => `<code>${esc(x)}</code>`).join(" ");
-  return f && f.length ? f.map((x) => `<code>${esc(x)}</code>`).join(" ") : "\u2013";
+  return f && f.length ? f.map((x) => `<code>${esc(x)}</code>`).join(" ") : "none";
 };
 const tagsHtml = `<div class="tablewrap"><table class="tags">
 <caption>What loaded and what was sent at each step (${esc(new Date(ev.capturedAt).toLocaleString("en-GB", { timeZone: "Africa/Johannesburg", day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" }))} SAST, fresh browser, no consent choice made)</caption>
 <thead><tr><th scope="col">Tag</th><th scope="col">Loads</th>${STEPS.map(([, h]) => `<th scope="col">${esc(h)}</th>`).join("")}</tr></thead>
 <tbody>
-${[...rows.values()].filter((r) => r.loaded || Object.keys(r.fired).length).map((r) => `<tr><th scope="row">${esc(r.vendor)}${r.ids.size ? `<br><code>${[...r.ids].map(esc).join(", ")}</code>` : ""}</th><td>${r.loaded ? "Yes" : "\u2013"}</td>${STEPS.map(([ph]) => `<td>${cell(r, ph)}</td>`).join("")}</tr>`).join("\n")}
+${[...rows.values()].filter((r) => r.loaded || Object.keys(r.fired).length).map((r) => `<tr><th scope="row">${esc(r.vendor)}${r.ids.size ? `<br><code>${[...r.ids].map(esc).join(", ")}</code>` : ""}</th><td>${r.loaded ? "Yes" : ""}</td>${STEPS.map(([ph]) => `<td>${cell(r, ph)}</td>`).join("")}</tr>`).join("\n")}
 </tbody></table></div>`;
 
 // Proof request: the conversion sent when the form page is opened, before any click.
