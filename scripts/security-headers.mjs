@@ -16,15 +16,16 @@ const G =
 
 // GTM Preview Mode / Tag Assistant (Matt, 29 Oct 2026: loosen the CSP so preview works), from the same Google guide's
 // "Preview Mode" table: tagmanager.google.com on script-src, the debug badge's stylesheets on style-src, gstatic images on
-// img-src and Google Fonts on font-src.
+// img-src. Google Fonts (fonts.googleapis.com, fonts.gstatic.com) taken out on 31 Oct 2026: every font is self-hosted,
+// and GTM Preview's badge falls back to a system font without them.
 // 'unsafe-inline' for scripts is deliberate: the pages are static files, so there is no per-request nonce. No 'unsafe-eval'.
 export const csp = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline' https://*.googletagmanager.com https://static.cloudflareinsights.com https://*.clarity.ms https://tagmanager.google.com",
-  "style-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://tagmanager.google.com https://fonts.googleapis.com",
+  "style-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://tagmanager.google.com",
   `img-src 'self' data: ${G} https://*.clarity.ms https://c.bing.com https://ssl.gstatic.com https://www.gstatic.com`,
   `connect-src 'self' https://cloudflareinsights.com ${G} https://*.clarity.ms https://c.bing.com`,
-  "font-src 'self' https://fonts.gstatic.com data:",
+  "font-src 'self' data:",
   "frame-src https://*.googletagmanager.com",
   "base-uri 'self'",
   "form-action 'self'",
