@@ -49,7 +49,8 @@ if (existsSync(vDir)) {
     // click in Clarity. Add it where a page has the button but not the script, and warn when a page has no button or
     // its utm_campaign does not match the page slug.
     const slug = f.replace(/\.html$/, "");
-    if (html.includes('data-cta="book"') && !html.includes("/v/cta.js") && html.includes("</head>")) {
+    // report.js (evidence pages) already records book_call_click, so cta.js is not added there (it would count twice).
+    if (html.includes('data-cta="book"') && !html.includes("/v/cta.js") && !html.includes("/v/report.js") && html.includes("</head>")) {
       html = html.replace("</head>", '<script src="/v/cta.js" defer></script>\n</head>');
       writeFileSync(file, html);
       console.log(`cf-postbuild: added cta.js to v/${f}`);
