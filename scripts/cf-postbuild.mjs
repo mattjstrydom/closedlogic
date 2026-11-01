@@ -59,6 +59,9 @@ if (existsSync(vDir)) {
     // of the Book button; every http(s) link on them must carry utm_campaign=<slug>.
     if (!html.includes('data-cta="book"') && !html.includes('data-cta="reply"')) console.warn(`cf-postbuild: WARNING v/${f} has no Book or Reply button (see scripts/v-template.html)`);
     else if (html.includes('data-cta="book"') && !html.includes(`utm_campaign=${slug}"`) && !html.includes(`utm_campaign=${slug}&amp;`)) console.warn(`cf-postbuild: WARNING v/${f} Book button utm_campaign does not match the slug ${slug}`);
+    // Every Cal.com booking link must carry utm_source, utm_campaign=<slug> and utm_content=book-cta (Matt, 1 Nov 2026).
+    const badBook = [...html.matchAll(/href="(https:\/\/cal\.com\/[^"]+)"/g)].map((m) => m[1]).filter((u) => !u.includes("utm_source=") || !u.includes(`utm_campaign=${slug}&amp;`) || !/utm_content=book-cta(&|$)/.test(u));
+    if (badBook.length) console.warn(`cf-postbuild: WARNING v/${f} booking links without utm_source/utm_campaign/utm_content=book-cta: ${badBook.join(" ")}`);
     if (html.includes('data-cta="reply"')) {
       const bad = [...html.matchAll(/href="(https?:[^"]+)"/g)].map((m) => m[1]).filter((u) => !u.includes(`utm_campaign=${slug}&amp;utm_content=`));
       if (bad.length) console.warn(`cf-postbuild: WARNING v/${f} links without utm_campaign/utm_content: ${bad.join(" ")}`);
