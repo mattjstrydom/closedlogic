@@ -44,8 +44,12 @@ PLAYWRIGHT=/workspace/shot/node_modules/playwright/index.js \
 node scripts/evidence/capture.mjs --url https://www.example.com --form /demo --slug example-xxxx \
   --out ../outbound/video-rebuild/evidence/example-xxxx [--simulate]
 node scripts/evidence/render.mjs --evidence ../outbound/video-rebuild/evidence/example-xxxx/evidence.json \
-  --page public/v/example-xxxx.html
+  --page public/v/example-xxxx.html --rows "Google Ads conversion,Google Ads remarketing"
 ```
+
+`--rows` picks the tags table rows, in order. Show only the rows that prove the page's finding. Google Tag Manager is
+never a row, because it sends no hits of its own. Hand-written notes about the table go after `<!-- /ev:tags -->`,
+so a re-render keeps them.
 
 Then run `npx eslint . && npx tsc --noEmit && npm run build`, and push to the preview branch only.
 

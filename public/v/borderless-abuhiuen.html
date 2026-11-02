@@ -60,6 +60,7 @@ pre code{background:none;padding:0;color:inherit;font-size:inherit;overflow-wrap
 .btn:hover{background:#ff6a5f}
 .ctas{display:flex;flex-direction:column;gap:12px;margin:16px 0}
 .audit{margin-bottom:0;font-size:.95rem}
+.tnote,.embed{font-size:.95rem}
 @media (min-width:640px){.btn{display:inline-flex;width:auto}.ctas{flex-direction:row;flex-wrap:wrap}}
 footer{border-top:1px solid #e5e5e5;margin-top:48px;padding-top:16px;font-size:.85rem;color:#444}
 footer a{color:inherit}
@@ -118,18 +119,14 @@ footer a{color:inherit}
 </figure>
 <!-- ev:tags -->
 <div class="tablewrap"><table class="tags">
-<caption>What loaded and what was sent at each step (31 Oct 2026, 17:00 SAST, fresh browser, no consent choice made)</caption>
+<caption>What loaded and what was sent at each step (31 Oct 2026, 17:00 SAST, fresh browser, no consent choice made before the Accept click)</caption>
 <thead><tr><th scope="col">Tag</th><th scope="col">Loads</th><th scope="col">Click “Book a demo” on the homepage</th><th scope="col">Open /demo</th><th scope="col">Click Accept on the cookie banner</th></tr></thead>
 <tbody>
-<tr><th scope="row">GA4<br><code>G-E9RNH347SJ</code></th><td>Yes</td><td>none</td><td>none</td><td>none</td></tr>
-<tr><th scope="row">HubSpot tracking</th><td>Yes</td><td><code>✓</code></td><td><code>✓</code></td><td><code>✓</code></td></tr>
-<tr><th scope="row">Google Tag Manager<br><code>GTM-WN5PP9J7</code></th><td>Yes</td><td>none</td><td>none</td><td>none</td></tr>
-<tr><th scope="row">Google Ads conversion<br><code>AW-11304873022</code></th><td>Yes</td><td><code>9ESjCOrlxvAcEL7Yyo4q</code></td><td><code>0iTHCK7X0coZEL7Yyo4q</code></td><td><code>9ESjCOrlxvAcEL7Yyo4q</code></td></tr>
-<tr><th scope="row">Google Ads remarketing<br><code>AW-11304873022</code></th><td></td><td>none</td><td><code>page_view</code></td><td><code>form_start</code></td></tr>
-<tr><th scope="row">LinkedIn Insight<br><code>LinkedIn 6118002</code></th><td>Yes</td><td><code>✓</code></td><td><code>✓</code></td><td><code>✓</code></td></tr>
-<tr><th scope="row">Meta pixel<br><code>Meta 1140851134740417</code></th><td>Yes</td><td><code>Contact</code></td><td><code>PageView</code></td><td><code>✓</code></td></tr>
+<tr><th scope="row">Google Ads conversion<br><code>AW-11304873022</code></th><td>Yes</td><td><code>en=conversion</code><br><code>label=9ESjCOrlxvAcEL7Yyo4q</code></td><td><code>en=page_view</code><br><code>label=0iTHCK7X0coZEL7Yyo4q</code></td><td><code>en=conversion</code><br><code>label=9ESjCOrlxvAcEL7Yyo4q</code></td></tr>
+<tr><th scope="row">Google Ads remarketing<br><code>AW-11304873022</code></th><td>Yes, via the Google Ads tag</td><td>No request</td><td><code>en=page_view</code></td><td><code>en=form_start</code></td></tr>
 </tbody></table></div>
 <!-- /ev:tags -->
+<p class="tnote">Why <code>en=form_start</code> on Accept: your cookie banner keeps its settings in a hidden form on /demo (<code>id=cookie-preferences</code>). Clicking Accept ticks its three checkboxes, and Google&#8217;s tags count that as someone starting a form. The same click sent GA4 a <code>form_start</code> for <code>form_id=cookie-preferences</code>. Your demo form wasn&#8217;t touched.</p>
 <figure>
 <img src="/v/evidence/borderless-abuhiuen/ads-transparency.webp" width="850" height="500" loading="lazy" decoding="async" alt="Google Ads Transparency Centre showing 14 ads on record for getborderless.co.uk.">
 <figcaption>Google Ads Transparency Centre, 31 October 2026: 14 ads on record pointing to getborderless.co.uk.</figcaption>
@@ -158,17 +155,23 @@ footer a{color:inherit}
 <div class="fix"><div class="fixbar"><span>GTM: Custom HTML, named &quot;CL - demo form listener&quot;, trigger: Page View where Page Path contains /demo</span><button type="button" class="copy" data-copy="fix-snippet">Copy</button></div>
 <pre tabindex="0"><code id="fix-snippet">&lt;script&gt;
 /* One Google Ads conversion per real demo request.
-   HubSpot form events: https://developers.hubspot.com/docs/cms/start-building/features/forms/legacy-forms
-   RevenueHero events:  https://help.revenuehero.io/integrations/javascript-events */
+   HubSpot legacy forms:  https://developers.hubspot.com/docs/cms/start-building/features/forms/legacy-forms
+   HubSpot new editor:    https://developers.hubspot.com/docs/api-reference/latest/marketing/forms/global-form-events
+   RevenueHero events:    https://help.revenuehero.io/integrations/javascript-events */
 (function () {
-  var FORM_ID = &quot;54ee3573-251e-44c8-adbc-c03c48bc5566&quot;;
+  var FORM_ID = &quot;54ee3573-251e-44c8-adbc-c03c48bc5566&quot;; // if the form is rebuilt in HubSpot's new editor, check this ID still matches
   var sent = {};
   function push(name) {
-    if (sent[name]) return; // the form is embedded twice on /demo: count it once
+    if (sent[name]) return; // one per page load, whichever embed or event reports it
     sent[name] = true;
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ event: name, form_id: FORM_ID });
   }
+  // HubSpot forms from the updated editor
+  window.addEventListener(&quot;hs-form-event:on-submission:success&quot;, function (e) {
+    if (e.detail &amp;&amp; e.detail.formId === FORM_ID) push(&quot;demo_form_submitted&quot;);
+  });
+  // HubSpot legacy forms, and RevenueHero bookings
   window.addEventListener(&quot;message&quot;, function (e) {
     var d = e.data;
     if (typeof d === &quot;string&quot;) { try { d = JSON.parse(d); } catch (err) { return; } }
@@ -182,6 +185,7 @@ footer a{color:inherit}
 })();
 &lt;/script&gt;</code></pre>
 <ul class="triggers"><li>Custom Event &quot;demo_form_submitted&quot; → use as the only trigger on the form-submit conversion tag</li><li>Custom Event &quot;demo_meeting_booked&quot; → use as the only trigger on the booking conversion tag</li></ul></div>
+<p class="embed">Your demo form uses HubSpot’s legacy embed (<code>embed/v2.js</code> with <code>hbspt.forms.create</code>), and the listener handles both that and forms built in HubSpot’s updated forms editor, so it still works if the form is moved over.</p>
 <!-- /ev:fix -->
 
 <h2>Secondary findings</h2>

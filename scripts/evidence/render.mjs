@@ -1,5 +1,5 @@
 // Renders the evidence report blocks on a /v/ page from capture.mjs output (scripts/evidence/capture.mjs).
-//   node scripts/evidence/render.mjs --evidence <dir>/evidence.json --page public/v/<slug>.html
+//   node scripts/evidence/render.mjs --evidence <dir>/evidence.json --page public/v/<slug>.html [--rows "Google Ads conversion,..."]
 // The page copy is written by hand; this script only fills the blocks between these markers, so a re-capture
 // updates the facts without touching the words around them:
 //   <!-- ev:tags --> ... <!-- /ev:tags -->    tags table: what loads, and what fires on each step we took
@@ -29,34 +29,55 @@ const STEPS = [
   ["form_load", `Open ${new URL(ev.formUrl).pathname}`],
   ["consent_accept_click", "Click Accept on the cookie banner"],
 ];
-const SHOW = ["Google Tag Manager", "Google tag (gtag.js)", "Google Ads conversion", "Google Ads remarketing", "GA4", "Meta pixel", "LinkedIn Insight", "HubSpot tracking"];
-const rows = new Map();
+// Rows to show, in this order. Keep only the rows that prove the page's finding: pass --rows "A,B" per page.
+// Google Tag Manager is never a row: it loads the tags but sends no hits of its own.
+const SHOW = (args.rows ? args.rows.split(",") : ["Google Ads conversion", "Google Ads remarketing", "GA4", "Meta pixel", "LinkedIn Insight", "HubSpot tracking"]).map((x) => x.trim());
+for (const v of SHOW) if (v === "Google Tag Manager") throw new Error("render: Google Tag Manager sends no hits; don't show it as a row");
+// The event parameter each vendor's hits carry, so every cell reads the same way as the proof request (en=..., label=...).
+const PARAM = { "Google Ads conversion": "en", "Google Ads remarketing": "en", GA4: "en", "Meta pixel": "ev" };
+const rows = new Map(SHOW.map((v) => [v, { vendor: v, ids: new Set(), loaded: false, fired: {} }]));
+let adsTagLoaded = false;
 for (const s of ev.summary) {
-  if (!SHOW.includes(s.vendor)) continue;
   // GA4 hits and the GA4 gtag.js load are one row; the Ads gtag.js load joins the Google Ads conversion row.
   const vendor = s.vendor === "Google tag (gtag.js)" ? (/^G-/.test(s.id) ? "GA4" : "Google Ads conversion") : s.vendor;
-  const key = vendor;
-  const r = rows.get(key) || { vendor, ids: new Set(), loaded: false, fired: {} };
+  if (s.vendor === "Google tag (gtag.js)" && /^AW-/.test(s.id) && s.loaded) adsTagLoaded = true;
+  const r = rows.get(vendor);
+  if (!r) continue;
   if (s.id) r.ids.add(s.id);
   r.loaded ||= s.loaded;
   for (const [ph, evs] of Object.entries(s.fired || {})) {
     const cur = new Set(r.fired[ph] || []);
-    for (const e of evs) if (!/^gtag\.config$/.test(e)) cur.add(e === "hit" ? "\u2713" : e.replace(/^label /, ""));
+    for (const e of evs) if (!/^gtag\.config$/.test(e)) cur.add(e);
     r.fired[ph] = [...cur];
   }
-  rows.set(key, r);
 }
+// Google Ads conversions: show the event and label of each /pagead/conversion/ request, as in the proof request.
+const conv = rows.get("Google Ads conversion");
+if (conv) {
+  conv.fired = {};
+  for (const h of ev.adsConversionHits.filter((x) => /\/pagead\/conversion\//.test(x.url))) {
+    const pair = `en=${new URL(h.url).searchParams.get("en")} label=${h.label}`;
+    conv.fired[h.phase] = [...new Set([...(conv.fired[h.phase] || []), pair])];
+  }
+}
+// Remarketing hits are sent by the Google Ads tag (gtag/js?id=AW-...), which has no script of its own to load.
+const rmkt = rows.get("Google Ads remarketing");
+const loads = (r) => (r.loaded ? "Yes" : r === rmkt && adsTagLoaded ? "Yes, via the Google Ads tag" : "No");
+const fmt = (r, e) => {
+  if (e === "hit") return "Request sent";
+  return e.split(" ").map((kv) => `<code>${esc(kv.includes("=") ? kv : `${PARAM[r.vendor] || "event"}=${kv.replace(/^label /, "")}`)}</code>`).join("<br>");
+};
 const cell = (r, ph) => {
   const f = r.fired[ph] || (ph === "form_load" ? r.fired.form_load_after_click : null);
-  const named = (f || []).filter((x) => x !== "\u2713");
-  if (named.length) return named.map((x) => `<code>${esc(x)}</code>`).join(" ");
-  return f && f.length ? f.map((x) => `<code>${esc(x)}</code>`).join(" ") : "none";
+  if (!f || !f.length) return "No request";
+  const named = f.filter((x) => x !== "hit");
+  return (named.length ? named : f).map((e) => fmt(r, e)).join("<br>");
 };
 const tagsHtml = `<div class="tablewrap"><table class="tags">
-<caption>What loaded and what was sent at each step (${esc(new Date(ev.capturedAt).toLocaleString("en-GB", { timeZone: "Africa/Johannesburg", day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" }))} SAST, fresh browser, no consent choice made)</caption>
+<caption>What loaded and what was sent at each step (${esc(new Date(ev.capturedAt).toLocaleString("en-GB", { timeZone: "Africa/Johannesburg", day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" }))} SAST, fresh browser, no consent choice made before the Accept click)</caption>
 <thead><tr><th scope="col">Tag</th><th scope="col">Loads</th>${STEPS.map(([, h]) => `<th scope="col">${esc(h)}</th>`).join("")}</tr></thead>
 <tbody>
-${[...rows.values()].filter((r) => r.loaded || Object.keys(r.fired).length).map((r) => `<tr><th scope="row">${esc(r.vendor)}${r.ids.size ? `<br><code>${[...r.ids].map(esc).join(", ")}</code>` : ""}</th><td>${r.loaded ? "Yes" : ""}</td>${STEPS.map(([ph]) => `<td>${cell(r, ph)}</td>`).join("")}</tr>`).join("\n")}
+${[...rows.values()].filter((r) => r.loaded || Object.keys(r.fired).length).map((r) => `<tr><th scope="row">${esc(r.vendor)}${r.ids.size ? `<br><code>${[...r.ids].map(esc).join(", ")}</code>` : ""}</th><td>${loads(r)}</td>${STEPS.map(([ph]) => `<td>${cell(r, ph)}</td>`).join("")}</tr>`).join("\n")}
 </tbody></table></div>`;
 
 // Proof request: the conversion sent when the form page is opened, before any click.
@@ -70,10 +91,11 @@ ${keep.filter((k) => u.searchParams.has(k)).map((k) => `  ${k}=${esc(u.searchPar
 // Fix for the detected form tool (stubs throw, so only a finished template can be rendered).
 const tool = ev.form.tools.find((t) => t.tool === "hubspot" && t.forms && t.forms.length);
 if (!tool) throw new Error("render: no supported form tool detected; finish its template in scripts/evidence/fixes/");
-const fix = fixFor("hubspot").build({ formId: tool.forms[0].formId });
+const fix = fixFor("hubspot").build({ formId: tool.forms[0].formId, variant: tool.variant });
+if (!fix.embedNote) console.warn(`render: capture couldn't tell which HubSpot embed the form uses (variant "${tool.variant}"); no embed sentence on the page`);
 const fixHtml = `<div class="fix"><div class="fixbar"><span>GTM: ${esc(fix.gtm.tag)}</span><button type="button" class="copy" data-copy="fix-snippet">Copy</button></div>
 <pre tabindex="0"><code id="fix-snippet">${esc(fix.snippet)}</code></pre>
-<ul class="triggers">${fix.gtm.triggers.map((t) => `<li>${esc(t)}</li>`).join("")}</ul></div>`;
+<ul class="triggers">${fix.gtm.triggers.map((t) => `<li>${esc(t)}</li>`).join("")}</ul></div>${fix.embedNote ? `\n<p class="embed">${fix.embedNote}</p>` : ""}`;
 
 let html = readFileSync(args.page, "utf8");
 for (const [name, block] of [["tags", tagsHtml], ["proof", proofHtml], ["fix", fixHtml]]) {
