@@ -31,7 +31,7 @@ export default function Header({ path = "/" }: { path?: string }) {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <a href={site.bookPath} target="_blank" rel="noopener noreferrer" className="btn btn-m"><span>Book a review</span><span className="sr-only"> (opens in a new tab)</span></a>
+          <a href={site.bookPath} target="_blank" rel="noopener noreferrer" className="btn btn-m"><span>Book a fit call</span><span className="sr-only"> (opens in a new tab)</span></a>
         </div>
 
         <button
@@ -58,7 +58,7 @@ export default function Header({ path = "/" }: { path?: string }) {
           ))}
         </ul>
         <div className="mt-6 flex flex-col gap-3">
-          <a href={site.bookPath} target="_blank" rel="noopener noreferrer" className="btn w-full">Book a 20-minute pipeline review<span className="sr-only"> (opens in a new tab)</span></a>
+          <a href={site.bookPath} target="_blank" rel="noopener noreferrer" className="btn w-full">Book a 20-minute fit call<span className="sr-only"> (opens in a new tab)</span></a>
         </div>
       </nav>
     </header>

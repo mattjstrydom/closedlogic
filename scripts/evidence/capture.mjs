@@ -51,6 +51,8 @@ const { chromium } = await import(pwPath.startsWith("/") ? pathToFileURL(pwPath)
 const sharp = (await import("sharp")).default;
 
 // ---------- request classification ----------
+/** A GA4 hit on any host: a tid=G-... measurement ID together with an en= event name, in either order. */
+const GA4_ANY_HOST = /^(?=[^#]*[?&]tid=G-[A-Z0-9]+(?:[&#]|$))(?=[^#]*[?&]en=[^&#]+)/i;
 /** [vendor, kind, regex]. kind: "script" (a tag loading) or "hit" (data sent to a collect endpoint). */
 const RULES = [
   ["Google Tag Manager", "script", /googletagmanager\.com\/gtm\.js/],
@@ -59,6 +61,9 @@ const RULES = [
   ["Google Ads remarketing", "hit", /googleads\.g\.doubleclick\.net\/pagead\/viewthroughconversion\/|google\.[a-z.]+\/pagead\/1p-user-list\/|\/ccm\/collect/],
   ["Google Ads form data", "hit", /google\.[a-z.]+\/pagead\/form-data\//],
   ["GA4", "hit", /(google-analytics\.com|analytics\.google\.com)\/g\/collect/],
+  // GA4 sent through a first-party path on the prospect's own host (server-side GTM or a Google tag gateway, e.g.
+  // www.getborderless.co.uk/<random>/ag/g/c?...&tid=G-...&en=page_view): any host, matched on tid=G-... with en=.
+  ["GA4", "hit", GA4_ANY_HOST],
   ["Meta pixel", "script", /connect\.facebook\.net\/.*(fbevents|signals)/],
   ["Meta pixel", "hit", /facebook\.com\/tr/],
   ["LinkedIn Insight", "script", /snap\.licdn\.com/],
@@ -94,6 +99,8 @@ const RULES = [
 const BLOCK = new RegExp([
   // Google: GA4, Ads conversions and remarketing, Floodlight, enhanced conversions, consent-mode pings
   String.raw`/g/collect|/g/s/collect|google-analytics\.com/(?:g/|j/|r/)?collect|analytics\.google\.com/g/`,
+  // GA4 through a first-party path on any host (same test as GA4_ANY_HOST above)
+  GA4_ANY_HOST.source,
   String.raw`pagead/conversion/|1p-conversion|1p-user-list|viewthroughconversion|/ccm/|/rmkt/collect|/ads/ga-audiences`,
   String.raw`pagead/form-data|googleads\.g\.doubleclick\.net/pagead/id|td\.doubleclick\.net|ad\.doubleclick\.net|static\.doubleclick\.net/instream`,
   // Meta, LinkedIn, Microsoft, X, Pinterest, TikTok, Reddit, Quora

@@ -116,7 +116,7 @@ Google's offline data diagnostics label "No recent data" means no events have be
 > 6. **EEA consent signals.** We check consent is set where Google requires it.
 > 7. **Side-by-side count.** We compare HubSpot stage changes with Google Ads conversions for the same period and explain the gap.
 >
-> We make only the changes you approve and log how to reverse each one. See a [sample report](/method) built on a fictional account.
+> We make only the changes you approve and log how to reverse each one. See the [20 checks we run](/method).
 
 ## Where to go next
 

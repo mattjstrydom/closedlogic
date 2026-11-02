@@ -64,7 +64,7 @@ export default function ForPe() {
         <PageHero
           id="pe"
           title="One measurement standard across your portfolio."
-          sub="We make every portfolio company’s pipeline numbers comparable — without migrating their CRMs. For operating partners who need one number, not six definitions."
+          sub="We make every portfolio company’s pipeline numbers comparable, without migrating their CRMs. For operating partners who need one number, not six definitions."
           micro="Your CRM partner implements. We measure. No migration required."
         >
           <BookPeButton className="w-full sm:w-auto" />
@@ -122,7 +122,7 @@ export default function ForPe() {
                 <li key={m} className="border-b border-solid border-rule py-3 font-medium text-ink">{m}</li>
               ))}
             </ol>
-            <p className="lead lead-center mt-8 max-w-[44rem]">One definition, one formula, one data source, one cadence — across every portfolio company.</p>
+            <p className="lead lead-center mt-8 max-w-[44rem]">One definition, one formula, one data source, one cadence, across every portfolio company.</p>
           </div>
         </section>
 

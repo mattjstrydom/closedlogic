@@ -30,9 +30,9 @@ const notIncluded = ["Media buying", "Creative, content or web development", "CR
 
 const weeks: [string, string, string][] = [
   ["Week 1", "Access and definitions.", "Read-only access to Google Ads, HubSpot and your reporting. One KPI dictionary. One definition of a lead, an opportunity and pipeline."],
-  ["Week 2", "The audit.", "20 checks. GCLID coverage, lifecycle, scoring, routing, attribution, reporting reconciliation."],
-  ["Week 3", "The baseline.", "Last 90 days. Where the numbers disagree, why, and what it costs."],
-  ["Week 4", "The scorecard and the roadmap.", "One page. The top three material issues. A 90-day plan. A readout with your team."],
+  ["Week 2", "The audit and the baseline.", "20 checks, plus the last 90 days: where the numbers disagree and why."],
+  ["Week 3", "The readout and the roadmap.", ""],
+  ["Week 4", "The first scorecard, and the first fixes you approve.", ""],
 ];
 
 const faqs = [
@@ -56,7 +56,7 @@ export default function ForB2bSaas() {
           id="b2b"
           title="Fractional measurement leadership for B2B SaaS."
           sub="We own the tracking, attribution, HubSpot lifecycle and reporting layer: 25 hours a month, $5,000, independent of your media agency, with a 30-day exit."
-          micro={["You keep your agency. We keep the number true.", "No media-buying incentive. No CRM implementation. Just the number."]}
+          micro={["You keep your agency. We keep the number true.", "No media to sell. No software to resell. No cut of your ad spend."]}
         >
           <BookButton className="w-full sm:w-auto" />
           <AuditButton className="w-full sm:w-auto" />
@@ -117,7 +117,7 @@ export default function ForB2bSaas() {
                 <li key={w} className="card group flex flex-col gap-3 p-6 text-text-m">
                   <Numeral n={i + 1} pad className="!text-[3.2rem]" />
                   <h3 className="text-title-xs"><span className="text-muted">{w}. </span>{lead}</h3>
-                  <p className="text-body">{rest}</p>
+                  {rest && <p className="text-body">{rest}</p>}
                 </li>
               ))}
             </ol>
@@ -161,7 +161,7 @@ export default function ForB2bSaas() {
           </div>
         </section>
 
-        <CtaBand id="start" title="Start with the audit." body="Ten business days from read access. 20 checks. If the audit doesn’t find at least three material issues, we refund the full $1,500 within 14 days of the audit readout. You keep the report, the baseline and the roadmap.">
+        <CtaBand id="start" title="Start with the audit." body="10 business days from read access. 20 checks. If the audit doesn’t find at least three material issues, we refund the full $1,500 within 14 days of the audit readout. You keep the report, the baseline and the roadmap.">
           <BookButton className="w-full sm:w-auto">Book the audit</BookButton>
           <a href={`mailto:${site.email}`} className="btn-outline w-full sm:w-auto">Email us</a>
         </CtaBand>

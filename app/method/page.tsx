@@ -18,8 +18,7 @@ export const metadata = pageMetadata({
 });
 
 const cadence: [string, string][] = [
-  ["10 business days from read access", "The audit."],
-  ["30 days", "The baseline and the roadmap."],
+  ["10 business days from read access", "The audit, the 90-day baseline and the roadmap."],
   ["Monthly", "The scorecard and the review."],
   // The quarterly portfolio roll-up is a PE deliverable: shown only when site.showPE is true (app/flags.ts).
   ...(site.showPE ? ([["Quarterly", "The portfolio roll-up and the benchmark."]] as [string, string][]) : []),
@@ -34,7 +33,7 @@ export default function Method() {
         <PageHero
           id="method"
           title="The Measurement Standard."
-          sub="One definition, one formula, one data source, one cadence. The same standard for one company or twenty."
+          sub="One definition, one formula, one data source and one cadence for every metric."
         />
 
         <section id="metrics" aria-labelledby="metrics-title" className="section-y band">
@@ -75,9 +74,9 @@ export default function Method() {
           <div className="container-site">
             <div className="mx-auto max-w-[44rem] text-center">
               <h2 id="principle-title" className="heading-center text-title-l">
-                Standardize the engine. <Accent>Localize the story.</Accent>
+                One number, <Accent>checked every month.</Accent>
               </h2>
-              <p className="lead mt-6">One definition of pipeline, one scorecard, one cadence. The campaigns, the offers and the message stay local.</p>
+              <p className="lead mt-6">One definition of pipeline, one scorecard, one cadence. Your team and your agency keep running the campaigns.</p>
             </div>
           </div>
         </section>

@@ -54,7 +54,7 @@ const offers: { name: string; price: string; body: string; href: string; link: s
 ];
 
 const steps: [string, string][] = [
-  ["Book a 20-minute review.", "Bring your Google Ads conversions, your HubSpot pipeline and the number in your board deck. No deck. No pitch. A diagnosis."],
+  ["Book a 20-minute fit call.", "Bring your Google Ads conversions, your HubSpot pipeline and the number in your board deck. Bring your three numbers and we’ll tell you whether an audit is worth doing."],
   ["We find the gap.", "20 checks in 10 business days from read access: tracking, GCLID coverage, lifecycle stages, lead scoring, routing, attribution, reporting reconciliation."],
   ["You get one number.", "A baseline, a one-page scorecard and a 90-day roadmap. The material issues we find, with the top three ranked by revenue impact."],
   ["We keep it true.", "A monthly scorecard, a fix list and a 60-minute review. The number stays defensible after the audit ends."],
@@ -62,12 +62,12 @@ const steps: [string, string][] = [
 
 const faqs: { q: string; a: string }[] = [
   { q: "Why not just use our agency?", a: "Because the agency that runs your ads has an incentive to report them favorably. We don’t run media. We audit the number." },
-  { q: "Why not just use our CRM partner?", a: "CRM partners implement and standardize the tool. We test whether the numbers the tool produces are true — and whether they compare across companies." },
+  { q: "Why not just use our CRM partner?", a: "CRM partners set up the tool. We test whether the numbers it produces are true, and we resell no software." },
   { q: "Do you replace our dashboard?", a: "No. We define the metrics, reconcile the sources and own the monthly scorecard. Your dashboard can stay." },
   { q: "What does it cost?", a: "Audit $1,500. Measurement Scorecard $1,500/month, no notice period. Fractional $5,000/month, with a 30-day exit. Fixed scope. No media percentage." },
   { q: "What if we’re not sure?", a: "Start with the audit. If the audit doesn’t find at least three material issues, we refund the full $1,500 within 14 days of the audit readout. You keep the report, the baseline and the roadmap." },
   ...guaranteeFaqs,
-  { q: "How fast?", a: "Audit in 10 business days from read access. Baseline in 30 days." },
+  { q: "How fast?", a: "Audit, baseline and roadmap in 10 business days from read access." },
   { q: "Do you sign NDAs?", a: "Yes." },
 ];
 const faqItems: FaqItem[] = faqs.map(({ q, a }) => ({ q, a }));
@@ -129,7 +129,7 @@ export default function Home() {
                 Your pipeline numbers don’t agree. <Accent>We find out which one is right.</Accent>
               </h1>
               <p className="lead max-w-[46rem]">
-                Closed Logic is the independent measurement layer for B2B SaaS. We don’t run your ads or implement your CRM. We own the number you take to the board.
+                Closed Logic is the independent measurement layer for B2B SaaS. We sell no media, resell no software and take no cut of your ad spend. We own the number you take to the board.
               </p>
               <div className="mt-2 flex w-full flex-col items-center justify-center gap-4 sm:w-auto sm:flex-row sm:flex-wrap">
                 <BookButton className="w-full sm:w-auto" />
@@ -260,8 +260,8 @@ export default function Home() {
         </section>
 
         {/* 9. Final CTA */}
-        <CtaBand id="request" title="Bring three numbers. We’ll tell you which one is wrong." body="A 20-minute pipeline review. No pitch. A diagnosis.">
-          <BookButton className="w-full sm:w-auto">Book the review</BookButton>
+        <CtaBand id="request" title="Bring three numbers. We’ll tell you which one is wrong." body="A 20-minute fit call. Bring your three numbers.">
+          <BookButton className="w-full sm:w-auto">Book a fit call</BookButton>
           <a href={`mailto:${site.email}`} className="btn-outline w-full sm:w-auto">Email us</a>
         </CtaBand>
       </main>

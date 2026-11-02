@@ -58,7 +58,8 @@ pre code{background:none;padding:0;color:inherit;font-size:inherit;overflow-wrap
 .cta h2{margin-top:0}
 .btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;padding:12px 28px;background:#ff4b3e;color:#0a0a0a;font-family:Poppins,Arial,sans-serif;font-weight:600;font-size:1.05rem;line-height:1.2;text-decoration:none;border-radius:8px}
 .btn:hover{background:#ff6a5f}
-.ctas{display:flex;flex-direction:column;gap:12px;margin:16px 0}
+.ctas{display:flex;flex-direction:column;gap:12px;margin:16px 0 8px}
+.alt{margin-top:0}
 .audit{margin-bottom:0;font-size:.95rem}
 .tnote,.embed{font-size:.95rem}
 @media (min-width:640px){.btn{display:inline-flex;width:auto}.ctas{flex-direction:row;flex-wrap:wrap}}
@@ -77,9 +78,9 @@ footer a{color:inherit}
 <video controls playsinline preload="metadata" poster="/v/borderless-abuhiuen-v10.webp" width="1280" height="720">
 <source src="/v/borderless-abuhiuen-v10.mp4" type="video/mp4">
 </video>
-<p class="nopitch">Here&#8217;s what we found, and the fix is below.</p>
+<p class="nopitch">Here&#8217;s what I found, and the fix is below.</p>
 
-<h2>What we checked</h2>
+<h2>What I checked</h2>
 <ul>
 <li>Your live Google Tag Manager container (<code>GTM-WN5PP9J7</code>) and the Google Ads tag it loads (<code>AW-11304873022</code>).</li>
 <li>What the browser sends to Google Ads when someone opens /demo and clicks on the page.</li>
@@ -97,13 +98,13 @@ footer a{color:inherit}
 <h2>The main finding: two Google Ads conversions before the form</h2>
 <ol class="finding">
 <li>Opening /demo sends a Google Ads conversion (event <code>page_view</code>, conversion label <code>0iTHCK7X0coZEL7Yyo4q</code>). It comes from a page-view rule set in your Google Ads tag for www.getborderless.co.uk/demo.</li>
-<li>Clicking a link to /demo sends a second one (label <code>9ESjCOrlxvAcEL7Yyo4q</code>). The rule counts any click on something whose link contains /demo, so in our test it also fired when we clicked Accept on your cookie banner on /demo.</li>
+<li>Clicking a link to /demo sends a second one (label <code>9ESjCOrlxvAcEL7Yyo4q</code>). The rule counts any click on something whose link contains /demo, so in my test it also fired when I clicked Accept on your cookie banner on /demo.</li>
 </ol>
-<p>Your container also has separate conversions for the real form submit (label <code>I67YCMqhwPAcEL7Yyo4q</code>) and a RevenueHero booking (label <code>tKbOCOuyu_AcEL7Yyo4q</code>). So up to four conversions are set up along one path to a demo. We saw the first two fire. We didn&#8217;t test the other two.</p>
+<p>Your container also has separate conversions for the real form submit (label <code>I67YCMqhwPAcEL7Yyo4q</code>) and a RevenueHero booking (label <code>tKbOCOuyu_AcEL7Yyo4q</code>). So up to four conversions are set up along one path to a demo. I saw the first two fire. I didn&#8217;t test the other two.</p>
 <p class="spend">What it means for your ad spend: if either of the first two is set to Primary, Google Ads is bidding towards people who open /demo, not people who ask for a demo, and the cost per demo it reports will look lower than it really is.</p>
 
 <h2>Evidence</h2>
-<p>The request your site sent to Google Ads when we opened /demo, before any click:</p>
+<p>The request your site sent to Google Ads when I opened /demo, before any click:</p>
 <!-- ev:proof -->
 <pre class="req" tabindex="0"><code>GET https://www.googleadservices.com/pagead/conversion/11304873022/
   en=page_view
@@ -126,13 +127,14 @@ footer a{color:inherit}
 <tr><th scope="row">Google Ads remarketing<br><code>AW-11304873022</code></th><td>Yes, via the Google Ads tag</td><td>No request</td><td><code>en=page_view</code></td><td><code>en=form_start</code></td></tr>
 </tbody></table></div>
 <!-- /ev:tags -->
+<p>I ran this in a fresh browser where no cookie choice had been made. The Google Ads, Meta and LinkedIn tags still fired before I clicked anything on your cookie banner.</p>
 <p class="tnote">Why <code>en=form_start</code> on Accept: your cookie banner keeps its settings in a hidden form on /demo (<code>id=cookie-preferences</code>). Clicking Accept ticks its three checkboxes, and Google&#8217;s tags count that as someone starting a form. The same click sent GA4 a <code>form_start</code> for <code>form_id=cookie-preferences</code>. Your demo form wasn&#8217;t touched.</p>
 <figure>
 <img src="/v/evidence/borderless-abuhiuen/ads-transparency.webp" width="850" height="500" loading="lazy" decoding="async" alt="Google Ads Transparency Centre showing 14 ads on record for getborderless.co.uk.">
 <figcaption>Google Ads Transparency Centre, 31 October 2026: 14 ads on record pointing to getborderless.co.uk.</figcaption>
 </figure>
 
-<h2>What we can&#8217;t see from outside</h2>
+<h2>What I can&#8217;t see from outside</h2>
 <p>Which of these conversions are primary (used for bidding) and which are secondary (reporting only). That&#8217;s the one thing that decides whether this matters, and it&#8217;s a 5-minute check.</p>
 
 <h2>Your 5-minute self-check in Google Ads</h2>
@@ -141,6 +143,7 @@ footer a{color:inherit}
 <li>Look for conversion actions that count a page view of /demo, or a click to /demo. In the details of each one, the tag label will match one of these: <code>0iTHCK7X0coZEL7Yyo4q</code> (demo page view) or <code>9ESjCOrlxvAcEL7Yyo4q</code> (click to /demo).</li>
 <li>Check the column that says whether each action is Primary or Secondary.</li>
 <li>If either of them is Primary, your campaigns are bidding for page views and clicks as well as real demo requests.</li>
+<li>Set the date range to the last 30 days and add the All conv. column. Compare the conversions on the demo page-view action (<code>0iTHCK7X0coZEL7Yyo4q</code>) with the form-submit action (<code>I67YCMqhwPAcEL7Yyo4q</code>). The page-view action counts every visit to /demo and the form submit counts real requests, so if the page view is Primary, the ratio between the two shows roughly how far your demo count is inflated.</li>
 <li>While you&#8217;re there, check that the form submit (<code>I67YCMqhwPAcEL7Yyo4q</code>) and the RevenueHero booking (<code>tKbOCOuyu_AcEL7Yyo4q</code>) are the ones you actually want to bid towards.</li>
 </ol>
 
@@ -190,17 +193,20 @@ footer a{color:inherit}
 
 <h2>Secondary findings</h2>
 <ol>
-<li>Clicks to pricing and case studies count as conversions. A click on a link to getborderless.co.uk/pricing or /case-study sends a Google Ads conversion (label <code>w-7yCJq2xPAcEL7Yyo4q</code>). Phone-number clicks (tel: links) send another (label <code>sxhDCO29lfEcEL7Yyo4q</code>). We read this from your container; we didn&#8217;t click them.</li>
+<li>Clicks to pricing and case studies count as conversions. A click on a link to getborderless.co.uk/pricing or /case-study sends a Google Ads conversion (label <code>w-7yCJq2xPAcEL7Yyo4q</code>). Phone-number clicks (tel: links) send another (label <code>sxhDCO29lfEcEL7Yyo4q</code>). I read this from your container; I didn&#8217;t click them.</li>
 <li>The ad click doesn&#8217;t travel with the demo request. The demo form has no hidden field for gclid or UTMs, and the &#8220;Book a demo&#8221; buttons on your homepage go to /demo with only a page label added (<code>demo_source_page</code>), so someone who lands on the homepage from an ad submits the form without them. Google Ads&#8217; own tags still credit the ad through its first-party cookie, but anything built on the HubSpot record, such as offline conversion imports, won&#8217;t have it.</li>
 </ol>
 
 <section class="cta" aria-labelledby="cta-h">
-<h2 id="cta-h">Want a hand putting this in, or checking your form and RevenueHero conversions too?</h2>
-<p>Reply &#8220;fix&#8221; to my email, or book 20&nbsp;minutes.</p>
+<h2 id="cta-h">Before your new Head of Marketing starts</h2>
+<p>Your new Head of Marketing will report to you, and your ad gives them this for their first 30 days: “Agree a plan with RevOps to fix HubSpot routing, lead scoring and attribution”. That plan is easier to agree when the numbers it starts from have already been checked.</p>
+<p>The fix above stops Google Ads counting page views and clicks to /demo as demo conversions. Bidding on qualified demos from HubSpot is what the audit sets up: I check which HubSpot stages reach Google Ads and which ones bidding uses, build a baseline of the last 90 days, and write the roadmap for moving bidding onto qualified demos. The audit uses read-only access, so nothing changes in your accounts unless you approve it.</p>
+<p>It takes 10 business days from read access, so the checked baseline can be ready before your new Head of Marketing starts.</p>
+<p>Reply “fix” to my email and I’ll send you the scope and the read access I need.</p>
 <div class="ctas">
 <a class="btn" data-cta="reply" data-v-slug="borderless-abuhiuen" href="mailto:matt@closedlogic.co?subject=fix%3A%20Borderless%20Google%20Ads%20tracking">Reply &#8220;fix&#8221;</a>
-<a class="btn" data-cta="book" data-v-slug="borderless-abuhiuen" href="https://cal.com/closedlogic/20min-fit?utm_source=video-page&amp;utm_campaign=borderless-abuhiuen&amp;utm_content=book-cta" target="_blank" rel="noopener">Book a 20-minute call</a>
 </div>
+<p class="alt">Or <a data-cta="book" data-v-slug="borderless-abuhiuen" href="https://cal.com/closedlogic/20min-fit?utm_source=video-page&amp;utm_campaign=borderless-abuhiuen&amp;utm_content=book-cta" target="_blank" rel="noopener">book a 20-minute fit call</a>.</p>
 <p class="audit"><a href="https://www.closedlogic.com/pricing?utm_source=video-page&amp;utm_campaign=borderless-abuhiuen&amp;utm_content=audit">The full audit</a> is $1,500. If the audit doesn&#8217;t find at least three material issues, we refund the full $1,500 within 14 days of the audit readout.</p>
 </section>
 </main>

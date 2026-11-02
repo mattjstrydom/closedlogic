@@ -5,7 +5,7 @@ import { site } from "../site.config";
 // new tab, no embed. Secondary buttons are internal links.
 type P = { className?: string; href?: string; children?: React.ReactNode };
 
-export function BookButton({ className = "", href = site.bookPath, children = "Book a 20-minute pipeline review" }: P) {
+export function BookButton({ className = "", href = site.bookPath, children = "Book a 20-minute fit call" }: P) {
   return (
     <a href={href} target="_blank" rel="noopener noreferrer" className={`btn ${className}`}>
       {children}

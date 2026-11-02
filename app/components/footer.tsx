@@ -12,7 +12,7 @@ export default function Footer() {
     <footer className="border-t border-solid border-rule bg-white py-10 text-text-s text-body">
       <div className="container-site flex flex-col gap-4">
         <Logo />
-        <p className="font-medium text-ink">We don&apos;t run media. We don&apos;t sell CRM. We own the number.</p>
+        <p className="font-medium text-ink">We sell no media, resell no software and take no cut of ad spend. We own the number.</p>
         <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-3">
           <p>{site.legalLine}.</p>
           <nav aria-label="Footer" className="flex flex-wrap items-center gap-x-6 gap-y-2">

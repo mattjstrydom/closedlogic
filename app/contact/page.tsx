@@ -8,7 +8,7 @@ import { site } from "../site.config";
 
 export const metadata = pageMetadata({
   title: "Contact: bring three numbers",
-  description: "A 20-minute pipeline review. No pitch. A diagnosis. Bring your Google Ads conversions, your HubSpot pipeline and the number in your board deck.",
+  description: "A 20-minute fit call. Bring your three numbers. Bring your Google Ads conversions, your HubSpot pipeline and the number in your board deck.",
   path: "/contact",
 });
 
@@ -30,7 +30,7 @@ export default function Contact() {
               <h1 id="contact-title" className="heading-center text-title-xl">
                 Bring <Accent>three numbers.</Accent>
               </h1>
-              <p className="lead max-w-[40rem]">A 20-minute pipeline review. No pitch. A diagnosis.</p>
+              <p className="lead max-w-[40rem]">A 20-minute fit call. Bring your three numbers.</p>
             </div>
           </div>
         </section>

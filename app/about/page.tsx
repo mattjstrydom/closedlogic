@@ -11,7 +11,7 @@ import { site } from "../site.config";
 
 export const metadata = pageMetadata({
   title: "About: independent by design",
-  description: "Closed Logic is an independent measurement practice. We don’t run media, sell CRM implementation or build dashboards. We make the numbers comparable.",
+  description: "Closed Logic is an independent measurement practice. We sell no media, resell no software and take no cut of ad spend. We check the numbers and keep them true.",
   path: "/about",
 });
 
@@ -68,7 +68,7 @@ export default function About() {
         <PageHero
           id="about"
           title="Independent by design."
-          sub="Closed Logic is an independent measurement practice. We don’t run media, sell CRM implementation or build dashboards. We make the numbers comparable."
+          sub="Closed Logic is an independent measurement practice. We sell no media, resell no software and take no cut of ad spend. We check the numbers and keep them true."
         />
 
         <section id="independent" aria-labelledby="independent-title" className="section-y band">
@@ -111,7 +111,7 @@ export default function About() {
         </section>
 
         <CtaBand id="start" title="Bring three numbers." body="Google Ads conversions. HubSpot pipeline. The number in your board deck. We’ll tell you which one is wrong.">
-          <BookButton className="w-full sm:w-auto">Book a 20-minute review</BookButton>
+          <BookButton className="w-full sm:w-auto">Book a 20-minute fit call</BookButton>
           <a href={`mailto:${site.email}`} className="btn-outline w-full sm:w-auto">Email us</a>
         </CtaBand>
       </main>

@@ -123,14 +123,14 @@ export default function RequestForm({ initialType = "b2b", choose = false, email
           )}
         </div>
         <button type="submit" className="btn w-full cursor-pointer disabled:cursor-wait disabled:opacity-70 sm:w-auto" disabled={status === "sending"}>
-          Book the review
+          Send
         </button>
         <p className="text-body">We reply within one business day.</p>
       </form>
       <p className="mt-6">
         Prefer to pick a time now?{" "}
         <a href={bookUrls[type] ?? bookUrls.b2b} target="_blank" rel="noopener noreferrer" className="link">
-          Book a 20-minute pipeline review
+          Book a 20-minute fit call
           <span className="sr-only"> (opens in a new tab)</span>
         </a>
       </p>
