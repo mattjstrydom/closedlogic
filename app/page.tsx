@@ -225,12 +225,12 @@ export default function Home() {
             <SectionHead id="for">Who this is for.</SectionHead>
             <div className={`${card} mx-auto mt-14 max-w-[60rem]`}>
               <h3 className="text-title-m">For B2B SaaS</h3>
-              <p>$10M to $50M ARR · 20 to 200 employees · HubSpot Professional or Enterprise · Google Ads $10k+/month · sales-led or hybrid · 2 to 15 marketing staff · US, UK or Canada.</p>
+              <p>For B2B companies running Google Ads into HubSpot, usually seed to Series B, and often just after hiring a marketing lead.</p>
               <p className="mt-auto pt-2"><Link href="/for-b2b-saas" className="link font-semibold">For B2B SaaS →</Link></p>
             </div>
             <div className="card mx-auto mt-7 max-w-[60rem] text-text-m">
               <h3 className="text-title-xs">Who this is not for</h3>
-              <p className="mt-2">Ecommerce with a uniform average order value. Pre-PMF startups. Companies that want a body shop.</p>
+              <p className="mt-2">Ecommerce with a uniform average order value. Companies that want a body shop.</p>
             </div>
           </div>
         </section>

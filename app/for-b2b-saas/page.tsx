@@ -128,7 +128,7 @@ export default function ForB2bSaas() {
           <div className="container-site">
             <SectionHead id="for">Who it’s for.</SectionHead>
             <p className="card mx-auto mt-10 max-w-[52rem] text-text-l">
-              $10M to $50M ARR · 20 to 200 employees · HubSpot Professional or Enterprise · Google Ads $10k+/month · sales-led or hybrid · 2 to 15 marketing staff · US, UK or Canada.
+              For B2B companies running Google Ads into HubSpot, usually seed to Series B, and often just after hiring a marketing lead.
             </p>
           </div>
         </section>
