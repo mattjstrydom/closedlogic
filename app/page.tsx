@@ -219,18 +219,12 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 6. Who it's for */}
+        {/* 6. Who it's not for */}
         <section id="for" aria-labelledby="for-title" className="section-y band">
           <div className="container-site">
-            <SectionHead id="for">Who this is for.</SectionHead>
-            <div className={`${card} mx-auto mt-14 max-w-[60rem]`}>
-              <h3 className="text-title-m">For B2B SaaS</h3>
-              <p>For B2B companies running Google Ads into HubSpot, usually seed to Series B, and often just after hiring a marketing lead.</p>
-              <p className="mt-auto pt-2"><Link href="/for-b2b-saas" className="link font-semibold">For B2B SaaS →</Link></p>
-            </div>
-            <div className="card mx-auto mt-7 max-w-[60rem] text-text-m">
-              <h3 className="text-title-xs">Who this is not for</h3>
-              <p className="mt-2">Ecommerce with a uniform average order value. Companies that want a body shop.</p>
+            <SectionHead id="for">Who this is not for.</SectionHead>
+            <div className="card mx-auto mt-10 max-w-[52rem] text-text-l">
+              <p>Ecommerce with a uniform average order value. Companies that want a body shop.</p>
             </div>
           </div>
         </section>
