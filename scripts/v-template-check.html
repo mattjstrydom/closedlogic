@@ -1,0 +1,104 @@
+<!doctype html>
+<!--
+  Template for a NEW unlisted /v/ check page (Closed Logic). Not deployed: it lives in scripts/, not public/. Existing /v/ pages
+  are never changed by this template.
+
+  To make a page: copy to public/v/<slug>.html, slug = "<company>-<8 random lowercase letters/digits>". Replace every
+  {{TOKEN}} (grep "{{" before committing: npm run build fails if any reaches out/):
+    {{SLUG}} {{COMPANY}} {{DOMAIN}} {{FIRST_NAME}} {{CHECK_DATE}} {{HEADLINE}} {{ONE_LINE_FINDING}} {{SPEND_IMPACT}}
+    {{ACTION_NAME}} {{PAGEVIEW_COUNT}} {{SUBMIT_COUNT}} {{HUBSPOT_EMBED}} (legacy embed, or updated editor)
+  Use &#8217; for apostrophes. One voice: "we". One primary CTA (Reply "fix", with the fix offer and its price). Booking a
+  call is one secondary text link. Do not link to /pricing.
+
+  Switches (delete or keep):
+    - Evidence table: rows are data-row="..."; the GTM row is hidden by default (the hidden attribute). Remove "hidden" to show it.
+    - Consent block: optional, plain observation only, no legal conclusions. Delete the whole <section id="consent"> if unused.
+    - Code fix: OFF by default. The short fix description is shown instead. To show code, delete the description paragraph
+      and uncomment the <div class="fix"> block.
+    - Pipeline stage: only recommend a stage as the bidding goal if the account has enough monthly volume (the page says so).
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
+<title>{{HEADLINE}} | Closed Logic</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script src="/v/clarity.js" async></script>
+<script src="/v/report.js" defer></script>
+<script src="/v/fixoffer.js" defer></script>
+<style>
+@font-face{font-family:Poppins;font-weight:400;font-style:normal;font-display:swap;src:url(/v/poppins-regular.woff2) format("woff2")}
+@font-face{font-family:Poppins;font-weight:600;font-style:normal;font-display:swap;src:url(/v/poppins-semibold.woff2) format("woff2")}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:#0a0a0a;font-family:Poppins,Arial,sans-serif;line-height:1.5}
+.wrap{max-width:860px;margin:0 auto;padding:24px 20px 40px}
+h1{font-weight:600;font-size:clamp(1.5rem,4.2vw,2.2rem);line-height:1.2;letter-spacing:-0.02em;margin:32px 0 20px;border-left:5px solid #ff4b3e;padding-left:16px}
+h2{font-size:1.25rem;margin:36px 0 12px}
+code{background:#f3f3f3;padding:1px 5px;border-radius:4px;font-size:.9em}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{border:1px solid #e5e5e5;padding:8px 10px;text-align:left;vertical-align:top}
+[hidden]{display:none!important}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 28px;background:#ff4b3e;color:#0a0a0a;font-weight:600;border-radius:10px;text-decoration:none}
+.fix pre{background:#0a0a0a;color:#f5f5f5;padding:16px;border-radius:8px;overflow:auto}
+footer{border-top:1px solid #e5e5e5;margin-top:48px;padding-top:16px;font-size:.85rem;color:#444}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><a href="https://www.closedlogic.com/" aria-label="Closed Logic home">Closed Logic</a></header>
+<main>
+<h1>{{HEADLINE}}</h1>
+<p>{{FIRST_NAME}}, we looked at what {{DOMAIN}} sends to Google Ads, from outside your site, on {{CHECK_DATE}}. No logins and no access to your accounts. We didn&#8217;t submit your form.</p>
+
+<h2>What we found</h2>
+<p>{{ONE_LINE_FINDING}}</p>
+<p>{{SPEND_IMPACT}}</p>
+
+<h2>Evidence</h2>
+<div class="tablewrap"><table>
+<caption>What we saw, and how to see it yourself</caption>
+<thead><tr><th scope="col">Source</th><th scope="col">What we saw</th><th scope="col">Where to look</th></tr></thead>
+<tbody>
+<!-- Add or remove rows. Each row has a data-row name. -->
+<tr data-row="ads"><th scope="row">Google Ads conversion action</th><td>{{ACTION_NAME}}</td><td>Google Ads: Goals, Conversions, Summary</td></tr>
+<tr data-row="network"><th scope="row">Request to Google Ads</th><td>Sent when the page opened, before any click</td><td>Browser developer tools: Network tab</td></tr>
+<tr data-row="gtm" hidden><th scope="row">Tag manager</th><td>Tag and trigger that sent it</td><td>Tag manager: Tags and Triggers</td></tr>
+</tbody></table></div>
+
+<h2>The HubSpot form embed we detected</h2>
+<p>{{HUBSPOT_EMBED}}</p>
+
+<!-- OPTIONAL: delete this whole section if unused. Plain observation, no legal conclusions. -->
+<section id="consent">
+<h2>Consent</h2>
+<p>In a fresh browser with no consent choice made, we saw these requests before any consent choice: {{CONSENT_OBSERVATION}}</p>
+</section>
+
+<h2>Your 5-minute self-check</h2>
+<ol>
+<li>In Google Ads, go to Goals, then Conversions, then Summary.</li>
+<li>Set the date range to the last 30 days and add the All conv. column.</li>
+<li>Compare the conversions on the page-view or click action ({{ACTION_NAME}}: {{PAGEVIEW_COUNT}}) with the form-submit action ({{SUBMIT_COUNT}}).</li>
+<li>The ratio shows how inflated the count is. If the page-view or click action is Primary, bidding is working toward visits, not requests.</li>
+</ol>
+
+<h2>The fix</h2>
+<p>Set the page-view and click actions to Secondary, keep the form submit and booking as Primary, and fire the submit conversion only on a confirmed submit. {{FIX_DESCRIPTION}}</p>
+<p>A pipeline stage is only a good bidding goal if the account has enough monthly volume for it. If it doesn&#8217;t, form submit or booking stays Primary.</p>
+<!-- Code fix block: OFF by default. To show it, delete the paragraph above that describes the fix and uncomment this block.
+<div class="fix"><pre><code>{{FIX_CODE}}</code></pre></div>
+-->
+
+<section class="cta" aria-labelledby="cta-h">
+<h2 id="cta-h">Want us to fix it?</h2>
+<p>Signal Fix is $750, fixed scope. <a data-cta="fixoffer" href="https://www.closedlogic.com/signal-fix?utm_source=video-page&amp;utm_campaign={{SLUG}}&amp;utm_content=fix-offer">See what it covers</a>.</p>
+<p><a class="btn" data-cta="reply" data-v-slug="{{SLUG}}" href="mailto:hello@closedlogic.com?subject=fix%3A%20{{COMPANY}}">Reply &#8220;fix&#8221;</a></p>
+<p>Or <a data-cta="book" data-v-slug="{{SLUG}}" href="https://cal.com/closedlogic/20min-fit?utm_source=video-page&amp;utm_campaign={{SLUG}}&amp;utm_content=book-cta" target="_blank" rel="noopener">book a 20-minute fit call</a>.</p>
+</section>
+</main>
+<footer>Closed Logic is a trading name of Reubika LLC, 530-B Harkle Road, STE 100, Santa Fe, NM 87505, USA.</footer>
+</div>
+</body>
+</html>

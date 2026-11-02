@@ -41,6 +41,9 @@ export default function Privacy() {
           decide whether the service is a fit, and to prepare for a call if we have one. If the link you followed carried a source tag (for example from a LinkedIn post), we also record that tag, so we can see which channel the request came from.
         </p>
         <p>
+          <strong>When you ask for a free outside-in check.</strong> If you use the check form, we receive your work email and company website. We use them to look at what your site sends to Google Ads from outside, with no access to your accounts, and to reply to you with what we find. We store the request the same way as a contact form request.
+        </p>
+        <p>
           <strong>When you email us.</strong> Your email address and whatever you send.
         </p>
         <p>

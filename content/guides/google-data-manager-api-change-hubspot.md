@@ -10,7 +10,7 @@ ogImage: google-data-manager-api-change-hubspot-og.png
 lastChecked: 2026-10-17
 status: published
 datePublished: 2026-10-17
-dateModified: 2026-10-17
+dateModified: 2026-11-02
 ---
 
 # Google Data Manager API offline conversions: what the 15 June 2026 change means for HubSpot users
@@ -66,9 +66,9 @@ The account rule is the one most likely to trip up agency setups that upload for
 > 2. Identify anything still on legacy offline import or a custom API upload.
 > 3. Check each imported action's status and diagnostics for gaps that line up with the June 2026 change.
 > 4. Check that uploads go to the account that owns the conversion action, and flag manager account setups HubSpot can't connect.
-> 5. Note what needs a developer, since we work in settings, not code, and say so plainly in the report.
+> 5. Note what needs a developer, since we work in settings and, where needed, the tag manager and small scripts, and we flag anything for your developer.
 >
-> We make only the changes you approve, with a note on how to reverse each one. The [20 checks](/method) we run are on our Method page.
+> We make only the changes you approve, with a note on how to reverse each one. The [checks](/method) we run are on our Method page.
 
 ## Want us to check your routes?
 
@@ -89,7 +89,7 @@ All last checked 17 Oct 2026.
 
 ## Editor notes
 
-**Check with Matt before publishing:** "What we check" item 5 says we work in settings, not code. That matches the site ("We fix everything on the list that lives in Google Ads, HubSpot or Tag Manager settings") but confirm the wording is wanted here.
+**Wording (2 Nov 2026):** "What we check" item 5 now says we work in settings and, where needed, the tag manager and small scripts, and flag anything for the client's developer.
 
 **Suggested internal links in:** homepage "Seven questions" item 5 (legacy imports); /sample-report finding "Customer conversions still use legacy offline import"; pillar B (already linked).
 

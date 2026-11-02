@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "prebuild": "node scripts/check-placeholders.mjs",
-    "postbuild": "node scripts/cf-postbuild.mjs",
+    "postbuild": "node scripts/cf-postbuild.mjs && node scripts/check-rendered.mjs",
     "start": "wrangler dev",
     "lint": "eslint",
     "cf:preview": "npm run build && wrangler dev",

@@ -35,7 +35,7 @@ export default function Header({ path = "/", campaign }: { path?: string; campai
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <a {...book} target="_blank" rel="noopener noreferrer" className="btn btn-m"><span>Book a fit call</span><span className="sr-only"> (opens in a new tab)</span></a>
+          <a {...book} target="_blank" rel="noopener noreferrer" className="btn btn-m"><span>20-minute fit call</span><span className="sr-only"> (opens in a new tab)</span></a>
         </div>
 
         <button

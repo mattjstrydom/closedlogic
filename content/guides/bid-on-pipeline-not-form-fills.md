@@ -10,7 +10,7 @@ ogImage: bid-on-pipeline-not-form-fills-og.png
 lastChecked: 2026-10-17
 status: published
 datePublished: 2026-10-17
-dateModified: 2026-10-17
+dateModified: 2026-11-02
 ---
 
 # Bid on pipeline, not form fills: a HubSpot lifecycle stage as your Google Ads conversion
@@ -33,11 +33,13 @@ If you haven't set this up, start with our [HubSpot Google Ads conversion tracki
 
 ## Step 2: choose the stage bidding learns from
 
-Google gives three tests for the conversion you bid on ([Google Ads Help: best practices for generating high-quality leads](https://support.google.com/google-ads/answer/13489421?hl=en), last checked 17 Oct 2026):
+Google gives three tests for the conversion you bid on ([Google Ads Help: best practices for generating high-quality leads](https://support.google.com/google-ads/answer/13489421?hl=en), last checked 2 Nov 2026):
 
 - **Volume:** at least 15 conversions in the last 30 days at account level.
 - **Freshness:** for offline imports and ECL, upload regularly, ideally daily.
 - **Delay:** ideally, a conversion that happens within 7 days of the ad interaction.
+
+So a pipeline stage is only a good bidding goal if enough of them happen each month. If the stage you want doesn't clear that volume, keep the form submit or booking as the Primary action until it does.
 
 Google's value-based bidding guide repeats the idea: pick a single stage of your lead-to-sale funnel, with a relatively short conversion delay and at least 15 monthly conversions ([Google Ads Help: value-based bidding best practices](https://support.google.com/google-ads/answer/14792795?hl=en), last checked 17 Oct 2026).
 
@@ -99,7 +101,7 @@ A fixed value per stage works well with target CPA on one stage. Value-based bid
 > 5. With your sign-off, set the chosen stage as the bidding conversion and the form fill as Secondary, and log how to reverse it.
 > 6. Compare HubSpot's stage count with Google Ads' count for the same period, then recheck at day 30.
 >
-> See the [20 checks we run](/method).
+> See the [checks we run](/method).
 
 ## Want help choosing the stage?
 

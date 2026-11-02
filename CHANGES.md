@@ -1,3 +1,30 @@
+# Changes: site update, 2 Nov 2026 (branch site-update-nov-2026, not deployed)
+
+New offers (single source: `app/offers.ts`): free outside-in check, Signal Fix ($750, 30-day guarantee), Signal Watch ($750/month, weekly checks, 2 hours of fixes) replacing the Measurement Scorecard, audit narrowed to 10 core checks, Fractional adds 10 extended checks. New `/signal-fix` page, free-check form (`app/components/check-form.tsx`, Worker type `check`, Sequenzy tag `outside-in-check-request`), `/method` split into core and extended checks with the bidding-stage section, new /v/ template `scripts/v-template-check.html`, unpublished samples in `scripts/samples/`, and `scripts/check-rendered.mjs` (fails the build if a double-brace token reaches `out/`).
+
+Existing `/v/` pages, their scripts and `_headers` rules are untouched (out/v/*.html byte-identical to public/v/*.html). New file only: `public/v/fixoffer.js`.
+
+## Terms changes for legal review (app/terms/page.tsx; last updated 2 November 2026)
+
+- Metadata and 1.2: scope lists the free outside-in check, Signal Fix, Signal Watch, audit, Fractional (Scorecard removed).
+- 2.2: prices for all offers; founding Fractional rate kept ($4,000, first 2 clients); pointer to 5.11.
+- 2.4 (was the audit credit): in full against the first month of Fractional; against Signal Watch, $750 applied to the first month's fee, the remaining $750 not carried forward; no Signal Fix credit except 5.11; founding offers and the audit credit don't combine, and a client gets at most one free first month of Signal Watch.
+- 3.1: "20 checks" is now "10 core checks". 3.2 to 3.6 unchanged, including the material-issue tests. Note: test (b)(iii) refers to a lifecycle stage the client wants bid on; "Lifecycle stages" is now an extended check, not a core one.
+- Clause 5 heading: Signal Fix, Signal Watch and Fractional Measurement Lead.
+- 5.3: "doesn't apply to the Measurement Scorecard" is now Signal Watch.
+- 5.6: Scorecard replaced by Signal Watch ($750/month, weekly checks, monthly note, 2 hours of fixes, no rollover, larger work quoted, not an alert service, no response-time promise). Cancellation mechanics carried over unchanged.
+- 5.7: case-study wording now points to founding offers in 2.2 and 5.11.
+- New 5.8 (Signal Fix scope and deliverables), 5.9 (30-day guarantee, remedy is a free fix, not a refund), 5.10 (no credit toward Signal Watch), 5.11 (first 5 Signal Fix clients get a free first month of Signal Watch for a written case study; founding offers, including the founding Fractional rate in 2.2, don't combine with each other or with the audit credit in 2.4; at most one free first month of Signal Watch), 5.12 (free outside-in check).
+- 13.3: "Measurement Scorecard" is now Signal Watch.
+- Unchanged: refund timing (4.1), material-issue tests and thresholds, 7.x refunds, liability, data processing. PE clauses still hidden by SHOW_PE (en dashes in them became "to").
+
+Privacy (flag for review): new paragraph for the free outside-in check form; last updated 2 November 2026.
+
+## Open items
+
+- OG images regenerated (wordmark and headline only); alt text matches the image exactly.
+- `/for-pe` is still built (hidden, noindex, not in the sitemap); left as is pending a separate brief apart from the "comparable" line and en dashes already removed.
+- Founding offers are shown only on `/pricing` ("Founding clients" box); removed from home, `/for-b2b-saas` and `/signal-fix`.
 # Changes: repositioning, 20 Oct 2026
 
 The site was rewritten in place from a fixed-price HubSpot to Google Ads check and fix (with agency and teardown lead

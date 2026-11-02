@@ -13,9 +13,9 @@ export const site = {
   brand: "Closed Logic",
   // Single PE switch, set in app/flags.ts.
   showPE: SHOW_PE,
-  positioning: "Independent pipeline measurement for B2B SaaS",
+  positioning: "Make sure Google Ads learns from your real leads",
   description:
-    "Your pipeline numbers don’t agree. We find out which one is right. Independent measurement audits and fractional measurement leadership. No media-buying incentive.",
+    "We find what your Google Ads and HubSpot setup is miscounting, fix it at a fixed price, and keep checking it. Every finding comes with steps you can check without us.",
   domain: "closedlogic.com", // apex; redirects to url (a Cloudflare redirect rule, see README)
   url: "https://www.closedlogic.com",
   // scripts/check-placeholders.mjs blocks the production build while emailLive is false, so the site never goes live
@@ -53,8 +53,8 @@ export const site = {
     "Nothing in this clause stops either of us from asking any court for urgent interim relief.",
   ],
   // Set both to the publish date at deploy, for example "12 October 2026".
-  privacyLastUpdated: "28 October 2026",
-  termsLastUpdated: "27 October 2026",
+  privacyLastUpdated: "2 November 2026",
+  termsLastUpdated: "2 November 2026",
 
   caseStudy: null as CaseStudy | null,
 };

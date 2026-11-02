@@ -23,10 +23,10 @@ export const metadata = {
 };
 
 const offers: [string, string, string][] = [
-  ["Portfolio Measurement Pilot", "$10k–$15k · 3 weeks", "One portfolio company. KPI dictionary, 20-point audit, baseline, 90-day roadmap and a one-page scorecard. The pilot is the proof."],
-  ["Portfolio Rollout", "$40k–$75k · 8–12 weeks", "4–6 portfolio companies. One standard, one scorecard, one fund-level roll-up. Each company gets a baseline, a benchmark and a 90-day plan."],
-  ["Measurement Retainer", "$5k–$7.5k per portfolio company per month", "Monthly scorecard, variance review, fix list and a quarterly portfolio roll-up. The fund gets one comparable number every quarter."],
-  ["PE Advisory", "$3k–$5k per month", "Define the standard, select vendors, run the quarterly review. For funds that want the operating partner to own the model, not the agency."],
+  ["Portfolio Measurement Pilot", "$10k to $15k · 3 weeks", "One portfolio company. KPI dictionary, 20-point audit, baseline, 90-day roadmap and a one-page scorecard. The pilot is the proof."],
+  ["Portfolio Rollout", "$40k to $75k · 8 to 12 weeks", "4 to 6 portfolio companies. One standard, one scorecard, one fund-level roll-up. Each company gets a baseline, a benchmark and a 90-day plan."],
+  ["Measurement Retainer", "$5k to $7.5k per portfolio company per month", "Monthly scorecard, variance review, fix list and a quarterly portfolio roll-up. The fund gets one comparable number every quarter."],
+  ["PE Advisory", "$3k to $5k per month", "Define the standard, select vendors, run the quarterly review. For funds that want the operating partner to own the model, not the agency."],
 ];
 
 // Illustrative sample: invented figures, shown only to make the format concrete.
@@ -64,7 +64,7 @@ export default function ForPe() {
         <PageHero
           id="pe"
           title="One measurement standard across your portfolio."
-          sub="We make every portfolio company’s pipeline numbers comparable, without migrating their CRMs. For operating partners who need one number, not six definitions."
+          sub="We check measurement across every portfolio company, without migrating their CRMs. For operating partners who need one number, not six definitions."
           micro="Your CRM partner implements. We measure. No migration required."
         >
           <BookPeButton campaign="for-pe" className="w-full sm:w-auto" />

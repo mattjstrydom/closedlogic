@@ -108,7 +108,7 @@ export default function RequestForm({ initialType = "b2b", choose = false, email
           </select>,
         )}
         {field("stack", "Stack (optional)", <input {...aria("stack")} className={input} placeholder="HubSpot, Salesforce, Pipedrive, Google Ads, GA4" value={f.stack} onChange={set("stack")} />)}
-        {field("note", "The number you can’t defend (optional)", <textarea {...aria("note")} rows={4} className={input} value={f.note} onChange={set("note")} />)}
+        {field("note", "What you want checked (optional)", <textarea {...aria("note")} rows={4} className={input} value={f.note} onChange={set("note")} />)}
 
         {/* honeypot: hidden from people and assistive tech */}
         <div aria-hidden="true" className="absolute -left-[9999px]">

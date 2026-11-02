@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 import Header from "../components/header";
 import Footer from "../components/footer";
@@ -7,7 +8,6 @@ import { BookButton } from "../components/cta";
 import { Accent, TickList } from "../components/ui";
 import { jenniferNode, jsonLdScript, mattNode, orgNode } from "../jsonld";
 import { pageMetadata } from "../seo";
-import { site } from "../site.config";
 
 export const metadata = pageMetadata({
   title: "About: independent by design",
@@ -31,7 +31,7 @@ const team: Person[] = [
     name: "Matt Strydom",
     initials: "MS",
     heading: "Matt Strydom, founder.",
-    bio: "Technical marketing ops background: HubSpot, Google Ads, tracking, attribution, Cloudflare and Stripe. I have built the systems and lived in the numbers. Closed Logic is the practice that came out of that work.",
+    bio: "Matt has spent 7 years in marketing and revenue operations. He runs HubSpot and Google Tag Manager in production for B2B SaaS, and has built CRM architecture, lead scoring and attribution across HubSpot, GA4, Google Ads, Clay and Amplitude.",
     photo: "/team/matt.jpg",
     alt: "Matt Strydom, founder of Closed Logic",
   },
@@ -85,6 +85,7 @@ export default function About() {
         <section id="who" aria-labelledby="who-title" className="section-y">
           <div className="container-site">
             <div className="mx-auto flex max-w-[52rem] flex-col gap-6">
+              <p className="text-center text-text-l">Matt and Jennifer both deliver the work.</p>
               {team.map((p, i) => {
                 const Heading = i === 0 ? "h2" : "h3";
                 return (
@@ -110,9 +111,9 @@ export default function About() {
           </div>
         </section>
 
-        <CtaBand id="start" title="Bring three numbers." body="Google Ads conversions. HubSpot pipeline. The number in your board deck. We’ll tell you which one is wrong.">
-          <BookButton campaign="about" className="w-full sm:w-auto">Book a 20-minute fit call</BookButton>
-          <a href={`mailto:${site.email}`} className="btn-outline w-full sm:w-auto">Email us</a>
+        <CtaBand id="start" title="Start with a free outside-in check." body="We look at what your site sends to Google Ads, with no access needed, and send you what we find.">
+          <Link href="/#check" className="btn w-full sm:w-auto">Get a free outside-in check</Link>
+          <BookButton campaign="about" className="btn-outline w-full sm:w-auto">Book a 20-minute fit call</BookButton>
         </CtaBand>
       </main>
       <Footer />

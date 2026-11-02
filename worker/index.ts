@@ -6,7 +6,7 @@
 // Abuse: the honeypot and the Sec-Fetch-Site check below are speed bumps only. The rate limit is the FORM_LIMITER
 // binding (wrangler.jsonc): more than 5 posts from one IP in 60 seconds get a 429 before anything is parsed or sent.
 // It is approximate and per Cloudflare location, which is enough for a contact form.
-import { validate, FORM_TYPES, type FormType, type Fields } from "../app/validate";
+import { validate, validateCheck, FORM_TYPES, type FormType, type Fields } from "../app/validate";
 import { site } from "../app/site.config";
 
 // The Workers Rate Limiting binding (wrangler.jsonc "ratelimits"; free on every Workers plan). Typed here because the
@@ -92,6 +92,9 @@ async function handleRequest(req: Request, env: Env): Promise<Response> {
   // Honeypot: real visitors never fill it. Pretend success so bots don't retry.
   if (str(body.company_fax)) return json({ ok: true });
 
+  // The free outside-in check form (email and website only) has its own type and tag.
+  if (body.type === "check") return handleCheck(body, env);
+
   // Pages post b2b (or pe when SHOW_PE is on). Anything else (a cached page from the old site posting check, teardown or
   // partner) is a B2B request.
   const type: FormType = FORM_TYPES.includes(body.type as FormType) ? (body.type as FormType) : "b2b";
@@ -159,6 +162,39 @@ async function handleRequest(req: Request, env: Env): Promise<Response> {
       .join("")}</table>`,
   });
 
+  return deliver(env, headers, subscriberBody, notifyBody, dryRun);
+}
+
+// The free outside-in check: email and website, tagged outside-in-check-request. No sequence enrolment, same as the contact form.
+async function handleCheck(body: Record<string, unknown>, env: Env): Promise<Response> {
+  const f = { email: str(body.email).trim(), website: str(body.website).trim() };
+  const errors = validateCheck(f);
+  if (Object.keys(errors).length) return json({ errors }, 422);
+  const dryRun = env.FORM_DRY_RUN === "1";
+  const key = env.SEQUENZY_API_KEY;
+  if (!key && !dryRun) return json({ error: "Form is not configured." }, 500);
+  const source = str(body.source).replace(/[^\w.-]/g, "").slice(0, 40);
+  const headers = { Authorization: `Bearer ${key}`, "Content-Type": "application/json" };
+  const subscriberBody = JSON.stringify({
+    email: f.email,
+    tags: ["outside-in-check-request"],
+    customAttributes: { website: f.website, requestType: "check", source: site.domain, ...(source ? { campaignSource: source } : {}) },
+    duplicateStrategy: "overwrite",
+    enrollInSequences: false,
+  });
+  const rows: [string, string][] = [["Type", "Free outside-in check request"], ["Email", f.email], ["Website", f.website], ...(source ? ([["Source", source]] as [string, string][]) : [])];
+  const notifyBody = JSON.stringify({
+    to: site.notifyTo,
+    replyTo: oneLine(f.email),
+    subject: `Outside-in check request: ${oneLine(f.website)}`,
+    html: `<table cellpadding="6" style="border-collapse:collapse;font:15px/1.5 sans-serif">${rows
+      .map(([k, v]) => `<tr><td style="color:#5c6764;vertical-align:top"><b>${esc(k)}</b></td><td style="white-space:pre-wrap">${esc(v)}</td></tr>`)
+      .join("")}</table>`,
+  });
+  return deliver(env, headers, subscriberBody, notifyBody, dryRun);
+}
+
+async function deliver(env: Env, headers: Record<string, string>, subscriberBody: string, notifyBody: string, dryRun: boolean): Promise<Response> {
   // Dry run: everything above ran, nothing leaves the Worker.
   if (dryRun) return json({ ok: true, dryRun: true, bytes: subscriberBody.length + notifyBody.length });
 

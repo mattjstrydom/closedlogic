@@ -77,7 +77,7 @@ For traffic from the EEA, Google requires consent for the use of personal data a
 > 4. Measure how many recent paid search contacts have a click ID or shared contact data.
 > 5. Check the combined enhanced conversions setting and the consent property used for syncing.
 >
-> We change only what you approve and log how to reverse it. Click ID coverage is one of the [20 checks we run](/method).
+> We change only what you approve and log how to reverse it. Click ID coverage is one of the [checks we run](/method).
 
 ## Want us to run these tests?
 

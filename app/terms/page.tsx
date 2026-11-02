@@ -3,6 +3,7 @@ import Header from "../components/header";
 import Footer from "../components/footer";
 import { Slot } from "../components/ph";
 import { site } from "../site.config";
+import { offers, fixScopeLine, watchLine, fixDeliverables, fixGuarantee, foundingFixText, foundingRule, auditCredit, checkOfferText } from "../offers";
 import { pageMetadata } from "../seo";
 
 // PE switch (app/flags.ts). While site.showPE is false, clause 6 (PE portfolio measurement) and the PE price in 2.3 are
@@ -17,7 +18,7 @@ const s2 = (k: number) => (pe || k < 3 ? k : k - 1) - (k > 4 ? 1 : 0);
 
 export const metadata = pageMetadata({
   title: "Terms of service",
-  description: `Terms for ${site.brand} measurement work: the Pipeline Truth Audit, the Measurement Scorecard${pe ? ", the Fractional Measurement Lead and PE portfolio measurement" : " and the Fractional Measurement Lead"}. Prices, scope, refunds, access and liability.`,
+  description: `Terms for ${site.brand} measurement work: the free outside-in check, Signal Fix, Signal Watch, the Pipeline Truth Audit${pe ? ", the Fractional Measurement Lead and PE portfolio measurement" : " and the Fractional Measurement Lead"}. Prices, scope, refunds, access and liability.`,
   path: "/terms",
 });
 
@@ -47,23 +48,23 @@ export default function Terms() {
           <C n="1.1">
             &quot;We&quot; and &quot;us&quot; means {site.legalEntity}, trading as {site.brand}. &quot;You&quot; means the business that buys from us.{pe ? " That can be a B2B SaaS company or a private equity fund." : ""}
           </C>
-          <C n="1.2">These terms apply to the Pipeline Truth Audit, the Measurement Scorecard{pe ? ", the Fractional Measurement Lead and PE portfolio measurement (pilot, rollout, retainer and advisory)" : " and the Fractional Measurement Lead"}. They also apply to any extra work we quote in writing. A written scope sets out which of these you are buying.</C>
+          <C n="1.2">These terms apply to the free outside-in check, Signal Fix, Signal Watch, the Pipeline Truth Audit{pe ? ", the Fractional Measurement Lead and PE portfolio measurement (pilot, rollout, retainer and advisory)" : " and the Fractional Measurement Lead"}. They also apply to any extra work we quote in writing. A written scope sets out which of these you are buying.</C>
 
           <h2 id="clause-2" className={h2}>2. Prices and payment</h2>
           <C n="2.1">All prices are in US dollars and paid through Stripe.</C>
           <C n="2.2">
-            <strong className="font-medium">B2B SaaS:</strong> Pipeline Truth Audit, $1,500. Measurement Scorecard, $1,500 a month, month to month, with no minimum term and no notice period (clause 5.6). Fractional Measurement Lead, $5,000 a month for 25 hours, with a 3-month initial term that either side can end in writing during the first 30 days (clause 5.4). Founding-client rate, $4,000 a month for 3 months, for the first 2 clients, with a case study required and the same 30-day exit.
+            <strong className="font-medium">B2B SaaS:</strong> {offers.check.name}, free. {offers.fix.name}, {offers.fix.price}, fixed scope (clause 5.8). {offers.watch.name}, {offers.watch.per}, month to month, with no minimum term and no notice period (clause 5.6). For larger accounts: {offers.audit.name}, {offers.audit.price}. Fractional Measurement Lead, {offers.fractional.per} for 25 hours, with a 3-month initial term that either side can end in writing during the first 30 days (clause 5.4). Founding Fractional rate, {offers.fractional.foundingPer} for 3 months, for the first {offers.fractional.foundingClients} clients, with a case study required and the same 30-day exit. The founding Signal Fix offer is in clause 5.11.
           </C>
           {pe && (
             <C n="2.3">
-              <strong className="font-medium">PE funds:</strong> Portfolio Measurement Pilot, $10k–$15k for one portfolio company. Portfolio Rollout, $40k–$75k for 4–6 portfolio companies. Measurement Retainer, $5k–$7.5k per portfolio company per month. PE Advisory, $3k–$5k per month. The exact fee is in your written scope.
+              <strong className="font-medium">PE funds:</strong> Portfolio Measurement Pilot, $10k to $15k for one portfolio company. Portfolio Rollout, $40k to $75k for 4 to 6 portfolio companies. Measurement Retainer, $5k to $7.5k per portfolio company per month. PE Advisory, $3k to $5k per month. The exact fee is in your written scope.
             </C>
           )}
           <C n={`2.${s2(5)}`}>Prices are fixed for the scope in writing. We never charge a percentage of ad spend. Anything outside the written scope is quoted before any work starts. Your written scope sets out when each invoice is due.</C>
-          <C n={`2.${s2(6)}`}>If you continue from the Pipeline Truth Audit to the Fractional Measurement Lead, we credit the audit fee against the first month.</C>
+          <C n={`2.${s2(6)}`}>{auditCredit} Signal Fix has no credit toward Signal Watch, other than the founding offer in clause 5.11. {foundingRule}</C>
 
           <h2 id="clause-3" className={h2}>3. What the Pipeline Truth Audit includes</h2>
-          <C n="3.1">20 checks across your Google Ads, HubSpot (or other CRM) and reporting, delivered within 10 business days of receiving the read-only access we need.</C>
+          <C n="3.1">10 core checks across your Google Ads, HubSpot (or other CRM) and reporting, delivered within 10 business days of receiving the read-only access we need.</C>
           <C n="3.2">A baseline of the last 90 days, a one-page scorecard, a 90-day roadmap, and the material issues we find, with the top three ranked by revenue impact.</C>
           <C n="3.3">The audit uses read-only access. We don&apos;t change anything in your accounts as part of the audit.</C>
           <C n="3.4">
@@ -114,20 +115,30 @@ export default function Terms() {
           <C n="4.1">If the audit doesn&apos;t find at least three material issues (clause 3.6), we refund the full $1,500 within 14 days of the audit readout (clause 3.5). You keep the report, the baseline and the roadmap. You don&apos;t need to ask for the refund, and a refund that follows a challenge under clause 3.6 is paid within the same 14 days.</C>
           <C n="4.2">If you don&apos;t continue after the audit, there is no lock-in.</C>
 
-          <h2 id="clause-5" className={h2}>5. Fractional Measurement Lead and Measurement Scorecard</h2>
+          <h2 id="clause-5" className={h2}>5. Signal Fix, Signal Watch and Fractional Measurement Lead</h2>
           <C n="5.1">Fractional Measurement Lead covers 25 hours a month. Month 1 is the audit, definitions and roadmap. Months 2 and 3 are the monthly scorecard, fixes and a 60-minute review. Either side can end it in writing during the first 30 days (clause 5.4).</C>
           <C n="5.2">Any change we make to your accounts is agreed with you first.</C>
-          <C n="5.3">The Fractional Measurement Lead has an initial term of 3 months, subject to the 30-day exit in clause 5.4. After that, it runs month to month until either of us gives 30 days&apos; written notice. This clause doesn&apos;t apply to the Measurement Scorecard.</C>
+          <C n="5.3">The Fractional Measurement Lead has an initial term of 3 months, subject to the 30-day exit in clause 5.4. After that, it runs month to month until either of us gives 30 days&apos; written notice. This clause doesn&apos;t apply to Signal Watch.</C>
           <C n="5.4">Fractional: either side can end it in writing during the first 30 days, and you pay only for that first month. This overrides the 3-month initial term in clause 5.3.</C>
           <C n="5.5">We don&apos;t guarantee ad performance, pipeline or revenue. We promise a defensible number and a documented method, not perfect attribution.</C>
-          <C n="5.6">The Measurement Scorecard is $1,500 a month, month to month. It covers a monthly reconciliation of your pipeline and revenue numbers across your CRM, ads and finance, plus a one-page scorecard showing what moved and what doesn&apos;t agree. It includes no fix hours: fixes are quoted separately or covered by Fractional. It has no minimum term and no notice period. Either of us can cancel it by email at any time. To stop the next monthly charge, a cancellation must reach us before your next billing date. The Scorecard then ends at the end of the month you&apos;ve already paid for. Clause 5.3 doesn&apos;t apply to it.</C>
-          <C n="5.7">We don&apos;t publicise the work without your written consent. A case study only applies where we agree it in writing, for example under the founding-client rate, and it uses wording you approve.</C>
+          <C n="5.6">
+            Signal Watch is {offers.watch.per}, month to month. It covers weekly checks of: {watchLine}. It includes a short monthly note and {offers.watch.allowanceHours} hours a month of fixes. Unused hours don&apos;t roll over, and larger work is quoted under clause 2.{s2(5)}. We run the checks weekly. They are not an automated alert service, and we don&apos;t promise a response time to anything they find. It has no minimum term and no notice period. Either of us can cancel it by email at any time. To stop the next monthly charge, a cancellation must reach us before your next billing date. Signal Watch then ends at the end of the month you&apos;ve already paid for. Clause 5.3 doesn&apos;t apply to it.
+          </C>
+          <C n="5.7">We don&apos;t publicise the work without your written consent. A case study only applies where we agree it in writing, for example under the founding offers in clauses 2.2 and 5.11, and it uses wording you approve.</C>
+
+          <C n="5.8">
+            Signal Fix is {offers.fix.price}, fixed scope. It covers: {fixScopeLine}. We deliver {fixDeliverables.charAt(0).toLowerCase() + fixDeliverables.slice(1)} Anything outside that scope is quoted before any work starts.
+          </C>
+          <C n="5.9">{fixGuarantee} The remedy is the free fix. It is not a refund.</C>
+          <C n="5.10">Signal Fix has no credit toward Signal Watch, other than the founding offer in clause 5.11.</C>
+          <C n="5.11">{foundingFixText} The case study uses wording you approve in writing (clause 5.7). {foundingRule} This covers the founding Fractional rate in clause 2.2 and the audit credit in clause 2.{s2(6)}.</C>
+          <C n="5.12">{checkOfferText} It is free, creates no obligation to buy, and doesn&apos;t promise that we will find every problem.</C>
 
           {pe && (
             <>
               <h2 id="clause-6" className={h2}>6. PE portfolio measurement</h2>
               <C n="6.1">A Portfolio Measurement Pilot covers one portfolio company over about 3 weeks: KPI dictionary, 20-point audit, baseline, 90-day roadmap and a one-page scorecard.</C>
-              <C n="6.2">A Portfolio Rollout covers 4–6 portfolio companies over 8–12 weeks, with one standard, one scorecard and one fund-level roll-up. A Measurement Retainer covers the monthly scorecard, variance review, fix list and a quarterly portfolio roll-up.</C>
+              <C n="6.2">A Portfolio Rollout covers 4 to 6 portfolio companies over 8 to 12 weeks, with one standard, one scorecard and one fund-level roll-up. A Measurement Retainer covers the monthly scorecard, variance review, fix list and a quarterly portfolio roll-up.</C>
               <C n="6.3">We work alongside the fund&apos;s CRM or RevOps partner. We don&apos;t implement CRMs or migrate them. The partner owns the data model, the migration and the workflows. We own the measurement layer: the KPI dictionary, the audit, the benchmark and the scorecard.</C>
               <C n="6.4">Other work is quoted separately under clause {`2.${s2(5)}`}.</C>
             </>
@@ -231,7 +242,7 @@ export default function Terms() {
           <C n={`${cl(13)}.1`}>We may update these terms. We&apos;ll publish the new version on this page with a new &quot;last updated&quot; date.</C>
           <C n={`${cl(13)}.2`}>{pe ? "An audit, pilot or rollout" : "An audit"} stays under the version in force when you agreed its written scope.</C>
           <C n={`${cl(13)}.3`}>
-            For a monthly engagement, we&apos;ll email you at least 30 days before a change applies to you. If you don&apos;t accept a change, you can cancel by email before it takes effect. For the Fractional Measurement Lead, a change doesn&apos;t apply during your 3-month initial term unless the law, or a change that Google or HubSpot makes, requires it. If you cancel the Fractional Measurement Lead because of a change, you won&apos;t need to give the 30-day notice in clause 5.3, and if the change applies during your 3-month initial term, you won&apos;t pay for the rest of it. The Measurement Scorecard can be cancelled at any time under clause 5.6.
+            For a monthly engagement, we&apos;ll email you at least 30 days before a change applies to you. If you don&apos;t accept a change, you can cancel by email before it takes effect. For the Fractional Measurement Lead, a change doesn&apos;t apply during your 3-month initial term unless the law, or a change that Google or HubSpot makes, requires it. If you cancel the Fractional Measurement Lead because of a change, you won&apos;t need to give the 30-day notice in clause 5.3, and if the change applies during your 3-month initial term, you won&apos;t pay for the rest of it. Signal Watch can be cancelled at any time under clause 5.6.
           </C>
 
           <h2 id="contact" className={h2}>Contact</h2>

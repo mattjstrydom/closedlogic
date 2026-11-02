@@ -1,0 +1,36 @@
+<!doctype html>
+<!-- UNPUBLISHED. Redacted from a real check. Lives in scripts/samples/, not public/. To publish later, copy to public/v/. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Sample check: a Google Ads conversion fires before anyone asks for a demo | Closed Logic</title>
+</head>
+<body>
+<main>
+<p><strong>Anonymized example of a real check.</strong> Company name, domain, people, tag IDs, labels and dates are removed or replaced. It is not a client result.</p>
+<h1>A Google Ads conversion fires before anyone asks for a demo</h1>
+<p>We looked at what example.com sends to Google Ads, from outside the site. No logins, no access to the accounts, and we didn&#8217;t submit the form.</p>
+<h2>What we checked</h2>
+<ul>
+<li>The live tag manager container (<code>GTM-XXXXXXX</code>) and the Google Ads tag it loads (<code>AW-XXXXXXXXXX</code>).</li>
+<li>What the browser sends to Google Ads when someone opens the demo page and clicks on it.</li>
+<li>The fields and script on the demo form.</li>
+</ul>
+<h2>The main finding</h2>
+<p>Opening the demo page sends a Google Ads conversion (event <code>page_view</code>, label <code>XXXXXXXXXXXXXXXXXXXX</code>) before anyone touches the form. The form-submit conversion is a separate action with its own label.</p>
+<p>If the page-view action is Primary, Google Ads bids toward people who open the page, not people who ask for a demo, and the cost per demo it reports looks lower than it is.</p>
+<h2>Your 5-minute self-check</h2>
+<ol>
+<li>In Google Ads, go to Goals, then Conversions, then Summary.</li>
+<li>Set the date range to the last 30 days and add the All conv. column.</li>
+<li>Compare the page-view action with the form-submit action. The ratio shows how inflated the count is.</li>
+<li>Check whether the page-view action is Primary or Secondary.</li>
+</ol>
+<h2>The fix</h2>
+<p>Set the page-view action to Secondary, keep the form submit and booking as Primary, and fire the submit conversion only on a confirmed submit. A pipeline stage is only a good bidding goal if the account has enough monthly volume for it.</p>
+<p>Form: <code>00000000-0000-0000-0000-000000000000</code> (placeholder ID).</p>
+</main>
+</body>
+</html>

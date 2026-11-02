@@ -1,0 +1,34 @@
+<!doctype html>
+<!-- UNPUBLISHED. Illustrative structure of a Signal Fix handover. Lives in scripts/samples/, not public/. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Sample Signal Fix handover (illustrative) | Closed Logic</title>
+</head>
+<body>
+<main>
+<p><strong>Illustrative.</strong> This shows the structure of a Signal Fix handover. The numbers are invented. It is not a client result.</p>
+<h1>Signal Fix handover: before and after</h1>
+<h2>Before-and-after check (you can rerun it)</h2>
+<table>
+<thead><tr><th>Check</th><th>Before</th><th>After</th><th>How to rerun</th></tr></thead>
+<tbody>
+<tr><td>Primary conversion actions</td><td>Page view and form submit both Primary</td><td>Form submit and booking Primary</td><td>Google Ads: Goals, Conversions, Summary</td></tr>
+<tr><td>Form-submit event</td><td>Fires on page load</td><td>Fires once per confirmed submit</td><td>Tag manager preview, submit one test request</td></tr>
+<tr><td>Click ID in HubSpot</td><td>No hidden field</td><td>Hidden fields for click ID and UTMs</td><td>Open the form, check the contact record after a test</td></tr>
+</tbody></table>
+<h2>Change log (with how to undo each change)</h2>
+<table>
+<thead><tr><th>Change</th><th>Where</th><th>How to undo</th></tr></thead>
+<tbody>
+<tr><td>Page-view action set to Secondary</td><td>Google Ads</td><td>Set it back to Primary</td></tr>
+<tr><td>Submit trigger changed</td><td>Tag manager</td><td>Restore the previous trigger from the version history</td></tr>
+<tr><td>Hidden fields added</td><td>HubSpot form</td><td>Remove the fields from the form</td></tr>
+</tbody></table>
+<h2>Guarantee</h2>
+<p>If, within 30 days of handover, a conversion we set up doesn&#8217;t fire as agreed in the written scope, we fix it at no charge. This doesn&#8217;t cover changes made to the site, tag manager, forms or accounts after handover.</p>
+</main>
+</body>
+</html>

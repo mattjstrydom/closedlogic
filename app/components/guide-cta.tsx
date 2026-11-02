@@ -9,12 +9,12 @@ export default function GuideCta({ cta, campaign }: { cta: "direct" | "agency"; 
   return (
     <aside aria-labelledby="guide-cta-title" className="bento mt-14">
       <h2 id="guide-cta-title" className="text-title-m">
-        {pe ? "Want one measurement standard across your portfolio?" : "Want the number checked on your accounts?"}
+        {pe ? "Want one measurement standard across your portfolio?" : "Want your setup checked?"}
       </h2>
       <p className="mt-3 max-w-[56ch] text-text-l text-body">
         {pe
-          ? "We work alongside your CRM partner to make every portfolio company’s pipeline numbers comparable, without migrating CRMs."
-          : "We check Google Ads, HubSpot and your reporting against each other, and tell you which number is wrong. Independent of your media agency and your CRM partner."}
+          ? "We work alongside your CRM partner on measurement across every portfolio company, without migrating CRMs."
+          : "We find what your Google Ads and HubSpot setup is miscounting, fix it at a fixed price, and keep checking it. We sell no media and resell no software."}
       </p>
       <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
         {pe ? <BookPeButton campaign={campaign} className="w-full sm:w-auto" /> : <BookButton campaign={campaign} className="w-full sm:w-auto" />}

@@ -16,7 +16,7 @@ export default function NotFound() {
         <section aria-labelledby="nf-title" className="section-y">
           <div className="container-site">
             <h1 id="nf-title" className="text-title-l max-w-[20ch]">That page doesn’t exist.</h1>
-            <p className="mt-6 max-w-[33.75rem] text-text-l">Start with the 20-point audit or book a 20-minute fit call.</p>
+            <p className="mt-6 max-w-[33.75rem] text-text-l">Start with the 10 core checks or book a 20-minute fit call.</p>
             <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
               <AuditButton className="w-full sm:w-auto" />
               <BookButton campaign="404" className="w-full sm:w-auto" />

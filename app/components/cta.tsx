@@ -19,7 +19,7 @@ export function BookPeButton({ className = "", campaign, children = "Book a port
   return <BookButton pe campaign={campaign} className={className}>{children}</BookButton>;
 }
 
-export function AuditButton({ className = "", href = "/method#checks", children = "See the 20-point audit" }: P) {
+export function AuditButton({ className = "", href = "/method#checks", children = "See the 10 core checks" }: P) {
   return (
     <Link href={href} className={`btn-outline ${className}`}>
       {children}

@@ -8,8 +8,7 @@ const rows: [string, V, V, V, V][] = [
   ["Runs your ads", "Yes", "No", "No", "No"],
   ["Implements your CRM", "No", "Yes", "No", "No"],
   ["Paid on media spend", "Yes", "No", "No", "No"],
-  ["Owns the monthly number", "No", "Depends", "No", "Yes"],
-  ["Independent audit", "No", "No", "No", "Yes"],
+  ["Reproduction steps with every finding", "Depends", "Depends", "No", "Yes"],
 ];
 
 const icon = { Yes: Check, No: X, Depends: Minus };
