@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { site } from "../site.config";
+import { bookHref, campaignFor } from "../booking";
 import Logo from "./logo";
 import { hasGuides } from "../guides/content";
 
@@ -9,7 +10,10 @@ const baseLinks: [string, string][] = [
   ["/pricing", "Pricing"],
 ];
 
-export default function Header({ path = "/" }: { path?: string }) {
+// campaign: the booking UTM slug, when the page path used for the nav highlight isn't the page (guides).
+export default function Header({ path = "/", campaign }: { path?: string; campaign?: string }) {
+  const c = campaign ?? campaignFor(path);
+  const book = { href: bookHref(c), "data-cta": "book", "data-cta-page": c } as const;
   // Guides appears only once a guide is published (automatic, see app/guides/content.ts).
   const links: [string, string][] = [...baseLinks, ...(hasGuides() ? ([["/guides", "Guides"]] as [string, string][]) : []), ["/about", "About"]];
   const current = (href: string) => (path === href || path.startsWith(`${href}/`) ? "page" : undefined);
@@ -31,7 +35,7 @@ export default function Header({ path = "/" }: { path?: string }) {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <a href={site.bookPath} target="_blank" rel="noopener noreferrer" className="btn btn-m"><span>Book a fit call</span><span className="sr-only"> (opens in a new tab)</span></a>
+          <a {...book} target="_blank" rel="noopener noreferrer" className="btn btn-m"><span>Book a fit call</span><span className="sr-only"> (opens in a new tab)</span></a>
         </div>
 
         <button
@@ -58,7 +62,7 @@ export default function Header({ path = "/" }: { path?: string }) {
           ))}
         </ul>
         <div className="mt-6 flex flex-col gap-3">
-          <a href={site.bookPath} target="_blank" rel="noopener noreferrer" className="btn w-full">Book a 20-minute fit call<span className="sr-only"> (opens in a new tab)</span></a>
+          <a {...book} target="_blank" rel="noopener noreferrer" className="btn w-full">Book a 20-minute fit call<span className="sr-only"> (opens in a new tab)</span></a>
         </div>
       </nav>
     </header>

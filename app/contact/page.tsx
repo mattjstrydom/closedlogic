@@ -1,3 +1,4 @@
+import { bookHref } from "../booking";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import RequestForm from "../components/request-form";
@@ -41,7 +42,7 @@ export default function Contact() {
               <RequestForm
                 choose
                 email={site.email}
-                bookUrls={{ b2b: site.bookPath, ...(site.showPE ? { pe: site.bookPePath } : {}) }}
+                bookUrls={{ b2b: bookHref("contact"), ...(site.showPE ? { pe: bookHref("contact", "pe") } : {}) }}
               />
             </div>
             <div className="space-y-7">

@@ -111,7 +111,7 @@ export default function About() {
         </section>
 
         <CtaBand id="start" title="Bring three numbers." body="Google Ads conversions. HubSpot pipeline. The number in your board deck. We’ll tell you which one is wrong.">
-          <BookButton className="w-full sm:w-auto">Book a 20-minute fit call</BookButton>
+          <BookButton campaign="about" className="w-full sm:w-auto">Book a 20-minute fit call</BookButton>
           <a href={`mailto:${site.email}`} className="btn-outline w-full sm:w-auto">Email us</a>
         </CtaBand>
       </main>

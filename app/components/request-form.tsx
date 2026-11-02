@@ -129,7 +129,7 @@ export default function RequestForm({ initialType = "b2b", choose = false, email
       </form>
       <p className="mt-6">
         Prefer to pick a time now?{" "}
-        <a href={bookUrls[type] ?? bookUrls.b2b} target="_blank" rel="noopener noreferrer" className="link">
+        <a href={bookUrls[type] ?? bookUrls.b2b} data-cta="book" data-cta-page="contact" target="_blank" rel="noopener noreferrer" className="link">
           Book a 20-minute fit call
           <span className="sr-only"> (opens in a new tab)</span>
         </a>

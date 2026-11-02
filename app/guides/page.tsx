@@ -37,7 +37,7 @@ export default function GuidesIndex() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdScript(graph) }} />
       {showDrafts && guides.some((g) => g.isDraft) && <div className="guide-draft-banner" role="status">DRAFT PREVIEW: unpublished guides are listed below and are hidden from the live site</div>}
-      <Header />
+      <Header campaign="guides" />
       <main id="main" tabIndex={-1}>
         <section aria-labelledby="guides-title" className="container-site pb-16 pt-10 sm:pb-24 sm:pt-14">
           <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Guides" }]} />

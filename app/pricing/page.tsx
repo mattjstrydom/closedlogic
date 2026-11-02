@@ -75,7 +75,7 @@ export default function Pricing() {
         </section>
 
         <CtaBand id="start" title="Not sure which one?" body="Start with the audit. It is the cheapest way to find out whether the bigger engagement is justified. If the audit doesn’t find at least three material issues, we refund the full $1,500 within 14 days of the audit readout. You keep the report, the baseline and the roadmap.">
-          <BookButton className="w-full sm:w-auto">Book the audit</BookButton>
+          <BookButton campaign="pricing" className="w-full sm:w-auto">Book the audit</BookButton>
           <a href={`mailto:${site.email}`} className="btn-outline w-full sm:w-auto">Email us</a>
         </CtaBand>
 

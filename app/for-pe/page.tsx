@@ -67,7 +67,7 @@ export default function ForPe() {
           sub="We make every portfolio company’s pipeline numbers comparable, without migrating their CRMs. For operating partners who need one number, not six definitions."
           micro="Your CRM partner implements. We measure. No migration required."
         >
-          <BookPeButton className="w-full sm:w-auto" />
+          <BookPeButton campaign="for-pe" className="w-full sm:w-auto" />
           <Link href="#sample" className="btn-outline w-full sm:w-auto">See a sample portfolio scorecard</Link>
         </PageHero>
 
@@ -171,7 +171,7 @@ export default function ForPe() {
         </section>
 
         <CtaBand id="start" title="Start with one portfolio company." body="A three-week pilot. One standard. One scorecard. If it doesn’t produce a comparable number, you don’t roll it out.">
-          <BookPeButton className="w-full sm:w-auto" />
+          <BookPeButton campaign="for-pe" className="w-full sm:w-auto" />
           <a href={`mailto:${site.email}`} className="btn-outline w-full sm:w-auto">Email us</a>
         </CtaBand>
       </main>

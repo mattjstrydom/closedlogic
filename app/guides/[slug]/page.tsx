@@ -76,7 +76,7 @@ export default async function GuidePage({ params }: PageProps<"/guides/[slug]">)
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdScript(graph) }} />
       {g.isDraft && showDrafts && <div className="guide-draft-banner" role="status">DRAFT ({g.status}): not published, hidden from the live site, noindex</div>}
-      <Header />
+      <Header campaign={g.slug} />
       <main id="main" tabIndex={-1}>
         <article className="container-site pb-16 pt-10 sm:pb-24 sm:pt-14">
           <Breadcrumbs items={crumbs} />
@@ -101,7 +101,7 @@ export default async function GuidePage({ params }: PageProps<"/guides/[slug]">)
           </p>
           <div className="guide-prose mt-10" dangerouslySetInnerHTML={{ __html: g.html }} />
           <div className="max-w-[68ch]">
-            <GuideCta cta={g.cta} />
+            <GuideCta cta={g.cta} campaign={g.slug} />
             {(related.length > 0 || pillarPage) && (
               <nav aria-label="Keep reading" className="mt-10">
                 <h2 className="text-title-s">Keep reading</h2>

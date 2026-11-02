@@ -1,21 +1,22 @@
 import Link from "next/link";
-import { site } from "../site.config";
+import { bookHref } from "../booking";
 
-// Booking buttons go to /book, /book-pe or /book-partner (redirects to Cal.com, see site.config.ts). They open in a
-// new tab, no embed. Secondary buttons are internal links.
+// Booking buttons go straight to Cal.com with UTM tags for the page they're on (app/booking.ts). They open in a
+// new tab, no embed; data-cta="book" lets public/cta.js record the click. Secondary buttons are internal links.
 type P = { className?: string; href?: string; children?: React.ReactNode };
+type B = { className?: string; campaign: string; pe?: boolean; children?: React.ReactNode };
 
-export function BookButton({ className = "", href = site.bookPath, children = "Book a 20-minute fit call" }: P) {
+export function BookButton({ className = "", campaign, pe = false, children = "Book a 20-minute fit call" }: B) {
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" className={`btn ${className}`}>
+    <a href={bookHref(campaign, pe ? "pe" : "direct")} data-cta="book" data-cta-page={campaign} target="_blank" rel="noopener noreferrer" className={`btn ${className}`}>
       {children}
       <span className="sr-only"> (opens in a new tab)</span>
     </a>
   );
 }
 
-export function BookPeButton({ className = "", children = "Book a portfolio measurement call" }: P) {
-  return <BookButton href={site.bookPePath} className={className}>{children}</BookButton>;
+export function BookPeButton({ className = "", campaign, children = "Book a portfolio measurement call" }: Omit<B, "pe">) {
+  return <BookButton pe campaign={campaign} className={className}>{children}</BookButton>;
 }
 
 export function AuditButton({ className = "", href = "/method#checks", children = "See the 20-point audit" }: P) {

@@ -132,7 +132,7 @@ export default function Home() {
                 Closed Logic is the independent measurement layer for B2B SaaS. We sell no media, resell no software and take no cut of your ad spend. We own the number you take to the board.
               </p>
               <div className="mt-2 flex w-full flex-col items-center justify-center gap-4 sm:w-auto sm:flex-row sm:flex-wrap">
-                <BookButton className="w-full sm:w-auto" />
+                <BookButton campaign="home" className="w-full sm:w-auto" />
                 <AuditButton className="w-full sm:w-auto" />
               </div>
               <p className="max-w-[40rem] text-[1.05rem] text-body">Bring three numbers. We’ll tell you which one is wrong.</p>
@@ -255,7 +255,7 @@ export default function Home() {
 
         {/* 9. Final CTA */}
         <CtaBand id="request" title="Bring three numbers. We’ll tell you which one is wrong." body="A 20-minute fit call. Bring your three numbers.">
-          <BookButton className="w-full sm:w-auto">Book a fit call</BookButton>
+          <BookButton campaign="home" className="w-full sm:w-auto">Book a fit call</BookButton>
           <a href={`mailto:${site.email}`} className="btn-outline w-full sm:w-auto">Email us</a>
         </CtaBand>
       </main>

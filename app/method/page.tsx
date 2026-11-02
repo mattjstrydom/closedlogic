@@ -82,7 +82,7 @@ export default function Method() {
         </section>
 
         <CtaBand id="start" title="Want the checks run on your accounts?" body="The 20 checks we run before we take a retainer.">
-          <BookButton className="w-full sm:w-auto" />
+          <BookButton campaign="method" className="w-full sm:w-auto" />
           <a href={`mailto:${site.email}`} className="btn-outline w-full sm:w-auto">Email us</a>
         </CtaBand>
       </main>

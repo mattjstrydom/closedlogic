@@ -5,6 +5,7 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { Marked, type Tokens } from "marked";
 import { site } from "../site.config";
+import { bookHref } from "../booking";
 
 const DIR = join(process.cwd(), "content", "guides");
 const PUBLIC = join(process.cwd(), "public", "guides");
@@ -75,7 +76,7 @@ function pngSize(file: string): { width: number; height: number } | undefined {
   return undefined;
 }
 
-function render(body: string, known: Set<string>): string {
+function render(body: string, known: Set<string>, slug: string): string {
   const seen = new Map<string, number>();
   const md = new Marked({
     renderer: {
@@ -98,6 +99,8 @@ function render(body: string, known: Set<string>): string {
         const m = href.match(/^(?:https:\/\/www\.closedlogic\.com)?\/guides\/([^/#?]+)\/?(?:[#?].*)?$/);
         if (m && !known.has(m[1])) return inner;
         const esc = (x: string) => x.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+        // A Cal.com booking link in the body gets the same UTM tags and click tracking as the booking buttons (Matt, 2 Nov 2026).
+        if (/^https:\/\/cal\.com\/closedlogic\/20min-fit\/?$/.test(href)) return `<a href="${esc(bookHref(slug))}" data-cta="book" data-cta-page="${esc(slug)}" target="_blank" rel="noopener noreferrer"${title ? ` title="${esc(title)}"` : ""}>${inner}</a>`;
         return `<a href="${esc(href)}"${title ? ` title="${esc(title)}"` : ""}>${inner}</a>`;
       },
       image({ href, title, text }: Tokens.Image) {
@@ -167,7 +170,7 @@ export function allGuides(): Guide[] {
     });
   }
   const known = new Set(out.map((g) => g.slug));
-  for (const g of out) g.html = render(g.html, known);
+  for (const g of out) g.html = render(g.html, known, g.slug);
   cache = out.sort((a, b) => b.dateModified.localeCompare(a.dateModified) || a.slug.localeCompare(b.slug));
   return cache;
 }

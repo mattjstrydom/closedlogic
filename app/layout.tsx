@@ -87,6 +87,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {children}
         <ConsentBanner />
         <Script id="menu" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: menu }} />
+        {/* Records booking-button clicks (book_call_click) in Clarity, see public/cta.js. */}
+        <Script id="cta" src="/cta.js" strategy="afterInteractive" />
       </body>
     </html>
   );

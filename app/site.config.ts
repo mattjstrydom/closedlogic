@@ -31,9 +31,10 @@ export const site = {
     return `${this.brand} is a trading name of ${this.legalEntity}`;
   },
   linkedin: "https://www.linkedin.com/in/mattstrydom",
-  // Booking links, all in app/booking.json (one place, also read by scripts/cf-postbuild.mjs). Buttons link to bookPath
-  // or bookPePath: redirects to the Cal.com URLs written to out/_redirects at build time, so pages
-  // never show a Cal.com address. A booking.json entry with no event of its own falls back to the direct link.
+  // Booking links, all in app/booking.json (one place, also read by scripts/cf-postbuild.mjs). Site buttons link to
+  // Cal.com directly with UTM tags (app/booking.ts, Matt 2 Nov 2026); bookPath and bookPePath are the redirects
+  // written to out/_redirects, kept for links shared outside the site. A booking.json entry with no event of its own
+  // falls back to the direct link.
   bookPath: "/book",
   bookPePath: "/book-pe",
   directBookingUrl: booking.direct,

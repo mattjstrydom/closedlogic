@@ -19,7 +19,7 @@ export default function NotFound() {
             <p className="mt-6 max-w-[33.75rem] text-text-l">Start with the 20-point audit or book a 20-minute fit call.</p>
             <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
               <AuditButton className="w-full sm:w-auto" />
-              <BookButton className="w-full sm:w-auto" />
+              <BookButton campaign="404" className="w-full sm:w-auto" />
             </div>
             <p className="mt-8">
               <Link href="/" className="link">Go to the home page</Link>

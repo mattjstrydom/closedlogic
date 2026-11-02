@@ -2,9 +2,9 @@ import { AuditButton, BookButton, BookPeButton } from "./cta";
 import { SHOW_PE } from "../flags";
 
 // cta: direct sends B2B SaaS readers to the audit and the fractional offer; cta: agency (the frontmatter value kept
-// from the old site) sends PE readers to the portfolio offer. Both book through the /book redirects.
-export default function GuideCta({ cta }: { cta: "direct" | "agency" }) {
-  // While SHOW_PE is false (app/flags.ts) every guide gets the B2B SaaS fit-call CTA (/book, the 20min-fit event).
+// from the old site) sends PE readers to the portfolio offer. Both book Cal.com directly, tagged with the guide slug.
+export default function GuideCta({ cta, campaign }: { cta: "direct" | "agency"; campaign: string }) {
+  // While SHOW_PE is false (app/flags.ts) every guide gets the B2B SaaS fit-call CTA (the 20min-fit event).
   const pe = SHOW_PE && cta === "agency";
   return (
     <aside aria-labelledby="guide-cta-title" className="bento mt-14">
@@ -17,7 +17,7 @@ export default function GuideCta({ cta }: { cta: "direct" | "agency" }) {
           : "We check Google Ads, HubSpot and your reporting against each other, and tell you which number is wrong. Independent of your media agency and your CRM partner."}
       </p>
       <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-        {pe ? <BookPeButton className="w-full sm:w-auto" /> : <BookButton className="w-full sm:w-auto" />}
+        {pe ? <BookPeButton campaign={campaign} className="w-full sm:w-auto" /> : <BookButton campaign={campaign} className="w-full sm:w-auto" />}
         <AuditButton className="w-full sm:w-auto" />
       </div>
     </aside>

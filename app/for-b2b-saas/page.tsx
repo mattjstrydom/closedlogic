@@ -58,7 +58,7 @@ export default function ForB2bSaas() {
           sub="We own the tracking, attribution, HubSpot lifecycle and reporting layer: 25 hours a month, $5,000, independent of your media agency, with a 30-day exit."
           micro={["You keep your agency. We keep the number true.", "No media to sell. No software to resell. No cut of your ad spend."]}
         >
-          <BookButton className="w-full sm:w-auto" />
+          <BookButton campaign="for-b2b-saas" className="w-full sm:w-auto" />
           <AuditButton className="w-full sm:w-auto" />
         </PageHero>
 
@@ -162,7 +162,7 @@ export default function ForB2bSaas() {
         </section>
 
         <CtaBand id="start" title="Start with the audit." body="10 business days from read access. 20 checks. If the audit doesn’t find at least three material issues, we refund the full $1,500 within 14 days of the audit readout. You keep the report, the baseline and the roadmap.">
-          <BookButton className="w-full sm:w-auto">Book the audit</BookButton>
+          <BookButton campaign="for-b2b-saas" className="w-full sm:w-auto">Book the audit</BookButton>
           <a href={`mailto:${site.email}`} className="btn-outline w-full sm:w-auto">Email us</a>
         </CtaBand>
       </main>

@@ -69,6 +69,16 @@ if (existsSync(vDir)) {
   }
 }
 
+// Site pages (Matt, 2 Nov 2026): every booking link goes to Cal.com with utm_source=site, utm_content=book-cta and a
+// utm_campaign, and carries data-cta="book" for public/cta.js. Warn on any link to /book or Cal.com that doesn't.
+const walk = (dir) => readdirSync(dir, { withFileTypes: true }).flatMap((d) => (d.isDirectory() ? (d.name === "v" && dir.href === out.href ? [] : walk(new URL(`${d.name}/`, dir))) : d.name.endsWith(".html") ? [new URL(d.name, dir)] : []));
+for (const file of walk(out)) {
+  const html = readFileSync(file, "utf8");
+  const links = [...html.matchAll(/<a\b[^>]*href="(\/book[^"]*|https:\/\/cal\.com\/closedlogic\/[^"]*)"[^>]*>/g)];
+  const bad = links.filter(([tag, u]) => !/utm_source=site&amp;utm_content=book-cta&amp;utm_campaign=[\w-]+$/.test(u) || !tag.includes('data-cta="book"')).map((m) => m[1]);
+  if (bad.length) console.warn(`cf-postbuild: WARNING ${file.href.slice(out.href.length)} booking links without UTM tags or data-cta: ${bad.join(" ")}`);
+}
+
 // Cal.com links, one per booking route. An entry that is empty falls back to the direct link, so a page never sends a
 // visitor to a booking route that goes nowhere. A pe event can be added to app/booking.json later.
 const booking = JSON.parse(readFileSync(fileURLToPath(new URL("../app/booking.json", import.meta.url)), "utf8"));
@@ -91,7 +101,8 @@ const redirects = [
   "# /partners /for-pe 301",
   "/partners / 301",
   "/tools/stage-check /method 301",
-  `/book ${booking.direct} 302`,
+  // Tagged for direct visitors (Matt, 2 Nov 2026); the site's own buttons link to Cal.com with their page slug.
+  `/book ${booking.direct}?utm_source=site&utm_content=book-cta&utm_campaign=book 302`,
   `# /book-pe ${booking.pe} 302`,
   "/book-pe /book 302",
   // Partner white-label offer removed (Matt, 27 Oct 2026): old /book-partner links go to the main booking route.
