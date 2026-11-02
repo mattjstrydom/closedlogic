@@ -8,7 +8,7 @@ import { site } from "../site.config";
 
 export const metadata = pageMetadata({
   title: "Contact: bring three numbers",
-  description: "A 20-minute fit call. Bring your three numbers. Bring your Google Ads conversions, your HubSpot pipeline and the number in your board deck.",
+  description: "A 20-minute fit call. Bring your three numbers.",
   path: "/contact",
 });
 

@@ -54,7 +54,7 @@ const offers: { name: string; price: string; body: string; href: string; link: s
 ];
 
 const steps: [string, string][] = [
-  ["Book a 20-minute fit call.", "Bring your Google Ads conversions, your HubSpot pipeline and the number in your board deck. Bring your three numbers and we’ll tell you whether an audit is worth doing."],
+  ["Book a 20-minute fit call.", "Bring your three numbers and we’ll tell you whether an audit is worth doing."],
   ["We find the gap.", "20 checks in 10 business days from read access: tracking, GCLID coverage, lifecycle stages, lead scoring, routing, attribution, reporting reconciliation."],
   ["You get one number.", "A baseline, a one-page scorecard and a 90-day roadmap. The material issues we find, with the top three ranked by revenue impact."],
   ["We keep it true.", "A monthly scorecard, a fix list and a 60-minute review. The number stays defensible after the audit ends."],
