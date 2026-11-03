@@ -1,8 +1,7 @@
 // The two people on the site (About and the home page). To add a headshot: put a square JPG in public/team/, list it in
 // images.manifest.json with [96, 192], run `node scripts/build-images.mjs`, then set photo below. Without a photo the card
-// shows the initials. Jennifer has no LinkedIn link yet; add `linkedin` to her entry when she wants one shown.
+// shows the initials. No LinkedIn links are shown (Matt, 3 Nov 2026); add `linkedin` to an entry to show one on the home page and /about.
 import type { Person } from "./components/headshot";
-import { site } from "./site.config";
 
 export const team: (Person & { short: string })[] = [
   {
@@ -14,7 +13,6 @@ export const team: (Person & { short: string })[] = [
     short: "7 years in marketing and revenue operations. Runs HubSpot and Google Tag Manager in production for B2B SaaS.",
     photo: "/team/matt.jpg",
     alt: "Matt Strydom, founder of Closed Logic",
-    linkedin: site.linkedin,
   },
   {
     id: "jennifer",
