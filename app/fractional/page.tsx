@@ -1,21 +1,25 @@
-import { guaranteeFaqs } from "../guarantee";
+import Link from "next/link";
 import Faq from "../components/faq";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import PageHero from "../components/page-hero";
 import CtaBand from "../components/cta-band";
 import ReportTable from "../components/report-table";
-import { AuditButton, BookButton } from "../components/cta";
+import AuditChecks from "../components/audit-checks";
+import { BookButton } from "../components/cta";
 import { Accent, Numeral, SectionHead, TickList } from "../components/ui";
-import { faqNode, jsonLdScript, orgNode } from "../jsonld";
-import { offers, auditCredit, fractionalTerm } from "../offers";
+import { extendedChecks, coreChecks } from "../checks-data";
+import { faqNode, jsonLdScript, orgNode, serviceNode } from "../jsonld";
+import { guaranteeFaqs } from "../guarantee";
+import { offers, auditCredit, auditGuarantee, fractionalTerm } from "../offers";
 import { pageMetadata } from "../seo";
 import { site } from "../site.config";
 
 export const metadata = pageMetadata({
-  title: "Fractional Measurement Lead for larger accounts",
-  description: "The step after the audit for larger accounts: 25 hours a month on tracking, attribution, HubSpot lifecycle and reporting, with a 30-day exit. No media to sell.",
-  path: "/for-b2b-saas",
+  title: "Fractional Marketing Operations for HubSpot Teams",
+  description: "The step after the audit: 25 hours a month on tracking, attribution, HubSpot lifecycle and reporting. Cancel in the first 30 days and pay only that month.",
+  path: "/fractional",
+  absoluteTitle: true,
 });
 
 const included = [
@@ -32,7 +36,7 @@ const notIncluded = ["Media buying", "Creative, content or web development", "CR
 const weeks: [string, string, string][] = [
   ["Week 1", "Access and definitions.", "Read-only access to Google Ads, HubSpot and your reporting. One KPI dictionary. One definition of a lead, an opportunity and pipeline."],
   ["Week 2", "The audit and the baseline.", "The 10 core checks, plus the last 90 days: where the numbers disagree and why."],
-  ["Week 3", "The readout and the roadmap.", ""],
+  ["Week 3", "The report and the roadmap.", ""],
   ["Week 4", "The first scorecard, and the first fixes you approve.", ""],
 ];
 
@@ -41,51 +45,47 @@ const faqs = [
   { q: "Do you replace our CRM admin?", a: "No. We define what the CRM should measure and test whether it does." },
   { q: "How much of our time will this take?", a: "Two hours in week one, one hour in week four, then 60 minutes a month." },
   { q: "What happens after the audit if we don’t continue?", a: "You keep the report, the baseline and the roadmap. No lock-in." },
-  ...guaranteeFaqs,
+  ...guaranteeFaqs.slice(0, 1),
   { q: "Can you work with our stack?", a: "HubSpot and Google Ads are the core. If your stack is different, we’ll tell you before you buy." },
+  { q: "How quickly will you reply?", a: "Within 1 business day." },
 ];
 
-const graph = [orgNode, faqNode(faqs)];
-
-export default function ForB2bSaas() {
+export default function Fractional() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdScript(graph) }} />
-      <Header path="/for-b2b-saas" />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLdScript([
+            orgNode,
+            serviceNode("fractional", offers.fractional.name, "Fractional marketing operations", "25 hours a month on tracking, attribution, HubSpot lifecycle and reporting, with a monthly scorecard. 3-month term; cancel in the first 30 days and pay only that month.", "5000", `${site.url}/fractional`, true),
+            faqNode(faqs),
+          ]),
+        }}
+      />
+      <Header path="/fractional" />
       <main id="main" tabIndex={-1}>
         <PageHero
-          id="b2b"
-          title="Fractional measurement leadership for larger accounts."
+          id="fractional"
+          title="Fractional marketing operations for larger accounts"
           sub="The step after the audit. We take over the tracking, attribution, HubSpot lifecycle and reporting checks: 25 hours a month, $5,000, with a 30-day exit."
           micro={["You keep your agency.", "We sell no media, resell no software and take no cut of your ad spend."]}
         >
-          <BookButton campaign="for-b2b-saas" className="w-full sm:w-auto" />
-          <AuditButton className="w-full sm:w-auto" />
+          <Link href="/free-check" className="btn w-full sm:w-auto">Get my free check</Link>
+          <Link href="/method#checks" className="btn-outline w-full sm:w-auto">See the 10 core checks</Link>
         </PageHero>
 
-        <section id="problem" aria-labelledby="problem-title" className="section-y band">
+        <section id="offer" aria-labelledby="offer-title" className="section-y band">
           <div className="container-site">
-            <SectionHead id="problem">
-              When the checks need <Accent>an owner.</Accent>
-            </SectionHead>
-            <div className="mx-auto mt-8 max-w-[44rem] space-y-5 text-center text-text-xl text-body">
-              <p>A fix and a weekly check keep Google Ads learning from your real leads. On larger accounts there is more to own: lifecycle stages, routing, attribution and the numbers the board sees.</p>
-              <p>Fractional is the step after the audit. We take over the checks and the fixes, and you keep your agency.</p>
-            </div>
-          </div>
-        </section>
-
-        <section id="offer" aria-labelledby="offer-title" className="section-y">
-          <div className="container-site">
-            <SectionHead id="offer">How larger accounts start.</SectionHead>
+            <SectionHead id="offer">How larger accounts <Accent>start.</Accent></SectionHead>
             <div className="mt-14 grid gap-7 lg:grid-cols-2">
               <div className="card flex flex-col gap-3 text-text-m">
-                <h3 className="text-title-m">Pipeline Truth Audit</h3>
+                <h3 className="text-title-m">{offers.audit.name}</h3>
                 <p className="font-display text-[1.05rem] font-bold text-ink">{offers.audit.price} · {offers.audit.days} business days</p>
-                <p className="text-body">10 core checks. A baseline of the last 90 days. A one-page scorecard. A 90-day roadmap. The material issues we find, with the top three ranked by revenue impact. {auditCredit}</p>
+                <p className="text-body">The 10 core checks. A baseline of the last 90 days. A one-page scorecard. A 90-day roadmap. {auditGuarantee} {auditCredit}</p>
               </div>
               <div className="card flex flex-col gap-3 text-text-m">
-                <h3 className="text-title-m">Fractional Measurement Lead</h3>
+                <h3 className="text-title-m">{offers.fractional.name}</h3>
                 <p className="font-display text-[1.05rem] font-bold text-ink">{offers.fractional.per} · {offers.fractional.hours} hours · 3-month term</p>
                 <p className="text-body">Month 1: audit, definitions and roadmap. Months 2 and 3: monthly scorecard, fixes and a 60-minute review. Adds the 10 extended checks. {fractionalTerm} You keep your agency.</p>
               </div>
@@ -93,7 +93,7 @@ export default function ForB2bSaas() {
           </div>
         </section>
 
-        <section id="scope" aria-labelledby="scope-title" className="section-y band">
+        <section id="scope" aria-labelledby="scope-title" className="section-y">
           <div className="container-site grid gap-7 lg:grid-cols-[7fr_5fr] lg:items-start">
             <div className="card">
               <h2 id="scope-title" className="text-title-m">What’s included</h2>
@@ -108,11 +108,19 @@ export default function ForB2bSaas() {
           </div>
         </section>
 
+        <section id="extended" aria-labelledby="extended-title" className="section-y band">
+          <div className="container-site">
+            <SectionHead id="extended">Extended checks <Accent>(Fractional).</Accent></SectionHead>
+            <p className="lead lead-center mt-6 max-w-[44rem]">On top of the 10 <Link href="/method#checks" className="link">core checks</Link> in the audit, Fractional adds these 10.</p>
+            <div className="mx-auto mt-10 max-w-[56rem]">
+              <AuditChecks items={extendedChecks} start={coreChecks.length + 1} />
+            </div>
+          </div>
+        </section>
+
         <section id="first-30-days" aria-labelledby="first-30-days-title" className="section-y">
           <div className="container-site">
-            <SectionHead id="first-30-days">
-              The first <Accent>30 days.</Accent>
-            </SectionHead>
+            <SectionHead id="first-30-days">The first <Accent>30 days.</Accent></SectionHead>
             <ol className="mt-14 grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
               {weeks.map(([w, lead, rest], i) => (
                 <li key={w} className="card group flex flex-col gap-3 p-6 text-text-m">
@@ -139,7 +147,7 @@ export default function ForB2bSaas() {
             <SectionHead id="pricing">Pricing.</SectionHead>
             <div className="card mx-auto mt-10 max-w-[60rem]">
               <ReportTable
-                caption="B2B SaaS offers and prices"
+                caption="Offers for larger accounts and their prices"
                 head={["Offer", "Price", "Scope"]}
                 right={[1]}
                 rows={[
@@ -148,6 +156,9 @@ export default function ForB2bSaas() {
                 ]}
               />
             </div>
+            <p className="mx-auto mt-5 max-w-[60rem] text-center text-body">
+              See <Link href="/pricing" className="link">every price</Link>.
+            </p>
           </div>
         </section>
 
@@ -160,9 +171,9 @@ export default function ForB2bSaas() {
           </div>
         </section>
 
-        <CtaBand id="start" title="Start with the audit." body="10 business days from read access. 10 core checks. If the audit doesn’t find at least three material issues, we refund the full $1,500 within 14 days of the audit readout. You keep the report, the baseline and the roadmap.">
-          <BookButton campaign="for-b2b-saas" className="w-full sm:w-auto">Book the audit</BookButton>
-          <a href={`mailto:${site.email}`} className="btn-outline w-full sm:w-auto">Email us</a>
+        <CtaBand id="start" title="Start with the free check." body="No logins, no obligation. We reply within 1 business day.">
+          <Link href="/free-check" className="btn w-full sm:w-auto">Get my free check</Link>
+          <BookButton campaign="fractional" className="w-full sm:w-auto" />
         </CtaBand>
       </main>
       <Footer />

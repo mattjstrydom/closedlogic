@@ -87,23 +87,20 @@ for (const [k, v] of Object.entries(booking)) {
   if (!/^https:\/\/cal\.com\/[\w-]+\/[\w-]+$/.test(v) || /aftertheform/.test(v)) throw new Error(`app/booking.json "${k}" is not a closedlogic Cal.com link: ${v}`);
 }
 
-// Retired offer pages (the agencies, teardown, sample report and partners pages, and the stage check) go to the new
-// pages with a permanent redirect. Booking routes are temporary: the Cal.com link can change.
-// PE hidden (Matt, 26 Oct 2026): the old PE targets are kept below as comments, in this script and in out/_redirects, so
-// they can come back. To restore, swap each live line for the commented one above it.
+// Retired pages go to their replacements with a permanent redirect. Booking routes are temporary: the Cal.com link can
+// change. /for-b2b-saas became /fractional and /for-pe was removed (Matt, 3 Nov 2026), so the old agency, partner and
+// PE routes all land on the homepage; /teardown, the old lead magnet, lands on the free check.
 const redirects = [
-  "# /agencies /for-pe 301",
+  "/for-b2b-saas /fractional 301",
+  "/for-pe / 301",
   "/agencies / 301",
-  "# /agencies/teardown /for-pe 301",
   "/agencies/teardown / 301",
-  "/teardown /for-b2b-saas 301",
-  "/sample-report /method 301",
-  "# /partners /for-pe 301",
   "/partners / 301",
+  "/teardown /free-check 301",
+  "/sample-report /method 301",
   "/tools/stage-check /method 301",
   // Tagged for direct visitors (Matt, 2 Nov 2026); the site's own buttons link to Cal.com with their page slug.
   `/book ${booking.direct}?utm_source=site&utm_content=book-cta&utm_campaign=book 302`,
-  `# /book-pe ${booking.pe} 302`,
   "/book-pe /book 302",
   // Partner white-label offer removed (Matt, 27 Oct 2026): old /book-partner links go to the main booking route.
   "/book-partner /book 302",

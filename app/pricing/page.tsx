@@ -22,8 +22,8 @@ const rows: React.ReactNode[][] = [
   [<Link key="fix" href="/signal-fix" className="link">{offers.fix.name}</Link>, offers.fix.price, "One defined fix, before-and-after check, change log, 30-day guarantee"],
   [<Link key="pilot" href="/ops-desk" className="link">{offers.pilot.name}</Link>, offers.pilot.price, "One defined request, scoped, built, tested and documented"],
   [<Link key="ops" href="/ops-desk" className="link">{offers.ops.name}</Link>, offers.ops.per, "Up to 10 hours, one active request, weekly updates, 30 days' notice"],
-  [offers.audit.name, offers.audit.price, "For larger teams: 10 core checks, a 90-day baseline and a roadmap"],
-  [offers.fractional.name, offers.fractional.per, "For larger teams: 25 hours a month; cancel in the first 30 days and pay only that month"],
+  [<Link key="audit" href="/method#checks" className="link">{offers.audit.name}</Link>, offers.audit.price, "For larger teams: 10 core checks, a 90-day baseline and a roadmap"],
+  [<Link key="frac" href="/fractional" className="link">{offers.fractional.name}</Link>, offers.fractional.per, "For larger teams: 25 hours a month; cancel in the first 30 days and pay only that month"],
 ];
 
 export default function Pricing() {

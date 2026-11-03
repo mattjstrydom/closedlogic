@@ -1,30 +1,33 @@
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import PageHero from "../components/page-hero";
 import CtaBand from "../components/cta-band";
-import { BookButton } from "../components/cta";
-import { Accent, TickList } from "../components/ui";
+import { TickList } from "../components/ui";
 import { jenniferNode, jsonLdScript, mattNode, orgNode } from "../jsonld";
 import { pageMetadata } from "../seo";
+import { site } from "../site.config";
 
 export const metadata = pageMetadata({
-  title: "About: independent by design",
-  description: "Closed Logic is an independent measurement practice. We sell no media, resell no software and take no cut of ad spend. We check the numbers and keep them true.",
+  title: "About Closed Logic: Matt Strydom and Jennifer Taylor",
+  description: "Who does the work, how we handle access to your accounts, and what we will never do.",
   path: "/about",
+  absoluteTitle: true,
 });
 
-const beliefs = [
-  "The number should reconcile to the CRM, not to the dashboard.",
-  "Independence is a feature, not a positioning line.",
-  "A standard is more useful than another tool.",
-  "If the audit doesn’t find at least three material issues, we refund the full $1,500 within 14 days of the audit readout. You keep the report, the baseline and the roadmap.",
+const never = [
+  "Sell media or take a cut of your ad spend",
+  "Change anything without your written approval",
+  "Keep access after a job is finished",
+  "Ask for your passwords or payment details",
+  "Name you as a client without your written permission",
 ];
 
 // Team cards. To add a headshot: put a square JPG in public/team/, list it in images.manifest.json with [96, 192],
 // run `node scripts/build-images.mjs`, then set photo below. Without a photo the card shows the initials in the same circle.
-type Person = { id: string; name: string; initials: string; heading: string; bio: string; photo?: string; alt?: string };
+// Jennifer has no LinkedIn link on the site yet; add `linkedin` to her entry when she wants one shown.
+type Person = { id: string; name: string; initials: string; heading: string; bio: string; photo?: string; alt?: string; linkedin?: string };
 const team: Person[] = [
   {
     id: "matt",
@@ -34,6 +37,7 @@ const team: Person[] = [
     bio: "Matt has spent 7 years in marketing and revenue operations. He runs HubSpot and Google Tag Manager in production for B2B SaaS, and has built CRM architecture, lead scoring and attribution across HubSpot, GA4, Google Ads, Clay and Amplitude.",
     photo: "/team/matt.jpg",
     alt: "Matt Strydom, founder of Closed Logic",
+    linkedin: site.linkedin,
   },
   {
     id: "jennifer",
@@ -65,27 +69,11 @@ export default function About() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdScript([orgNode, mattNode, jenniferNode]) }} />
       <Header path="/about" />
       <main id="main" tabIndex={-1}>
-        <PageHero
-          id="about"
-          title="Independent by design."
-          sub="Closed Logic is an independent measurement practice. We sell no media, resell no software and take no cut of ad spend. We check the numbers and keep them true."
-        />
+        <PageHero id="about" title="Two operators. No account managers." sub="The people you talk to are the people who do the work." />
 
-        <section id="independent" aria-labelledby="independent-title" className="section-y band">
-          <div className="container-site">
-            <div className="mx-auto max-w-[48rem] text-center">
-              <h2 id="independent-title" className="heading-center text-title-l">
-                The number is only useful if the person measuring it <Accent>isn’t selling the thing being measured.</Accent>
-              </h2>
-              <p className="lead mt-6">Media agencies are paid to run media. CRM partners are paid to implement CRM. Dashboard tools are paid per seat. None of them is paid to tell you that the number is wrong. That is the gap Closed Logic fills.</p>
-            </div>
-          </div>
-        </section>
-
-        <section id="who" aria-labelledby="who-title" className="section-y">
+        <section id="who" aria-labelledby="who-title" className="section-y band">
           <div className="container-site">
             <div className="mx-auto flex max-w-[52rem] flex-col gap-6">
-              <p className="text-center text-text-l">Matt and Jennifer both deliver the work.</p>
               {team.map((p, i) => {
                 const Heading = i === 0 ? "h2" : "h3";
                 return (
@@ -94,6 +82,13 @@ export default function About() {
                     <div className="min-w-0">
                       <Heading id={i === 0 ? "who-title" : undefined} className="text-title-m">{p.heading}</Heading>
                       <p className="mt-4 text-body">{p.bio}</p>
+                      {p.linkedin && (
+                        <p className="mt-3">
+                          <a href={p.linkedin} target="_blank" rel="noopener noreferrer" className="link">
+                            {p.name} on LinkedIn<span className="sr-only"> (opens in a new tab)</span>
+                          </a>
+                        </p>
+                      )}
                     </div>
                   </div>
                 );
@@ -102,18 +97,30 @@ export default function About() {
           </div>
         </section>
 
-        <section id="beliefs" aria-labelledby="beliefs-title" className="section-y band">
+        <section id="never" aria-labelledby="never-title" className="section-y">
           <div className="container-site">
             <div className="card mx-auto max-w-[52rem]">
-              <h2 id="beliefs-title" className="text-title-m">What we believe</h2>
-              <TickList items={beliefs} className="mt-6 text-text-m" />
+              <h2 id="never-title" className="text-title-m">What we&apos;ll never do</h2>
+              <TickList items={never} className="mt-6 text-text-m" />
+              <p className="mt-6 text-body">
+                Read how we handle access in our <Link href="/access" className="link">access policy</Link>.
+              </p>
             </div>
           </div>
         </section>
 
-        <CtaBand id="start" title="Start with a free outside-in check." body="We look at what your site sends to Google Ads, with no access needed, and send you what we find.">
-          <Link href="/#check" className="btn w-full sm:w-auto">Get a free outside-in check</Link>
-          <BookButton campaign="about" className="btn-outline w-full sm:w-auto">Book a 20-minute fit call</BookButton>
+        <section id="company" aria-labelledby="company-title" className="section-y band">
+          <div className="container-site">
+            <div className="mx-auto max-w-[52rem] text-text-m text-body">
+              <h2 id="company-title" className="text-title-s text-ink">Company details</h2>
+              <p className="mt-3">{site.legalLine}, 530-B Harkle Road, STE 100, Santa Fe, NM 87505, USA.</p>
+            </div>
+          </div>
+        </section>
+
+        <CtaBand id="start" title="Start with a free check." body="We look at what your site sends to Google Ads, with no logins, and send you the evidence.">
+          <Link href="/free-check" className="btn w-full sm:w-auto">Get my free check</Link>
+          <Link href="/contact" className="btn-outline w-full sm:w-auto">Talk to us</Link>
         </CtaBand>
       </main>
       <Footer />
