@@ -167,7 +167,7 @@ async function handleRequest(req: Request, env: Env): Promise<Response> {
 
 // The free outside-in check: email and website, tagged outside-in-check-request. No sequence enrolment, same as the contact form.
 async function handleCheck(body: Record<string, unknown>, env: Env): Promise<Response> {
-  const f = { email: str(body.email).trim(), website: str(body.website).trim() };
+  const f = { email: str(body.email).trim(), website: str(body.website).trim(), note: str(body.note).trim() };
   const errors = validateCheck(f);
   if (Object.keys(errors).length) return json({ errors }, 422);
   const dryRun = env.FORM_DRY_RUN === "1";
@@ -178,11 +178,11 @@ async function handleCheck(body: Record<string, unknown>, env: Env): Promise<Res
   const subscriberBody = JSON.stringify({
     email: f.email,
     tags: ["outside-in-check-request"],
-    customAttributes: { website: f.website, requestType: "check", source: site.domain, ...(source ? { campaignSource: source } : {}) },
+    customAttributes: { website: f.website, ...(f.note ? { note: f.note } : {}), requestType: "check", source: site.domain, ...(source ? { campaignSource: source } : {}) },
     duplicateStrategy: "overwrite",
     enrollInSequences: false,
   });
-  const rows: [string, string][] = [["Type", "Free outside-in check request"], ["Email", f.email], ["Website", f.website], ...(source ? ([["Source", source]] as [string, string][]) : [])];
+  const rows: [string, string][] = [["Type", "Free outside-in check request"], ["Email", f.email], ["Website", f.website], ...(f.note ? ([["Note", f.note]] as [string, string][]) : []), ...(source ? ([["Source", source]] as [string, string][]) : [])];
   const notifyBody = JSON.stringify({
     to: site.notifyTo,
     replyTo: oneLine(f.email),

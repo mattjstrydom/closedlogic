@@ -51,7 +51,7 @@ const offerCards: OfferCard[] = [
     name: offers.watch.name,
     price: `${offers.watch.per} · month to month`,
     body: `Weekly checks that conversions still arrive, click IDs are still stored, Primary actions haven't changed and form embeds still fire. A short monthly note and ${offers.watch.allowanceHours} hours of fixes.`,
-    href: "/pricing#watch",
+    href: "/pricing",
     link: "See what we check",
   },
 ];

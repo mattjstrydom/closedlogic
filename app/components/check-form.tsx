@@ -3,12 +3,13 @@
 import { useRef, useState } from "react";
 import { track, readSource } from "@/app/analytics";
 import { validateCheck, type CheckErrors } from "@/app/validate";
+import { checkConfirmation } from "@/app/offers";
 
 const input = "mt-1 block w-full rounded-[10px] border-2 border-solid border-ink bg-white px-4 py-3 text-[1rem] text-ink";
 
-// Free outside-in check request: work email and company website. Posts to /api/request with type "check".
-export default function CheckForm({ email }: { email: string }) {
-  const [f, setF] = useState({ email: "", website: "" });
+// Free check request: work email and company website, plus an optional note on /contact. Posts to /api/request with type "check".
+export default function CheckForm({ email, withNote = false }: { email: string; withNote?: boolean }) {
+  const [f, setF] = useState({ email: "", website: "", note: "" });
   const [errors, setErrors] = useState<CheckErrors>({});
   const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">("idle");
   const form = useRef<HTMLFormElement>(null);
@@ -45,23 +46,24 @@ export default function CheckForm({ email }: { email: string }) {
   if (status === "ok")
     return (
       <div role="status" tabIndex={-1} ref={(el) => el?.focus()} className="card focus:outline-none">
-        <p className="text-text-xl font-medium">Thanks. We&apos;ll reply with what we find.</p>
+        <p className="text-text-xl font-medium">{checkConfirmation}</p>
       </div>
     );
 
-  const field = (k: "email" | "website", label: string, el: React.ReactNode) => (
+  const field = (k: "email" | "website" | "note", label: string, el: React.ReactNode) => (
     <div>
       <label htmlFor={`check-${k}`} className="block font-medium">{label}</label>
       {el}
       {errors[k] && <p id={`check-${k}-err`} className="mt-1 text-[1rem] text-error">{errors[k]}</p>}
     </div>
   );
-  const aria = (k: "email" | "website") => ({ id: `check-${k}`, name: k, "aria-invalid": errors[k] ? true : undefined, "aria-describedby": errors[k] ? `check-${k}-err` : undefined });
+  const aria = (k: "email" | "website" | "note") => ({ id: `check-${k}`, name: k, "aria-invalid": errors[k] ? true : undefined, "aria-describedby": errors[k] ? `check-${k}-err` : undefined });
 
   return (
     <form ref={form} onSubmit={submit} noValidate className="space-y-5 text-left">
       {field("email", "Work email", <input {...aria("email")} required type="email" className={input} autoComplete="email" value={f.email} onChange={(e) => setF((p) => ({ ...p, email: e.target.value }))} />)}
       {field("website", "Company website", <input {...aria("website")} required className={input} placeholder="example.com" autoComplete="url" value={f.website} onChange={(e) => setF((p) => ({ ...p, website: e.target.value }))} />)}
+      {withNote && field("note", "What you'd like checked (optional)", <textarea {...aria("note")} rows={4} className={input} value={f.note} onChange={(e) => setF((p) => ({ ...p, note: e.target.value }))} />)}
       <div aria-hidden="true" className="absolute -left-[9999px]">
         <label>Leave this empty<input name="company_fax" tabIndex={-1} autoComplete="off" /></label>
       </div>
@@ -73,9 +75,9 @@ export default function CheckForm({ email }: { email: string }) {
         )}
       </div>
       <button type="submit" className="btn w-full cursor-pointer disabled:cursor-wait disabled:opacity-70 sm:w-auto" disabled={status === "sending"}>
-        Get a free outside-in check
+        Get my free check
       </button>
-      <p className="text-body">No access needed. We look from outside and send you what we find.</p>
+      <p className="text-body">No logins. No obligation. We reply within 1 business day.</p>
     </form>
   );
 }

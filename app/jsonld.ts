@@ -6,7 +6,7 @@ export const MATT_ID = `${site.url}/#matt`;
 export const JENNIFER_ID = `${site.url}/#jennifer`;
 
 // Minimal copies of the home page nodes, so a page that references the ids also carries the nodes (Google reads one page at a time).
-export const orgNode = { "@type": "Organization", "@id": ORG_ID, name: site.brand, legalName: site.legalName, url: site.url };
+export const orgNode = { "@type": ["Organization", "ProfessionalService"], "@id": ORG_ID, name: site.brand, legalName: site.legalName, url: site.url };
 export const mattNode = { "@type": "Person", "@id": MATT_ID, name: "Matt Strydom", sameAs: [site.linkedin] };
 export const jenniferNode = { "@type": "Person", "@id": JENNIFER_ID, name: "Jennifer Taylor", worksFor: { "@id": ORG_ID } };
 
@@ -21,5 +21,24 @@ export function faqNode(items: { q: string; a: string }[]) {
   return {
     "@type": "FAQPage",
     mainEntity: items.map(({ q, a }) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })),
+  };
+}
+
+/** Service node with one Offer: a fixed price, or a monthly price (unitText MONTH). */
+export function serviceNode(id: string, name: string, serviceType: string, description: string, price: string, url: string, monthly = false) {
+  return {
+    "@type": "Service",
+    "@id": `${site.url}/#${id}`,
+    name,
+    serviceType,
+    description,
+    provider: { "@id": ORG_ID },
+    offers: {
+      "@type": "Offer",
+      url,
+      ...(monthly
+        ? { priceSpecification: { "@type": "UnitPriceSpecification", price, priceCurrency: "USD", unitText: "MONTH" } }
+        : { price, priceCurrency: "USD" }),
+    },
   };
 }
