@@ -1,20 +1,8 @@
-import { SHOW_PE } from "./flags";
-
-const ALL_SIZES = [
-  "Under $5M ARR",
-  "$5M to $10M ARR",
-  "$10M to $25M ARR",
-  "$25M to $50M ARR",
-  "$50M+ ARR",
-  "PE fund (5 to 20 portfolio companies)",
-  "Other",
-] as const;
-export const SIZES: readonly string[] = SHOW_PE ? ALL_SIZES : ALL_SIZES.filter((s) => !s.startsWith("PE fund"));
-export const SIZE_LABEL = SHOW_PE ? "ARR or portfolio size" : "ARR";
+export const SIZES: readonly string[] = ["Under $5M ARR", "$5M to $10M ARR", "$10M to $25M ARR", "$25M to $50M ARR", "$50M+ ARR", "Other"];
 
 // The partner white-label offer was removed on 27 Oct 2026: there is no partner request type any more.
-export type FormType = "b2b" | "pe";
-export const FORM_TYPES: readonly FormType[] = SHOW_PE ? ["b2b", "pe"] : ["b2b"];
+export type FormType = "b2b";
+export const FORM_TYPES: readonly FormType[] = ["b2b"];
 export type Fields = { name: string; email: string; company: string; role: string; size: string; stack: string; note: string };
 export type Errors = Partial<Record<keyof Fields, string>>;
 
@@ -42,7 +30,7 @@ export function validate(f: Fields): Errors {
     e.email = "Enter a work email like name@company.com.";
   if (!f.company.trim() || f.company.length > 200) e.company = "Enter your company.";
   if (f.role.length > 120) e.role = "Shorten your role to 120 characters or fewer.";
-  if (!SIZES.includes(f.size)) e.size = SHOW_PE ? "Choose your ARR or portfolio size." : "Choose your ARR.";
+  if (!SIZES.includes(f.size)) e.size = "Choose your ARR.";
   if (f.stack.length > 300) e.stack = "Shorten your stack to 300 characters or fewer.";
   if (f.note.length > 2000) e.note = "Shorten your note to 2,000 characters or fewer.";
   return e;

@@ -1,3 +1,28 @@
+# Changes: full site rewrite, 3 Nov 2026 (branch site-rewrite-nov-2026, not deployed)
+
+Copy source: the rewrite doc (Claude Docs, "Closed Logic website rewrite, trust plan and offer pack"), with Matt's decisions of 3 Nov overriding it.
+
+- **Offers (single source `app/offers.ts`):** free check, Signal Fix ($750, one defined defect, 30-day fix-at-no-charge guarantee), Ops Desk (pilot $1,250; $2,500/month for up to 10 hours, one active request, weekly updates, month to month, 30 days' notice), Pipeline Truth Audit ($1,500) and Fractional Measurement Lead ($5,000/month) for larger accounts.
+- **Retired:** Signal Watch (and the Measurement Scorecard before it), both founding offers, the old three-material-issue refund.
+- **New audit guarantee:** if the audit finds nothing that changes how Google Ads counts or bids, we refund the fee in full (14 days from delivering the report).
+- **One audit credit rule:** continue to Fractional within 30 days of the audit report and the audit fee is credited against Fractional's first month. No credit toward other offers.
+- **Pages:** `/` rebuilt; `/signal-fix`, `/pricing`, `/about`, `/contact`, `/method` rewritten; new `/ops-desk`, `/free-check`, `/access`; `/for-b2b-saas` is now `/fractional` (301); `/for-pe` removed (301 to `/`). Header nav: Signal Fix, Ops Desk, Method, Pricing, Guides, About.
+- **Left off the site on purpose (code comments say where they go):** the example check (hero visual, "See an example check" link, home section "What a check looks like"), certification badges, Jennifer's LinkedIn link.
+- **Checks:** `scripts/check-rendered.mjs` fails on `{{...}}` tokens and on bracketed placeholders such as `[X]` in visible text; `scripts/check-links.mjs` fails on broken internal links and fragments.
+- **Existing `/v/` pages:** untouched (byte-identical to `public/v/`). Only addition: `public/v/fixoffer.js` and `scripts/v-template-check.html` (new pages only).
+
+## Terms changes for legal review (app/terms/page.tsx, last updated 3 November 2026)
+
+Numbering is now fixed (the PE gating is gone): 1 to 11, with 8 = Access and data (data processing terms in 8.6).
+- 1.1, 1.2: scope lists the free check, Signal Fix, Ops Desk, audit and Fractional.
+- 2.2: prices for every offer. 2.4: the single audit credit rule.
+- 3.2: audit deliverables say "the findings, each with its evidence and the steps to reproduce it". 3.5: audit report. 3.6: audit guarantee and the test (evidence; effect (i) to (iv); separate cause; not counted; checking a finding within 7 days).
+- Heading 4 and 4.1: audit refund, full fee within 14 days of delivering the report (14 days of a settled challenge if you challenge a finding).
+- Heading 5, 5.3 (Signal Watch sentence removed), 5.6 Signal Fix (one defect, extra fixes quoted first, access removal confirmed in writing), 5.7 guarantee (free fix, not a refund), 5.8 Ops Desk pilot, 5.9 Ops Desk, 5.10 free check, 5.11 case studies as an optional request with written approval. Old Signal Watch (5.6) and founding offer (5.11) clauses removed.
+- 8.2: access removal is confirmed in writing. 8.6(b): nature and purpose also covers the work in the written scope. 9.1: liability cap wording covers Signal Fix and the Ops Desk pilot. 11.2, 11.3: same, and Ops Desk notice replaces the Signal Watch reference.
+- Spelling made US ("authorize", "publicize").
+- To check: the Ops Desk pilot and plan terms (5.8, 5.9) are new drafts; the refund timing and the 3.6 test wording are proposed defaults.
+
 # Changes: site update, 2 Nov 2026 (branch site-update-nov-2026, not deployed)
 
 New offers (single source: `app/offers.ts`): free outside-in check, Signal Fix ($750, 30-day guarantee), Signal Watch ($750/month, weekly checks, 2 hours of fixes) replacing the Measurement Scorecard, audit narrowed to 10 core checks, Fractional adds 10 extended checks. New `/signal-fix` page, free-check form (`app/components/check-form.tsx`, Worker type `check`, Sequenzy tag `outside-in-check-request`), `/method` split into core and extended checks with the bidding-stage section, new /v/ template `scripts/v-template-check.html`, unpublished samples in `scripts/samples/`, and `scripts/check-rendered.mjs` (fails the build if a double-brace token reaches `out/`).

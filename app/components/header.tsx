@@ -11,7 +11,7 @@ const baseLinks: [string, string][] = [
 ];
 
 // campaign: the booking UTM slug, when the page path used for the nav highlight isn't the page (guides).
-export default function Header({ path = "/" }: { path?: string; campaign?: string }) {
+export default function Header({ path = "/" }: { path?: string }) {
   // Guides appears only once a guide is published (automatic, see app/guides/content.ts).
   const links: [string, string][] = [...baseLinks, ...(hasGuides() ? ([["/guides", "Guides"]] as [string, string][]) : []), ["/about", "About"]];
   const current = (href: string) => (path === href || path.startsWith(`${href}/`) ? "page" : undefined);

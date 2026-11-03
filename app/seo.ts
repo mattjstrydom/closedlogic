@@ -9,7 +9,7 @@ export const sharedOpenGraph = { siteName: site.brand, locale: "en_US", type: "w
 // 1200x630 for Open Graph, 1200x600 for X/Twitter. Rendered from scripts/og-v3.html with scripts/make-og.mjs; the
 // text is baked into the PNGs, so re-render them (and update ogAlt) when the headline changes.
 // Alt text states exactly what is on the share images: the wordmark and the headline (scripts/og-v3.html).
-const ogAlt = "Closed Logic wordmark. Make sure Google Ads learns from your real leads.";
+const ogAlt = "Closed Logic wordmark. Make sure Google Ads learns from real leads, not page views.";
 export const ogImage = { url: "/closedlogic-og-v3-1200x630.png", width: 1200, height: 630, alt: ogAlt, type: "image/png" };
 export const twitterImage = { url: "/closedlogic-og-v3-x-1200x600.png", width: 1200, height: 600, alt: ogAlt, type: "image/png" };
 

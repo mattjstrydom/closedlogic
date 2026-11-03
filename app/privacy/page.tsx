@@ -8,7 +8,7 @@ import { pageMetadata } from "../seo";
 
 export const metadata = pageMetadata({
   title: "Privacy policy",
-  description: `What ${site.domain} collects, why, who sees it, how long we keep it, and how to use your rights. ${site.legalLine}.`,
+  description: `What ${site.domain} collects, why, who sees it, how long we keep it, and how to use your rights.`,
   path: "/privacy",
 });
 
@@ -54,7 +54,7 @@ export default function Privacy() {
           <strong>When you visit the site: session replays and heatmaps.</strong>{" "}
           Microsoft Clarity records how visitors use the site: clicks, scrolling and mouse movement, shown as session
           replays and heatmaps, with the page, referrer, device, browser and approximate location. It sets cookies to
-          recognise your browser across pages. What you type into form fields is always masked. On most pages it&apos;s loaded
+          recognize your browser across pages. What you type into form fields is always masked. On most pages it&apos;s loaded
           through Tag Manager and switched off until you press Accept. The exception is the personal video pages we send to
           individual prospects (addresses starting /v/), which aren&apos;t linked from the rest of the site. Clarity runs on
           those straight away, so we can see whether the video was watched. Clarity keeps recordings for up to 30 days.
@@ -206,7 +206,7 @@ export default function Privacy() {
           ask us to tell you what we hold about you and where we got it, or to delete it. If you ask us to delete it, we keep only the
           do-not-contact entry described above, so we don&apos;t contact you again.
         </p>
-        <p>We do not sell or share personal information for cross-context behavioural advertising as those terms are defined in California law.</p>
+        <p>We do not sell or share personal information for cross-context behavioral advertising as those terms are defined in California law.</p>
 
         <h2 className={h}>Security</h2>
         <p>

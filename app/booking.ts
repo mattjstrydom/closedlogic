@@ -6,8 +6,8 @@ import booking from "./booking.json";
 // (utm_campaign=book, scripts/cf-postbuild.mjs) for links shared outside the site. public/cta.js records the click.
 export const UTM = { source: "site", content: "book-cta" } as const;
 
-export function bookHref(campaign: string, kind: "direct" | "pe" = "direct"): string {
-  const base = (booking as Record<string, string>)[kind] || booking.direct;
+export function bookHref(campaign: string): string {
+  const base = booking.direct;
   return `${base}${base.includes("?") ? "&" : "?"}utm_source=${UTM.source}&utm_content=${UTM.content}&utm_campaign=${encodeURIComponent(campaign)}`;
 }
 

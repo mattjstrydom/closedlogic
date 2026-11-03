@@ -80,9 +80,8 @@ for (const file of walk(out)) {
 }
 
 // Cal.com links, one per booking route. An entry that is empty falls back to the direct link, so a page never sends a
-// visitor to a booking route that goes nowhere. A pe event can be added to app/booking.json later.
+// visitor to a booking route that goes nowhere.
 const booking = JSON.parse(readFileSync(fileURLToPath(new URL("../app/booking.json", import.meta.url)), "utf8"));
-for (const k of ["pe"]) booking[k] ||= booking.direct;
 for (const [k, v] of Object.entries(booking)) {
   if (!/^https:\/\/cal\.com\/[\w-]+\/[\w-]+$/.test(v) || /aftertheform/.test(v)) throw new Error(`app/booking.json "${k}" is not a closedlogic Cal.com link: ${v}`);
 }

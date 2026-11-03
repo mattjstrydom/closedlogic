@@ -8,7 +8,7 @@ import { auditCredit, checkOfferText, fixDeliverablesList, fixExamples, fixGuara
 
 export const metadata = pageMetadata({
   title: "Terms of service",
-  description: `Terms for ${site.brand} work: the free check, Signal Fix, Ops Desk, the Pipeline Truth Audit and the Fractional Measurement Lead. Prices, scope, refunds, access and liability.`,
+  description: `Terms for ${site.brand} work: the free check, Signal Fix, Ops Desk, the audit and Fractional. Prices, scope, refunds, access and liability.`,
   path: "/terms",
 });
 

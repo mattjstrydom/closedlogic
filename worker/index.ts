@@ -1,4 +1,4 @@
-// The site's only server code: POST /api/request, the contact form (B2B SaaS requests, and PE requests when SHOW_PE is on),
+// The site's only server code: POST /api/request, the free check and contact forms (type "check"; the old b2b contact form is still accepted),
 // and byte ranges for the unlisted video files (/v/*.mp4, see serveVideo). Everything else is a static file served by Workers
 // static assets without running this Worker (wrangler.jsonc: run_worker_first ["/api/*", "/v/*.mp4"]).
 // Free plan budget: 10 ms CPU per request and 100,000 Worker requests a day; this handler does a JSON parse, the
@@ -95,7 +95,7 @@ async function handleRequest(req: Request, env: Env): Promise<Response> {
   // The free outside-in check form (email and website only) has its own type and tag.
   if (body.type === "check") return handleCheck(body, env);
 
-  // Pages post b2b (or pe when SHOW_PE is on). Anything else (a cached page from the old site posting check, teardown or
+  // Pages post check. The old contact form posted b2b, and a cached copy may still. Anything else (a cached page from the old site posting check, teardown or
   // partner) is a B2B request.
   const type: FormType = FORM_TYPES.includes(body.type as FormType) ? (body.type as FormType) : "b2b";
   // Where the visitor came from (?src= on the page): letters, numbers, dot, dash and underscore only.

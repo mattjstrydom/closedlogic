@@ -1,7 +1,6 @@
 // Site facts and every open placeholder. scripts/check-placeholders.mjs fails the
 // production build while any double-brace token is left in app/.
 import booking from "./booking.json";
-import { SHOW_PE } from "./flags";
 
 export type CaseStudy = { title: string; body: string; attribution: string };
 
@@ -11,8 +10,6 @@ export const site = {
   // Nova's artwork (wordmark, icons, share images), whose text is outlined or baked in (see README, "Renaming").
   // Renamed from the old brand to Closed Logic (Matt, 9 Oct 2026). The old domain's 301 plan is in the dev report.
   brand: "Closed Logic",
-  // Single PE switch, set in app/flags.ts.
-  showPE: SHOW_PE,
   positioning: "Fix HubSpot and Google Ads Conversion Tracking",
   description:
     "We check what your site sends to Google Ads and HubSpot, fix what’s miscounted for $750, and run your HubSpot ops after. Free check, no access.",
@@ -32,13 +29,11 @@ export const site = {
   },
   linkedin: "https://www.linkedin.com/in/mattstrydom",
   // Booking links, all in app/booking.json (one place, also read by scripts/cf-postbuild.mjs). Site buttons link to
-  // Cal.com directly with UTM tags (app/booking.ts, Matt 2 Nov 2026); bookPath and bookPePath are the redirects
+  // Cal.com directly with UTM tags (app/booking.ts, Matt 2 Nov 2026); bookPath is the redirect
   // written to out/_redirects, kept for links shared outside the site. A booking.json entry with no event of its own
   // falls back to the direct link.
   bookPath: "/book",
-  bookPePath: "/book-pe",
   directBookingUrl: booking.direct,
-  peBookingUrl: booking.pe,
   // Only the production build is indexable: the Cloudflare Workers Builds build of main, or any build with
   // SITE_INDEXABLE=1. VERCEL_ENV keeps a Vercel production build working.
   indexable:
