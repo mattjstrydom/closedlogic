@@ -35,6 +35,6 @@ export const opsPilotLine = `One defined request, scoped, built, tested and docu
 export const opsLine = "Unused hours don't roll over. Larger projects are quoted separately before any work starts.";
 
 // Pipeline Truth Audit.
-export const auditGuarantee = "If the audit finds nothing that changes how Google Ads counts or bids, we refund the fee in full.";
+export const auditGuarantee = "If the audit finds nothing that changes how Google Ads counts, bids on or attributes your leads, we refund the fee in full.";
 export const auditCredit = `If you continue to the ${offers.fractional.name} within 30 days of the audit report, the audit fee is credited against Fractional's first month. No credit applies to other offers.`;
 export const fractionalTerm = "Cancel in the first 30 days and pay only that month. Otherwise the 3-month term applies, then 30 days' notice.";

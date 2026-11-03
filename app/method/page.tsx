@@ -43,7 +43,7 @@ export default function Method() {
             <SectionHead id="checks">
               Core checks <Accent>(audit).</Accent>
             </SectionHead>
-            <p className="lead lead-center mt-6 max-w-[44rem]">The Pipeline Truth Audit runs these 10 checks across Google Ads, HubSpot and your reporting. The extended checks are on the <Link href="/fractional#extended" className="link">Fractional page</Link>.</p>
+            <p className="lead lead-center mt-6 max-w-[44rem]">The Pipeline Truth Audit runs these 10 checks across Google Ads, HubSpot and your reporting, then takes you through the report on a readout call. The extended checks are on the <Link href="/fractional#extended" className="link">Fractional page</Link>.</p>
             <div className="mx-auto mt-10 max-w-[56rem]">
               <AuditChecks items={coreChecks} />
             </div>

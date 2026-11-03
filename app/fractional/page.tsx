@@ -82,7 +82,7 @@ export default function Fractional() {
               <div className="card flex flex-col gap-3 text-text-m">
                 <h3 className="text-title-m">{offers.audit.name}</h3>
                 <p className="font-display text-[1.05rem] font-bold text-ink">{offers.audit.price} · {offers.audit.days} business days</p>
-                <p className="text-body">The 10 core checks. A baseline of the last 90 days. A one-page scorecard. A 90-day roadmap. {auditGuarantee} {auditCredit}</p>
+                <p className="text-body">The 10 core checks. A baseline of the last 90 days. A one-page scorecard. A 90-day roadmap. A readout call. {auditGuarantee} {auditCredit}</p>
               </div>
               <div className="card flex flex-col gap-3 text-text-m">
                 <h3 className="text-title-m">{offers.fractional.name}</h3>
@@ -151,7 +151,7 @@ export default function Fractional() {
                 head={["Offer", "Price", "Scope"]}
                 right={[1]}
                 rows={[
-                  [offers.audit.name, offers.audit.price, `${offers.audit.days} business days from read access; 10 core checks; baseline; roadmap. ${auditCredit}`],
+                  [offers.audit.name, offers.audit.price, `${offers.audit.days} business days from read access; 10 core checks; baseline; roadmap; readout call. ${auditCredit}`],
                   [offers.fractional.name, offers.fractional.per, `${offers.fractional.hours} hours; 10 core and 10 extended checks; monthly scorecard. ${fractionalTerm}`],
                 ]}
               />

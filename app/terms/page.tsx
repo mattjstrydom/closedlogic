@@ -4,7 +4,7 @@ import Footer from "../components/footer";
 import { Slot } from "../components/ph";
 import { site } from "../site.config";
 import { pageMetadata } from "../seo";
-import { auditCredit, checkOfferText, fixDeliverablesList, fixExamples, fixGuarantee, offers } from "../offers";
+import { auditCredit, auditGuarantee, checkOfferText, fixDeliverablesList, fixExamples, fixGuarantee, offers } from "../offers";
 
 export const metadata = pageMetadata({
   title: "Terms of service",
@@ -57,10 +57,10 @@ export default function Terms() {
             <strong className="font-medium">Not included in any engagement:</strong> media buying, creative, content or web development, CRM migration, a new dashboard, a full-time hire, and a percentage of ad spend.
           </C>
           <C n="3.5">
-            <strong className="font-medium">Audit report.</strong> We deliver the audit report in writing. For each finding it shows the evidence, the steps to reproduce it, and whether the finding changes how Google Ads counts or bids (clause 3.6).
+            <strong className="font-medium">Audit report and readout.</strong> We deliver the audit report in writing. For each finding it shows the evidence, the steps to reproduce it, and whether the finding changes how Google Ads counts, bids on or attributes your leads (clause 3.6). The audit also includes a readout call, where we take you through the report. The date we deliver the written report starts the clocks in clauses 3.6 and 4.1, not the date of the readout call.
           </C>
           <C n="3.6">
-            <strong className="font-medium">Audit guarantee.</strong> If the audit finds nothing that changes how Google Ads counts or bids, we refund the fee in full (clause 4.1). A finding changes how Google Ads counts or bids if it passes all three tests in (a) to (c).
+            <strong className="font-medium">Audit guarantee.</strong> {auditGuarantee} A finding counts toward this guarantee if it passes all three tests in (a) to (c).
           </C>
           <div className="space-y-3 pl-6">
             <p>
@@ -79,15 +79,15 @@ export default function Terms() {
               <p>
                 (iii) The click ID or source that ties a lead to its ad is missing or wrong in your CRM, so the lead can&apos;t be matched to the ad.
               </p>
-              <p>
-                (iv) Contact data is sent to Google without the consent signal or consent property that your own privacy notice or consent settings say is required.
-              </p>
             </div>
             <p>
               <strong className="font-medium">(c) Separate cause.</strong> It has its own root cause. Several findings that share one root cause count as one finding.
             </p>
             <p>
               <strong className="font-medium">Not counted:</strong> a best-practice suggestion that doesn&apos;t pass (b); a problem you told us about in writing before kickoff, naming its cause; a problem caused by a change made in your accounts after we receive access; and anything outside Google Ads, your CRM and your reporting. If access we asked for in writing isn&apos;t given, the checks it affects are reported as not run and count neither way.
+            </p>
+            <p>
+              <strong className="font-medium">Consent gaps.</strong> If we find that contact data is sent to Google without the consent signal or consent property that your own privacy notice or consent settings say is required, we report it as a finding in the audit report. It doesn&apos;t count toward the audit guarantee.
             </p>
             <p>
               <strong className="font-medium">Checking a finding.</strong> If the report lists a finding that you think doesn&apos;t pass these tests, email us within 7 days of the report, naming the finding and the test. Within 3 business days we re-run the steps in (a) with you, on a call or in writing. If the finding doesn&apos;t reproduce, or doesn&apos;t pass (b) or (c), it doesn&apos;t count. If that leaves no finding that passes, we refund under clause 4.1. Only the documented steps decide a challenge, not a view on how important a finding is.
@@ -197,7 +197,7 @@ export default function Terms() {
           </div>
 
           <h2 id="clause-9" className={h2}>9. Liability</h2>
-          <C n="9.1">Our total liability is capped. For an audit, a Signal Fix or an Ops Desk pilot, the cap is the fees you paid for it. For a monthly engagement, it&apos;s the fees you paid in the last 3 months.</C>
+          <C n="9.1">Our total liability is capped. For one-off work (the audit, Signal Fix and the Ops Desk pilot), the cap is the fees you paid for it. For monthly work (Ops Desk and the Fractional Measurement Lead), it&apos;s the fees you paid in the last 3 months.</C>
           <C n="9.2">We&apos;re not liable for ad spend, bidding results, lost revenue, or any indirect or consequential loss.</C>
           <C n="9.3">We don&apos;t guarantee ad performance, and bidding decisions are Google&apos;s.</C>
           <C n="9.4">Google and HubSpot change their products, features and documentation, and that&apos;s outside our control.</C>
