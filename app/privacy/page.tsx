@@ -35,13 +35,10 @@ export default function Privacy() {
 
         <h2 className={h}>What we collect</h2>
         <p>
-          <strong>When you book a call or send a request.</strong> If you book a fit call through Cal.com,
-          we receive the details you enter when booking. If you send a request through the contact form, we receive your name, work
-          email, company, role, {site.showPE ? "ARR or portfolio size" : "ARR"}, stack and any note you choose to write. We use it to reply to you, to
-          decide whether the service is a fit, and to prepare for a call if we have one. If the link you followed carried a source tag (for example from a LinkedIn post), we also record that tag, so we can see which channel the request came from.
+          <strong>When you book a call.</strong> If you book a call through Cal.com, we receive the details you enter when booking. We use them to reply to you, to decide whether the service is a fit, and to prepare for the call.
         </p>
         <p>
-          <strong>When you ask for a free outside-in check.</strong> If you use the check form, we receive your work email and company website. We use them to look at what your site sends to Google Ads from outside, with no access to your accounts, and to reply to you with what we find. We store the request the same way as a contact form request.
+          <strong>When you ask for a free check or send a request.</strong> If you use the free check form or the contact form, we receive your work email, your company website and any note you choose to write. We use them to look at what your site sends to Google Ads from outside, with no access to your accounts, and to reply to you with what we find, within 1 business day. If the link you followed carried a source tag (for example from a LinkedIn post), we also record that tag, so we can see which channel the request came from.
         </p>
         <p>
           <strong>When you email us.</strong> Your email address and whatever you send.
@@ -120,7 +117,7 @@ export default function Privacy() {
             <a href="https://www.cloudflare.com/cloudflare-customer-dpa/" className="link">DPA</a>)
           </li>
           <li>
-            <strong>Sequenzy (Nic Tech Solutions, LLC)</strong>: stores the requests you send through the contact form, and lets us email you about them. (
+            <strong>Sequenzy (Nic Tech Solutions, LLC)</strong>: stores the requests you send through our forms, and lets us email you about them. (
             <a href="https://www.sequenzy.com/privacy" className="link">privacy policy</a>, <a href="https://www.sequenzy.com/dpa" className="link">DPA</a>)
           </li>
           <li>
@@ -133,7 +130,7 @@ export default function Privacy() {
             cookies, and straight away on our personal video pages. (<a href="https://www.microsoft.com/privacy/privacystatement" className="link">privacy statement</a>)
           </li>
           <li>
-            <strong>Cal.com</strong>: books fit calls and receives the details you enter when you book. (
+            <strong>Cal.com</strong>: books calls and receives the details you enter when you book. (
             <a href="https://cal.com/privacy" className="link">privacy policy</a>, <a href="https://trust.cal.com/subprocessors" className="link">subprocessors</a>)
           </li>
           <li>
