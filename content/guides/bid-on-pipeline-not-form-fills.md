@@ -21,7 +21,7 @@ If the only conversion Google Ads bids on is a form fill, Smart Bidding gets ver
 
 Smart Bidding, including target CPA and target ROAS, considers only conversions reported in the "Conversions" column ([Google Ads Help: campaign-specific conversion goals](https://support.google.com/google-ads/answer/9143218?hl=en), last checked 17 Oct 2026). Only Primary actions in a goal used for bidding, or actions in a custom goal, land in that column ([Google Ads Help: primary and secondary conversion actions](https://support.google.com/google-ads/answer/11461796?hl=en), last checked 17 Oct 2026).
 
-So whatever sits there is what bidding chases. If that is a form fill, every form fill is a success to Google, including the ones your sales team throws away. Google's own lead generation guidance points the other way: optimise towards lead generation goals such as "qualified lead" or "converted lead", and avoid selecting goals from more than one stage of your lead journey ([Google Ads Help: best practices for generating high-quality leads](https://support.google.com/google-ads/answer/13489421?hl=en), last checked 17 Oct 2026).
+So whatever sits there is what bidding chases. If that is a form fill, every form fill is a success to Google, including the ones your sales team throws away. Google's own lead generation guidance points the other way: optimize toward lead generation goals such as "qualified lead" or "converted lead", and avoid selecting goals from more than one stage of your lead journey ([Google Ads Help: best practices for generating high-quality leads](https://support.google.com/google-ads/answer/13489421?hl=en), last checked 17 Oct 2026).
 
 Google Ads has "qualified lead" and "converted lead" goal types for exactly this. Google describes a qualified lead as a Google-generated lead that has been further qualified offline in your CRM, and a converted lead as one that completed a step you define as conversion, typically a sale ([Google Ads Help: about qualified leads and converted leads](https://support.google.com/google-ads/answer/11459091?hl=en), last checked 17 Oct 2026).
 
@@ -105,7 +105,7 @@ A fixed value per stage works well with target CPA on one stage. Value-based bid
 
 ## Want help choosing the stage?
 
-Book a 20-minute fit call and we'll look at which stage your bidding could learn from: https://cal.com/closedlogic/20min-fit
+Book a 20-minute call and we'll look at which stage your bidding could learn from: https://cal.com/closedlogic/20min-fit
 
 ## Sources
 

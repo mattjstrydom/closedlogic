@@ -2,7 +2,7 @@
 title: "HubSpot Google Ads offline conversions in 2026: the three routes"
 seoTitle: "HubSpot Google Ads offline conversions"
 slug: hubspot-google-ads-offline-conversions
-description: "Three ways to send HubSpot Google Ads offline conversions in 2026: HubSpot events, the Data Manager connector and Zapier. How to choose one route per stage."
+description: "Three ways to send HubSpot Google Ads offline conversions in 2026: HubSpot events, the Data Manager connector and Zapier. How to pick one route per stage."
 targetKeyword: hubspot google ads offline conversions
 pillar: B
 cta: direct
@@ -104,7 +104,7 @@ Whatever you choose, write it down: stage, route, Google Ads conversion action, 
 
 ## Not sure which routes you have?
 
-Book a 20-minute fit call and we'll talk through what's connected and whether a check is worth it: https://cal.com/closedlogic/20min-fit
+Book a 20-minute call and we'll talk through what's connected and whether a check is worth it: https://cal.com/closedlogic/20min-fit
 
 ## Sources
 

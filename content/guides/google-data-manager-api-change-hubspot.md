@@ -19,7 +19,7 @@ On 15 June 2026, Google moved offline conversion and enhanced conversions for le
 
 ## What Google says changed
 
-Google's help centre: "Starting June 15, 2026, offline conversions import and enhanced conversions for leads uploads will be migrated to the Data Manager API and blocked in the Google Ads API." The same notice says developer tokens that hadn't sent a request between January 2026 and June 2026 would not be allowlisted for legacy access ([Google Ads Help: upgrade offline conversion import to enhanced conversions for leads](https://support.google.com/google-ads/answer/14274408?hl=en), last checked 17 Oct 2026).
+Google's help center: "Starting June 15, 2026, offline conversions import and enhanced conversions for leads uploads will be migrated to the Data Manager API and blocked in the Google Ads API." The same notice says developer tokens that hadn't sent a request between January 2026 and June 2026 would not be allowlisted for legacy access ([Google Ads Help: upgrade offline conversion import to enhanced conversions for leads](https://support.google.com/google-ads/answer/14274408?hl=en), last checked 17 Oct 2026).
 
 The Google Ads API deprecations page gives a slightly different window. Its 15 June 2026 entry says developer tokens with no offline conversion upload requests between 17 December 2025 and 15 June 2026 are restricted from using the Google Ads API for offline conversions, and that UploadClickConversions requests from those tokens return a CUSTOMER_NOT_ALLOWLISTED_FOR_THIS_FEATURE error ([Google Ads API: feature deprecations](https://developers.google.com/google-ads/api/docs/deprecations), last checked 17 Oct 2026). Both pages tell you to move to the Data Manager API.
 
@@ -72,7 +72,7 @@ The account rule is the one most likely to trip up agency setups that upload for
 
 ## Want us to check your routes?
 
-Book a 20-minute fit call and we'll tell you whether your setup is touched by the change: https://cal.com/closedlogic/20min-fit
+Book a 20-minute call and we'll tell you whether your setup is touched by the change: https://cal.com/closedlogic/20min-fit
 
 ## Sources
 

@@ -44,7 +44,7 @@ That checkbox is set once, when the event is created. Anyone can change the acti
 
 **3. The campaign uses a custom goal that leaves the stage out.** One custom goal per campaign, and only its actions count.
 
-**4. The stage is Primary, but so is the form fill.** Both count in "Conversions", and form fills usually outnumber SQLs, so the cheaper, more frequent action dominates what bidding chases. Google's lead generation guidance is to avoid selecting goals from multiple stages of your lead journey for optimisation ([Google Ads Help: best practices for generating high-quality leads](https://support.google.com/google-ads/answer/13489421?hl=en), last checked 17 Oct 2026).
+**4. The stage is Primary, but so is the form fill.** Both count in "Conversions", and form fills usually outnumber SQLs, so the cheaper, more frequent action dominates what bidding chases. Google's lead generation guidance is to avoid selecting goals from multiple stages of your lead journey for optimization ([Google Ads Help: best practices for generating high-quality leads](https://support.google.com/google-ads/answer/13489421?hl=en), last checked 17 Oct 2026).
 
 ## Check your account
 
@@ -58,7 +58,7 @@ You now know, per campaign, which conversions Smart Bidding is learning from.
 
 ## Changing it safely
 
-To change an action, Google's steps are: Goals > Conversions > Summary, find the goal, Edit goal, and choose Primary or Secondary (observe only) under "Conversion action optimisation" ([Google Ads Help](https://support.google.com/google-ads/answer/11461796?hl=en), last checked 17 Oct 2026).
+To change an action, Google's steps are: Goals > Conversions > Summary, find the goal, Edit goal, and choose Primary or Secondary (observe only) under "Conversion action optimization" ([Google Ads Help](https://support.google.com/google-ads/answer/11461796?hl=en), last checked 17 Oct 2026).
 
 Before you do:
 
@@ -80,7 +80,7 @@ Before you do:
 
 ## Want a second pair of eyes?
 
-If you'd like us to check which of your HubSpot stages Google Ads is actually bidding on, book a 20-minute fit call: https://cal.com/closedlogic/20min-fit
+If you'd like us to check which of your HubSpot stages Google Ads is actually bidding on, book a 20-minute call: https://cal.com/closedlogic/20min-fit
 
 ## Sources
 

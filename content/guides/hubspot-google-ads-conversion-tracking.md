@@ -126,7 +126,7 @@ Google's offline data diagnostics label "No recent data" means no events have be
 
 ## Want us to look at yours?
 
-If you would rather we checked the connection for you, book a 20-minute fit call and we'll tell you whether it's worth doing: https://cal.com/closedlogic/20min-fit
+If you would rather we checked the connection for you, book a 20-minute call and we'll tell you whether it's worth doing: https://cal.com/closedlogic/20min-fit
 
 ## Sources
 

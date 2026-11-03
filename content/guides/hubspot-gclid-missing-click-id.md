@@ -81,7 +81,7 @@ For traffic from the EEA, Google requires consent for the use of personal data a
 
 ## Want us to run these tests?
 
-Book a 20-minute fit call and we'll tell you whether a full check makes sense: https://cal.com/closedlogic/20min-fit
+Book a 20-minute call and we'll tell you whether a full check makes sense: https://cal.com/closedlogic/20min-fit
 
 ## Sources
 
