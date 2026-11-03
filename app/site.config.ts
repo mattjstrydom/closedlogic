@@ -13,9 +13,9 @@ export const site = {
   brand: "Closed Logic",
   // Single PE switch, set in app/flags.ts.
   showPE: SHOW_PE,
-  positioning: "Make sure Google Ads learns from your real leads",
+  positioning: "Fix HubSpot and Google Ads Conversion Tracking",
   description:
-    "We find what your Google Ads and HubSpot setup is miscounting, fix it at a fixed price, and keep checking it. Every finding comes with steps you can check without us.",
+    "We check what your site sends to Google Ads and HubSpot, fix what’s miscounted for $750, and run your HubSpot ops after. Free check, no access.",
   domain: "closedlogic.com", // apex; redirects to url (a Cloudflare redirect rule, see README)
   url: "https://www.closedlogic.com",
   // scripts/check-placeholders.mjs blocks the production build while emailLive is false, so the site never goes live
@@ -44,7 +44,7 @@ export const site = {
   indexable:
     process.env.VERCEL_ENV === "production" || process.env.SITE_INDEXABLE === "1" || process.env.WORKERS_CI_BRANCH === "main",
 
-  replyTime: "Within one business day",
+  replyTime: "Within 1 business day",
   // Terms clause 10 (clause 11 with PE on; Reubika LLC is a New Mexico LLC), text from matt-decisions-drafts.md section 5.
   governingLaw: [
     "These terms, and any dispute arising from them, are governed by the laws of the State of New Mexico, USA, without regard to its conflict-of-law rules.",
@@ -53,8 +53,8 @@ export const site = {
     "Nothing in this clause stops either of us from asking any court for urgent interim relief.",
   ],
   // Set both to the publish date at deploy, for example "12 October 2026".
-  privacyLastUpdated: "2 November 2026",
-  termsLastUpdated: "2 November 2026",
+  privacyLastUpdated: "3 November 2026",
+  termsLastUpdated: "3 November 2026",
 
   caseStudy: null as CaseStudy | null,
 };

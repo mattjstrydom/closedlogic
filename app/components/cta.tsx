@@ -6,7 +6,7 @@ import { bookHref } from "../booking";
 type P = { className?: string; href?: string; children?: React.ReactNode };
 type B = { className?: string; campaign: string; pe?: boolean; children?: React.ReactNode };
 
-export function BookButton({ className = "", campaign, pe = false, children = "Book a 20-minute fit call" }: B) {
+export function BookButton({ className = "", campaign, pe = false, children = "Book a 20-minute call" }: B) {
   return (
     <a href={bookHref(campaign, pe ? "pe" : "direct")} data-cta="book" data-cta-page={campaign} target="_blank" rel="noopener noreferrer" className={`btn ${className}`}>
       {children}

@@ -11,7 +11,7 @@ export function bookHref(campaign: string, kind: "direct" | "pe" = "direct"): st
   return `${base}${base.includes("?") ? "&" : "?"}utm_source=${UTM.source}&utm_content=${UTM.content}&utm_campaign=${encodeURIComponent(campaign)}`;
 }
 
-/** Campaign slug for a page path: "/" is home, a guide is its own slug, anything else is the route ("for-b2b-saas"). */
+/** Campaign slug for a page path: "/" is home, a guide is its own slug, anything else is the route ("fractional"). */
 export function campaignFor(path: string): string {
   const p = path.replace(/^\/+|\/+$/g, "");
   if (!p) return "home";

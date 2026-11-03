@@ -12,18 +12,22 @@ export default function Footer() {
     <footer className="border-t border-solid border-rule bg-white py-10 text-text-s text-body">
       <div className="container-site flex flex-col gap-4">
         <Logo />
-        <p className="font-medium text-ink">We sell no media, resell no software and take no cut of ad spend. We check that Google Ads learns from your real leads.</p>
+        <p className="font-medium text-ink">We sell no media, resell no software and take no cut of ad spend.</p>
         <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-3">
-          <p>{site.legalLine}.</p>
+          <p>{site.legalLine}, 530-B Harkle Road, STE 100, Santa Fe, NM 87505, USA.</p>
           <nav aria-label="Footer" className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            <Link href="/for-b2b-saas" className={link}>For B2B SaaS</Link>
+            <Link href="/signal-fix" className={link}>Signal Fix</Link>
+            <Link href="/ops-desk" className={link}>Ops Desk</Link>
             <Link href="/method" className={link}>Method</Link>
             <Link href="/pricing" className={link}>Pricing</Link>
+            <Link href="/fractional" className={link}>Fractional</Link>
             {hasGuides() && <Link href="/guides" className={link}>Guides</Link>}
             <Link href="/about" className={link}>About</Link>
             <Link href="/contact" className={link}>Contact</Link>
             <Link href="/privacy" className={link}>Privacy</Link>
             <Link href="/terms" className={link}>Terms</Link>
+            <Link href="/access" className={link}>Access policy</Link>
+            <a href={`mailto:${site.email}`} className={link}>Email us</a>
             <CookieSettings className={`${link} cursor-pointer`} />
           </nav>
         </div>

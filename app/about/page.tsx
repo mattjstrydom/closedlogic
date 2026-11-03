@@ -1,12 +1,13 @@
-import Image from "next/image";
 import Link from "next/link";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import PageHero from "../components/page-hero";
 import CtaBand from "../components/cta-band";
+import Headshot from "../components/headshot";
 import { TickList } from "../components/ui";
 import { jenniferNode, jsonLdScript, mattNode, orgNode } from "../jsonld";
 import { pageMetadata } from "../seo";
+import { team } from "../team";
 import { site } from "../site.config";
 
 export const metadata = pageMetadata({
@@ -23,45 +24,6 @@ const never = [
   "Ask for your passwords or payment details",
   "Name you as a client without your written permission",
 ];
-
-// Team cards. To add a headshot: put a square JPG in public/team/, list it in images.manifest.json with [96, 192],
-// run `node scripts/build-images.mjs`, then set photo below. Without a photo the card shows the initials in the same circle.
-// Jennifer has no LinkedIn link on the site yet; add `linkedin` to her entry when she wants one shown.
-type Person = { id: string; name: string; initials: string; heading: string; bio: string; photo?: string; alt?: string; linkedin?: string };
-const team: Person[] = [
-  {
-    id: "matt",
-    name: "Matt Strydom",
-    initials: "MS",
-    heading: "Matt Strydom, founder.",
-    bio: "Matt has spent 7 years in marketing and revenue operations. He runs HubSpot and Google Tag Manager in production for B2B SaaS, and has built CRM architecture, lead scoring and attribution across HubSpot, GA4, Google Ads, Clay and Amplitude.",
-    photo: "/team/matt.jpg",
-    alt: "Matt Strydom, founder of Closed Logic",
-    linkedin: site.linkedin,
-  },
-  {
-    id: "jennifer",
-    name: "Jennifer Taylor",
-    initials: "JT",
-    heading: "Jennifer Taylor, revenue operations and MarTech.",
-    bio: "Revenue operations and MarTech background: CRM resets, pipeline upgrades, lead routing and workflow automation, outbound systems, and reporting and attribution for sales and marketing leaders. She starts with clean data and consistent pipelines, so the reporting is something a team can trust.",
-    photo: "/team/jennifer.jpg",
-    alt: "Jennifer Taylor, Closed Logic",
-  },
-];
-
-const headshot = "size-24 shrink-0 rounded-full border-2 border-solid border-ink";
-
-function Headshot({ person }: { person: Person }) {
-  if (person.photo) {
-    return <Image src={person.photo} alt={person.alt ?? person.name} width={96} height={96} sizes="96px" className={`${headshot} object-cover`} />;
-  }
-  return (
-    <div role="img" aria-label={person.name} className={`${headshot} flex items-center justify-center bg-band font-display text-[1.75rem] font-bold tracking-[-0.03em] text-ink`}>
-      <span aria-hidden="true">{person.initials}</span>
-    </div>
-  );
-}
 
 export default function About() {
   return (

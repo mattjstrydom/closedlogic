@@ -8,7 +8,7 @@ import { checkConfirmation } from "@/app/offers";
 const input = "mt-1 block w-full rounded-[10px] border-2 border-solid border-ink bg-white px-4 py-3 text-[1rem] text-ink";
 
 // Free check request: work email and company website, plus an optional note on /contact. Posts to /api/request with type "check".
-export default function CheckForm({ email, withNote = false }: { email: string; withNote?: boolean }) {
+export default function CheckForm({ email, withNote = false, idPrefix = "check" }: { email: string; withNote?: boolean; idPrefix?: string }) {
   const [f, setF] = useState({ email: "", website: "", note: "" });
   const [errors, setErrors] = useState<CheckErrors>({});
   const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">("idle");
@@ -52,12 +52,12 @@ export default function CheckForm({ email, withNote = false }: { email: string; 
 
   const field = (k: "email" | "website" | "note", label: string, el: React.ReactNode) => (
     <div>
-      <label htmlFor={`check-${k}`} className="block font-medium">{label}</label>
+      <label htmlFor={`${idPrefix}-${k}`} className="block font-medium">{label}</label>
       {el}
-      {errors[k] && <p id={`check-${k}-err`} className="mt-1 text-[1rem] text-error">{errors[k]}</p>}
+      {errors[k] && <p id={`${idPrefix}-${k}-err`} className="mt-1 text-[1rem] text-error">{errors[k]}</p>}
     </div>
   );
-  const aria = (k: "email" | "website" | "note") => ({ id: `check-${k}`, name: k, "aria-invalid": errors[k] ? true : undefined, "aria-describedby": errors[k] ? `check-${k}-err` : undefined });
+  const aria = (k: "email" | "website" | "note") => ({ id: `${idPrefix}-${k}`, name: k, "aria-invalid": errors[k] ? true : undefined, "aria-describedby": errors[k] ? `${idPrefix}-${k}-err` : undefined });
 
   return (
     <form ref={form} onSubmit={submit} noValidate className="space-y-5 text-left">

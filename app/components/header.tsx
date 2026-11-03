@@ -1,19 +1,17 @@
 import Link from "next/link";
 import { site } from "../site.config";
-import { bookHref, campaignFor } from "../booking";
 import Logo from "./logo";
 import { hasGuides } from "../guides/content";
 
 const baseLinks: [string, string][] = [
-  ["/for-b2b-saas", "For B2B SaaS"],
+  ["/signal-fix", "Signal Fix"],
+  ["/ops-desk", "Ops Desk"],
   ["/method", "Method"],
   ["/pricing", "Pricing"],
 ];
 
 // campaign: the booking UTM slug, when the page path used for the nav highlight isn't the page (guides).
-export default function Header({ path = "/", campaign }: { path?: string; campaign?: string }) {
-  const c = campaign ?? campaignFor(path);
-  const book = { href: bookHref(c), "data-cta": "book", "data-cta-page": c } as const;
+export default function Header({ path = "/" }: { path?: string; campaign?: string }) {
   // Guides appears only once a guide is published (automatic, see app/guides/content.ts).
   const links: [string, string][] = [...baseLinks, ...(hasGuides() ? ([["/guides", "Guides"]] as [string, string][]) : []), ["/about", "About"]];
   const current = (href: string) => (path === href || path.startsWith(`${href}/`) ? "page" : undefined);
@@ -35,7 +33,7 @@ export default function Header({ path = "/", campaign }: { path?: string; campai
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <a {...book} target="_blank" rel="noopener noreferrer" className="btn btn-m"><span>20-minute fit call</span><span className="sr-only"> (opens in a new tab)</span></a>
+          <Link href="/free-check" className="btn btn-m">Get a free check</Link>
         </div>
 
         <button
@@ -62,7 +60,7 @@ export default function Header({ path = "/", campaign }: { path?: string; campai
           ))}
         </ul>
         <div className="mt-6 flex flex-col gap-3">
-          <a {...book} target="_blank" rel="noopener noreferrer" className="btn w-full">Book a 20-minute fit call<span className="sr-only"> (opens in a new tab)</span></a>
+          <Link href="/free-check" className="btn w-full">Get a free check</Link>
         </div>
       </nav>
     </header>
