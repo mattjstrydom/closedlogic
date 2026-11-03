@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import PageHero from "../components/page-hero";
@@ -100,7 +101,7 @@ export default function Method() {
 
         <CtaBand id="start" title="Want to see what your setup is sending?" body="Start with the free outside-in check. No access needed.">
           <BookButton campaign="method" className="w-full sm:w-auto" />
-          <a href="/contact#check" className="btn-outline w-full sm:w-auto">Get a free outside-in check</a>
+          <Link href="/#check" className="btn-outline w-full sm:w-auto">Get a free outside-in check</Link>
         </CtaBand>
       </main>
       <Footer />
