@@ -32,7 +32,7 @@ export const fixExtra = "If we find more than one problem, we quote each extra f
 
 // Ops Desk.
 export const opsPilotLine = `One defined request, scoped, built, tested and documented. ${offers.pilot.price}.`;
-export const opsLine = `Up to ${offers.ops.hours} hours a month, one active request, weekly updates. Month to month after the pilot, with ${offers.ops.noticeDays} days' notice. Unused hours don't roll over. Larger projects are quoted separately before any work starts.`;
+export const opsLine = "Unused hours don't roll over. Larger projects are quoted separately before any work starts.";
 
 // Pipeline Truth Audit.
 export const auditGuarantee = "If the audit finds nothing that changes how Google Ads counts or bids, we refund the fee in full.";
