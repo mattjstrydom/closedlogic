@@ -1,3 +1,7 @@
+# Redesign, 16 Nov 2026: "Bright and crisp"
+
+Tokens, Inter, new navbar, footer and homepage; every inner page restyled with content, meta and tracking unchanged. See `docs/redesign/REPORT.md`. Rollback point: `b8f4a73`.
+
 # Changes: full site rewrite, 3 Nov 2026 (branch site-rewrite-nov-2026, not deployed)
 
 Copy source: the rewrite doc (Claude Docs, "Closed Logic website rewrite, trust plan and offer pack"), with Matt's decisions of 3 Nov overriding it.
