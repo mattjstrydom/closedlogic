@@ -26,7 +26,9 @@
   --fg-subtle: #6b7180;
   --brand: #ff4b3e;
   --brand-hover: #f0392c;
-  --on-brand: #0b0b0c;
+  --on-brand: #ffffff;
+  --brand-button: #d92d20; /* button fill: white text on it is 5:1; --brand (#ff4b3e) is only 3:1 */
+  --brand-button-hover: #b9231a;
   --status-bad: #c8261b;
   --status-bad-bg: #fdecea;
   --status-warn: #a34306;
@@ -70,7 +72,7 @@
   --fg-subtle: #80868f;
   --brand: #ff5b3a;
   --brand-hover: #ff7556;
-  --on-brand: #0b0b0c;
+  --on-brand: #ffffff;
   --status-bad: #ff7b6e;
   --status-bad-bg: #2e1513;
   --status-warn: #f5b84a;
@@ -348,15 +350,15 @@
     white-space: nowrap;
     transition: background-color 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
   }
-  /* Primary: brand fill, near-black text, never white. One per view. */
+  /* Primary: red fill, white text. One per view. */
   .btn,
   .cl-btn--primary {
-    background: var(--brand);
+    background: var(--brand-button);
     color: var(--on-brand);
     box-shadow: var(--shadow-xs);
   }
   .btn:hover,
-  .cl-btn--primary:hover { background: var(--brand-hover); }
+  .cl-btn--primary:hover { background: var(--brand-button-hover); }
   /* Secondary. */
   .btn-outline,
   .cl-btn--secondary {
