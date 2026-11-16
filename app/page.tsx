@@ -96,7 +96,6 @@ export default function Home() {
               </div>
               <div className="cl-hero__panel">
                 <span className="fx-chip fx-chip--a" aria-hidden="true">gclid: empty</span>
-                <span className="fx-chip fx-chip--b" aria-hidden="true">page_view → conversion</span>
                 <SignalReport
                   host="acme.io"
                   healthy={2}
@@ -226,7 +225,7 @@ export default function Home() {
         {/* 9. Who it's for */}
         <section id="for" aria-labelledby="for-title" className="section-y">
           <div className="container-site">
-            <div className="cl-head cl-head--c" data-reveal>
+            <div className="cl-head cl-head--split" data-reveal>
               <Chip>Who it&apos;s for</Chip>
               <h2 id="for-title">Built for B2B teams <span className="soft">running Google Ads into HubSpot</span></h2>
             </div>

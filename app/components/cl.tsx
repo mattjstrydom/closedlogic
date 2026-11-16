@@ -172,12 +172,11 @@ export function EvidenceSample() {
 
 /** Hairline beams that run along the hero's grid lines (decorative; the grid itself is CSS in app/fx.css). */
 export function Beams() {
-  const lines: [string, number, string, string][] = [["h", 3, "11s", "0s"], ["h", 6, "13s", "4s"], ["h", 9, "10s", "7s"], ["v", 5, "12s", "2s"], ["v", 14, "14s", "6s"], ["v", 19, "11s", "9s"]];
+  const lines: [string, number, string, string][] = [["h", 3, "14s", "0s"], ["h", 8, "16s", "6s"], ["v", 15, "15s", "3s"]];
   return (
     <>
     <div className="fx-rings" aria-hidden="true">
       <span className="r1"><b /></span>
-      <span className="r2"><b /></span>
     </div>
     <div className="fx-beams" aria-hidden="true">
       {lines.map(([d, n, t, delay]) => (
