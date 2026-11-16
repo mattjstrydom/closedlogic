@@ -2,15 +2,15 @@ import Image from "next/image";
 
 export type Person = { id: string; name: string; initials: string; heading: string; bio: string; photo?: string; alt?: string; linkedin?: string };
 
-const headshot = "size-24 shrink-0 rounded-full border-2 border-solid border-ink";
-
-/** Round team photo, or the initials in the same circle when a person has no photo yet. */
-export default function Headshot({ person }: { person: Person }) {
+/** Square team photo (radius-md, 1px border), or the initials in the same tile when a person has no photo yet. */
+export default function Headshot({ person, size = 96 }: { person: Person; size?: 72 | 96 }) {
+  const box = `shrink-0 rounded-[var(--radius-md)] border border-solid border-rule`;
+  const px = { width: size, height: size };
   if (person.photo) {
-    return <Image src={person.photo} alt={person.alt ?? person.name} width={96} height={96} sizes="96px" className={`${headshot} object-cover`} />;
+    return <Image src={person.photo} alt={person.alt ?? person.name} width={96} height={96} sizes={`${size}px`} style={px} className={`${box} object-cover`} />;
   }
   return (
-    <div role="img" aria-label={person.name} className={`${headshot} flex items-center justify-center bg-band font-display text-[1.75rem] font-bold tracking-[-0.03em] text-ink`}>
+    <div role="img" aria-label={person.name} style={px} className={`${box} flex items-center justify-center bg-band text-[22px] font-semibold text-body`}>
       <span aria-hidden="true">{person.initials}</span>
     </div>
   );

@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { site } from "../site.config";
 import Logo from "./logo";
+import MobileMenu from "./mobile-menu";
+import HeaderEffects from "./header-effects";
 import { hasGuides } from "../guides/content";
 
 const baseLinks: [string, string][] = [
@@ -10,59 +12,36 @@ const baseLinks: [string, string][] = [
   ["/pricing", "Pricing"],
 ];
 
-// campaign: the booking UTM slug, when the page path used for the nav highlight isn't the page (guides).
+// Navbar: 64px, white, 1px bottom border (soft shadow once scrolled). Logo left, links in small muted type, one small
+// primary button right. Under 1024px the links move into the menu toggle.
 export default function Header({ path = "/" }: { path?: string }) {
   // Guides appears only once a guide is published (automatic, see app/guides/content.ts).
   const links: [string, string][] = [...baseLinks, ...(hasGuides() ? ([["/guides", "Guides"]] as [string, string][]) : []), ["/about", "About"]];
   const current = (href: string) => (path === href || path.startsWith(`${href}/`) ? "page" : undefined);
+  const active = links.find(([href]) => current(href))?.[0];
   return (
     <header className="site-header">
-      <div className="container-site flex h-[76px] items-center justify-between gap-6 max-md:h-16">
+      <HeaderEffects />
+      <div className="container-site flex h-16 items-center gap-3 lg:gap-8">
         {/* /#hero, not /: a plain "/" can keep the visitor's old scroll position (the browser restores it), while a fragment always scrolls to the top of the home page, from any page or #section. */}
         {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
         <a href="/#hero" aria-label={`${site.brand}, home`} className="inline-flex min-h-6 items-center no-underline">
           <Logo />
         </a>
 
-        <nav aria-label="Main" className="hidden items-center gap-[30px] text-[1rem] font-medium lg:flex">
+        <nav aria-label="Main" className="cl-nav__links ml-auto hidden items-center gap-6 lg:flex">
           {links.map(([href, label]) => (
-            <Link key={href} href={href} aria-current={current(href)} className="inline-flex min-h-[26px] items-center text-ink no-underline hover:text-accent-text aria-[current=page]:underline aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-[0.35em]">
+            <Link key={href} href={href} aria-current={current(href)}>
               {label}
             </Link>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="ml-auto flex items-center gap-3 lg:ml-0">
           <Link href="/free-check" className="btn btn-m">Get a free check</Link>
+          <MobileMenu links={links} current={active} />
         </div>
-
-        <button
-          type="button"
-          popoverTarget="site-menu"
-          aria-label="Menu"
-          className="inline-flex size-11 items-center justify-center justify-self-end rounded-[10px] border-2 border-solid border-ink bg-white text-ink lg:hidden"
-        >
-          <svg width="18" height="8" viewBox="0 0 18 8" aria-hidden="true" focusable="false">
-            <rect y="0" width="18" height="2" fill="currentColor" />
-            <rect y="6" width="18" height="2" fill="currentColor" />
-          </svg>
-        </button>
       </div>
-
-      <nav id="site-menu" popover="auto" aria-label="Main" className="site-menu lg:hidden">
-        <ul className="flex flex-col gap-4">
-          {links.map(([href, label]) => (
-            <li key={href}>
-              <Link href={href} aria-current={current(href)} className="font-display text-[1.25rem] leading-[1.3] font-medium text-ink no-underline aria-[current=page]:underline aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-[0.35em]">
-                {label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <div className="mt-6 flex flex-col gap-3">
-          <Link href="/free-check" className="btn w-full">Get a free check</Link>
-        </div>
-      </nav>
     </header>
   );
 }
