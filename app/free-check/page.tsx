@@ -31,7 +31,7 @@ export default function FreeCheck() {
       <Header path="/free-check" />
       <main id="main" tabIndex={-1}>
         <PageHero
-          id="free-check"
+          id="free-check" eyebrow="Free check"
           title="Free Google Ads conversion check for HubSpot sites"
           sub="We look at what your site sends to Google Ads from outside, with no logins, and send you the evidence."
         />

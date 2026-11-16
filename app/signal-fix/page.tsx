@@ -51,7 +51,7 @@ export default function SignalFix() {
       <Header path="/signal-fix" />
       <main id="main" tabIndex={-1}>
         <PageHero
-          id="signal-fix"
+          id="signal-fix" eyebrow="Signal Fix"
           title="Google Ads conversion tracking fix for HubSpot: $750"
           sub="One miscounted conversion, fixed, tested and documented. You see the scope and the price before we start."
         >

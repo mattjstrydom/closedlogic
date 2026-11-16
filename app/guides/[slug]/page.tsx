@@ -80,7 +80,7 @@ export default async function GuidePage({ params }: PageProps<"/guides/[slug]">)
       <main id="main" tabIndex={-1}>
         <article className="container-site pb-16 pt-10 sm:pb-24 sm:pt-14">
           <Breadcrumbs items={crumbs} />
-          <p className="chip mt-8">{g.type === "pillar" ? "Guide" : pillar.name}</p>
+          <p className="chip mt-8 !mx-0">{g.type === "pillar" ? "Guide" : pillar.name}</p>
           <h1 className="mt-4 max-w-[24ch] text-title-l">{g.title}</h1>
           <p className="mt-5 text-text-s text-body">
             By <span className="text-ink">Matt Strydom</span>

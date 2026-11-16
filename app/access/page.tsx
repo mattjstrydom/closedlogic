@@ -33,7 +33,7 @@ export default function Access() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdScript([orgNode]) }} />
       <Header path="/access" />
       <main id="main" tabIndex={-1}>
-        <PageHero id="access" title="How we handle access to your accounts" sub="Six rules we follow on every job." />
+        <PageHero id="access" eyebrow="Access policy" title="How we handle access to your accounts" sub="Six rules we follow on every job." />
 
         <section id="rules" aria-labelledby="rules-title" className="section-y band">
           <div className="container-site">
@@ -41,7 +41,7 @@ export default function Access() {
             <ol className="mx-auto grid max-w-[52rem] gap-4 text-text-l">
               {points.map(([lead, rest], i) => (
                 <li key={lead} className="card flex gap-4">
-                  <span aria-hidden="true" className="font-display font-bold text-accent-text">{i + 1}</span>
+                  <span className="step-badge" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
                   <span><strong className="font-semibold text-ink">{lead}</strong> {rest}</span>
                 </li>
               ))}

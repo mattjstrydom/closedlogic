@@ -33,7 +33,7 @@ export default function Method() {
       <Header path="/method" />
       <main id="main" tabIndex={-1}>
         <PageHero
-          id="method"
+          id="method" eyebrow="Method"
           title="How we check Google Ads and HubSpot tracking"
           sub="The 10 core checks, what broken looks like, and what it costs. Use them yourself; that's the point."
         />

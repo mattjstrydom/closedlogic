@@ -65,7 +65,7 @@ export default function OpsDesk() {
       <Header path="/ops-desk" />
       <main id="main" tabIndex={-1}>
         <PageHero
-          id="ops-desk"
+          id="ops-desk" eyebrow="Ops Desk"
           title="HubSpot operations support, handled each month"
           sub="Your HubSpot, tracking and automation backlog, worked through by two operators. Fixed hours, one request at a time, and a weekly update so you always know where things stand."
         >
@@ -94,7 +94,7 @@ export default function OpsDesk() {
             <ol className="mx-auto mt-10 grid max-w-[52rem] gap-4 text-text-l">
               {steps.map(([lead, rest], i) => (
                 <li key={lead} className="card flex gap-4">
-                  <span aria-hidden="true" className="font-display font-bold text-accent-text">{i + 1}</span>
+                  <span className="step-badge" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
                   <span><strong className="font-semibold text-ink">{lead}</strong> {rest}</span>
                 </li>
               ))}

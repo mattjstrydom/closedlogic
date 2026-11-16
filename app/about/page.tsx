@@ -31,7 +31,7 @@ export default function About() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdScript([orgNode, mattNode, jenniferNode]) }} />
       <Header path="/about" />
       <main id="main" tabIndex={-1}>
-        <PageHero id="about" title="Two operators. No account managers." sub="The people you talk to are the people who do the work." />
+        <PageHero id="about" eyebrow="About" title="Two operators. No account managers." sub="The people you talk to are the people who do the work." />
 
         <section id="who" aria-labelledby="who-title" className="section-y band">
           <div className="container-site">

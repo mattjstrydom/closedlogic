@@ -3,7 +3,7 @@ import { bookHref } from "../booking";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import CheckForm from "../components/check-form";
-import { Accent } from "../components/ui";
+import { Accent, Chip } from "../components/ui";
 import { jsonLdScript, orgNode } from "../jsonld";
 import { pageMetadata } from "../seo";
 import { site } from "../site.config";
@@ -29,11 +29,12 @@ export default function Contact() {
       <main id="main" tabIndex={-1}>
         <section aria-labelledby="contact-title" className="hero-grid">
           <div className="container-site pb-16 pt-20 max-lg:pb-10 max-lg:pt-12">
-            <div className="flex flex-col items-center gap-6 text-center">
+            <div className="flex flex-col items-center gap-5 text-center">
+              <Chip className="!mb-0">Contact</Chip>
               <h1 id="contact-title" className="heading-center text-title-xl">
                 Talk to <Accent>us</Accent>
               </h1>
-              <p className="lead max-w-[40rem]">Ask for a free check, book a 20-minute call, or email us directly.</p>
+              <p className="lead">Ask for a free check, book a 20-minute call, or email us directly.</p>
             </div>
           </div>
         </section>

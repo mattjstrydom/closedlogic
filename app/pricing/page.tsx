@@ -33,7 +33,7 @@ export default function Pricing() {
       <Header path="/pricing" />
       <main id="main" tabIndex={-1}>
         <PageHero
-          id="pricing"
+          id="pricing" eyebrow="Pricing"
           title="Every price, in full"
           sub="No percentage of ad spend, no hidden setup fees. If something isn't listed here, we quote it before any work starts."
         />

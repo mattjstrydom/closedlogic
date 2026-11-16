@@ -41,7 +41,7 @@ export default function GuidesIndex() {
       <main id="main" tabIndex={-1}>
         <section aria-labelledby="guides-title" className="container-site pb-16 pt-10 sm:pb-24 sm:pt-14">
           <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Guides" }]} />
-          <h1 id="guides-title" className="mt-8 max-w-[22ch] text-title-l">Guides</h1>
+          <h1 id="guides-title" className="mt-8 max-w-[22ch] text-title-xl">Guides</h1>
           {guides.length === 0 ? (
             <p className="mt-6 max-w-[62ch] text-text-xl text-body">
               Guides coming soon. Meanwhile, see <Link href="/method" className="link">the method</Link> to see what we check.
@@ -58,7 +58,7 @@ export default function GuidesIndex() {
                     {guides.filter((g) => g.pillar === k).sort((a, b) => Number(b.type === "pillar") - Number(a.type === "pillar")).map((g) => (
                       <li key={g.slug} className="tile border border-solid border-rule p-5">
                         <h3 className="text-title-xs">
-                          <Link href={`/guides/${g.slug}`} className="text-ink no-underline hover:text-accent-text">{g.title}</Link>
+                          <Link href={`/guides/${g.slug}`} className="text-ink no-underline hover:text-ink hover:underline">{g.title}</Link>
                           {g.isDraft && <span className="ml-2 text-text-s font-semibold text-warn">DRAFT</span>}
                         </h3>
                         <p className="mt-2 text-text-s text-body">{g.description}</p>

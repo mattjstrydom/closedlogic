@@ -66,7 +66,7 @@ export default function Fractional() {
       <Header path="/fractional" />
       <main id="main" tabIndex={-1}>
         <PageHero
-          id="fractional"
+          id="fractional" eyebrow="Fractional"
           title="Fractional marketing operations for larger accounts"
           sub="The step after the audit. We take over the tracking, attribution, HubSpot lifecycle and reporting checks: 25 hours a month, $5,000, with a 30-day exit."
           micro={["You keep your agency.", "We sell no media, resell no software and take no cut of your ad spend."]}
