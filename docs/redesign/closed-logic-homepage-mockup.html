@@ -1,0 +1,272 @@
+<!doctype html><html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Closed Logic: fix HubSpot and Google Ads conversion tracking (mockup)</title>
+<style>@import url("https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap");
+
+/* Closed Logic: bright and crisp. Every value comes from tokens.css (var(--…)). */
+body { margin: 0; font-family: var(--font-sans); font-optical-sizing: auto; font-size: 16px; line-height: 1.6; background: var(--bg); color: var(--fg); -webkit-font-smoothing: antialiased; }
+.cl-stage { padding: var(--space-8); display: flex; flex-wrap: wrap; gap: var(--space-6); align-items: flex-start; }
+.cl-stage-col { padding: var(--space-8); display: grid; gap: var(--space-6); }
+.cl-tnum { font-variant-numeric: tabular-nums; }
+
+/* Button */
+.cl-btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); font-family: var(--font-sans); font-size: 15px; line-height: 1.2; font-weight: 600; padding: 13px var(--space-5); border-radius: var(--radius-sm); border: 1px solid transparent; text-decoration: none; cursor: pointer; transition: background-color 120ms ease, border-color 120ms ease, box-shadow 120ms ease; }
+.cl-btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.cl-btn--primary { background: var(--brand); color: var(--on-brand); box-shadow: var(--shadow-xs); }
+.cl-btn--primary:hover { background: var(--brand-hover); }
+.cl-btn--secondary { background: var(--surface); color: var(--fg); border-color: var(--border-input); box-shadow: var(--shadow-xs); }
+.cl-btn--secondary:hover { background: var(--bg-subtle); }
+.cl-btn--ghost { background: transparent; color: var(--fg); }
+.cl-btn--ghost:hover { background: var(--bg-subtle); }
+.cl-btn--sm { padding: 9px 14px; font-size: 14px; }
+.cl-btn[disabled] { opacity: .5; cursor: not-allowed; }
+
+/* Eyebrow + status pills */
+.cl-eyebrow { display: inline-flex; align-items: center; gap: var(--space-2); font-size: 13px; line-height: 1.3; font-weight: 500; color: var(--fg-muted); background: var(--surface); border: 1px solid var(--border); padding: 6px var(--space-3); border-radius: var(--radius-pill); }
+.cl-eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--brand); }
+.cl-pill { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; line-height: 1; font-weight: 600; padding: 5px 10px; border-radius: var(--radius-pill); white-space: nowrap; background: var(--bg-subtle); color: var(--fg-muted); }
+.cl-pill::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.cl-pill--bad { background: var(--status-bad-bg); color: var(--status-bad); }
+.cl-pill--warn { background: var(--status-warn-bg); color: var(--status-warn); }
+.cl-pill--good { background: var(--status-good-bg); color: var(--status-good); }
+.cl-trust { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-6); font-size: 14px; color: var(--fg-muted); }
+
+/* Navbar */
+.cl-nav { display: flex; align-items: center; gap: var(--space-8); height: 64px; padding: 0 var(--space-8); background: var(--bg); border-bottom: 1px solid var(--border); }
+.cl-nav__links { display: flex; gap: var(--space-6); margin-left: auto; font-size: 14px; font-weight: 500; }
+.cl-nav__links a { color: var(--fg-muted); text-decoration: none; }
+.cl-nav__links a:hover { color: var(--fg); }
+
+/* Logo */
+.cl-logo { display: inline-flex; align-items: center; gap: 9px; color: var(--fg); text-decoration: none; }
+.cl-logo svg { width: 26px; height: 26px; flex-shrink: 0; }
+.cl-logo__word { font-size: 19px; line-height: 1; letter-spacing: -0.02em; white-space: nowrap; }
+.cl-logo__word b { font-weight: 700; }
+.cl-logo__word span { font-weight: 400; }
+
+/* Input / email capture */
+.cl-field { display: grid; gap: var(--space-2); max-width: 520px; }
+.cl-label { font-size: 14px; line-height: 1.2; font-weight: 600; }
+.cl-input { font: inherit; font-size: 15px; line-height: 1.4; padding: 12px var(--space-4); border-radius: var(--radius-sm); border: 1px solid var(--border-input); background: var(--surface); color: var(--fg); box-shadow: var(--shadow-xs); }
+.cl-input::placeholder { color: var(--fg-subtle); }
+.cl-input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.cl-input[aria-invalid="true"] { border-color: var(--status-bad); }
+.cl-help { font-size: 13px; line-height: 1.45; color: var(--fg-muted); }
+.cl-error { font-size: 13px; line-height: 1.45; color: var(--status-bad); font-weight: 500; }
+.cl-capture { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+.cl-capture .cl-input { flex: 1 1 240px; }
+
+/* Signal report: the product panel */
+.cl-report { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-panel); overflow: hidden; width: 100%; max-width: 560px; }
+.cl-report__bar { display: flex; align-items: center; gap: 6px; padding: 12px var(--space-4); background: var(--bg-subtle); border-bottom: 1px solid var(--border); }
+.cl-report__bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--border); }
+.cl-report__bar span { margin-left: var(--space-2); font-size: 12.5px; color: var(--fg-muted); }
+.cl-report__head { display: flex; justify-content: space-between; align-items: flex-end; padding: var(--space-5) var(--space-6); border-bottom: 1px solid var(--border); }
+.cl-report__head small { display: block; font-size: 12.5px; color: var(--fg-muted); margin-bottom: var(--space-1); }
+.cl-report__metric { font-size: 44px; line-height: 1; font-weight: 600; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.cl-report__metric span { font-size: 24px; color: var(--fg-muted); }
+.cl-report__bars { display: flex; gap: 6px; align-items: flex-end; height: 56px; }
+.cl-report__bars i { width: 18px; border-radius: 4px; background: var(--border); }
+.cl-report__bars i.is-now { background: var(--brand); }
+.cl-report__row { display: flex; justify-content: space-between; align-items: center; gap: var(--space-4); padding: 14px var(--space-6); border-bottom: 1px solid var(--border); }
+.cl-report__row:last-child { border-bottom: 0; }
+.cl-report__row b { display: block; font-size: 14px; line-height: 1.4; font-weight: 600; }
+.cl-report__row small { font-size: 12.5px; line-height: 1.4; color: var(--fg-muted); }
+.cl-hero-glow { background: radial-gradient(640px 320px at 70% 65%, var(--glow), transparent 70%), var(--bg); }
+
+/* Feature card */
+.cl-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--space-8); box-shadow: var(--shadow-xs); display: grid; gap: var(--space-3); max-width: 360px; transition: box-shadow 160ms ease; }
+.cl-card:hover { box-shadow: var(--shadow-md); }
+.cl-card__icon { width: 36px; height: 36px; border-radius: var(--radius-sm); background: var(--bg-subtle); border: 1px solid var(--border); display: grid; place-items: center; font-family: var(--font-mono); font-size: 13px; font-weight: 500; color: var(--fg); }
+.cl-card h3 { margin: var(--space-2) 0 0; font-size: 20px; line-height: 1.3; font-weight: 600; letter-spacing: -0.015em; }
+.cl-card p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--fg-muted); }
+.cl-card .cl-card__foot { margin-top: var(--space-2); padding-top: var(--space-4); border-top: 1px solid var(--border); font-size: 14px; line-height: 1.5; color: var(--fg); }
+.cl-card__foot b { font-weight: 600; }
+
+/* Pricing tier */
+.cl-tiers { display: flex; flex-wrap: wrap; gap: var(--space-6); align-items: stretch; }
+.cl-tier { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--space-8); width: 280px; display: flex; flex-direction: column; gap: var(--space-4); box-shadow: var(--shadow-xs); }
+.cl-tier--recommended { border-color: var(--fg); box-shadow: var(--shadow-md); }
+.cl-tier__name { margin: 0; display: flex; justify-content: space-between; align-items: center; gap: var(--space-2); font-size: 20px; line-height: 1.3; font-weight: 600; letter-spacing: -0.015em; }
+.cl-tier__price { margin: 0; font-size: 44px; line-height: 1; font-weight: 600; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.cl-tier__price small { font-size: 14px; font-weight: 400; letter-spacing: 0; color: var(--fg-muted); margin-left: 6px; }
+.cl-tier__desc { margin: 0; font-size: 14px; line-height: 1.5; color: var(--fg-muted); }
+.cl-tier ul { margin: 0; padding: var(--space-4) 0 0; border-top: 1px solid var(--border); list-style: none; display: grid; gap: var(--space-2); font-size: 14px; line-height: 1.5; }
+.cl-tier li { display: grid; grid-template-columns: 22px 1fr; }
+.cl-tier li::before { content: "✓"; font-weight: 700; color: var(--fg); }
+.cl-tier .cl-btn { margin-top: auto; }
+
+/* Evidence */
+.cl-evidence { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-xs); max-width: 600px; overflow: hidden; }
+.cl-evidence__head { display: flex; justify-content: space-between; align-items: center; gap: var(--space-3); padding: var(--space-4) var(--space-6); border-bottom: 1px solid var(--border); }
+.cl-evidence__head b { font-size: 15px; font-weight: 600; }
+.cl-evidence__head small { display: block; font-size: 12.5px; color: var(--fg-muted); }
+.cl-evidence__code { margin: 0; padding: var(--space-4) var(--space-6); background: var(--bg-subtle); font-family: var(--font-mono); font-size: 13px; line-height: 1.65; color: var(--fg); white-space: pre-wrap; border-bottom: 1px solid var(--border); }
+.cl-evidence__code .bad { color: var(--status-bad); }
+.cl-evidence__code .good { color: var(--status-good); }
+.cl-evidence__fix { margin: 0; padding: var(--space-4) var(--space-6); font-size: 14px; line-height: 1.55; color: var(--fg-muted); }
+.cl-evidence__fix b { color: var(--fg); }
+
+:root,[data-theme=light]{--bg:#ffffff;--bg-subtle:#f6f7f9;--surface:#ffffff;--glow:#ffe3df;--border:#e7e8ec;--border-input:#868c98;--fg:#0b0b0c;--fg-muted:#5b616e;--fg-subtle:#6b7180;--brand:#ff4b3e;--brand-hover:#f0392c;--on-brand:#0b0b0c;--status-bad:#c8261b;--status-bad-bg:#fdecea;--status-warn:#a34306;--status-warn-bg:#fef0e1;--status-good:#0e7490;--status-good-bg:#e3f4f8;--focus:#0b0b0c;--shadow-xs:0 1px 2px rgba(16,24,40,0.06);--shadow-md:0 1px 2px rgba(16,24,40,0.06), 0 8px 24px -8px rgba(16,24,40,0.12);--shadow-panel:0 1px 2px rgba(16,24,40,0.06), 0 24px 60px -20px rgba(16,24,40,0.25);}[data-theme=dark]{--bg:#0b0c0f;--bg-subtle:#121418;--surface:#121418;--glow:#2a1410;--border:#24272e;--border-input:#636974;--fg:#f2f3f5;--fg-muted:#9aa0ab;--fg-subtle:#80868f;--brand:#ff5b3a;--brand-hover:#ff7556;--on-brand:#0b0b0c;--status-bad:#ff7b6e;--status-bad-bg:#2e1513;--status-warn:#f5b84a;--status-warn-bg:#2e2210;--status-good:#4cc9e0;--status-good-bg:#0f2a30;--focus:#f2f3f5;--shadow-xs:0 1px 2px rgba(0,0,0,0.5);--shadow-md:0 1px 2px rgba(0,0,0,0.5), 0 8px 24px -8px rgba(0,0,0,0.6);--shadow-panel:0 1px 2px rgba(0,0,0,0.5), 0 30px 80px -20px rgba(0,0,0,0.8);}:root{--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:20px;--space-6:24px;--space-8:32px;--space-12:48px;--space-14:56px;--space-24:96px;--content-max:1200px;--radius-sm:8px;--radius-md:12px;--radius-lg:16px;--radius-pill:999px;--font-sans:Inter, "Inter Display", system-ui, -apple-system, "Segoe UI", sans-serif;--font-mono:"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;}
+
+.wrap{max-width:var(--content-max);margin:0 auto;padding:0 var(--space-14)}
+.cl-nav{position:sticky;top:0;z-index:5;padding:0}
+.cl-nav .wrap{display:flex;align-items:center;gap:var(--space-8);height:64px;width:100%}
+.hero{padding:88px 0 96px}
+.hero .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:var(--space-14);align-items:center}
+.display{font-size:64px;line-height:1.02;font-weight:600;letter-spacing:-.035em;margin:22px 0 18px}
+.lead{font-size:19px;line-height:1.55;color:var(--fg-muted);margin:0 0 28px;max-width:34em}
+.hero .cl-capture{max-width:520px}.hero .cl-trust{margin-top:16px;font-size:13px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.strip{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg-subtle)}
+.strip .wrap{display:flex;justify-content:space-between;gap:24px;padding-top:18px;padding-bottom:18px;font-size:14px;font-weight:500;color:var(--fg-muted)}
+.strip span::before{content:"✓  ";color:var(--fg);font-weight:700}
+section.s{padding:var(--space-24) 0}
+section.alt{background:var(--bg-subtle);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.head{max-width:720px;margin-bottom:var(--space-12)}
+.head.c{margin-left:auto;margin-right:auto;text-align:center}
+.h2{font-size:36px;line-height:1.12;font-weight:600;letter-spacing:-.025em;margin:16px 0 12px}
+.head p{font-size:18px;line-height:1.55;color:var(--fg-muted);margin:0}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-6)}
+.grid3 .cl-card{max-width:none}
+.steps{display:grid;grid-template-columns:1fr 1.1fr;gap:var(--space-14);align-items:start}
+.step{display:grid;grid-template-columns:44px 1fr;gap:16px;padding:22px 0;border-bottom:1px solid var(--border)}
+.step:first-child{padding-top:0}
+.step .n{width:36px;height:36px;border-radius:var(--radius-sm);background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;font-family:var(--font-mono);font-size:13px}
+.step h3{margin:4px 0 6px;font-size:18px;font-weight:600;letter-spacing:-.01em}.step p{margin:0;color:var(--fg-muted);font-size:15px;line-height:1.55}
+.step .meta{margin-top:8px;font-size:13px;font-weight:600}
+.pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-6)}
+.pricing .cl-tier{width:auto}
+.fract{margin-top:var(--space-6);display:flex;justify-content:space-between;align-items:center;gap:24px;padding:22px 28px;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--surface)}
+.fract b{font-size:16px}.fract p{margin:4px 0 0;color:var(--fg-muted);font-size:14px}
+.trust2{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-14);align-items:start}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:14px 28px;margin:0;padding:0;list-style:none}
+.checks li{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:18px 20px;box-shadow:var(--shadow-xs)}
+.checks b{display:block;font-size:15px;margin-bottom:4px}.checks span{font-size:14px;color:var(--fg-muted);line-height:1.5}
+.fit{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-6)}
+.fit div{border:1px solid var(--border);border-radius:var(--radius-md);padding:28px;background:var(--surface)}
+.fit h3{margin:12px 0 12px;font-size:20px;font-weight:600;letter-spacing:-.015em}
+.fit ul{margin:0;padding:0;list-style:none;display:grid;gap:10px;font-size:15px;color:var(--fg-muted)}
+.fit .yes li::before{content:"✓  ";color:var(--fg);font-weight:700}.fit .no li::before{content:"✕  ";color:var(--status-bad);font-weight:700}
+.team{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-6)}
+.person{display:flex;gap:20px;align-items:flex-start;border:1px solid var(--border);border-radius:var(--radius-md);padding:24px;background:var(--surface)}
+.av{width:72px;height:72px;border-radius:var(--radius-md);background:var(--bg-subtle);border:1px solid var(--border);display:grid;place-items:center;font-weight:600;font-size:22px;color:var(--fg-muted);flex-shrink:0}
+.person b{font-size:17px}.person small{display:block;color:var(--fg-muted);font-size:13px;margin:2px 0 8px}.person p{margin:0;font-size:14px;color:var(--fg-muted);line-height:1.55}
+.faq{max-width:800px;margin:0 auto}
+.faq details{border-bottom:1px solid var(--border);padding:20px 0}
+.faq summary{list-style:none;display:flex;justify-content:space-between;font-weight:600;font-size:17px;cursor:pointer}
+.faq summary::after{content:"+";color:var(--fg-muted);font-weight:400;font-size:22px;line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq p{margin:10px 0 0;color:var(--fg-muted);font-size:15px;line-height:1.6;max-width:62ch}
+.cta{background:var(--fg);color:var(--bg);border-radius:var(--radius-lg);padding:64px;display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center;position:relative;overflow:hidden}
+.cta::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,75,62,.35),transparent)}
+.cta h2{font-size:40px;line-height:1.08;letter-spacing:-.03em;margin:0 0 12px;font-weight:600}
+.cta p{margin:0;color:#b9bdc6;font-size:17px;line-height:1.55}
+.cta .cl-input{background:#17191e;border-color:#3a3e47;color:#f2f3f5}
+.cta .cl-help{color:#9aa0ab}
+.cta .cl-label{color:#f2f3f5}
+.cta .cl-btn--ghost{color:#f2f3f5}
+footer{padding:64px 0 40px;border-top:1px solid var(--border);margin-top:var(--space-24)}
+.fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:32px}
+.fgrid h4{margin:0 0 12px;font-size:13px;font-weight:600}
+.fgrid a{display:block;color:var(--fg-muted);text-decoration:none;font-size:14px;margin-bottom:8px}
+.fgrid p{color:var(--fg-muted);font-size:14px;max-width:30ch;line-height:1.55}
+.head .cl-evidence__fix{font-size:14px;line-height:1.55}
+.fgrid .cl-logo{display:inline-flex;color:var(--fg);margin-bottom:4px}
+.legal{display:flex;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);font-size:12.5px;color:var(--fg-subtle)}
+</style></head><body>
+<header class="cl-nav"><div class="wrap"><a class="cl-logo" href="#"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="22" fill="none" stroke="currentColor" stroke-width="9" stroke-dasharray="104 34" stroke-dashoffset="-10" transform="rotate(-20 32 32)"/><circle cx="53" cy="32" r="7" fill="var(--brand)" stroke="currentColor" stroke-width="3"/></svg><span class="cl-logo__word"><b>Closed</b> <span>Logic</span></span></a><nav class="cl-nav__links"><a href="#">Signal Fix</a><a href="#">Ops Desk</a><a href="#">Method</a><a href="#">Pricing</a><a href="#">Guides</a><a href="#">About</a></nav><a class="cl-btn cl-btn--primary cl-btn--sm" href="#check">Get a free check</a></div></header>
+
+<section class="hero cl-hero-glow"><div class="wrap">
+<div><span class="cl-eyebrow">HubSpot and Google Ads conversion tracking</span>
+<h1 class="display">Make Google Ads learn from real leads, not page views.</h1>
+<p class="lead">We check what your site sends to Google Ads and HubSpot, show you the evidence before you share any access, and fix what's miscounted for $750.</p>
+<form class="cl-capture" onsubmit="return false"><label class="sr" for="h">Work email</label><input class="cl-input" id="h" type="email" placeholder="you@company.com"><button class="cl-btn cl-btn--primary">Get my free check</button></form>
+<div class="cl-trust"><span>No logins. No obligation.</span><a class="cl-btn cl-btn--ghost cl-btn--sm" style="padding:0" href="#">Or book a 20-minute call →</a></div></div>
+<div class="cl-report">
+  <div class="cl-report__bar"><i></i><i></i><i></i><span>Signal report · acme.io</span></div>
+  <div class="cl-report__head"><div><small>Signals healthy</small><div class="cl-report__metric">2<span>/5</span></div></div><div class="cl-report__bars"><i style="height:30%"></i><i style="height:45%"></i><i style="height:38%"></i><i style="height:70%"></i><i class="is-now" style="height:88%"></i></div></div>
+  <div class="cl-report__row"><div><b>Book a demo</b><small>Fires on page view, no form</small></div><span class="cl-pill cl-pill--bad">Miscounted</span></div>
+  <div class="cl-report__row"><div><b>gclid → HubSpot contact</b><small>hs_google_click_id is empty</small></div><span class="cl-pill cl-pill--bad">Missing</span></div>
+  <div class="cl-report__row"><div><b>Offline conversions</b><small>SQL stage not sent to Google Ads</small></div><span class="cl-pill cl-pill--warn">Not sent</span></div>
+  <div class="cl-report__row"><div><b>Enhanced conversions</b><small>Hashed email matched</small></div><span class="cl-pill cl-pill--good">Healthy</span></div>
+</div></div></section>
+
+<div class="strip"><div class="wrap"><span>No logins for the check</span><span>Prices on the site</span><span>Read-only access if you hire us</span><span>Every change can be undone</span><span>We sell no media</span></div></div>
+
+<section class="s"><div class="wrap">
+<div class="head c"><span class="cl-eyebrow">The problem</span><h2 class="h2">Three ways Google Ads ends up chasing the wrong people</h2><p>Smart bidding optimises for whatever you tell it is a conversion. If that signal is wrong, so is every bid.</p></div>
+<div class="grid3">
+<article class="cl-card"><span class="cl-card__icon">01</span><h3>A page view counts as a demo</h3><p>If opening your demo page or clicking a link counts as a conversion, Google Ads learns to find visitors, not buyers.</p><p class="cl-card__foot"><b>What it costs:</b> a cost per demo that looks fine while sales sees nothing.</p></article>
+<article class="cl-card"><span class="cl-card__icon">02</span><h3>The click ID never reaches HubSpot</h3><p>If the Google click ID isn't stored on the contact, the lead can't be matched back to the ad that brought it.</p><p class="cl-card__foot"><b>What it costs:</b> you can't tell which campaigns make pipeline.</p></article>
+<article class="cl-card"><span class="cl-card__icon">03</span><h3>Bidding stops at the form fill</h3><p>If qualified stages never reach Google Ads, bidding can't tell a real lead from a form sales threw away.</p><p class="cl-card__foot"><b>What it costs:</b> budget keeps flowing to junk leads.</p></article>
+</div></div></section>
+
+<section class="s alt"><div class="wrap steps">
+<div class="head" style="margin:0"><span class="cl-eyebrow">How it works</span><h2 class="h2">From free check to fixed signal</h2><p>You see the evidence before you share any access. Every change is documented and can be undone.</p>
+<article class="cl-evidence" style="margin-top:32px"><header class="cl-evidence__head"><div><b>Book a demo fires on page view</b><small>Evidence 1 of 4 · conversion_event</small></div><span class="cl-pill cl-pill--bad">Miscounted</span></header>
+<pre class="cl-evidence__code">GET /demo
+<span class="bad">gtag('event','conversion',{send_to:'AW-…/book_demo'})</span>
+form_submitted: false</pre><p class="cl-evidence__fix"><b>Check it yourself:</b> open /demo in a private window and watch the tag fire before you type anything.</p></article></div>
+<div>
+<div class="step"><span class="n">01</span><div><h3>Free check</h3><p>We review what your site sends to Google Ads from the outside, with evidence and steps you can rerun. No logins, no access.</p><div class="meta">$0</div></div></div>
+<div class="step"><span class="n">02</span><div><h3>Signal Fix</h3><p>We fix one miscounted conversion with read-only access by default, document every change, and back it with a 30-day guarantee.</p><div class="meta">$750 one-time</div></div></div>
+<div class="step"><span class="n">03</span><div><h3>Ops Desk</h3><p>We work through your HubSpot, tracking and automation backlog every month, so the signal stays clean as the site changes.</p><div class="meta">$1,250 pilot, then $2,500/month</div></div></div>
+</div></div></section>
+
+<section class="s" id="pricing"><div class="wrap">
+<div class="head c"><span class="cl-eyebrow">Pricing</span><h2 class="h2">Prices on the site. No cut of your ad spend.</h2><p>Start free. Pay only when you've seen what's wrong.</p></div>
+<div class="pricing">
+<section class="cl-tier"><h3 class="cl-tier__name">Free check</h3><p class="cl-tier__price">$0</p><p class="cl-tier__desc">What your site sends to Google Ads, checked from outside.</p><ul><li>No logins or access</li><li>Evidence you can rerun</li><li>Plain-English summary</li></ul><a class="cl-btn cl-btn--secondary" href="#">Get my free check</a></section>
+<section class="cl-tier cl-tier--recommended"><h3 class="cl-tier__name">Signal Fix <span class="cl-pill">Most teams start here</span></h3><p class="cl-tier__price">$750<small>one-time</small></p><p class="cl-tier__desc">One miscounted conversion, fixed and documented.</p><ul><li>Read-only access by default</li><li>Every change can be undone</li><li>30-day guarantee</li></ul><a class="cl-btn cl-btn--primary" href="#">Fix it for $750</a></section>
+<section class="cl-tier"><h3 class="cl-tier__name">Ops Desk</h3><p class="cl-tier__price">$2,500<small>/month</small></p><p class="cl-tier__desc">Your HubSpot, tracking and automation backlog, handled monthly. Starts with a $1,250 pilot.</p><ul><li>HubSpot, tracking and automation</li><li>Monthly backlog, worked in order</li><li>Same access rules as Signal Fix</li></ul><a class="cl-btn cl-btn--secondary" href="#">Start the pilot</a></section>
+</div>
+<div class="fract"><div><b>Fractional</b><p>A full audit and a fractional measurement lead for larger teams.</p></div><a class="cl-btn cl-btn--secondary" href="#">Talk to us</a></div>
+</div></section>
+
+<section class="s alt"><div class="wrap trust2">
+<div class="head" style="margin:0"><span class="cl-eyebrow">Check us before you trust us</span><h2 class="h2">Low risk by design</h2><p>Everything about how we work is built so you can verify it before you pay, and undo it if you change your mind.</p></div>
+<ul class="checks">
+<li><b>No logins for the check</b><span>We look from the outside, like Google Ads does.</span></li>
+<li><b>Prices on the site</b><span>What you see above is what you pay.</span></li>
+<li><b>Read-only access</b><span>If you hire us, we start read-only by default.</span></li>
+<li><b>Every change can be undone</b><span>Documented, reversible, yours to keep.</span></li>
+<li><b>We sell no media</b><span>No ad buying, no cut of your spend.</span></li>
+<li><b>30-day guarantee</b><span>On every Signal Fix.</span></li>
+</ul></div></section>
+
+<section class="s"><div class="wrap">
+<div class="head c"><span class="cl-eyebrow">Who it's for</span><h2 class="h2">Built for B2B teams running Google Ads into HubSpot</h2></div>
+<div class="fit">
+<div class="yes"><span class="cl-pill cl-pill--good">Good fit</span><h3>You're likely a fit if</h3><ul><li>You sell a demo, consultation or sales-qualified lead</li><li>You're a SaaS or service business on HubSpot</li><li>You just hired a marketing lead or rebuilt your site</li></ul></div>
+<div class="no"><span class="cl-pill cl-pill--bad">Not a fit</span><h3>We're not the right team if</h3><ul><li>You run ecommerce with fixed order values</li><li>You want someone to buy media for you</li></ul></div>
+</div></div></section>
+
+<section class="s alt"><div class="wrap">
+<div class="head c"><span class="cl-eyebrow">Team</span><h2 class="h2">The people doing the work</h2></div>
+<div class="team">
+<div class="person"><div class="av">MS</div><div><b>Matt Strydom</b><small>Founder</small><p>Seven years in marketing and revenue operations.</p></div></div>
+<div class="person"><div class="av">JT</div><div><b>Jennifer Taylor</b><small>Revenue operations and MarTech</small><p>CRM resets, pipeline, routing and workflow automation.</p></div></div>
+</div></div></section>
+
+<section class="s"><div class="wrap">
+<div class="head c"><span class="cl-eyebrow">FAQ</span><h2 class="h2">Questions teams ask first</h2></div>
+<div class="faq">
+<details open><summary>Do you need access to run the free check?</summary><p>No. We review what your site sends to Google Ads from the outside, and give you the evidence with steps you can rerun yourself.</p></details>
+<details><summary>What access do you need if we hire you?</summary><p>Read-only by default. Anything more is agreed with you first, and every change is documented so it can be undone.</p></details>
+<details><summary>Do you buy media or take a cut of ad spend?</summary><p>No. We sell no media and take no cut of your spend. Our prices are on this page.</p></details>
+<details><summary>What if the fix doesn't hold?</summary><p>Every Signal Fix comes with a 30-day guarantee.</p></details>
+</div></div></section>
+
+<section id="check"><div class="wrap"><div class="cta">
+<div><h2>See what your site is really telling Google Ads.</h2><p>Get the free check. Evidence first, no logins, no obligation.</p></div>
+<form class="cl-field" onsubmit="return false"><label class="cl-label" for="c">Work email</label><div class="cl-capture"><input class="cl-input" id="c" type="email" placeholder="you@company.com"><button class="cl-btn cl-btn--primary">Get my free check</button></div><span class="cl-help">Prefer to talk? <a href="#" style="color:#f2f3f5">Book a 20-minute call</a>.</span></form>
+</div></div></section>
+
+<footer><div class="wrap">
+<div class="fgrid"><div><a class="cl-logo" href="#"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="22" fill="none" stroke="currentColor" stroke-width="9" stroke-dasharray="104 34" stroke-dashoffset="-10" transform="rotate(-20 32 32)"/><circle cx="53" cy="32" r="7" fill="var(--brand)" stroke="currentColor" stroke-width="3"/></svg><span class="cl-logo__word"><b>Closed</b> <span>Logic</span></span></a><p>We check what your site sends to Google Ads and HubSpot, then fix what's miscounted.</p></div>
+<div><h4>Services</h4><a href="#">Signal Fix</a><a href="#">Ops Desk</a><a href="#">Fractional</a><a href="#">Pricing</a></div>
+<div><h4>Learn</h4><a href="#">Method</a><a href="#">Guides</a><a href="#">About</a></div>
+<div><h4>Company</h4><a href="#">Contact</a><a href="#">Access policy</a><a href="#">Privacy</a><a href="#">Terms</a></div></div>
+<div class="legal"><span>Closed Logic is a trading name of Reubika LLC, Santa Fe, New Mexico.</span><span>hello@closedlogic.com</span></div>
+</div></footer>
+</body></html>

@@ -22,32 +22,14 @@ document.readyState==="complete"?queueGtm():addEventListener("load",queueGtm,{on
 
 const jsFlag = `document.documentElement.classList.add("js")`;
 
-// Closes the mobile menu popover when a link inside it is clicked (in-page anchors do not close popovers on their own).
-const menu = `document.getElementById("site-menu")?.addEventListener("click",function(e){if(e.target.closest("a"))e.currentTarget.hidePopover()});`;
 
 // Fonts are self-hosted from app/fonts (the Google Fonts latin subset, woff2), so the build never fetches Google Fonts.
-// A failed fetch broke the Cloudflare build on 30 Oct 2026. Same weights, variables and settings as the old
-// next/font/google setup. Characters outside the latin subset (e.g. the arrow) fall back exactly as before.
-const poppins = localFont({
-  src: [
-    { path: "./fonts/poppins-latin-400.woff2", weight: "400", style: "normal" },
-    { path: "./fonts/poppins-latin-500.woff2", weight: "500", style: "normal" },
-    { path: "./fonts/poppins-latin-600.woff2", weight: "600", style: "normal" },
-    { path: "./fonts/poppins-latin-700.woff2", weight: "700", style: "normal" },
-  ],
-  variable: "--font-poppins",
-  display: "swap",
-  preload: true,
-  adjustFontFallback: "Arial",
-});
-
-const fira = localFont({
-  src: [
-    { path: "./fonts/firasans-latin-400.woff2", weight: "400", style: "normal" },
-    { path: "./fonts/firasans-latin-500.woff2", weight: "500", style: "normal" },
-    { path: "./fonts/firasans-latin-600.woff2", weight: "600", style: "normal" },
-  ],
-  variable: "--font-fira",
+// A failed fetch broke the Cloudflare build on 30 Oct 2026. Inter is the variable font with the weight (400 to 700) and
+// optical-size (14 to 32) axes; the browser picks the optical size from the text size (font-optical-sizing: auto on body).
+// Characters outside the latin subset (e.g. the arrow) fall back to the system font.
+const inter = localFont({
+  src: [{ path: "./fonts/inter-latin-var.woff2", weight: "400 700", style: "normal" }],
+  variable: "--font-inter",
   display: "swap",
   preload: true,
   adjustFontFallback: "Arial",
@@ -75,7 +57,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={`${poppins.variable} ${fira.variable} ${jetbrains.variable}`} suppressHydrationWarning>
+    <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} ${jetbrains.variable}`} suppressHydrationWarning>
       <body>
         {/* Marks JS as available before first paint (the .js class). */}
         <script dangerouslySetInnerHTML={{ __html: jsFlag }} />
@@ -86,7 +68,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </noscript>
         {children}
         <ConsentBanner />
-        <Script id="menu" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: menu }} />
         {/* Records booking-button clicks (book_call_click) in Clarity, see public/cta.js. */}
         <Script id="cta" src="/cta.js" strategy="afterInteractive" />
       </body>
