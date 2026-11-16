@@ -8,7 +8,8 @@
    The @theme block below only maps Tailwind's utility names onto them, so a colour is edited in one place.
    Older token names (ink, body, muted, accent-text, band, rule, ...) are kept as aliases because the JSX
    uses them; their VALUES are the new palette. Rules that matter:
-   - brand is a fill only (3.3:1 on white). Text on it is always on-brand (near-black), never white.
+   - brand (#ff4b3e) is a fill only (3.3:1 on white): dots, bars, glow. Never put text on it.
+   - Buttons use brand-button (#d92d20) with white on-brand text (5:1).
    - fg-subtle only on bg, bg-subtle and surface.
    - border is structure only; inputs and secondary buttons use border-input.
    - status colours appear only in product-style UI (signal report, evidence, pills).
