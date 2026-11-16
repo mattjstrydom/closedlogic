@@ -1,5 +1,6 @@
 import Link from "next/link";
 import CookieSettings from "./cookie-settings";
+import { MotionToggle } from "./fx";
 import Logo from "./logo";
 import { site } from "../site.config";
 import { hasGuides } from "../guides/content";
@@ -51,7 +52,10 @@ export default function Footer() {
           <p className="max-w-[80ch]">
             HubSpot® and Google Ads are trademarks of their respective owners. {site.brand} is an independent service. We are not affiliated with, authorized by, endorsed by, sponsored by or otherwise approved by HubSpot, Inc. or Google LLC.
           </p>
-          <p>© {new Date().getFullYear()} {site.legalName}</p>
+          <p className="flex flex-wrap items-center gap-x-4">
+            <span>© {new Date().getFullYear()} {site.legalName}</span>
+            <MotionToggle />
+          </p>
         </div>
       </div>
     </footer>

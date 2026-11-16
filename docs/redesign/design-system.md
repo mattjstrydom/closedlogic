@@ -48,3 +48,23 @@ All: 44px min height, 15px / 600, 8px radius, 13px 20px padding, 120ms colour tr
 - `--brand` is never used for text and never carries text. It is a fill for dots, bars and glow. Buttons use `--brand-button`.
 - WCAG 2.1 AA: any new text-on-fill pair must reach 4.5:1 (3:1 only for 24px+ or 19px+ bold).
 - Copy: sentence case, second person, no exclamation marks, no emoji, no em dashes.
+
+## Motion layer (added 16 Nov 2026, `app/fx.css`, `app/components/fx.tsx`)
+Reference study: Stripe (flowing gradient mesh, product UI in bento frames, two-tone headlines), Linear (hairline grids, glow lines, product UI as the hero), Attio (soft gradient floor, bordered cells). Adapted to a light page and the brand red, with no borrowed assets.
+
+| Part | What it does | Where |
+|---|---|---|
+| Hero ground | Hairline 64px grid, masked to fade out; an aurora (red, peach, faint teal) drifting under it; six hairline beams travelling along grid lines | Every hero (home and inner pages); beams on the home hero only |
+| Brand orbit | The logo's ring and dot, large and faint behind the hero panel, the dot in slow orbit | Home hero |
+| Dotted band | 20px dot field fading in and out at the section edges | Every `.band` section |
+| Signal report | A light that runs around the border, a soft scan line, bars that grow, a ping on "bad" pills, two floating code chips | Home hero panel |
+| Card diagrams | Small live diagrams on the three problem cards (page view firing a conversion, a click ID that stops short, leads that stop at the form fill) | Home problem section |
+| Steps rail | A pulse running down the rail through the three steps; the flagged line in the evidence sample breathes | Home how it works |
+| Pricing | The recommended tier carries the same moving border light | Home pricing |
+| Cursor light | A soft red glow follows the pointer inside cards (fine pointers only) | Cards, tiers, fit and team cards |
+| Two-tone headlines | First clause in ink, rest in `--fg-subtle` (`.soft`) | Home h1 and h2s |
+| Split section heads | Heading left, standfirst right (`.cl-head--split`) | Problem, pricing |
+| Reveal | Section heads, grids and steps rise 16px and fade in once as they enter view | Home |
+| Closing block | Hairline grid and a drifting glow on the dark ground | Every closing block |
+
+Rules: only transform and opacity animate (plus the border-light angle); everything moving sits inside `prefers-reduced-motion: no-preference` (under "reduce" the static patterns stay, no motion, nothing hidden); decorative parts are `aria-hidden` and never carry the only copy of a fact; a footer toggle ("Pause background motion", `aria-pressed`, remembered in `localStorage` key `cl-fx`) stops all of it (WCAG 2.2.2); no tilt, no scroll-jacking, no parallax on text.

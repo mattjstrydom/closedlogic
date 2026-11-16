@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import "./fx.css";
 import Script from "next/script";
 import ConsentBanner from "./components/consent-banner";
+import Fx from "./components/fx";
 import { site } from "./site.config";
 import { CONSENT_KEY } from "./consent-key";
 import { sharedOpenGraph, ogImage, twitterImage } from "./seo";
@@ -68,6 +70,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </noscript>
         {children}
         <ConsentBanner />
+        <Fx />
         {/* Records booking-button clicks (book_call_click) in Clarity, see public/cta.js. */}
         <Script id="cta" src="/cta.js" strategy="afterInteractive" />
       </body>

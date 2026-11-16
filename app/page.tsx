@@ -5,7 +5,7 @@ import Footer from "./components/footer";
 import Faq, { type FaqItem } from "./components/faq";
 import CheckForm from "./components/check-form";
 import Headshot from "./components/headshot";
-import { EvidenceSample, FeatureCard, PricingTier, SignalReport, TrustStrip } from "./components/cl";
+import { Beams, EvidenceSample, FeatureCard, PricingTier, SignalReport, TrustStrip } from "./components/cl";
 import { Chip } from "./components/ui";
 import { bookHref } from "./booking";
 import { homeFaqs } from "./faqs";
@@ -77,11 +77,12 @@ export default function Home() {
       <main id="main" tabIndex={-1}>
         {/* 2. Hero */}
         <section id="hero" aria-labelledby="hero-title" className="cl-hero cl-hero-glow">
+          <Beams />
           <div className="container-site">
             <div className="cl-hero__grid">
               <div>
                 <Chip className="!mx-0 !mb-0">HubSpot and Google Ads conversion tracking</Chip>
-                <h1 id="hero-title" className="display">Make sure Google Ads learns from real leads, not page views.</h1>
+                <h1 id="hero-title" className="display">Make sure Google Ads learns from real leads, <span className="soft">not page views.</span></h1>
                 <p className="lead">We check what your site sends to Google Ads and HubSpot, show you the evidence before you share any access, and fix what&apos;s miscounted for $750.</p>
                 <div className="max-w-[560px]">
                   <CheckForm email={site.email} idPrefix="hero" variant="inline" />
@@ -94,6 +95,8 @@ export default function Home() {
                 {/* Not yet: a "See an example check" link. It waits for a real, permitted or fully anonymized example check. */}
               </div>
               <div className="cl-hero__panel">
+                <span className="fx-chip fx-chip--a" aria-hidden="true">gclid: empty</span>
+                <span className="fx-chip fx-chip--b" aria-hidden="true">page_view → conversion</span>
                 <SignalReport
                   host="acme.io"
                   healthy={2}
@@ -118,14 +121,14 @@ export default function Home() {
         {/* 4. The problem */}
         <section id="problem" aria-labelledby="problem-title" className="section-y">
           <div className="container-site">
-            <div className="cl-head cl-head--c">
+            <div className="cl-head cl-head--split" data-reveal>
               <Chip>The problem</Chip>
-              <h2 id="problem-title">Three ways Google Ads ends up chasing the wrong people</h2>
+              <h2 id="problem-title">Three ways Google Ads <span className="soft">ends up chasing the wrong people</span></h2>
               <p>Smart bidding optimizes for whatever you tell it is a conversion. If that signal is wrong, so is every bid.</p>
             </div>
             <div className="cl-grid3">
-              {problems.map(([i, t, b, c]) => (
-                <FeatureCard key={t} index={i} title={t} foot={<><b>What it costs:</b> {c}</>}>
+              {problems.map(([i, t, b, c], n) => (
+                <FeatureCard key={t} index={i} title={t} visual={(["a", "b", "c"] as const)[n]} foot={<><b>What it costs:</b> {c}</>}>
                   {b}
                 </FeatureCard>
               ))}
@@ -138,9 +141,9 @@ export default function Home() {
           <div className="container-site">
             <div className="cl-steps">
               <div>
-                <div className="cl-head">
+                <div className="cl-head" data-reveal>
                   <Chip>How it works</Chip>
-                  <h2 id="how-title">From free check to fixed, in three steps</h2>
+                  <h2 id="how-title">From free check to fixed, <span className="soft">in three steps</span></h2>
                   <p>You see the evidence before you share any access. Every change is documented and can be undone.</p>
                 </div>
                 <div className="mt-8"><EvidenceSample /></div>
@@ -148,7 +151,7 @@ export default function Home() {
               </div>
               <ol className="m-0 list-none p-0">
                 {steps.map(([n, t, b, meta]) => (
-                  <li key={t} className="cl-step">
+                  <li key={t} className="cl-step" data-reveal>
                     <span className="step-badge" aria-hidden="true">{n}</span>
                     <div>
                       <h3>{t}</h3>
@@ -165,12 +168,12 @@ export default function Home() {
         {/* 6. Pricing */}
         <section id="offers" aria-labelledby="offers-title" className="section-y">
           <div className="container-site">
-            <div className="cl-head cl-head--c">
+            <div className="cl-head cl-head--split" data-reveal>
               <Chip>Pricing</Chip>
-              <h2 id="offers-title">Start small. Keep going only if it&apos;s worth it.</h2>
+              <h2 id="offers-title">Start small. <span className="soft">Keep going only if it&apos;s worth it.</span></h2>
               <p>Start free. Pay only when you&apos;ve seen what&apos;s wrong.</p>
             </div>
-            <div className="cl-pricing">
+            <div className="cl-pricing" data-reveal>
               <PricingTier name={offers.check.name} price="$0" desc="What your site sends to Google Ads, with the evidence." items={["No logins or access", "Evidence you can rerun", "Steps you can check yourself"]}>
                 <Link href="/free-check" className="btn-outline">Get my free check</Link>
               </PricingTier>
@@ -197,7 +200,7 @@ export default function Home() {
         <section id="independent" aria-labelledby="independent-title" className="section-y band">
           <div className="container-site">
             <div className="cl-trust2">
-              <div className="cl-head">
+              <div className="cl-head" data-reveal>
                 <Chip>Why independent</Chip>
                 <h2 id="independent-title">Check us before you trust us</h2>
                 <p>Everything about how we work is built so you can verify it before you pay, and undo it if you change your mind.</p>
@@ -223,11 +226,11 @@ export default function Home() {
         {/* 9. Who it's for */}
         <section id="for" aria-labelledby="for-title" className="section-y">
           <div className="container-site">
-            <div className="cl-head cl-head--c">
+            <div className="cl-head cl-head--c" data-reveal>
               <Chip>Who it&apos;s for</Chip>
-              <h2 id="for-title">Built for B2B teams running Google Ads into HubSpot</h2>
+              <h2 id="for-title">Built for B2B teams <span className="soft">running Google Ads into HubSpot</span></h2>
             </div>
-            <div className="cl-fit">
+            <div className="cl-fit" data-reveal>
               <div className="yes">
                 <span className="cl-pill cl-pill--good">Good fit</span>
                 <h3>You&apos;re likely a fit if</h3>
@@ -252,11 +255,11 @@ export default function Home() {
         {/* 10. The people */}
         <section id="people" aria-labelledby="people-title" className="section-y band">
           <div className="container-site">
-            <div className="cl-head cl-head--c">
+            <div className="cl-head cl-head--c" data-reveal>
               <Chip>Team</Chip>
               <h2 id="people-title">Who does the work</h2>
             </div>
-            <div className="cl-team">
+            <div className="cl-team" data-reveal>
               {team.map((p) => (
                 <div key={p.id} className="cl-person">
                   <Headshot person={p} size={72} />
@@ -282,11 +285,11 @@ export default function Home() {
         {/* 11. FAQ */}
         <section id="questions" aria-labelledby="questions-title" className="section-y">
           <div className="container-site">
-            <div className="cl-head cl-head--c">
+            <div className="cl-head cl-head--c" data-reveal>
               <Chip>FAQ</Chip>
               <h2 id="questions-title">Questions we get</h2>
             </div>
-            <div className="cl-faqwrap">
+            <div className="cl-faqwrap" data-reveal>
               <Faq items={faqItems} />
             </div>
           </div>
@@ -295,7 +298,7 @@ export default function Home() {
         {/* 12. Closing call to action */}
         <section id="check" aria-labelledby="check-title" className="pb-0">
           <div className="container-site">
-            <div className="cl-cta">
+            <div className="cl-cta" data-reveal>
               <div>
                 <h2 id="check-title">See what your site is sending to Google Ads</h2>
                 <p>Free, no logins, and you keep the evidence either way.</p>

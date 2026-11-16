@@ -32,3 +32,6 @@ Signal Fix, Ops Desk, Pricing, About, Access policy, Free check, Fractional, Met
 
 - The street address stays in the footer and on About (the mockup's footer shows only "Santa Fe, New Mexico").
 - Fractional's price is shown on `/pricing` and `/fractional` (unchanged, because inner-page content stays as is) and not on the homepage (as before), although the brief's pricing strip calls Fractional "no published price".
+
+## Motion layer (16 Nov 2026)
+Decorative code tokens, aria-hidden, in the home page diagrams and chips: page_view, conversion, gclid=EAIaIQ…, hs_google_click_id, form_fill, sql, closed_won, "gclid: empty", "page_view → conversion". Footer control: "Pause background motion" / "Play background motion". No marketing copy changed; the h1 and h2s are split into two tones with the same words.

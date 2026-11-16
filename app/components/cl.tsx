@@ -1,6 +1,6 @@
 // Design-system components for the homepage and the pages that reuse its blocks. Class names (cl-*) and values are in
 // app/globals.css; the tokens are in :root there. No icon set: only the text glyphs the CSS adds (tick, cross).
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 export type PillTone = "bad" | "warn" | "good" | "neutral";
 
@@ -46,15 +46,52 @@ export function SignalReport({ host, healthy, total, bars, rows }: { host: strin
   );
 }
 
-/** White card with a mono index tile, an h3, text and an optional footer line. */
-export function FeatureCard({ index, title, children, foot }: { index: string; title: string; children: ReactNode; foot?: ReactNode }) {
+/** White card with a mono index tile, an h3, text and an optional footer line. `visual` puts a small live diagram on top (decorative). */
+export function FeatureCard({ index, title, children, foot, visual }: { index: string; title: string; children: ReactNode; foot?: ReactNode; visual?: "a" | "b" | "c" }) {
+  const tile = <span className="cl-card__icon" aria-hidden="true">{index}</span>;
   return (
-    <article className="cl-card">
-      <span className="cl-card__icon" aria-hidden="true">{index}</span>
+    <article className="cl-card" data-reveal>
+      {visual ? <Viz kind={visual}>{tile}</Viz> : tile}
       <h3>{title}</h3>
       <p>{children}</p>
       {foot && <p className="cl-card__foot">{foot}</p>}
     </article>
+  );
+}
+
+/** Decorative diagrams for the three problem cards. Labels are code tokens, not claims; the card text carries the meaning. */
+function Viz({ kind, children }: { kind: "a" | "b" | "c"; children: ReactNode }) {
+  return (
+    <div className={`cl-viz cl-viz--${kind}`} aria-hidden="true">
+      {children}
+      {kind === "a" && (
+        <>
+          <span className="t t1">page_view</span>
+          <i className="ln" />
+          <i className="dot" />
+          <span className="t t2">conversion</span>
+        </>
+      )}
+      {kind === "b" && (
+        <>
+          <span className="t t1">gclid=EAIaIQ…</span>
+          <i className="ln" />
+          <i className="dot" />
+          <span className="t t2 bad">hs_google_click_id<span className="caret" /></span>
+        </>
+      )}
+      {kind === "c" && (
+        <>
+          <i className="ln" />
+          <span className="t t1">form_fill</span>
+          <span className="t t2 dim">sql</span>
+          <span className="t t3 dim">closed_won</span>
+          <i className="dot" />
+          <i className="dot" />
+          <i className="dot" />
+        </>
+      )}
+    </div>
   );
 }
 
@@ -130,5 +167,23 @@ export function EvidenceSample() {
       }
       check="open /demo in a private window and watch the tag fire before you type anything."
     />
+  );
+}
+
+/** Hairline beams that run along the hero's grid lines (decorative; the grid itself is CSS in app/fx.css). */
+export function Beams() {
+  const lines: [string, number, string, string][] = [["h", 3, "11s", "0s"], ["h", 6, "13s", "4s"], ["h", 9, "10s", "7s"], ["v", 5, "12s", "2s"], ["v", 14, "14s", "6s"], ["v", 19, "11s", "9s"]];
+  return (
+    <>
+    <div className="fx-rings" aria-hidden="true">
+      <span className="r1"><b /></span>
+      <span className="r2"><b /></span>
+    </div>
+    <div className="fx-beams" aria-hidden="true">
+      {lines.map(([d, n, t, delay]) => (
+        <i key={`${d}${n}`} className={d} style={{ [d === "h" ? "--r" : "--c"]: n, "--t": t, "--d": delay } as CSSProperties} />
+      ))}
+    </div>
+    </>
   );
 }
