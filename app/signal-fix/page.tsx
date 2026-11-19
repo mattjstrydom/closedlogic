@@ -170,6 +170,7 @@ export default function SignalFix() {
               <p className="text-text-l">We fix one defined problem between Google Ads and HubSpot, for example:</p>
               <TickList items={fixExamples} className="mt-6 text-text-m" />
               <p className="mt-6 text-body">{fixExtra}</p>
+              <p className="mt-4"><Link href="/method#checks" className="link font-semibold">See the checks we run</Link></p>
             </div>
           </div>
         </section>

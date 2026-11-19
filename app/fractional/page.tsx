@@ -7,6 +7,7 @@ import CtaBand from "../components/cta-band";
 import ReportTable from "../components/report-table";
 import AuditChecks from "../components/audit-checks";
 import { BookButton } from "../components/cta";
+import { bookUrl } from "../booking";
 import { Accent, Numeral, SectionHead, TickList } from "../components/ui";
 import { extendedChecks, coreChecks } from "../checks-data";
 import { faqNode, jsonLdScript, orgNode, serviceNode } from "../jsonld";
@@ -16,7 +17,7 @@ import { pageMetadata } from "../seo";
 import { site } from "../site.config";
 
 export const metadata = pageMetadata({
-  title: "Fractional Marketing Operations for HubSpot Teams",
+  title: "Fractional Measurement Lead for Larger Accounts | Closed Logic",
   description: "The step after the audit: 25 hours a month on tracking, attribution, HubSpot lifecycle and reporting. Cancel in the first 30 days and pay only that month.",
   path: "/fractional",
   absoluteTitle: true,
@@ -36,8 +37,8 @@ const notIncluded = ["Media buying", "Creative, content or web development", "CR
 const weeks: [string, string, string][] = [
   ["Week 1", "Access and definitions.", "Read-only access to Google Ads, HubSpot and your reporting. One KPI dictionary. One definition of a lead, an opportunity and pipeline."],
   ["Week 2", "The audit and the baseline.", "The 10 core checks, plus the last 90 days: where the numbers disagree and why."],
-  ["Week 3", "The report and the roadmap.", ""],
-  ["Week 4", "The first scorecard, and the first fixes you approve.", ""],
+  ["Week 3", "The report and the roadmap.", "We take you through the audit report and the 90-day roadmap on a readout call."],
+  ["Week 4", "The first scorecard, and the first fixes you approve.", "You get your first monthly scorecard, and we start on the fixes you approve."],
 ];
 
 const faqs = [
@@ -67,11 +68,13 @@ export default function Fractional() {
       <main id="main" tabIndex={-1}>
         <PageHero
           id="fractional" eyebrow="Fractional"
-          title="Fractional marketing operations for larger accounts"
+          title="Fractional measurement lead for larger accounts"
           sub="The step after the audit. We take over the tracking, attribution, HubSpot lifecycle and reporting checks: 25 hours a month, $5,000, with a 30-day exit."
           micro={["You keep your agency.", "We sell no media, resell no software and take no cut of your ad spend."]}
         >
-          <Link href="/free-check" className="btn w-full sm:w-auto">Get my free check</Link>
+          <a href={bookUrl("hero-cta", "fractional")} data-cta="book" data-cta-page="fractional" target="_blank" rel="noopener noreferrer" className="btn w-full sm:w-auto">
+            Book a 20-minute call<span className="sr-only"> (opens in a new tab)</span>
+          </a>
           <Link href="/method#checks" className="btn-outline w-full sm:w-auto">See the 10 core checks</Link>
         </PageHero>
 
@@ -171,9 +174,9 @@ export default function Fractional() {
           </div>
         </section>
 
-        <CtaBand id="start" title="Start with the free check." body="No logins, no obligation. We reply within 1 business day.">
-          <Link href="/free-check" className="btn w-full sm:w-auto">Get my free check</Link>
+        <CtaBand id="start" title="Start with a 20-minute call.">
           <BookButton campaign="fractional" className="w-full sm:w-auto" />
+          <Link href="/free-check" className="link font-semibold">Or start with the free check</Link>
         </CtaBand>
       </main>
       <Footer />

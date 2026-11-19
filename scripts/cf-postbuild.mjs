@@ -76,7 +76,7 @@ const walk = (dir) => readdirSync(dir, { withFileTypes: true }).flatMap((d) => (
 for (const file of walk(out)) {
   const html = readFileSync(file, "utf8");
   const links = [...html.matchAll(/<a\b[^>]*href="(\/book[^"]*|https:\/\/cal\.com\/closedlogic\/[^"]*)"[^>]*>/g)];
-  const bad = links.filter(([tag, u]) => !/utm_source=site&amp;utm_content=(book-cta|header-cta|home-umbrella|home-umbrella-footer)&amp;utm_campaign=[\w-]+$/.test(u) || !tag.includes('data-cta="book"')).map((m) => m[1]);
+  const bad = links.filter(([tag, u]) => !/utm_source=site&amp;utm_content=(book-cta|header-cta|hero-cta|home-umbrella|home-umbrella-footer)&amp;utm_campaign=[\w-]+$/.test(u) || !tag.includes('data-cta="book"')).map((m) => m[1]);
   if (bad.length) console.warn(`cf-postbuild: WARNING ${file.href.slice(out.href.length)} booking links without UTM tags or data-cta: ${bad.join(" ")}`);
 }
 
