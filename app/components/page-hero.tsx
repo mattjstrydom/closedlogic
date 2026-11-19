@@ -2,11 +2,14 @@ import type { ReactNode } from "react";
 import { Chip } from "./ui";
 
 // Hero for the inner pages: an eyebrow pill, one h1, one sub-line, optional buttons and micro-line, on the hero wash.
-export default function PageHero({ id, title, sub, micro, eyebrow, children }: { id: string; title: ReactNode; sub?: ReactNode; micro?: string | string[]; eyebrow?: string; children?: ReactNode }) {
+export const KICKER = "Closed Logic · Fractional marketing ops";
+
+export default function PageHero({ id, title, sub, micro, eyebrow, kicker, children }: { id: string; title: ReactNode; sub?: ReactNode; micro?: string | string[]; eyebrow?: string; kicker?: string; children?: ReactNode }) {
   return (
     <section id="hero" aria-labelledby={`${id}-title`} className="hero-grid">
       <div className="container-site pb-20 pt-20 max-md:pb-14 max-md:pt-12">
         <div className="flex flex-col items-center gap-5 text-center">
+          {kicker && <p className="text-[13px] font-medium tracking-wide text-muted">{kicker}</p>}
           {eyebrow && <Chip className="!mb-0">{eyebrow}</Chip>}
           <h1 id={`${id}-title`} className="heading-center max-w-[22ch] text-title-xl">{title}</h1>
           {sub && <p className="lead mx-auto">{sub}</p>}

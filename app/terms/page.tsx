@@ -8,7 +8,7 @@ import { auditCredit, auditGuarantee, checkOfferText, fixDeliverablesList, fixEx
 
 export const metadata = pageMetadata({
   title: "Terms of service",
-  description: `Terms for ${site.brand} work: the free check, Signal Fix, Ops Desk, the audit and Fractional. Prices, scope, refunds, access and liability.`,
+  description: `Terms for ${site.brand} work: the free check, Signal Fix, Ops Desk, the audit and Measurement Lead. Prices, scope, refunds, access and liability.`,
   path: "/terms",
 });
 
@@ -39,12 +39,12 @@ export default function Terms() {
           <C n="1.1">
             &quot;We&quot; and &quot;us&quot; means {site.legalEntity}, trading as {site.brand}. &quot;You&quot; means the business that buys from us.
           </C>
-          <C n="1.2">These terms apply to the free check, Signal Fix, Ops Desk, the Pipeline Truth Audit and the Fractional Measurement Lead. They also apply to any extra work we quote in writing. A written scope sets out which of these you are buying.</C>
+          <C n="1.2">These terms apply to the free check, Signal Fix, Ops Desk, the Pipeline Truth Audit and the Measurement Lead. They also apply to any extra work we quote in writing. A written scope sets out which of these you are buying.</C>
 
           <h2 id="clause-2" className={h2}>2. Prices and payment</h2>
           <C n="2.1">All prices are in US dollars and paid through Stripe.</C>
           <C n="2.2">
-            Free check, free. {offers.fix.name}, {offers.fix.price} for one defined defect (clause 5.6). {offers.pilot.name}, {offers.pilot.price} (clause 5.8). {offers.ops.name}, {offers.ops.per} (clause 5.9). For larger accounts: {offers.audit.name}, {offers.audit.price}. {offers.fractional.name}, {offers.fractional.per} for 25 hours, with a 3-month initial term that either side can end in writing during the first 30 days (clause 5.4).
+            Free check, free. {offers.fix.name}, {offers.fix.price} for one defined defect (clause 5.6). {offers.pilot.name}, {offers.pilot.price} (clause 5.8). {offers.ops.name}, {offers.ops.per} (clause 5.9). For larger accounts: {offers.audit.name}, {offers.audit.price}. {offers.measurement.name}, {offers.measurement.per} for 25 hours, with a 3-month initial term that either side can end in writing during the first 30 days (clause 5.4).
           </C>
           <C n="2.3">Prices are fixed for the scope in writing. We never charge a percentage of ad spend. Anything outside the written scope is quoted before any work starts. Your written scope sets out when each invoice is due.</C>
           <C n="2.4">{auditCredit}</C>
@@ -98,17 +98,17 @@ export default function Terms() {
           <C n="4.1">If the audit report has no finding that passes the tests in clause 3.6, we refund the full {offers.audit.price} within 14 days of delivering the report. If you challenge a finding under clause 3.6, we pay the refund within 14 days of the day the challenge is settled. You keep the report and the roadmap. You don&apos;t need to ask for the refund.</C>
           <C n="4.2">If you don&apos;t continue after the audit, there is no lock-in.</C>
 
-          <h2 id="clause-5" className={h2}>5. Signal Fix, Ops Desk and Fractional Measurement Lead</h2>
-          <C n="5.1">Fractional Measurement Lead covers 25 hours a month. Month 1 is the audit, definitions and roadmap. Months 2 and 3 are the monthly scorecard, fixes and a 60-minute review. Either side can end it in writing during the first 30 days (clause 5.4).</C>
+          <h2 id="clause-5" className={h2}>5. Signal Fix, Ops Desk and Measurement Lead</h2>
+          <C n="5.1">Measurement Lead covers 25 hours a month. Month 1 is the audit, definitions and roadmap. Months 2 and 3 are the monthly scorecard, fixes and a 60-minute review. Either side can end it in writing during the first 30 days (clause 5.4).</C>
           <C n="5.2">Any change we make to your accounts is agreed with you first.</C>
-          <C n="5.3">The Fractional Measurement Lead has an initial term of 3 months, subject to the 30-day exit in clause 5.4. After that, it runs month to month until either of us gives 30 days&apos; written notice.</C>
-          <C n="5.4">Fractional: either side can end it in writing during the first 30 days, and you pay only for that first month. This overrides the 3-month initial term in clause 5.3.</C>
+          <C n="5.3">The Measurement Lead has an initial term of 3 months, subject to the 30-day exit in clause 5.4. After that, it runs month to month until either of us gives 30 days&apos; written notice.</C>
+          <C n="5.4">Measurement Lead: either side can end it in writing during the first 30 days, and you pay only for that first month. This overrides the 3-month initial term in clause 5.3.</C>
           <C n="5.5">We don&apos;t guarantee ad performance, pipeline or revenue. We promise a defensible number and a documented method, not perfect attribution.</C>
           <C n="5.6">
             Signal Fix is {offers.fix.price} for one defined defect, named in the written scope. For example: {fixExamples.map(lowerFirst).join("; ")}. We deliver: {fixDeliverablesList.map(lowerFirst).join("; ")}. If we find more than one problem, we quote each extra fix before doing any work. When the work is done, we confirm in writing that our access has been removed.
           </C>
           <C n="5.7">{fixGuarantee} The remedy is the free fix. It is not a refund.</C>
-          <C n="5.8">The Ops Desk pilot is {offers.pilot.price} for one defined request, named in the written scope. We scope, build, test and document it. The pilot ends when we hand the request over. Any further work needs a new written scope or the Ops Desk plan.</C>
+          <C n="5.8">The Ops Desk pilot is {offers.pilot.price} for one defined request of up to {offers.pilot.hours} hours, named in the written scope. We scope, build, test and document it. The pilot ends when we hand the request over. Any further work needs a new written scope or the Ops Desk plan.</C>
           <C n="5.9">
             Ops Desk is {offers.ops.per}. It covers up to {offers.ops.hours} hours of work a month on one active request at a time, with a weekly update showing what is done, what is next and the hours used. After the pilot it is month to month, and either of us can end it with {offers.ops.noticeDays} days&apos; written notice. Unused hours don&apos;t roll over. Larger projects are quoted separately before any work starts. Ops Desk doesn&apos;t include media buying, creative or content, running outbound campaigns or booking meetings for you, large CRM migrations, or any guarantee of a pipeline number. Matt and Jennifer do the work, and we don&apos;t subcontract it without your written approval.
           </C>
@@ -197,7 +197,7 @@ export default function Terms() {
           </div>
 
           <h2 id="clause-9" className={h2}>9. Liability</h2>
-          <C n="9.1">Our total liability is capped. For one-off work (the audit, Signal Fix and the Ops Desk pilot), the cap is the fees you paid for it. For monthly work (Ops Desk and the Fractional Measurement Lead), it&apos;s the fees you paid in the last 3 months.</C>
+          <C n="9.1">Our total liability is capped. For one-off work (the audit, Signal Fix and the Ops Desk pilot), the cap is the fees you paid for it. For monthly work (Ops Desk and the Measurement Lead), it&apos;s the fees you paid in the last 3 months.</C>
           <C n="9.2">We&apos;re not liable for ad spend, bidding results, lost revenue, or any indirect or consequential loss.</C>
           <C n="9.3">We don&apos;t guarantee ad performance, and bidding decisions are Google&apos;s.</C>
           <C n="9.4">Google and HubSpot change their products, features and documentation, and that&apos;s outside our control.</C>
@@ -213,7 +213,7 @@ export default function Terms() {
           <C n="11.1">We may update these terms. We&apos;ll publish the new version on this page with a new &quot;last updated&quot; date.</C>
           <C n="11.2">An audit, a Signal Fix or an Ops Desk pilot stays under the version in force when you agreed its written scope.</C>
           <C n="11.3">
-            For a monthly engagement, we&apos;ll email you at least 30 days before a change applies to you. If you don&apos;t accept a change, you can cancel by email before it takes effect. For the Fractional Measurement Lead, a change doesn&apos;t apply during your 3-month initial term unless the law, or a change that Google or HubSpot makes, requires it. If you cancel the Fractional Measurement Lead because of a change, you won&apos;t need to give the 30-day notice in clause 5.3, and if the change applies during your 3-month initial term, you won&apos;t pay for the rest of it. Ops Desk can be ended with 30 days&apos; written notice under clause 5.9.
+            For a monthly engagement, we&apos;ll email you at least 30 days before a change applies to you. If you don&apos;t accept a change, you can cancel by email before it takes effect. For the Measurement Lead, a change doesn&apos;t apply during your 3-month initial term unless the law, or a change that Google or HubSpot makes, requires it. If you cancel the Measurement Lead because of a change, you won&apos;t need to give the 30-day notice in clause 5.3, and if the change applies during your 3-month initial term, you won&apos;t pay for the rest of it. Ops Desk can be ended with 30 days&apos; written notice under clause 5.9.
           </C>
 
           <h2 id="contact" className={h2}>Contact</h2>

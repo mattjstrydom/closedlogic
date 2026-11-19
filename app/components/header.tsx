@@ -9,7 +9,7 @@ import { bookUrl, campaignFor } from "../booking";
 const baseLinks: [string, string][] = [
   ["/signal-fix", "Signal Fix"],
   ["/ops-desk", "Ops Desk"],
-  ["/fractional", "Fractional"],
+  ["/measurement-lead", "Measurement Lead"],
   ["/pricing", "Pricing"],
 ];
 

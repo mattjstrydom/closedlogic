@@ -121,11 +121,7 @@
 /* Pricing: the recommended tier is marked by its ink border and shadow (globals.css), no moving effect. */
 .cl-tier--recommended { box-shadow: var(--shadow-md); }
 
-/* Closing block: a hairline grid and drifting glows on the dark ground. */
-.cl-cta::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
-  background-size: 48px 48px; -webkit-mask-image: radial-gradient(ellipse 70% 90% at 90% 0%, #000, transparent 75%); mask-image: radial-gradient(ellipse 70% 90% at 90% 0%, #000, transparent 75%); }
-.cl-cta::after { width: 520px; height: 520px; right: -160px; top: -200px; }
+/* Closing block: a light card now (no grid or glow). */
 
 /* Footer motion toggle. */
 .fx-toggle { display: none; min-height: 24px; padding: 0; border: 0; background: none; font: inherit; font-size: 12.5px; color: var(--fg-muted); cursor: pointer; text-decoration: underline; text-underline-offset: 0.2em; }
@@ -137,7 +133,6 @@
 
   /* Aurora drift (transform only). */
   .hero-grid::after, .cl-hero-glow::after { animation: fx-drift 40s ease-in-out infinite alternate; will-change: transform; }
-  .cl-cta::after { animation: fx-drift2 18s ease-in-out infinite alternate; }
 
   /* Beams. */
   .fx-beams i { animation-duration: var(--t, 9s); animation-delay: var(--d, 0s); animation-iteration-count: infinite; animation-timing-function: linear; }

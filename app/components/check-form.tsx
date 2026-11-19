@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { track, readSource } from "@/app/analytics";
+import { track, readSource, readTouch } from "@/app/analytics";
 import { validateCheck, type CheckErrors } from "@/app/validate";
 import { checkConfirmation } from "@/app/offers";
 
@@ -30,7 +30,7 @@ export default function CheckForm({ email, withNote = false, idPrefix = "check",
       const res = await fetch("/api/request", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...f, type: "check", source, company_fax: (form.current?.elements.namedItem("company_fax") as HTMLInputElement | null)?.value }),
+        body: JSON.stringify({ ...f, type: "check", source, ...readTouch(), company_fax: (form.current?.elements.namedItem("company_fax") as HTMLInputElement | null)?.value }),
       });
       if (res.status === 422) {
         setErrors((await res.json()).errors);

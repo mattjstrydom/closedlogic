@@ -17,7 +17,13 @@ export function bookUrl(content: string, campaign: string): string {
   return `${base}${base.includes("?") ? "&" : "?"}utm_source=${UTM.source}&utm_content=${encodeURIComponent(content)}&utm_campaign=${encodeURIComponent(campaign)}`;
 }
 
-/** Campaign slug for a page path: "/" is home, a guide is its own slug, anything else is the route ("fractional"). */
+/** Booking link for the agency event (the home page "For agencies" block). Same tagging as bookUrl. */
+export function agencyUrl(content: string, campaign: string): string {
+  const base = booking.agency;
+  return `${base}${base.includes("?") ? "&" : "?"}utm_source=${UTM.source}&utm_content=${encodeURIComponent(content)}&utm_campaign=${encodeURIComponent(campaign)}`;
+}
+
+/** Campaign slug for a page path: "/" is home, a guide is its own slug, anything else is the route ("measurement-lead"). */
 export function campaignFor(path: string): string {
   const p = path.replace(/^\/+|\/+$/g, "");
   if (!p) return "home";

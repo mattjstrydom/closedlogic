@@ -6,6 +6,8 @@ import Faq from "../components/faq";
 import CheckForm from "../components/check-form";
 import ReportTable from "../components/report-table";
 import { Beams, EvidenceSample, FeatureCard, SignalReport } from "../components/cl";
+import SiblingServices from "../components/sibling-services";
+import { KICKER } from "../components/page-hero";
 import { TickList, SectionHead, Accent, Chip } from "../components/ui";
 import { bookHref } from "../booking";
 import { checkFaqs } from "../faqs";
@@ -30,7 +32,7 @@ const problems: [string, string, string, string][] = [
 
 const journey: [string, string, React.ReactNode, string][] = [
   ["01", "Free check", "Send your work email and website. We look at what your site sends to Google Ads from outside and send you the evidence, with steps you can check yourself.", "$0"],
-  ["02", "Fix it for $750", "If you want us to fix it, we agree the scope in writing, work with read-only access where possible, and hand back a before-and-after check and a change log.", "$750 one-time"],
+  ["02", `Fix it for ${offers.fix.price}`, "If you want us to fix it, we agree the scope in writing, work with read-only access where possible, and hand back a before-and-after check and a change log.", `${offers.fix.price} one-time`],
   [
     "03",
     "Keep it running, if you want",
@@ -60,7 +62,8 @@ const faqs = [
   { q: "How quickly will you reply?", a: "Within 1 business day." },
 ];
 
-const mailFix = `mailto:matt@closedlogic.co?subject=fix`;
+const mailFix = `mailto:${site.email}?subject=fix`;
+const stripePay = "https://buy.stripe.com/14A00i2FP6dA3IN49fafS09";
 
 export default function SignalFix() {
   const book = bookHref("signal-fix");
@@ -71,7 +74,7 @@ export default function SignalFix() {
         dangerouslySetInnerHTML={{
           __html: jsonLdScript([
             orgNode,
-            serviceNode("signal-fix", offers.fix.name, "Conversion tracking fix", "One defined Google Ads and HubSpot conversion defect, fixed, tested and documented, with a before-and-after check and a change log.", "750", `${site.url}/signal-fix`),
+            serviceNode("signal-fix", offers.fix.name, "Conversion tracking fix", "One defined Google Ads and HubSpot conversion defect, fixed, tested and documented, with a before-and-after check and a change log.", offers.fix.amount, `${site.url}/signal-fix`),
             faqNode(faqs),
           ]),
         }}
@@ -84,9 +87,10 @@ export default function SignalFix() {
           <div className="container-site">
             <div className="cl-hero__grid">
               <div>
+                <p className="mb-3 text-[13px] font-medium tracking-wide text-muted">{KICKER}</p>
                 <Chip className="!mx-0 !mb-0">HubSpot and Google Ads conversion tracking</Chip>
                 <h1 id="signal-fix-title" className="display">Make sure Google Ads learns from real leads, <span className="soft">not page views.</span></h1>
-                <p className="lead">We check what your site sends to Google Ads and HubSpot, show you the evidence before you share any access, and fix what&apos;s miscounted for $750.</p>
+                <p className="lead">We check what your site sends to Google Ads and HubSpot, show you the evidence before you share any access, and fix what&apos;s miscounted for {offers.fix.price}.</p>
                 <div className="max-w-[560px]">
                   <CheckForm email={site.email} idPrefix="hero" variant="inline" />
                 </div>
@@ -115,6 +119,7 @@ export default function SignalFix() {
             </div>
           </div>
         </section>
+        <SiblingServices current="/signal-fix" />
 
         {/* The problem (moved from the old home page) */}
         <section id="problem" aria-labelledby="problem-title" className="section-y">
@@ -122,7 +127,7 @@ export default function SignalFix() {
             <div className="cl-head cl-head--split" data-reveal>
               <Chip>The problem</Chip>
               <h2 id="problem-title">Three ways Google Ads <span className="soft">ends up chasing the wrong people</span></h2>
-              <p>Smart bidding optimizes for whatever you tell it is a conversion. If that signal is wrong, so is every bid.</p>
+              <p>Smart Bidding optimizes for whatever you tell it is a conversion. If that signal is wrong, so is every bid.</p>
             </div>
             <div className="cl-grid3">
               {problems.map(([i, t, b, c], n) => (
@@ -181,6 +186,9 @@ export default function SignalFix() {
             <div className="card mx-auto mt-10 max-w-[52rem]">
               <TickList items={fixDeliverablesList} className="text-text-m" />
             </div>
+            <p className="mx-auto mt-6 max-w-[52rem] text-center text-body">
+              <strong className="font-semibold text-ink">What happens after the fix.</strong> If you want the connection watched or more ops work done, <Link href="/ops-desk" className="link">Ops Desk</Link> picks it up each month.
+            </p>
           </div>
         </section>
 
@@ -242,8 +250,13 @@ export default function SignalFix() {
         </section>
 
         <CtaBand id="start" title="Ready to fix it?" body={`${offers.fix.price}, one defined fix. We confirm the written scope before any work starts.`}>
-          <a href={mailFix} className="btn w-full sm:w-auto">Email us “fix”</a>
-          <Link href="/free-check" className="link font-semibold">Not sure yet? Get the free check</Link>
+          <a href={book} data-cta="book" data-cta-page="signal-fix" target="_blank" rel="noopener noreferrer" className="btn w-full sm:w-auto">
+            Book a 20-minute call<span className="sr-only"> (opens in a new tab)</span>
+          </a>
+          <a href={stripePay} target="_blank" rel="noopener noreferrer" className="btn-outline w-full sm:w-auto">
+            Pay for Signal Fix<span className="sr-only"> (opens in a new tab)</span>
+          </a>
+          <a href={mailFix} className="link font-semibold">Or email us “fix”</a>
         </CtaBand>
       </main>
       <Footer />

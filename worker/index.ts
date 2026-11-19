@@ -166,6 +166,18 @@ async function handleRequest(req: Request, env: Env): Promise<Response> {
 }
 
 // The free outside-in check: email and website, tagged outside-in-check-request. No sequence enrolment, same as the contact form.
+// First-touch attribution sent by the free check form (utm_source, utm_medium, utm_campaign, utm_content, ref, page_path):
+// each value is trimmed to a safe character set and length before it goes into the lead record or the notification email.
+const TOUCH_FIELDS = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "ref", "page_path"] as const;
+function readTouch(body: Record<string, unknown>): [string, string][] {
+  const rows: [string, string][] = [];
+  for (const k of TOUCH_FIELDS) {
+    const v = str(body[k]).replace(k === "page_path" ? /[^\w./~%+-]/g : /[^\w.~%+: -]/g, "").slice(0, k === "page_path" ? 200 : 100);
+    if (v) rows.push([k, v]);
+  }
+  return rows;
+}
+
 async function handleCheck(body: Record<string, unknown>, env: Env): Promise<Response> {
   const f = { email: str(body.email).trim(), website: str(body.website).trim(), note: str(body.note).trim() };
   const errors = validateCheck(f);
@@ -174,15 +186,16 @@ async function handleCheck(body: Record<string, unknown>, env: Env): Promise<Res
   const key = env.SEQUENZY_API_KEY;
   if (!key && !dryRun) return json({ error: "Form is not configured." }, 500);
   const source = str(body.source).replace(/[^\w.-]/g, "").slice(0, 40);
+  const touch = readTouch(body);
   const headers = { Authorization: `Bearer ${key}`, "Content-Type": "application/json" };
   const subscriberBody = JSON.stringify({
     email: f.email,
     tags: ["outside-in-check-request"],
-    customAttributes: { website: f.website, ...(f.note ? { note: f.note } : {}), requestType: "check", source: site.domain, ...(source ? { campaignSource: source } : {}) },
+    customAttributes: { website: f.website, ...(f.note ? { note: f.note } : {}), requestType: "check", source: site.domain, ...(source ? { campaignSource: source } : {}), ...Object.fromEntries(touch) },
     duplicateStrategy: "overwrite",
     enrollInSequences: false,
   });
-  const rows: [string, string][] = [["Type", "Free outside-in check request"], ["Email", f.email], ["Website", f.website], ...(f.note ? ([["Note", f.note]] as [string, string][]) : []), ...(source ? ([["Source", source]] as [string, string][]) : [])];
+  const rows: [string, string][] = [["Type", "Free outside-in check request"], ["Email", f.email], ["Website", f.website], ...(f.note ? ([["Note", f.note]] as [string, string][]) : []), ...(source ? ([["Source", source]] as [string, string][]) : []), ...touch];
   const notifyBody = JSON.stringify({
     to: site.notifyTo,
     replyTo: oneLine(f.email),

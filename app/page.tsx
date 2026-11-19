@@ -8,7 +8,7 @@ import Headshot from "./components/headshot";
 import HeroLoop from "./components/hero-loop";
 import { Beams, FeatureCard, PricingTier, TrustStrip } from "./components/cl";
 import { Chip } from "./components/ui";
-import { bookUrl } from "./booking";
+import { agencyUrl, bookUrl } from "./booking";
 import { homeFaqs } from "./faqs";
 import { faqNode, jsonLdScript, MATT_ID, ORG_ID } from "./jsonld";
 import { offers } from "./offers";
@@ -17,8 +17,8 @@ import { site } from "./site.config";
 import { team } from "./team";
 
 // Title is absolute (no brand suffix added) so it reads exactly as written.
-const homeTitle = "On-demand marketing operations for B2B teams | Closed Logic";
-const shareTitle = "Marketing ops when you need it, without hiring for it.";
+const homeTitle = "Fractional marketing ops for B2B teams | Closed Logic";
+const shareTitle = "Fractional marketing ops for B2B teams";
 
 export const metadata: Metadata = {
   title: { absolute: homeTitle },
@@ -86,16 +86,19 @@ export default function Home() {
           <Beams />
           <div className="container-site">
             <div className="mx-auto flex max-w-[48rem] flex-col items-center text-center">
-              <Chip className="!mx-auto !mb-0">Marketing operations, on demand</Chip>
-              <h1 id="hero-title" className="display">Marketing ops when you need it, <span className="soft">without hiring for it.</span></h1>
-              <p className="lead">We set up, fix and run the systems between your website, CRM and ad platforms. Tracking, lead routing, automation and reporting, scoped in writing, at published prices.</p>
+              <Chip className="!mx-auto !mb-0">Marketing operations</Chip>
+              <h1 id="hero-title" className="display">Fractional marketing ops <span className="soft">for B2B teams.</span></h1>
+              <p className="lead">Without hiring for it. Fixed-scope jobs and monthly plans, at published prices. We set up, fix and run the systems between your website, CRM and ad platforms.</p>
               <div className="mt-2 flex w-full flex-col items-center gap-4 sm:w-auto sm:flex-row sm:flex-wrap sm:justify-center">
                 <a href={book} data-cta="book" data-cta-page="home" target="_blank" rel="noopener noreferrer" className="btn w-full sm:w-auto">
                   Book a 20-minute call<span className="sr-only"> (opens in a new tab)</span>
                 </a>
                 <Link href="/free-check" className="link font-semibold">Or get a free check of what your site sends to Google Ads</Link>
               </div>
-              <p className="cl-help mt-4">No obligation. We reply within 1 business day.</p>
+              <p className="mt-4 text-[15px] text-body">
+                Backlog piling up? <Link href="/ops-desk" className="link font-semibold">Start with a one-request Ops Desk pilot ({offers.pilot.price}).</Link>
+              </p>
+              <p className="cl-help mt-2">No obligation. We reply within 1 business day.</p>
               <HeroLoop />
             </div>
           </div>
@@ -122,6 +125,28 @@ export default function Home() {
           </div>
         </section>
 
+        {/* How we work together: the ladder */}
+        <section id="ladder" aria-labelledby="ladder-title" className="section-y">
+          <div className="container-site">
+            <div className="cl-head cl-head--split" data-reveal>
+              <Chip>The ladder</Chip>
+              <h2 id="ladder-title">How we <span className="soft">work together</span></h2>
+              <p>Start free, fix one thing, then keep us on if it makes sense.</p>
+            </div>
+            <div className="cl-grid3">
+              <FeatureCard index="01" title="Free check" foot={<><b>Price:</b> Free</>}>
+                For anyone who suspects their Google Ads tracking is off. We look from outside, with no logins, and send you the evidence.
+              </FeatureCard>
+              <FeatureCard index="02" title="A fixed job" foot={<><b>Price:</b> {offers.fix.name} {offers.fix.price}, or the {offers.audit.name} {offers.audit.price}</>}>
+                For one defined problem. Signal Fix repairs a tracking defect. The audit checks a larger setup end to end.
+              </FeatureCard>
+              <FeatureCard index="03" title="Monthly" foot={<><b>Price:</b> {offers.ops.name} {offers.ops.per}, or {offers.measurement.name} {offers.measurement.per}</>}>
+                For ongoing work. Ops Desk handles your backlog one request at a time. The Measurement Lead is for larger accounts.
+              </FeatureCard>
+            </div>
+          </div>
+        </section>
+
         {/* Ways to work with us */}
         <section id="offers" aria-labelledby="offers-title" className="section-y band">
           <div className="container-site">
@@ -129,15 +154,18 @@ export default function Home() {
               <Chip>Pricing</Chip>
               <h2 id="offers-title">Start with one fix, <span className="soft">or hand us the backlog</span></h2>
             </div>
-            <div className="cl-pricing" data-reveal>
-              <PricingTier recommended badge="Most teams start here" name={offers.fix.name} price={offers.fix.price} per="one-time" desc="One miscounted Google Ads conversion fixed and documented, with a 30-day guarantee. Starts with a free check.">
+            <div className="cl-pricing cl-pricing--4" data-reveal>
+              <PricingTier name={offers.fix.name} price={offers.fix.price} per="one-time" desc="One miscounted Google Ads conversion fixed and documented, with a 30-day guarantee. Starts with a free check.">
                 <Link href="/signal-fix" className="btn">See Signal Fix</Link>
+              </PricingTier>
+              <PricingTier name={offers.audit.name} price={offers.audit.price} per="one-time" desc="Ten checks across Google Ads, your CRM and your reporting, with a 90-day baseline and a roadmap. For larger accounts.">
+                <Link href="/pipeline-truth-audit" className="btn-outline">See the audit</Link>
               </PricingTier>
               <PricingTier name={offers.ops.name} price={offers.pilot.price} per={`pilot, then ${offers.ops.per}`} desc="Your ongoing marketing ops backlog, handled each month. One active request at a time, weekly updates.">
                 <Link href="/ops-desk" className="btn-outline">See the plan</Link>
               </PricingTier>
-              <PricingTier name="Fractional" desc="A senior ops and measurement lead for larger teams.">
-                <Link href="/fractional" className="btn-outline">See options for larger teams</Link>
+              <PricingTier name={offers.measurement.name} price={offers.measurement.price} per="/month" desc="A senior ops and measurement lead for larger accounts. 25 hours a month, 3-month term.">
+                <Link href="/measurement-lead" className="btn-outline">See the Measurement Lead</Link>
               </PricingTier>
             </div>
             <p className="mt-8 text-center text-text-m text-body">
@@ -219,6 +247,21 @@ export default function Home() {
                   <li>You want someone to buy media for you</li>
                 </ul>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* For agencies */}
+        <section id="agencies" aria-labelledby="agencies-title" className="section-y">
+          <div className="container-site">
+            <div className="cl-fract">
+              <div>
+                <b id="agencies-title">For agencies</b>
+                <p>Agencies: we fix tracking and HubSpot ops for your clients, under your name or ours. Same published prices.</p>
+              </div>
+              <a href={agencyUrl("agencies-cta", "home")} data-cta="book" data-cta-page="home" target="_blank" rel="noopener noreferrer" className="btn-outline">
+                Book an agency call<span className="sr-only"> (opens in a new tab)</span>
+              </a>
             </div>
           </div>
         </section>

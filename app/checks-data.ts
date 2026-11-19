@@ -1,4 +1,4 @@
-// The checks, in two groups. Core checks are the Pipeline Truth Audit; extended checks are added by the Fractional
+// The checks, in two groups. Core checks are the Pipeline Truth Audit; extended checks are added by the Measurement Lead
 // Measurement Lead. "broken" and "cost" are generally true statements, not client results. One source for /method.
 export type Check = { name: string; broken: string; cost: string };
 

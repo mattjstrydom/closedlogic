@@ -24,8 +24,9 @@ export default function Footer() {
           <nav aria-label="Services">
             <p className={h4}>Services</p>
             <Link href="/signal-fix" className={link}>Signal Fix</Link>
+            <Link href="/pipeline-truth-audit" className={link}>Pipeline Truth Audit</Link>
             <Link href="/ops-desk" className={link}>Ops Desk</Link>
-            <Link href="/fractional" className={link}>Fractional</Link>
+            <Link href="/measurement-lead" className={link}>Measurement Lead</Link>
             <Link href="/pricing" className={link}>Pricing</Link>
           </nav>
           <nav aria-label="Learn">

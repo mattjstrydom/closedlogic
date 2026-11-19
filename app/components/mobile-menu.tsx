@@ -11,6 +11,14 @@ export default function MobileMenu({ links, current, cta }: { links: [string, st
   const button = useRef<HTMLButtonElement>(null);
   const panel = useRef<HTMLElement>(null);
 
+  // Lets the CSS hide the header "Book a call" button while the menu is open (the panel has its own).
+  useEffect(() => {
+    const root = document.documentElement;
+    if (open) root.dataset.menu = "open";
+    else delete root.dataset.menu;
+    return () => { delete root.dataset.menu; };
+  }, [open]);
+
   useEffect(() => {
     if (!open) return;
     const items = () => [button.current, ...Array.from(panel.current?.querySelectorAll<HTMLElement>("a[href], button") ?? [])].filter(Boolean) as HTMLElement[];

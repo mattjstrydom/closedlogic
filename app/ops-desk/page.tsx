@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Header from "../components/header";
 import Footer from "../components/footer";
-import PageHero from "../components/page-hero";
+import PageHero, { KICKER } from "../components/page-hero";
+import SiblingServices from "../components/sibling-services";
 import CtaBand from "../components/cta-band";
 import Faq from "../components/faq";
 import ReportTable from "../components/report-table";
@@ -36,7 +37,7 @@ const steps = [
 ];
 
 const pricing: string[][] = [
-  [offers.pilot.name, offers.pilot.price, "One defined request, scoped, built, tested and documented"],
+  [offers.pilot.name, offers.pilot.price, `One defined request, up to ${offers.pilot.hours} hours, scoped, built, tested and documented`],
   [offers.ops.name, offers.ops.per, "Up to 10 hours a month, one active request, weekly updates. Month to month after the pilot, 30 days' notice"],
 ];
 
@@ -56,8 +57,8 @@ export default function OpsDesk() {
         dangerouslySetInnerHTML={{
           __html: jsonLdScript([
             orgNode,
-            serviceNode("ops-desk", offers.ops.name, "CRM operations support", `CRM, tracking and automation work each month: up to ${offers.ops.hours} hours, one active request, weekly updates. Month to month after the pilot.`, "2500", `${site.url}/ops-desk`, true),
-            serviceNode("ops-desk-pilot", offers.pilot.name, "CRM operations pilot", "One defined CRM, tracking or automation request, scoped, built, tested and documented.", "1250", `${site.url}/ops-desk`),
+            serviceNode("ops-desk", offers.ops.name, "CRM operations support", `CRM, tracking and automation work each month: up to ${offers.ops.hours} hours, one active request, weekly updates. Month to month after the pilot.`, offers.ops.amount, `${site.url}/ops-desk`, true),
+            serviceNode("ops-desk-pilot", offers.pilot.name, "CRM operations pilot", `One defined CRM, tracking or automation request, up to ${offers.pilot.hours} hours, scoped, built, tested and documented.`, offers.pilot.amount, `${site.url}/ops-desk`),
             faqNode(faqs),
           ]),
         }}
@@ -65,8 +66,8 @@ export default function OpsDesk() {
       <Header path="/ops-desk" />
       <main id="main" tabIndex={-1}>
         <PageHero
-          id="ops-desk" eyebrow="Ops Desk"
-          title="CRM and marketing ops support, handled each month"
+          id="ops-desk" eyebrow="Ops Desk" kicker={KICKER}
+          title="Ops Desk: your marketing ops backlog, handled each month"
           sub="Your CRM, tracking and automation backlog, worked through by two operators. Fixed hours, one request at a time, and a weekly update so you always know where things stand."
         >
           <a href="mailto:hello@closedlogic.com?subject=Ops%20Desk%20pilot" className="btn w-full sm:w-auto">Start with a one-task pilot</a>
@@ -74,6 +75,7 @@ export default function OpsDesk() {
             Book a 20-minute call<span className="sr-only"> (opens in a new tab)</span>
           </a>
         </PageHero>
+        <SiblingServices current="/ops-desk" />
 
         <section id="handle" aria-labelledby="handle-title" className="section-y band">
           <div className="container-site">
@@ -84,6 +86,9 @@ export default function OpsDesk() {
             <h3 className="heading-center mt-14 text-center text-title-m">What we don&apos;t do</h3>
             <p className="mx-auto mt-4 max-w-[44rem] text-center text-text-l text-body">
               Media buying, creative or content, running outbound campaigns or booking meetings for you, large CRM migrations, and anything that guarantees a pipeline number.
+            </p>
+            <p className="mx-auto mt-6 max-w-[44rem] text-center text-text-l text-body">
+              Tracking-only problem? <Link href="/signal-fix" className="link font-semibold">Signal Fix is the faster route.</Link>
             </p>
           </div>
         </section>

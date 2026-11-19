@@ -92,7 +92,7 @@ export default function Privacy() {
         <ul className="list-disc space-y-2 pl-6">
           <li>Replying to your request and taking steps you ask for before any agreement: legitimate interests, and steps at your request before entering a contract.</li>
           <li>Contacting people at businesses about our service by email and on LinkedIn (viewing your profile, sending a connection request, and sending messages), and keeping a record of who we contacted and who asked us to stop: legitimate interests, namely telling businesses that may need it about our service. We only contact you in your work role, we keep it to a few messages, and you can stop it at any time.</li>
-          <li>In the United States, we contact you as a business contact in line with US federal email law (the CAN-SPAM Act): every email says who we are, gives our postal address and lets you opt out, and we honour opt-outs promptly.</li>
+          <li>In the United States, we contact you as a business contact in line with US federal email law (the CAN-SPAM Act): every email says who we are, gives our postal address and lets you opt out, and we honor opt-outs promptly.</li>
           <li>In Canada, we don&apos;t send you outreach unless we have recorded a basis for it under Canada&apos;s anti-spam law (CASL) for you specifically.</li>
           <li>Running a service you have bought, including access to your accounts: performance of a contract.</li>
           <li>Analytics and session replay cookies: your consent, which you can withdraw at any time. Session replay on our personal video pages: legitimate interests, namely understanding whether our outreach is useful to the person we sent it to.</li>

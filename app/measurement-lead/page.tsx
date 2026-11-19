@@ -2,7 +2,8 @@ import Link from "next/link";
 import Faq from "../components/faq";
 import Header from "../components/header";
 import Footer from "../components/footer";
-import PageHero from "../components/page-hero";
+import PageHero, { KICKER } from "../components/page-hero";
+import SiblingServices from "../components/sibling-services";
 import CtaBand from "../components/cta-band";
 import ReportTable from "../components/report-table";
 import AuditChecks from "../components/audit-checks";
@@ -12,14 +13,15 @@ import { Accent, Numeral, SectionHead, TickList } from "../components/ui";
 import { extendedChecks, coreChecks } from "../checks-data";
 import { faqNode, jsonLdScript, orgNode, serviceNode } from "../jsonld";
 import { guaranteeFaqs } from "../guarantee";
-import { offers, auditCredit, auditGuarantee, fractionalTerm } from "../offers";
+import { stackAnswer } from "../faqs";
+import { offers, auditCredit, auditGuarantee, measurementTerm } from "../offers";
 import { pageMetadata } from "../seo";
 import { site } from "../site.config";
 
 export const metadata = pageMetadata({
-  title: "Fractional Measurement Lead for Larger Accounts | Closed Logic",
+  title: "Measurement Lead for Larger Accounts | Closed Logic",
   description: "The step after the audit: 25 hours a month on tracking, attribution, HubSpot lifecycle and reporting. Cancel in the first 30 days and pay only that month.",
-  path: "/fractional",
+  path: "/measurement-lead",
   absoluteTitle: true,
 });
 
@@ -47,11 +49,11 @@ const faqs = [
   { q: "How much of our time will this take?", a: "Two hours in week one, one hour in week four, then 60 minutes a month." },
   { q: "What happens after the audit if we don’t continue?", a: "You keep the report, the baseline and the roadmap. No lock-in." },
   ...guaranteeFaqs.slice(0, 1),
-  { q: "Can you work with our stack?", a: "HubSpot and Google Ads are the core. If your stack is different, we’ll tell you before you buy." },
+  { q: "Can you work with our stack?", a: stackAnswer },
   { q: "How quickly will you reply?", a: "Within 1 business day." },
 ];
 
-export default function Fractional() {
+export default function MeasurementLead() {
   return (
     <>
       <script
@@ -59,24 +61,25 @@ export default function Fractional() {
         dangerouslySetInnerHTML={{
           __html: jsonLdScript([
             orgNode,
-            serviceNode("fractional", offers.fractional.name, "Fractional marketing operations", "25 hours a month on tracking, attribution, HubSpot lifecycle and reporting, with a monthly scorecard. 3-month term; cancel in the first 30 days and pay only that month.", "5000", `${site.url}/fractional`, true),
+            serviceNode("measurement-lead", offers.measurement.name, "Measurement lead", "25 hours a month on tracking, attribution, HubSpot lifecycle and reporting, with a monthly scorecard. 3-month term; cancel in the first 30 days and pay only that month.", offers.measurement.amount, `${site.url}/fractional`, true),
             faqNode(faqs),
           ]),
         }}
       />
-      <Header path="/fractional" />
+      <Header path="/measurement-lead" />
       <main id="main" tabIndex={-1}>
         <PageHero
-          id="fractional" eyebrow="Fractional"
-          title="Fractional measurement lead for larger accounts"
-          sub="The step after the audit. We take over the tracking, attribution, HubSpot lifecycle and reporting checks: 25 hours a month, $5,000, with a 30-day exit."
+          id="measurement-lead" eyebrow="Measurement Lead" kicker={KICKER}
+          title="Measurement Lead for larger accounts"
+          sub={`The step after the audit. We take over the tracking, attribution, HubSpot lifecycle and reporting checks: 25 hours a month, ${offers.measurement.per}, with a 30-day exit.`}
           micro={["You keep your agency.", "We sell no media, resell no software and take no cut of your ad spend."]}
         >
-          <a href={bookUrl("hero-cta", "fractional")} data-cta="book" data-cta-page="fractional" target="_blank" rel="noopener noreferrer" className="btn w-full sm:w-auto">
+          <a href={bookUrl("hero-cta", "measurement-lead")} data-cta="book" data-cta-page="measurement-lead" target="_blank" rel="noopener noreferrer" className="btn w-full sm:w-auto">
             Book a 20-minute call<span className="sr-only"> (opens in a new tab)</span>
           </a>
           <Link href="/method#checks" className="btn-outline w-full sm:w-auto">See the 10 core checks</Link>
         </PageHero>
+        <SiblingServices current="/measurement-lead" />
 
         <section id="offer" aria-labelledby="offer-title" className="section-y band">
           <div className="container-site">
@@ -88,9 +91,9 @@ export default function Fractional() {
                 <p className="text-body">The 10 core checks. A baseline of the last 90 days. A one-page scorecard. A 90-day roadmap. A readout call. {auditGuarantee} {auditCredit}</p>
               </div>
               <div className="card flex flex-col gap-3 text-text-m">
-                <h3 className="text-title-m">{offers.fractional.name}</h3>
-                <p className="font-display text-[1.05rem] font-bold text-ink">{offers.fractional.per} · {offers.fractional.hours} hours · 3-month term</p>
-                <p className="text-body">Month 1: audit, definitions and roadmap. Months 2 and 3: monthly scorecard, fixes and a 60-minute review. Adds the 10 extended checks. {fractionalTerm} You keep your agency.</p>
+                <h3 className="text-title-m">{offers.measurement.name}</h3>
+                <p className="font-display text-[1.05rem] font-bold text-ink">{offers.measurement.per} · {offers.measurement.hours} hours · 3-month term</p>
+                <p className="text-body">Month 1: audit, definitions and roadmap. Months 2 and 3: monthly scorecard, fixes and a 60-minute review. Adds the 10 extended checks. {measurementTerm} You keep your agency.</p>
               </div>
             </div>
           </div>
@@ -113,8 +116,8 @@ export default function Fractional() {
 
         <section id="extended" aria-labelledby="extended-title" className="section-y band">
           <div className="container-site">
-            <SectionHead id="extended">Extended checks <Accent>(Fractional).</Accent></SectionHead>
-            <p className="lead lead-center mt-6 max-w-[44rem]">On top of the 10 <Link href="/method#checks" className="link">core checks</Link> in the audit, Fractional adds these 10.</p>
+            <SectionHead id="extended">Extended checks <Accent>(Measurement Lead).</Accent></SectionHead>
+            <p className="lead lead-center mt-6 max-w-[44rem]">On top of the 10 <Link href="/method#checks" className="link">core checks</Link> in the audit, the Measurement Lead adds these 10.</p>
             <div className="mx-auto mt-10 max-w-[56rem]">
               <AuditChecks items={extendedChecks} start={coreChecks.length + 1} />
             </div>
@@ -155,7 +158,7 @@ export default function Fractional() {
                 right={[1]}
                 rows={[
                   [offers.audit.name, offers.audit.price, `${offers.audit.days} business days from read access; 10 core checks; baseline; roadmap; readout call. ${auditCredit}`],
-                  [offers.fractional.name, offers.fractional.per, `${offers.fractional.hours} hours; 10 core and 10 extended checks; monthly scorecard. ${fractionalTerm}`],
+                  [offers.measurement.name, offers.measurement.per, `${offers.measurement.hours} hours; 10 core and 10 extended checks; monthly scorecard. ${measurementTerm}`],
                 ]}
               />
             </div>
@@ -175,7 +178,7 @@ export default function Fractional() {
         </section>
 
         <CtaBand id="start" title="Start with a 20-minute call.">
-          <BookButton campaign="fractional" className="w-full sm:w-auto" />
+          <BookButton campaign="measurement-lead" className="w-full sm:w-auto" />
           <Link href="/free-check" className="link font-semibold">Or start with the free check</Link>
         </CtaBand>
       </main>

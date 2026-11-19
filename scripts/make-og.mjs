@@ -1,4 +1,4 @@
-// Renders the share images from scripts/og-v4.html: 1200x630 for Open Graph and 1200x600 for X/Twitter, into public/.
+// Renders the share images from scripts/og-v5.html: 1200x630 for Open Graph and 1200x600 for X/Twitter, into public/.
 //   node scripts/make-og.mjs
 // Needs puppeteer-core and a local Chrome (set CHROME_PATH if it isn't at the default Windows location) and a network
 // connection for the Google Fonts the template links. Re-run after any change to the positioning text.
@@ -6,10 +6,10 @@ import puppeteer from "puppeteer-core";
 import { fileURLToPath } from "node:url";
 
 const CHROME = process.env.CHROME_PATH || "C:/Program Files/Google/Chrome/Application/chrome.exe";
-const page = fileURLToPath(new URL("./og-v4.html", import.meta.url));
+const page = fileURLToPath(new URL("./og-v5.html", import.meta.url));
 const sizes = [
-  ["closedlogic-og-v4-1200x630.png", 630],
-  ["closedlogic-og-v4-x-1200x600.png", 600],
+  ["closedlogic-og-v5-1200x630.png", 630],
+  ["closedlogic-og-v5-x-1200x600.png", 600],
 ];
 
 const b = await puppeteer.launch({ executablePath: CHROME, headless: true, args: ["--allow-file-access-from-files"] });

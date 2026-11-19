@@ -76,7 +76,7 @@ const walk = (dir) => readdirSync(dir, { withFileTypes: true }).flatMap((d) => (
 for (const file of walk(out)) {
   const html = readFileSync(file, "utf8");
   const links = [...html.matchAll(/<a\b[^>]*href="(\/book[^"]*|https:\/\/cal\.com\/closedlogic\/[^"]*)"[^>]*>/g)];
-  const bad = links.filter(([tag, u]) => !/utm_source=site&amp;utm_content=(book-cta|header-cta|hero-cta|home-umbrella|home-umbrella-footer)&amp;utm_campaign=[\w-]+$/.test(u) || !tag.includes('data-cta="book"')).map((m) => m[1]);
+  const bad = links.filter(([tag, u]) => !/utm_source=site&amp;utm_content=[\w-]+&amp;utm_campaign=[\w-]+$/.test(u) || !tag.includes('data-cta="book"')).map((m) => m[1]);
   if (bad.length) console.warn(`cf-postbuild: WARNING ${file.href.slice(out.href.length)} booking links without UTM tags or data-cta: ${bad.join(" ")}`);
 }
 
@@ -88,10 +88,11 @@ for (const [k, v] of Object.entries(booking)) {
 }
 
 // Retired pages go to their replacements with a permanent redirect. Booking routes are temporary: the Cal.com link can
-// change. /for-b2b-saas became /fractional and /for-pe was removed (Matt, 3 Nov 2026), so the old agency, partner and
+// change. /for-b2b-saas became /fractional (now /measurement-lead, Matt, Nov 2026) and /for-pe was removed (Matt, 3 Nov 2026), so the old agency, partner and
 // PE routes all land on the homepage; /teardown, the old lead magnet, lands on the free check.
 const redirects = [
-  "/for-b2b-saas /fractional 301",
+  "/for-b2b-saas /measurement-lead 301",
+  "/fractional /measurement-lead 301",
   "/for-pe / 301",
   "/agencies / 301",
   "/agencies/teardown / 301",

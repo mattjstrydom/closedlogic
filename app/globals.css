@@ -258,7 +258,6 @@
     border-radius: 4px;
   }
   /* On the dark closing block the focus ring is white. */
-  .cl-cta :focus-visible { outline-color: #f2f3f5; }
   ::selection { background: var(--brand); color: var(--on-brand); }
 }
 
@@ -764,18 +763,14 @@
   .cl-strip li::before { content: "\2713\00a0\00a0"; color: var(--fg); font-weight: 700; }
   @media (max-width: 1023px) { .cl-strip ul { justify-content: center; } }
 
+  /* Closing call to action: the light card style used elsewhere (Matt, Nov 2026: it was a dark slab). */
   .cl-cta {
-    background: var(--fg); color: var(--bg); border-radius: var(--radius-lg); padding: 64px;
+    background: var(--bg-subtle); color: var(--fg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 64px;
     display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; position: relative; overflow: hidden;
   }
-  .cl-cta::after { content: ""; position: absolute; right: -120px; top: -120px; width: 420px; height: 420px; border-radius: 50%; background: radial-gradient(closest-side, rgba(255, 75, 62, 0.35), transparent); pointer-events: none; }
   .cl-cta > * { position: relative; z-index: 1; }
-  .cl-cta h2 { color: var(--bg); font-size: 40px; line-height: 1.08; letter-spacing: -0.03em; margin: 0 0 12px; font-weight: 600; }
-  .cl-cta p { margin: 0; color: #b9bdc6; font-size: 17px; line-height: 1.55; }
-  .cl-cta .cl-input { background: #17191e; border-color: #3a3e47; color: #f2f3f5; }
-  .cl-cta .cl-help, .cl-cta .text-body { color: #b9bdc6; }
-  .cl-cta .cl-label { color: #f2f3f5; }
-  .cl-cta a:not(.btn):not(.btn-outline):not(.cl-btn) { color: #f2f3f5; }
+  .cl-cta h2 { color: var(--fg); font-size: 40px; line-height: 1.08; letter-spacing: -0.03em; margin: 0 0 12px; font-weight: 600; }
+  .cl-cta p { margin: 0; color: var(--fg-muted); font-size: 17px; line-height: 1.55; }
   @media (max-width: 1023px) { .cl-cta { grid-template-columns: 1fr; padding: 40px 28px; gap: 32px; } .cl-cta h2 { font-size: 30px; } }
 }
 
@@ -820,6 +815,9 @@
 
   .cl-pricing { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
   @media (max-width: 1023px) { .cl-pricing { grid-template-columns: 1fr; max-width: 520px; margin-inline: auto; } }
+  .cl-pricing--4 { grid-template-columns: repeat(4, 1fr); gap: var(--space-4); }
+  @media (max-width: 1199px) { .cl-pricing--4 { grid-template-columns: repeat(2, 1fr); max-width: none; } }
+  @media (max-width: 639px) { .cl-pricing--4 { grid-template-columns: 1fr; max-width: 520px; } }
   .cl-fract { margin-top: var(--space-6); display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 22px 28px; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface); }
   .cl-fract b { font-size: 16px; }
   .cl-fract p { margin: 4px 0 0; color: var(--fg-muted); font-size: 14px; }
@@ -854,8 +852,6 @@
 }
 
 @layer components {
-  .cl-cta .cl-error { color: #ff9a8f; }
-  .cl-cta .cl-error a { color: #ff9a8f; }
   .cl-cta .card { background: var(--surface); }
 }
 
@@ -863,4 +859,8 @@
   .cl-fgrid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 32px; }
   @media (max-width: 1023px) { .cl-fgrid { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 479px) { .cl-fgrid { grid-template-columns: 1fr; } }
+}
+
+@media (max-width: 1023px) {
+  html[data-menu="open"] .site-header .btn-m { display: none; }
 }
