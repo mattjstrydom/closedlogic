@@ -1,0 +1,178 @@
+<template>
+  <style>
+      /* Colours, radii and pill styles come from the site's tokens (app/globals.css :root):
+         --surface, --border, --border-input, --fg, --fg-muted, --brand, --status-good(-bg), --status-bad(-bg), --bg-subtle.
+         The canvas is 1280 x 720: the card on the page shows it at 640 x 360, so this is a 2x render. */
+      :root {
+        --surface: #ffffff;
+        --bg-subtle: #f6f7f9;
+        --border: #e7e8ec;
+        --border-input: #868c98;
+        --fg: #0b0b0c;
+        --fg-muted: #5b616e;
+        --brand: #ff4b3e;
+        --status-good: #0e7490;
+        --status-good-bg: #e3f4f8;
+        --status-bad: #c8261b;
+        --status-bad-bg: #fdecea;
+        --font-sans: "Inter", system-ui, sans-serif;
+      }
+      #root, #root * { margin: 0; padding: 0; box-sizing: border-box; }
+            #root { position: absolute; inset: 0; background: var(--surface); font-family: var(--font-sans); color: var(--fg); }
+      #stage { position: absolute; inset: 0; }
+
+      .node {
+        position: absolute; top: 270px; width: 264px; height: 176px;
+        background: var(--surface); border: 2px solid var(--border); border-radius: 20px;
+        box-shadow: 0 2px 4px rgba(16, 24, 40, 0.06);
+        display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
+      }
+      .node .ico { width: 76px; height: 76px; border-radius: 16px; background: var(--bg-subtle); display: flex; align-items: center; justify-content: center; }
+      .node .ico svg { width: 44px; height: 44px; }
+      .node .lbl { font-size: 38px; line-height: 1; font-weight: 600; letter-spacing: -0.02em; }
+      #n1 { left: 88px; } #n2 { left: 508px; } #n3 { left: 928px; }
+
+      .line { position: absolute; top: 356px; height: 4px; width: 156px; border-radius: 2px; background: var(--border-input); opacity: 0.55; }
+      #l1 { left: 352px; } #l2 { left: 772px; }
+      .fill { position: absolute; top: 356px; height: 4px; width: 156px; border-radius: 2px; }
+      #l1f { left: 352px; background: var(--status-good); }
+      #l2bad { left: 772px; background: var(--status-bad); }
+      #l2good { left: 772px; background: var(--status-good); }
+      #gap { position: absolute; left: 832px; top: 346px; width: 36px; height: 24px; background: var(--surface); }
+
+      .dot { position: absolute; top: 344px; left: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--brand); box-shadow: 0 0 0 6px rgba(255, 75, 62, 0.16); }
+
+      .pill {
+        position: absolute; top: 470px; display: inline-flex; align-items: center; gap: 10px;
+        font-size: 31px; line-height: 1; font-weight: 600; padding: 12px 24px; border-radius: 999px; white-space: nowrap;
+      }
+      .pill::before { content: ""; width: 14px; height: 14px; border-radius: 50%; background: currentColor; }
+      .good { background: var(--status-good-bg); color: var(--status-good); }
+      .bad { background: var(--status-bad-bg); color: var(--status-bad); }
+      #p1 { left: 430px; } #p2bad { left: 850px; } #p2good { left: 850px; }
+
+      #chip {
+        position: absolute; left: 850px; top: 176px; display: inline-flex; align-items: center; gap: 14px;
+        padding: 12px 24px 12px 18px; border-radius: 999px; background: var(--surface); border: 2px solid var(--border);
+        box-shadow: 0 2px 4px rgba(16, 24, 40, 0.06), 0 16px 32px -12px rgba(16, 24, 40, 0.18);
+        font-size: 31px; line-height: 1; font-weight: 600; letter-spacing: -0.01em; white-space: nowrap; color: var(--fg);
+      }
+      #chip svg { width: 34px; height: 34px; flex: none; }
+    </style>
+  <div id="root" data-composition-id="loop" data-width="1280" data-height="720">
+<div id="stage">
+        <!-- links -->
+        <div id="l1" class="line"></div>
+        <div id="l1f" class="fill"></div>
+        <div id="l2" class="line"></div>
+        <div id="l2bad" class="fill"></div>
+        <div id="l2good" class="fill"></div>
+        <div id="gap"></div>
+
+        <!-- nodes -->
+        <div id="n1" class="node">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#0b0b0c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4" width="17" height="16" rx="2.5"/><path d="M7.5 9h9M7.5 13h9M7.5 17h5"/></svg>
+          </div>
+          <div class="lbl">Website form</div>
+        </div>
+        <div id="n2" class="node">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#0b0b0c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7.5" ry="2.8"/><path d="M4.5 6v6c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8V6M4.5 12v6c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8v-6"/></svg>
+          </div>
+          <div class="lbl">CRM</div>
+        </div>
+        <div id="n3" class="node">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#0b0b0c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="#0b0b0c"/></svg>
+          </div>
+          <div class="lbl">Ad platform</div>
+        </div>
+
+        <!-- lead dots -->
+        <div id="d1" class="dot"></div>
+        <div id="d2" class="dot"></div>
+        <div id="d3" class="dot"></div>
+
+        <!-- status pills -->
+        <div id="p1" class="pill good">Healthy</div>
+        <div id="p2bad" class="pill bad">Not sent</div>
+        <div id="p2good" class="pill good">Healthy</div>
+
+        <!-- change log chip -->
+        <div id="chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0b0b0c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14L4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg>
+          <span>Change logged. Can be undone.</span>
+        </div>
+      </div>
+  </div>
+  <script>
+      const tl = gsap.timeline({ paused: true });
+      const SIDE = 14; // half of a dot, to centre it on a point
+      const E = "power2.inOut";
+
+      // Opening frame = closing frame: the idle chain, no dots, no pills, no chip, grey links.
+      gsap.set(["#l1f", "#l2bad", "#l2good"], { opacity: 0 });
+      gsap.set("#l1f", { scaleX: 0, transformOrigin: "0% 50%" });
+      gsap.set("#l2good", { scaleX: 0, transformOrigin: "0% 50%" });
+      gsap.set("#gap", { opacity: 0 });
+      gsap.set(["#d1", "#d2", "#d3"], { opacity: 0, x: 352 - SIDE });
+      gsap.set(["#p1", "#p2bad", "#p2good"], { opacity: 0, xPercent: -50 });
+      gsap.set("#chip", { opacity: 0, xPercent: -50, y: 0 });
+
+      const flash = (id, at, col) => {
+        tl.fromTo(id, { borderColor: "#e7e8ec" }, { borderColor: col, duration: 0.4, ease: "sine.inOut" }, at);
+        tl.to(id, { borderColor: "#e7e8ec", duration: 0.4, ease: "sine.inOut" }, at + 0.4);
+      };
+
+      // 0.0 to 1.5: a calm pass of attention across the three nodes
+      flash("#n1", 0.1, "#868c98");
+      flash("#n2", 0.4, "#868c98");
+      flash("#n3", 0.7, "#868c98");
+
+      // 1.5 to 3.5: a lead leaves the form and reaches the CRM; first link is healthy
+      tl.fromTo("#d1", { opacity: 0, x: 352 - SIDE }, { opacity: 1, duration: 0.2, ease: "power1.out" }, 1.5);
+      tl.to("#d1", { x: 560 - SIDE, duration: 1.4, ease: E }, 1.7);
+      tl.to("#l1f", { opacity: 1, duration: 0.01 }, 1.7);
+      tl.to("#l1f", { scaleX: 1, duration: 1.2, ease: E }, 1.7);
+      tl.to("#d1", { opacity: 0, duration: 0.3, ease: "power1.in" }, 2.9);
+      tl.fromTo("#p1", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 2.9);
+      tl.fromTo("#n2", { borderColor: "#e7e8ec" }, { borderColor: "#0e7490", duration: 0.35, ease: "sine.inOut", immediateRender: false }, 2.9);
+      tl.to("#n2", { borderColor: "#e7e8ec", duration: 0.4, ease: "sine.inOut" }, 3.25);
+
+      // 3.5 to 5.0: the next lead tries to reach the ad platform and stops halfway; the link turns red
+      tl.fromTo("#d2", { opacity: 0, x: 772 - SIDE }, { opacity: 1, duration: 0.2, ease: "power1.out" }, 3.5);
+      tl.to("#d2", { x: 850 - SIDE, duration: 0.9, ease: "power2.out" }, 3.6);
+      tl.to("#l2bad", { opacity: 1, duration: 0.3, ease: "power1.out" }, 4.5);
+      tl.to("#gap", { opacity: 1, duration: 0.2 }, 4.5);
+      tl.to("#d2", { opacity: 0.35, duration: 0.4 }, 4.5);
+      tl.fromTo("#p2bad", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 4.65);
+
+      // 5.0 to 6.5: the change-log chip slides in near the broken link
+      tl.fromTo("#chip", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 5.0);
+
+      // 6.5 to 8.5: the link turns healthy and a new lead travels the whole chain
+      tl.to("#l2bad", { opacity: 0, duration: 0.4, ease: "power1.inOut" }, 6.5);
+      tl.to("#gap", { opacity: 0, duration: 0.3 }, 6.5);
+      tl.to("#d2", { opacity: 0, duration: 0.2 }, 6.5);
+      tl.to("#l2good", { opacity: 1, duration: 0.01 }, 6.5);
+      tl.to("#l2good", { scaleX: 1, duration: 0.5, ease: E }, 6.5);
+      tl.to("#p2bad", { opacity: 0, duration: 0.3 }, 6.8);
+      tl.fromTo("#p2good", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 6.9);
+      tl.to("#chip", { opacity: 0, y: -6, duration: 0.5, ease: "power1.in" }, 7.5);
+      tl.fromTo("#d3", { opacity: 0, x: 352 - SIDE }, { opacity: 1, duration: 0.2, ease: "power1.out" }, 6.7);
+      tl.to("#d3", { x: 1060 - SIDE, duration: 1.6, ease: "sine.inOut" }, 6.8);
+      tl.to("#d3", { opacity: 0, duration: 0.25, ease: "power1.in" }, 8.25);
+      tl.fromTo("#n3", { borderColor: "#e7e8ec" }, { borderColor: "#0e7490", duration: 0.3, ease: "sine.inOut", immediateRender: false }, 8.2);
+
+      // 8.5 to 10.0: hold, then ease back to the opening frame
+      tl.to("#n3", { borderColor: "#e7e8ec", duration: 0.4, ease: "sine.inOut" }, 8.7);
+      tl.to(["#l1f", "#l2good"], { opacity: 0, duration: 1.0, ease: "power1.inOut" }, 8.9);
+      tl.to(["#p1", "#p2good"], { opacity: 0, duration: 0.8, ease: "power1.inOut" }, 8.9);
+      tl.to({}, { duration: 0.01 }, 9.99); // pad the timeline to exactly 10 s
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["loop"] = tl;
+      tl.seek(0);
+      </script>
+</template>

@@ -5,6 +5,7 @@ import Footer from "./components/footer";
 import Faq, { type FaqItem } from "./components/faq";
 import CtaBand from "./components/cta-band";
 import Headshot from "./components/headshot";
+import HeroLoop from "./components/hero-loop";
 import { Beams, FeatureCard, PricingTier, TrustStrip } from "./components/cl";
 import { Chip } from "./components/ui";
 import { bookUrl } from "./booking";
@@ -95,6 +96,7 @@ export default function Home() {
                 <Link href="/free-check" className="link font-semibold">Or get a free check of what your site sends to Google Ads</Link>
               </div>
               <p className="cl-help mt-4">No obligation. We reply within 1 business day.</p>
+              <HeroLoop />
             </div>
           </div>
         </section>

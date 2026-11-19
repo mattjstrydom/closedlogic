@@ -45,3 +45,8 @@ worker-configuration.d.ts
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# HyperFrames project (motion/hero-loop): keep the source, not its working artifacts or local renders
+/motion/hero-loop/.hyperframes/
+/motion/hero-loop/renders/
+/motion/hero-loop/node_modules/
