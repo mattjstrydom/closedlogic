@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import Faq, { type FaqItem } from "./components/faq";
-import CheckForm from "./components/check-form";
+import CtaBand from "./components/cta-band";
 import Headshot from "./components/headshot";
-import { Beams, EvidenceSample, FeatureCard, PricingTier, SignalReport, TrustStrip } from "./components/cl";
+import { Beams, FeatureCard, PricingTier, TrustStrip } from "./components/cl";
 import { Chip } from "./components/ui";
-import { bookHref } from "./booking";
+import { bookUrl } from "./booking";
 import { homeFaqs } from "./faqs";
 import { faqNode, jsonLdScript, MATT_ID, ORG_ID } from "./jsonld";
 import { offers } from "./offers";
@@ -15,29 +15,33 @@ import { sharedOpenGraph, ogImage, twitterImage } from "./seo";
 import { site } from "./site.config";
 import { team } from "./team";
 
-// Title is the doc's, without the brand suffix: with " | Closed Logic" it is 61 characters, over the 60 limit.
-const homeTitle = "Fix HubSpot and Google Ads Conversion Tracking";
+// Title is absolute (no brand suffix added) so it reads exactly as written.
+const homeTitle = "On-demand marketing operations for B2B teams | Closed Logic";
+const shareTitle = "Marketing ops when you need it, without hiring for it.";
 
 export const metadata: Metadata = {
   title: { absolute: homeTitle },
   description: site.description,
   alternates: { canonical: "/" },
-  openGraph: { ...sharedOpenGraph, url: "/", title: homeTitle, description: site.description, images: [ogImage] },
-  twitter: { card: "summary_large_image", title: homeTitle, description: site.description, images: [twitterImage] },
+  openGraph: { ...sharedOpenGraph, url: "/", title: shareTitle, description: site.description, images: [ogImage] },
+  twitter: { card: "summary_large_image", title: shareTitle, description: site.description, images: [twitterImage] },
 };
 
-const reassurance = ["No logins for the check", "Prices on the site", "Read-only access if you hire us", "Every change can be undone", "We sell no media"];
+const reassurance = ["Prices on the site", "Read-only access by default", "Every change can be undone", "We sell no media"];
 
-const problems: [string, string, string, string][] = [
-  ["01", "A page view counts as a demo", "If opening your demo page or clicking a link counts as a conversion, Google Ads learns to find visitors, not buyers.", "Your reported cost per demo looks lower than it is."],
-  ["02", "The click ID never reaches HubSpot", "If the Google click ID isn't stored on the contact, the lead can't be matched back to the ad that brought it.", "You can't tell which campaigns produce pipeline."],
-  ["03", "Bidding stops at the form fill", "If qualified stages never reach Google Ads, bidding can't tell a real lead from a form sales threw away.", "Budget keeps flowing to the leads you didn't want."],
+const handle: [string, string, string][] = [
+  ["01", "CRM setup and cleanup", "Properties, lifecycle stages, duplicates and data your team can trust."],
+  ["02", "Tracking and attribution", "What your site records, where it goes, and whether the numbers agree."],
+  ["03", "Ad platform signals", "Making sure your ad platforms learn from qualified leads, not page views."],
+  ["04", "Lead routing and handoff", "The right leads reach the right person, fast."],
+  ["05", "Automation and integrations", "Workflows and connections between your tools that don't break silently."],
+  ["06", "Reporting", "Dashboards built on data you've already checked."],
 ];
 
-const steps: [string, string, string, string][] = [
-  ["01", "Free check", "Send your work email and website. We look at what your site sends to Google Ads from outside and send you the evidence, with steps you can check yourself.", "$0"],
-  ["02", "Fix it for $750", "If you want us to fix it, we agree the scope in writing, work with read-only access where possible, and hand back a before-and-after check and a change log.", "$750 one-time"],
-  ["03", "Keep it running, if you want", "Our Ops Desk plan handles your ongoing HubSpot, tracking and automation work each month.", `${offers.pilot.price} pilot, then ${offers.ops.per}`],
+const steps: [string, string, string][] = [
+  ["01", "Talk to us", "A 20-minute call about what's broken or what's piling up."],
+  ["02", "Agree the scope in writing", "Fixed price, clear deliverables, the least access the job needs."],
+  ["03", "We do the work", "You get a change log with how to reverse every change."],
 ];
 
 const why: [string, string][] = [
@@ -69,65 +73,46 @@ const graph = [
 const roles: Record<string, string> = { matt: "Founder", jennifer: "Revenue operations and MarTech" };
 
 export default function Home() {
-  const book = bookHref("home");
+  const book = bookUrl("home-umbrella", "home");
+  const bookFooter = bookUrl("home-umbrella-footer", "home");
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdScript(graph) }} />
       <Header path="/" />
       <main id="main" tabIndex={-1}>
-        {/* 2. Hero */}
+        {/* Hero */}
         <section id="hero" aria-labelledby="hero-title" className="cl-hero cl-hero-glow">
           <Beams />
           <div className="container-site">
-            <div className="cl-hero__grid">
-              <div>
-                <Chip className="!mx-0 !mb-0">HubSpot and Google Ads conversion tracking</Chip>
-                <h1 id="hero-title" className="display">Make sure Google Ads learns from real leads, <span className="soft">not page views.</span></h1>
-                <p className="lead">We check what your site sends to Google Ads and HubSpot, show you the evidence before you share any access, and fix what&apos;s miscounted for $750.</p>
-                <div className="max-w-[560px]">
-                  <CheckForm email={site.email} idPrefix="hero" variant="inline" />
-                </div>
-                <div className="cl-hero__trust">
-                  <a href={book} data-cta="book" data-cta-page="home" target="_blank" rel="noopener noreferrer" className="cl-btn cl-btn--ghost cl-btn--sm !px-0 hover:!bg-transparent">
-                    Or book a 20-minute call →<span className="sr-only"> (opens in a new tab)</span>
-                  </a>
-                </div>
-                {/* Not yet: a "See an example check" link. It waits for a real, permitted or fully anonymized example check. */}
+            <div className="mx-auto flex max-w-[48rem] flex-col items-center text-center">
+              <Chip className="!mx-auto !mb-0">Marketing operations, on demand</Chip>
+              <h1 id="hero-title" className="display">Marketing ops when you need it, <span className="soft">without hiring for it.</span></h1>
+              <p className="lead">We set up, fix and run the systems between your website, CRM and ad platforms. Tracking, lead routing, automation and reporting, scoped in writing, at published prices.</p>
+              <div className="mt-2 flex w-full flex-col items-center gap-4 sm:w-auto sm:flex-row sm:flex-wrap sm:justify-center">
+                <a href={book} data-cta="book" data-cta-page="home" target="_blank" rel="noopener noreferrer" className="btn w-full sm:w-auto">
+                  Book a 20-minute call<span className="sr-only"> (opens in a new tab)</span>
+                </a>
+                <Link href="/free-check" className="link font-semibold">Or get a free check of what your site sends to Google Ads</Link>
               </div>
-              <div className="cl-hero__panel">
-                <span className="fx-chip fx-chip--a" aria-hidden="true">gclid: empty</span>
-                <SignalReport
-                  host="acme.io"
-                  healthy={2}
-                  total={5}
-                  bars={[30, 45, 38, 70, 88]}
-                  rows={[
-                    { title: "Book a demo", note: "Fires on page view, no form", tone: "bad", label: "Miscounted" },
-                    { title: "gclid → HubSpot contact", note: "hs_google_click_id is empty", tone: "bad", label: "Missing" },
-                    { title: "Offline conversions", note: "SQL stage not sent to Google Ads", tone: "warn", label: "Not sent" },
-                    { title: "Enhanced conversions", note: "Hashed email matched", tone: "good", label: "Healthy" },
-                  ]}
-                />
-                <p className="cl-help">Illustrative example, not a client result.</p>
-              </div>
+              <p className="cl-help mt-4">No obligation. We reply within 1 business day.</p>
             </div>
           </div>
         </section>
 
-        {/* 3. Trust strip */}
+        {/* Trust strip */}
         <TrustStrip items={reassurance} />
 
-        {/* 4. The problem */}
-        <section id="problem" aria-labelledby="problem-title" className="section-y">
+        {/* What we handle */}
+        <section id="handle" aria-labelledby="handle-title" className="section-y">
           <div className="container-site">
             <div className="cl-head cl-head--split" data-reveal>
-              <Chip>The problem</Chip>
-              <h2 id="problem-title">Three ways Google Ads <span className="soft">ends up chasing the wrong people</span></h2>
-              <p>Smart bidding optimizes for whatever you tell it is a conversion. If that signal is wrong, so is every bid.</p>
+              <Chip>What we do</Chip>
+              <h2 id="handle-title">The work that falls <span className="soft">between marketing, sales and engineering</span></h2>
+              <p>Most B2B teams don&apos;t need a full-time ops hire. They need someone who can fix things properly and keep them running.</p>
             </div>
             <div className="cl-grid3">
-              {problems.map(([i, t, b, c], n) => (
-                <FeatureCard key={t} index={i} title={t} visual={(["a", "b", "c"] as const)[n]} foot={<><b>What it costs:</b> {c}</>}>
+              {handle.map(([i, t, b]) => (
+                <FeatureCard key={t} index={i} title={t}>
                   {b}
                 </FeatureCard>
               ))}
@@ -135,27 +120,46 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 5. How it works */}
-        <section id="how" aria-labelledby="how-title" className="section-y band">
+        {/* Ways to work with us */}
+        <section id="offers" aria-labelledby="offers-title" className="section-y band">
+          <div className="container-site">
+            <div className="cl-head cl-head--split" data-reveal>
+              <Chip>Pricing</Chip>
+              <h2 id="offers-title">Start with one fix, <span className="soft">or hand us the backlog</span></h2>
+            </div>
+            <div className="cl-pricing" data-reveal>
+              <PricingTier recommended badge="Most teams start here" name={offers.fix.name} price={offers.fix.price} per="one-time" desc="One miscounted Google Ads conversion fixed and documented, with a 30-day guarantee. Starts with a free check.">
+                <Link href="/signal-fix" className="btn">See Signal Fix</Link>
+              </PricingTier>
+              <PricingTier name={offers.ops.name} price={offers.pilot.price} per={`pilot, then ${offers.ops.per}`} desc="Your ongoing marketing ops backlog, handled each month. One active request at a time, weekly updates.">
+                <Link href="/ops-desk" className="btn-outline">See the plan</Link>
+              </PricingTier>
+              <PricingTier name="Fractional" desc="A senior ops and measurement lead for larger teams.">
+                <Link href="/fractional" className="btn-outline">See options for larger teams</Link>
+              </PricingTier>
+            </div>
+            <p className="mt-8 text-center text-text-m text-body">
+              Not sure which fits? <Link href="/contact" className="link font-semibold">Talk to us</Link>
+            </p>
+          </div>
+        </section>
+
+        {/* How it works */}
+        <section id="how" aria-labelledby="how-title" className="section-y">
           <div className="container-site">
             <div className="cl-steps">
-              <div>
-                <div className="cl-head" data-reveal>
-                  <Chip>How it works</Chip>
-                  <h2 id="how-title">From free check to fixed, <span className="soft">in three steps</span></h2>
-                  <p>You see the evidence before you share any access. Every change is documented and can be undone.</p>
-                </div>
-                <div className="mt-8"><EvidenceSample /></div>
-                <p className="cl-help mt-3">Illustrative example, not a client result.</p>
+              <div className="cl-head" data-reveal>
+                <Chip>How it works</Chip>
+                <h2 id="how-title">From first call to done, <span className="soft">in three steps</span></h2>
+                <p>You agree the scope before any work starts. Every change is documented and can be undone.</p>
               </div>
               <ol className="m-0 list-none p-0">
-                {steps.map(([n, t, b, meta]) => (
+                {steps.map(([n, t, b]) => (
                   <li key={t} className="cl-step" data-reveal>
                     <span className="step-badge" aria-hidden="true">{n}</span>
                     <div>
                       <h3>{t}</h3>
                       <p>{b}</p>
-                      <div className="meta">{meta}</div>
                     </div>
                   </li>
                 ))}
@@ -164,38 +168,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 6. Pricing */}
-        <section id="offers" aria-labelledby="offers-title" className="section-y">
-          <div className="container-site">
-            <div className="cl-head cl-head--split" data-reveal>
-              <Chip>Pricing</Chip>
-              <h2 id="offers-title">Start small. <span className="soft">Keep going only if it&apos;s worth it.</span></h2>
-              <p>Start free. Pay only when you&apos;ve seen what&apos;s wrong.</p>
-            </div>
-            <div className="cl-pricing" data-reveal>
-              <PricingTier name={offers.check.name} price="$0" desc="What your site sends to Google Ads, with the evidence." items={["No logins or access", "Evidence you can rerun", "Steps you can check yourself"]}>
-                <Link href="/free-check" className="btn-outline">Get my free check</Link>
-              </PricingTier>
-              <PricingTier recommended badge="Most teams start here" name={offers.fix.name} price={offers.fix.price} per="one-time" desc="One miscounted conversion, fixed and documented, with a 30-day guarantee." items={["Read-only access by default", "Every change can be undone", "30-day guarantee"]}>
-                <Link href="/signal-fix" className="btn">See what&apos;s included</Link>
-              </PricingTier>
-              <PricingTier name={offers.ops.name} price={offers.ops.price} per="/month" desc={`Your HubSpot, tracking and automation backlog, handled each month. Starts with a ${offers.pilot.price} pilot.`} items={["HubSpot, tracking and automation", "One active request at a time", "Weekly updates"]}>
-                <Link href="/ops-desk" className="btn-outline">See the plan</Link>
-              </PricingTier>
-            </div>
-            <div className="cl-fract">
-              <div>
-                <b>Fractional</b>
-                <p>
-                  A full audit and a fractional measurement lead for larger teams. <Link href="/fractional" className="link">See options for larger teams</Link>
-                </p>
-              </div>
-              <Link href="/contact" className="btn-outline">Talk to us</Link>
-            </div>
-          </div>
-        </section>
-
-        {/* 7. Why you can check us first */}
+        {/* Why independent (unchanged) */}
         <section id="independent" aria-labelledby="independent-title" className="section-y band">
           <div className="container-site">
             <div className="cl-trust2">
@@ -219,24 +192,21 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 8. What a check looks like: not yet. A short walkthrough of one anonymized check ("What you get from a free check", with a
-              "See the full example" button) goes here once a real, permitted or fully anonymized example exists. */}
-
-        {/* 9. Who it's for */}
+        {/* Who it's for */}
         <section id="for" aria-labelledby="for-title" className="section-y">
           <div className="container-site">
             <div className="cl-head cl-head--split" data-reveal>
               <Chip>Who it&apos;s for</Chip>
-              <h2 id="for-title">Built for B2B teams <span className="soft">running Google Ads into HubSpot</span></h2>
+              <h2 id="for-title">Built for B2B teams <span className="soft">without a full-time ops person</span></h2>
             </div>
             <div className="cl-fit" data-reveal>
               <div className="yes">
                 <span className="cl-pill cl-pill--good">Good fit</span>
                 <h3>You&apos;re likely a fit if</h3>
                 <ul>
-                  <li>You sell with a demo, consultation or sales-qualified lead</li>
-                  <li>You&apos;re a SaaS or service business running Google Ads into HubSpot</li>
-                  <li>You often just hired a marketing lead or rebuilt your site</li>
+                  <li>You sell through demos, consultations or a sales process</li>
+                  <li>You don&apos;t have a dedicated ops person, or yours is stretched</li>
+                  <li>You&apos;ve just hired a marketing lead, changed tools or rebuilt your site</li>
                 </ul>
               </div>
               <div className="no">
@@ -251,7 +221,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 10. The people */}
+        {/* The people (unchanged) */}
         <section id="people" aria-labelledby="people-title" className="section-y band">
           <div className="container-site">
             <div className="cl-head cl-head--c" data-reveal>
@@ -281,7 +251,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 11. FAQ */}
+        {/* FAQ */}
         <section id="questions" aria-labelledby="questions-title" className="section-y">
           <div className="container-site">
             <div className="cl-head cl-head--c" data-reveal>
@@ -294,26 +264,13 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 12. Closing call to action */}
-        <section id="check" aria-labelledby="check-title" className="pb-0">
-          <div className="container-site">
-            <div className="cl-cta" data-reveal>
-              <div>
-                <h2 id="check-title">See what your site is sending to Google Ads</h2>
-                <p>Free, no logins, and you keep the evidence either way.</p>
-              </div>
-              <div>
-                <CheckForm email={site.email} />
-                <p className="cl-help mt-4">
-                  Prefer to talk?{" "}
-                  <a href={book} data-cta="book" data-cta-page="home" target="_blank" rel="noopener noreferrer">
-                    Book a 20-minute call<span className="sr-only"> (opens in a new tab)</span>
-                  </a>
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Final CTA */}
+        <CtaBand id="check" title="Tell us what's broken, or what's piling up.">
+          <a href={bookFooter} data-cta="book" data-cta-page="home" target="_blank" rel="noopener noreferrer" className="btn w-full sm:w-auto">
+            Book a 20-minute call<span className="sr-only"> (opens in a new tab)</span>
+          </a>
+          <Link href="/free-check" className="link font-semibold">Or start with a free Google Ads check</Link>
+        </CtaBand>
       </main>
       <Footer />
     </>

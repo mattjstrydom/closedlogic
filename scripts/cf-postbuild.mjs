@@ -69,13 +69,14 @@ if (existsSync(vDir)) {
   }
 }
 
-// Site pages (Matt, 2 Nov 2026): every booking link goes to Cal.com with utm_source=site, utm_content=book-cta and a
+// Site pages (Matt, 2 Nov 2026): every booking link goes to Cal.com with utm_source=site, utm_content=book-cta (or the
+// header and home placements: header-cta, home-umbrella, home-umbrella-footer) and a
 // utm_campaign, and carries data-cta="book" for public/cta.js. Warn on any link to /book or Cal.com that doesn't.
 const walk = (dir) => readdirSync(dir, { withFileTypes: true }).flatMap((d) => (d.isDirectory() ? (d.name === "v" && dir.href === out.href ? [] : walk(new URL(`${d.name}/`, dir))) : d.name.endsWith(".html") ? [new URL(d.name, dir)] : []));
 for (const file of walk(out)) {
   const html = readFileSync(file, "utf8");
   const links = [...html.matchAll(/<a\b[^>]*href="(\/book[^"]*|https:\/\/cal\.com\/closedlogic\/[^"]*)"[^>]*>/g)];
-  const bad = links.filter(([tag, u]) => !/utm_source=site&amp;utm_content=book-cta&amp;utm_campaign=[\w-]+$/.test(u) || !tag.includes('data-cta="book"')).map((m) => m[1]);
+  const bad = links.filter(([tag, u]) => !/utm_source=site&amp;utm_content=(book-cta|header-cta|home-umbrella|home-umbrella-footer)&amp;utm_campaign=[\w-]+$/.test(u) || !tag.includes('data-cta="book"')).map((m) => m[1]);
   if (bad.length) console.warn(`cf-postbuild: WARNING ${file.href.slice(out.href.length)} booking links without UTM tags or data-cta: ${bad.join(" ")}`);
 }
 

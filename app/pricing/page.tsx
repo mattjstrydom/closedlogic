@@ -11,8 +11,8 @@ import { offers, auditCredit, auditGuarantee } from "../offers";
 import { pageMetadata } from "../seo";
 
 export const metadata = pageMetadata({
-  title: "Pricing: Conversion Fix and HubSpot Ops | Closed Logic",
-  description: "Published prices: free check, $750 Signal Fix, a monthly HubSpot ops plan, and options for larger teams. No percentage of ad spend.",
+  title: "Pricing: Conversion Fix and CRM Ops | Closed Logic",
+  description: "Published prices: free check, $750 Signal Fix, a monthly CRM ops plan, and options for larger teams. No percentage of ad spend.",
   path: "/pricing",
   absoluteTitle: true,
 });

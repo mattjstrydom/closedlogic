@@ -12,7 +12,7 @@ export const site = {
   brand: "Closed Logic",
   positioning: "Fix HubSpot and Google Ads Conversion Tracking",
   description:
-    "We check what your site sends to Google Ads and HubSpot, fix what’s miscounted for $750, and run your HubSpot ops after. Free check, no access.",
+    "Fractional marketing ops for B2B teams. We fix and run your CRM, tracking, ad signals and automation, with published prices and read-only access by default.",
   domain: "closedlogic.com", // apex; redirects to url (a Cloudflare redirect rule, see README)
   url: "https://www.closedlogic.com",
   // scripts/check-placeholders.mjs blocks the production build while emailLive is false, so the site never goes live

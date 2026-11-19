@@ -13,17 +13,17 @@ import { pageMetadata } from "../seo";
 import { site } from "../site.config";
 
 export const metadata = pageMetadata({
-  title: "HubSpot Operations Support, Monthly | Closed Logic",
-  description: "HubSpot admin, tracking, routing and automation work on a monthly plan, with a request queue, fixed hours and weekly updates.",
+  title: "CRM and Marketing Operations Support, Monthly | Closed Logic",
+  description: "CRM admin, tracking, routing and automation work on a monthly plan, with a request queue, fixed hours and weekly updates.",
   path: "/ops-desk",
   absoluteTitle: true,
 });
 
 const handle: string[][] = [
-  ["Tracking and attribution", "Google Ads and HubSpot conversions, click IDs, UTMs, GA4 and Google Tag Manager"],
-  ["HubSpot administration", "Properties, lifecycle stages, deal stages, data cleanup"],
+  ["Tracking and attribution", "Ad platform and CRM conversions, click IDs, UTMs, analytics and tag management"],
+  ["CRM administration", "Properties, lifecycle stages, deal stages, data cleanup"],
   ["Routing and automation", "Lead routing, workflows, Make and Zapier automations"],
-  ["Reporting", "Dashboards, report definitions, reconciling Google Ads and HubSpot counts"],
+  ["Reporting", "Dashboards, report definitions, reconciling ad platform and CRM counts"],
   ["Outbound setup", "Clay workflows, Apollo or Instantly setup, CRM sync for outbound"],
 ];
 
@@ -56,8 +56,8 @@ export default function OpsDesk() {
         dangerouslySetInnerHTML={{
           __html: jsonLdScript([
             orgNode,
-            serviceNode("ops-desk", offers.ops.name, "HubSpot operations support", `HubSpot, tracking and automation work each month: up to ${offers.ops.hours} hours, one active request, weekly updates. Month to month after the pilot.`, "2500", `${site.url}/ops-desk`, true),
-            serviceNode("ops-desk-pilot", offers.pilot.name, "HubSpot operations pilot", "One defined HubSpot, tracking or automation request, scoped, built, tested and documented.", "1250", `${site.url}/ops-desk`),
+            serviceNode("ops-desk", offers.ops.name, "CRM operations support", `CRM, tracking and automation work each month: up to ${offers.ops.hours} hours, one active request, weekly updates. Month to month after the pilot.`, "2500", `${site.url}/ops-desk`, true),
+            serviceNode("ops-desk-pilot", offers.pilot.name, "CRM operations pilot", "One defined CRM, tracking or automation request, scoped, built, tested and documented.", "1250", `${site.url}/ops-desk`),
             faqNode(faqs),
           ]),
         }}
@@ -66,8 +66,8 @@ export default function OpsDesk() {
       <main id="main" tabIndex={-1}>
         <PageHero
           id="ops-desk" eyebrow="Ops Desk"
-          title="HubSpot operations support, handled each month"
-          sub="Your HubSpot, tracking and automation backlog, worked through by two operators. Fixed hours, one request at a time, and a weekly update so you always know where things stand."
+          title="CRM and marketing ops support, handled each month"
+          sub="Your CRM, tracking and automation backlog, worked through by two operators. Fixed hours, one request at a time, and a weekly update so you always know where things stand."
         >
           <a href="mailto:hello@closedlogic.com?subject=Ops%20Desk%20pilot" className="btn w-full sm:w-auto">Start with a one-task pilot</a>
           <a href={bookHref("ops-desk")} data-cta="book" data-cta-page="ops-desk" target="_blank" rel="noopener noreferrer" className="link font-semibold">

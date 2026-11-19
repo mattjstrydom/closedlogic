@@ -4,6 +4,7 @@ import Logo from "./logo";
 import MobileMenu from "./mobile-menu";
 import HeaderEffects from "./header-effects";
 import { hasGuides } from "../guides/content";
+import { bookUrl, campaignFor } from "../booking";
 
 const baseLinks: [string, string][] = [
   ["/signal-fix", "Signal Fix"],
@@ -19,6 +20,8 @@ export default function Header({ path = "/" }: { path?: string }) {
   const links: [string, string][] = [...baseLinks, ...(hasGuides() ? ([["/guides", "Guides"]] as [string, string][]) : []), ["/about", "About"]];
   const current = (href: string) => (path === href || path.startsWith(`${href}/`) ? "page" : undefined);
   const active = links.find(([href]) => current(href))?.[0];
+  const campaign = campaignFor(path);
+  const cta = bookUrl("header-cta", campaign);
   return (
     <header className="site-header">
       <HeaderEffects />
@@ -38,8 +41,10 @@ export default function Header({ path = "/" }: { path?: string }) {
         </nav>
 
         <div className="ml-auto flex items-center gap-3 lg:ml-0">
-          <Link href="/free-check" className="btn btn-m">Get a free check</Link>
-          <MobileMenu links={links} current={active} />
+          <a href={cta} data-cta="book" data-cta-page={campaign} target="_blank" rel="noopener noreferrer" className="btn btn-m">
+            Book a call<span className="sr-only"> (opens in a new tab)</span>
+          </a>
+          <MobileMenu links={links} current={active} cta={{ href: cta, page: campaign }} />
         </div>
       </div>
     </header>

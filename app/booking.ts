@@ -11,6 +11,12 @@ export function bookHref(campaign: string): string {
   return `${base}${base.includes("?") ? "&" : "?"}utm_source=${UTM.source}&utm_content=${UTM.content}&utm_campaign=${encodeURIComponent(campaign)}`;
 }
 
+/** Booking link with an explicit button label (utm_content), for placements that need their own tag, such as the header and the home hero. */
+export function bookUrl(content: string, campaign: string): string {
+  const base = booking.direct;
+  return `${base}${base.includes("?") ? "&" : "?"}utm_source=${UTM.source}&utm_content=${encodeURIComponent(content)}&utm_campaign=${encodeURIComponent(campaign)}`;
+}
+
 /** Campaign slug for a page path: "/" is home, a guide is its own slug, anything else is the route ("fractional"). */
 export function campaignFor(path: string): string {
   const p = path.replace(/^\/+|\/+$/g, "");

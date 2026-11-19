@@ -96,23 +96,27 @@ function Viz({ kind, children }: { kind: "a" | "b" | "c"; children: ReactNode })
 }
 
 /** Pricing tier. `recommended` gets the foreground border, shadow-md, a neutral pill and (by the caller) the one primary button. */
-export function PricingTier({ name, price, per, desc, items, recommended, badge, children }: { name: string; price: string; per?: string; desc: string; items: string[]; recommended?: boolean; badge?: string; children: ReactNode }) {
+export function PricingTier({ name, price, per, desc, items = [], recommended, badge, children }: { name: string; price?: string; per?: string; desc: string; items?: string[]; recommended?: boolean; badge?: string; children: ReactNode }) {
   return (
     <section className={`cl-tier ${recommended ? "cl-tier--recommended" : ""}`}>
       <h3 className="cl-tier__name">
         {name}
         {badge && <StatusPill>{badge}</StatusPill>}
       </h3>
-      <p className="cl-tier__price">
-        {price}
-        {per && <small>{per}</small>}
-      </p>
+      {price && (
+        <p className="cl-tier__price">
+          {price}
+          {per && <small>{per}</small>}
+        </p>
+      )}
       <p className="cl-tier__desc">{desc}</p>
-      <ul>
-        {items.map((t) => (
-          <li key={t}>{t}</li>
-        ))}
-      </ul>
+      {items.length > 0 && (
+        <ul>
+          {items.map((t) => (
+            <li key={t}>{t}</li>
+          ))}
+        </ul>
+      )}
       {children}
     </section>
   );

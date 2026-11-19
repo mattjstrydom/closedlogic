@@ -1,4 +1,4 @@
-// FAQ rows shared by the home page and /free-check (visible text and FAQPage JSON-LD render from the same strings).
+// FAQ rows: the home page has its own set; /free-check and /signal-fix share the check questions (visible text and FAQPage JSON-LD render from the same strings).
 export type Faq = { q: string; a: string };
 
 export const checkFaqs: Faq[] = [
@@ -9,12 +9,10 @@ export const checkFaqs: Faq[] = [
 ];
 
 export const homeFaqs: Faq[] = [
-  checkFaqs[0],
-  checkFaqs[1],
-  checkFaqs[2],
-  { q: "How much access do you need?", a: "For the check, none. For a fix, read-only access where possible, and edit access only for the specific settings in scope." },
-  { q: "We have an agency. Do we need to switch?", a: "No. We can send our findings to your agency, or fix them alongside it." },
-  { q: "What if the fix doesn't work?", a: "If a conversion we set up doesn't fire as agreed within 30 days of handover, we fix it at no charge." },
+  { q: "What does on-demand marketing ops mean?", a: "You get the ops work done without hiring for it: one fixed-scope job or a monthly plan." },
+  { q: "Which tools do you work with?", a: "The CRM, analytics and ad platforms B2B teams commonly run on. Tell us your stack on the call, and if it's outside what we do well, we'll say so before any scope is agreed." },
+  { q: "We have an agency. Do we need to switch?", a: "No. We work alongside your agency or hand our findings to them." },
+  { q: "How much access do you need?", a: "Read-only where possible. Edit access only for the specific settings in scope." },
+  { q: "Will you change anything without asking?", a: "No. Every change is agreed in writing and recorded in a change log you keep." },
   { q: "Do you take a percentage of ad spend?", a: "No. We sell no media and our prices are fixed." },
-  checkFaqs[3],
 ];

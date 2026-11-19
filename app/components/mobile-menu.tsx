@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 // Mobile menu: a toggle button (aria-expanded, aria-controls) and the panel #site-menu. Esc closes and returns focus to
 // the toggle, Tab is trapped inside the panel and the toggle while it is open, a click on a link closes it, and a
 // resize to desktop width closes it. Replaces the old native-popover menu.
-export default function MobileMenu({ links, current }: { links: [string, string][]; current: string | undefined }) {
+export default function MobileMenu({ links, current, cta }: { links: [string, string][]; current: string | undefined; cta: { href: string; page: string } }) {
   const [open, setOpen] = useState(false);
   const button = useRef<HTMLButtonElement>(null);
   const panel = useRef<HTMLElement>(null);
@@ -70,7 +70,9 @@ export default function MobileMenu({ links, current }: { links: [string, string]
           ))}
         </ul>
         <div className="mt-4">
-          <Link href="/free-check" className="btn w-full">Get a free check</Link>
+          <a href={cta.href} data-cta="book" data-cta-page={cta.page} target="_blank" rel="noopener noreferrer" className="btn w-full">
+            Book a call<span className="sr-only"> (opens in a new tab)</span>
+          </a>
         </div>
       </nav>
     </>
