@@ -235,3 +235,11 @@ html[data-fx="off"] [data-reveal] { opacity: 1 !important; transform: none !impo
 #people, #questions { padding-block: 80px; }
 
 @media (max-width: 639px) { .fx-rings { display: none; } }
+
+/* Forced-colors (Windows high contrast): hide the decorative rings, beams and grid washes, which would otherwise draw as hard
+   lines across the content, and keep status pills and eyebrow dots visible with system colours. */
+@media (forced-colors: active) {
+  .fx-rings, .fx-beams, .hero-grid::before, .hero-grid::after, .cl-hero-glow::before, .cl-hero-glow::after { display: none; }
+  .cl-pill { border: 1px solid CanvasText; }
+  .cl-pill::before, .chip::before, .cl-eyebrow::before { background: CanvasText; }
+}
