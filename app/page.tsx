@@ -89,16 +89,16 @@ export default function Home() {
               <Chip className="!mx-auto !mb-0">Marketing operations</Chip>
               <h1 id="hero-title" className="display">Fractional marketing ops <span className="soft">for B2B teams.</span></h1>
               <p className="lead">Without hiring for it. Fixed-scope jobs and monthly plans, at published prices. We set up, fix and run the systems between your website, CRM and ad platforms.</p>
-              <div className="mt-2 flex w-full flex-col items-center gap-4 sm:w-auto sm:flex-row sm:flex-wrap sm:justify-center">
+              <div className="mt-2 flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:justify-center">
                 <a href={book} data-cta="book" data-cta-page="home" target="_blank" rel="noopener noreferrer" className="btn w-full sm:w-auto">
                   Book a 20-minute call<span className="sr-only"> (opens in a new tab)</span>
                 </a>
-                <Link href="/free-check" className="link font-semibold">Or get a free check of what your site sends to Google Ads</Link>
+                <Link href="/free-check" className="btn-outline w-full sm:w-auto">Get a free Google Ads check</Link>
               </div>
-              <p className="mt-4 text-[15px] text-body">
+              <p className="cl-help mt-4">No obligation. We reply within 1 business day.</p>
+              <p className="mt-1 text-[14px] text-body">
                 Backlog piling up? <Link href="/ops-desk" className="link font-semibold">Start with a one-request Ops Desk pilot ({offers.pilot.price}).</Link>
               </p>
-              <p className="cl-help mt-2">No obligation. We reply within 1 business day.</p>
               <HeroLoop />
             </div>
           </div>
