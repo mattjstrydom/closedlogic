@@ -1,3 +1,13 @@
+# Review pass, 26 Nov 2026 (branch phase2-review)
+
+Prices and names now (single source `app/offers.ts`): Signal Fix $750; Ops Desk pilot $750 (one request, up to 5 hours); Ops Desk $1,500 a month (up to 10 hours); Pipeline Truth Audit $1,500; Measurement Lead $3,750 a month (25 hours, 3-month term, 30-day exit). The old $1,250, $2,500 and $5,000 prices and the "Fractional Measurement Lead" name below are history.
+
+- **Fixes:** Measurement Lead JSON-LD URL and hero copy (Month 1 is the audit); the guarantee wording on `/signal-fix`, `/pipeline-truth-audit` and `/pricing` now carries the terms' conditions; prices, days and hours that were typed into pages are read from `offers.ts`.
+- **Money and tracking:** scope-first line beside "Pay for Signal Fix"; `book_click` and `pay_click` events on the data layer (`public/cta.js`); `/signal-fix/thanks` (noindex) sends one `purchase` event for a live Stripe payment only. In Stripe, set the Payment Link's after-payment redirect to `https://www.closedlogic.com/signal-fix/thanks?session_id={CHECKOUT_SESSION_ID}`.
+- **Privacy:** the policy now covers first-touch tags in session storage, the booking-link tags, `cl-fx` and the payment page; the cookie banner wording no longer says "advertising measurement"; `privacyLastUpdated` is 26 November 2026.
+- **Conversion:** one primary action and one outline button in the home hero; `/pricing` offer cards with who-it's-for and guarantee lines; a confirmation email to the person who requests a free check (Worker); share image v6.
+- **Removed:** the unused b2b form path (`validate()`, `SIZES`, the Worker's b2b branch; the Worker now answers 400 to any form type except `check`), `tracked-link.tsx`, the `lucide-react` dependency, the v3 to v5 share images and templates, and `docs/redesign/before` and `after` (37 MB of screenshots).
+
 # Redesign, 16 Nov 2026: "Bright and crisp"
 
 Tokens, Inter, new navbar, footer and homepage; every inner page restyled with content, meta and tracking unchanged. See `docs/redesign/REPORT.md`. Rollback point: `b8f4a73`.

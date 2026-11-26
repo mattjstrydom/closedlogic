@@ -1,12 +1,12 @@
-// The site's only server code: POST /api/request, the free check and contact forms (type "check"; the old b2b contact form is still accepted),
+// The site's only server code: POST /api/request, the free check form (type "check", also used on /contact),
 // and byte ranges for the unlisted video files (/v/*.mp4, see serveVideo). Everything else is a static file served by Workers
 // static assets without running this Worker (wrangler.jsonc: run_worker_first ["/api/*", "/v/*.mp4"]).
 // Free plan budget: 10 ms CPU per request and 100,000 Worker requests a day; this handler does a JSON parse, the
-// shared validation, and two fetches to Sequenzy (waiting on fetch is not CPU time). See the dev report for measurements.
+// shared validation, and up to three fetches to Sequenzy (waiting on fetch is not CPU time). See the dev report for measurements.
 // Abuse: the honeypot and the Sec-Fetch-Site check below are speed bumps only. The rate limit is the FORM_LIMITER
 // binding (wrangler.jsonc): more than 5 posts from one IP in 60 seconds get a 429 before anything is parsed or sent.
 // It is approximate and per Cloudflare location, which is enough for a contact form.
-import { validate, validateCheck, FORM_TYPES, type FormType, type Fields } from "../app/validate";
+import { validateCheck } from "../app/validate";
 import { site } from "../app/site.config";
 import booking from "../app/booking.json";
 import { replyTime } from "../app/offers";
@@ -97,74 +97,8 @@ async function handleRequest(req: Request, env: Env): Promise<Response> {
   // The free outside-in check form (email and website only) has its own type and tag.
   if (body.type === "check") return handleCheck(body, env);
 
-  // Pages post check. The old contact form posted b2b, and a cached copy may still. Anything else (a cached page from the old site posting check, teardown or
-  // partner) is a B2B request.
-  const type: FormType = FORM_TYPES.includes(body.type as FormType) ? (body.type as FormType) : "b2b";
-  // Where the visitor came from (?src= on the page): letters, numbers, dot, dash and underscore only.
-  const source = str(body.source).replace(/[^\w.-]/g, "").slice(0, 40);
-  const f: Fields = {
-    name: str(body.name).trim(),
-    email: str(body.email).trim(),
-    company: str(body.company).trim(),
-    role: str(body.role).trim(),
-    size: str(body.size),
-    stack: str(body.stack).trim(),
-    note: str(body.note).trim(),
-  };
-  const errors = validate(f);
-  if (Object.keys(errors).length) return json({ errors }, 422);
-
-  const dryRun = env.FORM_DRY_RUN === "1";
-  const key = env.SEQUENZY_API_KEY;
-  if (!key && !dryRun) return json({ error: "Form is not configured." }, 500);
-
-  const headers = { Authorization: `Bearer ${key}`, "Content-Type": "application/json" };
-  const label = { b2b: "B2B SaaS request", pe: "PE request" }[type];
-  const tag = { b2b: "b2b-saas-request", pe: "pe-request" }[type];
-  const rows: [string, string][] = [
-    ["Type", label],
-    ["Name", f.name],
-    ["Email", f.email],
-    ["Company", f.company],
-    ["Role", f.role || "(none)"],
-    ["Size", f.size],
-    ["Stack", f.stack || "(none)"],
-    ...(source ? ([["Source", source]] as [string, string][]) : []),
-    ["Note", f.note || "(none)"],
-  ];
-
-  // 1) Store the lead. "overwrite" so a repeat submitter's latest details land
-  //    (the default, "skip", leaves existing subscribers untouched).
-  const subscriberBody = JSON.stringify({
-    email: f.email,
-    firstName: f.name.split(/\s+/)[0],
-    tags: [tag],
-    customAttributes: {
-      fullName: f.name,
-      company: f.company,
-      role: f.role,
-      size: f.size,
-      stack: f.stack,
-      note: f.note,
-      requestType: type,
-      source: site.domain,
-      ...(source ? { campaignSource: source } : {}),
-    },
-    duplicateStrategy: "overwrite",
-    enrollInSequences: false,
-  });
-
-  // 2) Email the submission to us. Replying goes to the submitter.
-  const notifyBody = JSON.stringify({
-    to: site.notifyTo,
-    replyTo: `${oneLine(f.name) || "Lead"} <${oneLine(f.email)}>`,
-    subject: `${label}: ${oneLine(f.name)} (${oneLine(f.company)})`,
-    html: `<table cellpadding="6" style="border-collapse:collapse;font:15px/1.5 sans-serif">${rows
-      .map(([k, v]) => `<tr><td style="color:#5c6764;vertical-align:top"><b>${esc(k)}</b></td><td style="white-space:pre-wrap">${esc(v)}</td></tr>`)
-      .join("")}</table>`,
-  });
-
-  return deliver(env, headers, subscriberBody, notifyBody, dryRun);
+  // The free check is the only form. Anything else, such as a cached page from the old site, is refused.
+  return json({ error: "Unknown form." }, 400);
 }
 
 // The free outside-in check: email and website, tagged outside-in-check-request. No sequence enrolment, same as the contact form.
