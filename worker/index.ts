@@ -8,6 +8,8 @@
 // It is approximate and per Cloudflare location, which is enough for a contact form.
 import { validate, validateCheck, FORM_TYPES, type FormType, type Fields } from "../app/validate";
 import { site } from "../app/site.config";
+import booking from "../app/booking.json";
+import { replyTime } from "../app/offers";
 
 // The Workers Rate Limiting binding (wrangler.jsonc "ratelimits"; free on every Workers plan). Typed here because the
 // project doesn't pull in @cloudflare/workers-types.
@@ -204,12 +206,28 @@ async function handleCheck(body: Record<string, unknown>, env: Env): Promise<Res
       .map(([k, v]) => `<tr><td style="color:#5c6764;vertical-align:top"><b>${esc(k)}</b></td><td style="white-space:pre-wrap">${esc(v)}</td></tr>`)
       .join("")}</table>`,
   });
-  return deliver(env, headers, subscriberBody, notifyBody, dryRun);
+  // One confirmation to the person who asked (Matt, Nov 2026): what happens next, what we won't do, and a booking link. A reply to
+  // this request, not a sequence. If it fails, the lead is unaffected.
+  const bookingLink = `${booking.direct}?utm_source=email&utm_medium=confirmation&utm_campaign=free-check`;
+  const p = "margin:0 0 14px";
+  const confirmBody = JSON.stringify({
+    to: oneLine(f.email),
+    replyTo: site.email,
+    subject: "We got your free check request",
+    html: `<div style="max-width:520px;font:16px/1.55 sans-serif;color:#0b0b0c">
+<p style="${p}">Thanks. We have your request for <b>${esc(f.website)}</b>.</p>
+<p style="${p}"><b>What happens next.</b> We look at what your site sends to Google Ads from outside. We reply ${replyTime} with what we found, or tell you if we couldn't find anything worth fixing.</p>
+<p style="${p}"><b>What we won't do.</b> Ask for logins or passwords, submit your forms, or change anything on your site or in your accounts.</p>
+<p style="${p}">Want to talk it through now? <a href="${esc(bookingLink)}">Book a 20-minute call</a>.</p>
+<p style="margin:24px 0 0;font-size:13px;color:#5b616e">${esc(site.legalLine)}. If you didn't make this request, reply to this email and we'll remove it.</p>
+</div>`,
+  });
+  return deliver(env, headers, subscriberBody, notifyBody, dryRun, confirmBody);
 }
 
-async function deliver(env: Env, headers: Record<string, string>, subscriberBody: string, notifyBody: string, dryRun: boolean): Promise<Response> {
+async function deliver(env: Env, headers: Record<string, string>, subscriberBody: string, notifyBody: string, dryRun: boolean, confirmBody?: string): Promise<Response> {
   // Dry run: everything above ran, nothing leaves the Worker.
-  if (dryRun) return json({ ok: true, dryRun: true, bytes: subscriberBody.length + notifyBody.length });
+  if (dryRun) return json({ ok: true, dryRun: true, bytes: subscriberBody.length + notifyBody.length + (confirmBody?.length ?? 0) });
 
   const subscriber = fetch(`${API}/subscribers`, { method: "POST", headers, body: subscriberBody }).catch(() => null);
   const notify = fetch(`${API}/transactional/send`, {
@@ -218,7 +236,12 @@ async function deliver(env: Env, headers: Record<string, string>, subscriberBody
     body: notifyBody,
   }).catch(() => null);
 
-  const [s, n] = await Promise.all([subscriber, notify]);
+  const confirm = confirmBody
+    ? fetch(`${API}/transactional/send`, { method: "POST", headers: { ...headers, "Idempotency-Key": crypto.randomUUID() }, body: confirmBody }).catch(() => null)
+    : Promise.resolve(null);
+
+  const [s, n, c] = await Promise.all([subscriber, notify, confirm]);
+  if (confirmBody && !c?.ok) console.error("sequenzy confirmation failed", c?.status);
   if (!s?.ok) console.error("sequenzy subscriber failed", s?.status);
   if (!n?.ok) console.error("sequenzy notify failed", n?.status);
 
