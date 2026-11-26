@@ -254,10 +254,11 @@ export default function SignalFix() {
           <a href={book} data-cta="book" data-cta-page="signal-fix" target="_blank" rel="noopener noreferrer" className="btn w-full sm:w-auto">
             Book a 20-minute call<span className="sr-only"> (opens in a new tab)</span>
           </a>
-          <a href={stripePay} target="_blank" rel="noopener noreferrer" className="btn-outline w-full sm:w-auto">
+          <a href={stripePay} data-cta="pay" data-cta-page="signal-fix" data-offer="signal-fix" target="_blank" rel="noopener noreferrer" className="btn-outline w-full sm:w-auto">
             Pay for Signal Fix<span className="sr-only"> (opens in a new tab)</span>
           </a>
           <a href={mailFix} className="link font-semibold">Or email us “fix”</a>
+          <p className="basis-full text-[14px] leading-[1.5] text-body">Pay once we have agreed the written scope. {fixGuaranteeShort}</p>
         </CtaBand>
       </main>
       <Footer />

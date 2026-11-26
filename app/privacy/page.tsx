@@ -44,6 +44,18 @@ export default function Privacy() {
           <strong>When you email us.</strong> Your email address and whatever you send.
         </p>
         <p>
+          <strong>How you found us.</strong> If the link you followed carries campaign tags (<code>utm_source</code>,{" "}
+          <code>utm_medium</code>, <code>utm_campaign</code>, <code>utm_content</code>) or a referral code (<code>ref</code>), we keep them in your browser&apos;s
+          session storage under the key <code>cl-touch</code> until you close the tab or window. This happens whether or not you accept cookies. We add them to the
+          booking links to Cal.com so the booking shows where it came from, and the free check form sends them to us with your request, together with the page you
+          were on. We use them only to see which links and pages lead to enquiries.
+        </p>
+        <p>
+          <strong>When you pay.</strong> The Pay for Signal Fix button opens a payment page hosted by Stripe, which takes your card details. Afterwards you return to
+          our thank-you page, which sends one purchase event to Google Analytics if you accepted cookies. If you pause background motion on the site, we store that
+          choice in your browser&apos;s local storage under the key <code>cl-fx</code>.
+        </p>
+        <p>
           <strong>When you visit the site, and only if you accept cookies.</strong> Google Analytics 4 measures
           pages viewed, referrer, approximate location, device and browser details, and cookie identifiers.
           It&apos;s loaded through Google Tag Manager and switched off until you press Accept. Tag Manager itself
@@ -106,7 +118,8 @@ export default function Privacy() {
           <code>analytics_storage</code>, <code>ad_user_data</code> and <code>ad_personalization</code>) is
           set to denied. If you press Accept they are set to granted. If you press Decline they stay denied.
           We store your choice in your browser&apos;s local storage under the key <code>{CONSENT_KEY}</code> so
-          we do not ask again. To change your mind, use the Cookie settings link at the bottom of any page.
+          we do not ask again. Pressing Accept also sets the advertising signals to granted, but we load no advertising tags today and will update
+          this policy before we add any. To change your mind, use the Cookie settings link at the bottom of any page.
         </p>
 
         <h2 className={h}>Who we share it with</h2>

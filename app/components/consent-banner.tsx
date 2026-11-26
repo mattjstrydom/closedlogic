@@ -86,7 +86,7 @@ export default function ConsentBanner() {
     >
       <div className="mx-auto flex max-w-[1200px] items-center gap-3 sm:justify-between">
         <p className="min-w-0 flex-1 text-[0.8125rem] leading-[1.35] sm:text-[1rem]">
-          This site uses cookies for analytics and advertising measurement.{" "}
+          This site uses cookies for analytics and measurement.{" "}
           <a href="/privacy" className="link">Privacy policy</a>
         </p>
         <div className="flex shrink-0 flex-col gap-1.5 min-[480px]:flex-row min-[480px]:gap-2 sm:gap-3">

@@ -7,6 +7,7 @@
 //     utm_source=site), ref goes in the Cal.com "ref" field, and the site's own button label stays in utm_content with the
 //     page slug in cta_page. A first-touch utm_content is kept as first_utm_content. Without a first touch the links keep
 //     the site's tags (utm_source=site). Never blocks the link.
+//  3. pushes book_click and pay_click to the GA4 data layer (see push() below).
 // Loaded from app/layout.tsx, which the /v/ pages don't use, so nothing counts twice. The window.clarity queue is defined
 // in the layout's head script; Clarity itself loads from GTM, after consent.
 (function () {
@@ -39,10 +40,25 @@
     } catch (e) { /* leave the link as it is */ }
   }
 
+  // GA4 events on the Tag Manager data layer (Matt, Nov 2026: booking and payment clicks were not measured). The tags only fire
+  // after consent, so pushing sends nothing on its own. book_click and pay_click carry cta (the button label from the
+  // link's utm_content, or "pay"), cta_page (page slug) and offer (data-offer, else the page slug).
+  function push(name, a, slug, label) {
+    try {
+      (window.dataLayer = window.dataLayer || []).push({ event: name, cta: label, cta_page: slug, offer: a.getAttribute("data-offer") || slug });
+    } catch (e) { /* never block the link */ }
+  }
+
   document.addEventListener("click", function (e) {
+    var pay = e.target && e.target.closest ? e.target.closest('a[data-cta="pay"]') : null;
+    if (pay) push("pay_click", pay, pay.getAttribute("data-cta-page") || "signal-fix", "pay");
     var a = e.target && e.target.closest ? e.target.closest('a[data-cta="book"]') : null;
     if (!a) return;
     tag(a);
+    try {
+      var u = new URL(a.href);
+      push("book_click", a, a.getAttribute("data-cta-page") || location.pathname.replace(/^\/+|\/+$/g, "") || "home", u.searchParams.get("utm_content") || "book");
+    } catch (e3) { /* never block the link */ }
     try {
       var slug = a.getAttribute("data-cta-page") || location.pathname.replace(/^\/+|\/+$/g, "") || "home";
       if (typeof window.clarity === "function") {
