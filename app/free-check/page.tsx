@@ -7,6 +7,7 @@ import CheckForm from "../components/check-form";
 import { SectionHead, Accent, TickList } from "../components/ui";
 import { checkFaqs } from "../faqs";
 import { faqNode, jsonLdScript, orgNode } from "../jsonld";
+import { offers } from "../offers";
 import { pageMetadata } from "../seo";
 import { site } from "../site.config";
 
@@ -71,7 +72,7 @@ export default function FreeCheck() {
               <Faq items={checkFaqs} />
             </div>
             <p className="mx-auto mt-8 max-w-[44rem] text-center text-text-l text-body">
-              If we find something, <Link href="/signal-fix" className="link">Signal Fix</Link> is <Accent>$750</Accent> for one defined fix.
+              If we find something, <Link href="/signal-fix" className="link">Signal Fix</Link> is <Accent>{offers.fix.price}</Accent> for one defined fix.
             </p>
           </div>
         </section>

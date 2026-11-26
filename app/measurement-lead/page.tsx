@@ -12,7 +12,6 @@ import { bookUrl } from "../booking";
 import { Accent, Numeral, SectionHead, TickList } from "../components/ui";
 import { extendedChecks, coreChecks } from "../checks-data";
 import { faqNode, jsonLdScript, orgNode, serviceNode } from "../jsonld";
-import { guaranteeFaqs } from "../guarantee";
 import { stackAnswer } from "../faqs";
 import { offers, auditCredit, auditGuarantee, measurementTerm } from "../offers";
 import { pageMetadata } from "../seo";
@@ -20,7 +19,7 @@ import { site } from "../site.config";
 
 export const metadata = pageMetadata({
   title: "Measurement Lead for Larger Accounts | Closed Logic",
-  description: "The step after the audit: 25 hours a month on tracking, attribution, HubSpot lifecycle and reporting. Cancel in the first 30 days and pay only that month.",
+  description: `Month 1 is the audit and roadmap, then ${offers.measurement.hours} hours a month on tracking, attribution, HubSpot lifecycle and reporting. Cancel in the first 30 days and pay only that month.`,
   path: "/measurement-lead",
   absoluteTitle: true,
 });
@@ -48,7 +47,7 @@ const faqs = [
   { q: "Do you replace our CRM admin?", a: "No. We define what the CRM should measure and test whether it does." },
   { q: "How much of our time will this take?", a: "Two hours in week one, one hour in week four, then 60 minutes a month." },
   { q: "What happens after the audit if we don’t continue?", a: "You keep the report, the baseline and the roadmap. No lock-in." },
-  ...guaranteeFaqs.slice(0, 1),
+  { q: "Is Month 1 the same as the Pipeline Truth Audit?", a: `Month 1 covers the audit, the definitions and the roadmap. ${auditCredit}` },
   { q: "Can you work with our stack?", a: stackAnswer },
   { q: "How quickly will you reply?", a: "Within 1 business day." },
 ];
@@ -61,7 +60,7 @@ export default function MeasurementLead() {
         dangerouslySetInnerHTML={{
           __html: jsonLdScript([
             orgNode,
-            serviceNode("measurement-lead", offers.measurement.name, "Measurement lead", "25 hours a month on tracking, attribution, HubSpot lifecycle and reporting, with a monthly scorecard. 3-month term; cancel in the first 30 days and pay only that month.", offers.measurement.amount, `${site.url}/fractional`, true),
+            serviceNode("measurement-lead", offers.measurement.name, "Measurement lead", `${offers.measurement.hours} hours a month on tracking, attribution, HubSpot lifecycle and reporting, with a monthly scorecard. 3-month term; cancel in the first 30 days and pay only that month.`, offers.measurement.amount, `${site.url}/measurement-lead`, true),
             faqNode(faqs),
           ]),
         }}
@@ -71,7 +70,7 @@ export default function MeasurementLead() {
         <PageHero
           id="measurement-lead" eyebrow="Measurement Lead" kicker={KICKER}
           title="Measurement Lead for larger accounts"
-          sub={`The step after the audit. We take over the tracking, attribution, HubSpot lifecycle and reporting checks: 25 hours a month, ${offers.measurement.per}, with a 30-day exit.`}
+          sub={`We take over the tracking, attribution, HubSpot lifecycle and reporting checks: ${offers.measurement.hours} hours a month, ${offers.measurement.per}, with a 30-day exit.`}
           micro={["You keep your agency.", "We sell no media, resell no software and take no cut of your ad spend."]}
         >
           <a href={bookUrl("hero-cta", "measurement-lead")} data-cta="book" data-cta-page="measurement-lead" target="_blank" rel="noopener noreferrer" className="btn w-full sm:w-auto">

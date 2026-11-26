@@ -19,11 +19,11 @@ export const metadata = pageMetadata({
 
 const rows: React.ReactNode[][] = [
   [offers.check.name, offers.check.price, "What your site sends to Google Ads, with evidence and self-check steps"],
-  [<Link key="fix" href="/signal-fix" className="link">{offers.fix.name}</Link>, offers.fix.price, "One defined fix, before-and-after check, change log, 30-day guarantee"],
-  [<Link key="pilot" href="/ops-desk" className="link">{offers.pilot.name}</Link>, offers.pilot.price, "One defined request, up to 5 hours, scoped, built, tested and documented"],
-  [<Link key="ops" href="/ops-desk" className="link">{offers.ops.name}</Link>, offers.ops.per, "Up to 10 hours, one active request, weekly updates, 30 days' notice"],
-  [<Link key="audit" href="/pipeline-truth-audit" className="link">{offers.audit.name}</Link>, offers.audit.price, "For larger teams: 10 core checks, a 90-day baseline, a roadmap and a readout call"],
-  [<Link key="frac" href="/measurement-lead" className="link">{offers.measurement.name}</Link>, offers.measurement.per, "For larger teams: 25 hours a month, 3-month term. Cancel in the first 30 days and pay only that month."],
+  [<Link key="fix" href="/signal-fix" className="link">{offers.fix.name}</Link>, offers.fix.price, `One defined fix, before-and-after check, change log, ${offers.fix.guaranteeDays}-day guarantee`],
+  [<Link key="pilot" href="/ops-desk" className="link">{offers.pilot.name}</Link>, offers.pilot.price, `One defined request, up to ${offers.pilot.hours} hours, scoped, built, tested and documented`],
+  [<Link key="ops" href="/ops-desk" className="link">{offers.ops.name}</Link>, offers.ops.per, `Up to ${offers.ops.hours} hours, one active request, weekly updates, ${offers.ops.noticeDays} days' notice`],
+  [<Link key="audit" href="/pipeline-truth-audit" className="link">{offers.audit.name}</Link>, offers.audit.price, "For larger accounts: 10 core checks, a 90-day baseline, a roadmap and a readout call"],
+  [<Link key="frac" href="/measurement-lead" className="link">{offers.measurement.name}</Link>, offers.measurement.per, `For larger accounts: ${offers.measurement.hours} hours a month, 3-month term. Cancel in the first 30 days and pay only that month.`],
 ];
 
 export default function Pricing() {

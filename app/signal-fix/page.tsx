@@ -12,14 +12,14 @@ import { TickList, SectionHead, Accent, Chip } from "../components/ui";
 import { bookHref } from "../booking";
 import { checkFaqs } from "../faqs";
 import { faqNode, jsonLdScript, orgNode, serviceNode } from "../jsonld";
-import { offers, fixExamples, fixExtra, fixDeliverablesList, fixGuarantee } from "../offers";
+import { offers, fixExamples, fixExtra, fixDeliverablesList, fixGuarantee, fixGuaranteeShort, fixRemedy } from "../offers";
 import { pageMetadata } from "../seo";
 import { site } from "../site.config";
 
 // The title is the old home page title: this page now carries that content.
 export const metadata = pageMetadata({
   title: "Fix HubSpot and Google Ads Conversion Tracking",
-  description: "One miscounted Google Ads conversion, fixed at a fixed price. Read-only access, a change log to undo every change, and a 30-day guarantee.",
+  description: `One miscounted Google Ads conversion, fixed at a fixed price. Read-only access, a change log to undo every change, and a ${offers.fix.guaranteeDays}-day guarantee.`,
   path: "/signal-fix",
   absoluteTitle: true,
 });
@@ -57,7 +57,7 @@ const faqs = [
   { q: "Do I need to change agencies?", a: "No. We can work alongside your agency, or hand them our findings." },
   { q: "Will this change my bidding?", a: "Only if you approve it. We'll tell you which conversion your volume can support for bidding, and why." },
   { q: "What if the problem is bigger than one fix?", a: "We'll tell you before starting, and quote each extra fix separately." },
-  { q: "What if the fix doesn't work?", a: "If a conversion we set up doesn't fire as agreed within 30 days of handover, we fix it at no charge." },
+  { q: "What if the fix doesn't work?", a: fixGuaranteeShort },
   checkFaqs[3],
   { q: "How quickly will you reply?", a: "Within 1 business day." },
 ];
@@ -208,6 +208,7 @@ export default function SignalFix() {
           <div className="container-site">
             <SectionHead id="guarantee">The <Accent>guarantee.</Accent></SectionHead>
             <p className="lead lead-center mt-6 max-w-[44rem]">{fixGuarantee}</p>
+            <p className="mx-auto mt-4 max-w-[44rem] text-center text-body">{fixRemedy}</p>
           </div>
         </section>
 

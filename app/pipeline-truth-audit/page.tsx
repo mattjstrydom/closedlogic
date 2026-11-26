@@ -10,7 +10,7 @@ import { Accent, SectionHead, TickList } from "../components/ui";
 import { bookUrl } from "../booking";
 import { coreChecks } from "../checks-data";
 import { faqNode, jsonLdScript, orgNode, serviceNode } from "../jsonld";
-import { offers, auditCredit, auditGuarantee } from "../offers";
+import { offers, auditCredit, auditGuarantee, auditGuaranteeTest } from "../offers";
 import { pageMetadata } from "../seo";
 import { site } from "../site.config";
 
@@ -33,7 +33,7 @@ const gets = [
 const faqs = [
   { q: "How long does the audit take?", a: `We deliver the written report within ${offers.audit.days} business days of receiving the read-only access we need.` },
   { q: "Do you change anything in our accounts?", a: "No. The audit uses read-only access. We don't change anything in your accounts as part of the audit." },
-  { q: "What does the audit guarantee cover?", a: `${auditGuarantee} We refund within 14 days of delivering the audit report, and you keep the report. The full test is in clause 3.6 of our terms.` },
+  { q: "What does the audit guarantee cover?", a: `${auditGuarantee} We refund within 14 days of delivering the audit report, and you keep the report. ${auditGuaranteeTest}` },
   { q: "What if we want you to keep going after the audit?", a: auditCredit },
   { q: "What if we don't continue?", a: "You keep the report, the baseline and the roadmap. No lock-in." },
   { q: "How quickly will you reply?", a: "Within 1 business day." },
@@ -94,6 +94,7 @@ export default function PipelineTruthAudit() {
           <div className="container-site">
             <SectionHead id="guarantee">The <Accent>guarantee.</Accent></SectionHead>
             <p className="lead lead-center mt-6 max-w-[44rem]">{auditGuarantee}</p>
+            <p className="mx-auto mt-4 max-w-[44rem] text-center text-body">{auditGuaranteeTest}</p>
             <p className="mx-auto mt-4 max-w-[44rem] text-center text-body">{auditCredit}</p>
           </div>
         </section>

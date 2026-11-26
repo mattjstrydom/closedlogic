@@ -28,6 +28,8 @@ export const fixDeliverablesList = [
   "A change log showing how to undo every change",
 ];
 export const fixGuarantee = `If, within ${offers.fix.guaranteeDays} days of handover, a conversion we set up doesn't fire as agreed in the written scope, we fix it at no charge. This doesn't cover changes made to your site, tag manager, forms or accounts after handover.`;
+export const fixRemedy = "The remedy is the free fix, not a refund.";
+export const fixGuaranteeShort = `${offers.fix.guaranteeDays}-day guarantee: if a conversion we set up doesn't fire as agreed, we fix it at no charge. ${fixRemedy}`;
 export const fixExtra = "If we find more than one problem, we quote each extra fix before doing any work.";
 
 // Ops Desk.
@@ -36,5 +38,6 @@ export const opsLine = "Unused hours don't roll over. Larger projects are quoted
 
 // Pipeline Truth Audit.
 export const auditGuarantee = "If the audit finds nothing that changes how Google Ads counts, bids on or attributes your leads, we refund the fee in full.";
+export const auditGuaranteeTest = "A finding counts if you can check its evidence yourself, it changes how Google Ads counts, bids on or attributes your leads, and it has its own root cause. You can challenge a finding within 7 days of the report. The full test is in clause 3.6 of our terms.";
 export const auditCredit = `If you continue to the ${offers.measurement.name} within 30 days of the audit report, the audit fee is credited against the Measurement Lead's first month. No credit applies to other offers.`;
 export const measurementTerm = "Cancel in the first 30 days and pay only that month. Otherwise the 3-month term applies, then 30 days' notice.";

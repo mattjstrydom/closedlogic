@@ -4,7 +4,7 @@ import Footer from "../components/footer";
 import { Slot } from "../components/ph";
 import { site } from "../site.config";
 import { pageMetadata } from "../seo";
-import { auditCredit, auditGuarantee, checkOfferText, fixDeliverablesList, fixExamples, fixGuarantee, offers } from "../offers";
+import { auditCredit, auditGuarantee, checkOfferText, fixDeliverablesList, fixExamples, fixGuarantee, fixRemedy, offers } from "../offers";
 
 export const metadata = pageMetadata({
   title: "Terms of service",
@@ -107,7 +107,7 @@ export default function Terms() {
           <C n="5.6">
             Signal Fix is {offers.fix.price} for one defined defect, named in the written scope. For example: {fixExamples.map(lowerFirst).join("; ")}. We deliver: {fixDeliverablesList.map(lowerFirst).join("; ")}. If we find more than one problem, we quote each extra fix before doing any work. When the work is done, we confirm in writing that our access has been removed.
           </C>
-          <C n="5.7">{fixGuarantee} The remedy is the free fix. It is not a refund.</C>
+          <C n="5.7">{fixGuarantee} {fixRemedy}</C>
           <C n="5.8">The Ops Desk pilot is {offers.pilot.price} for one defined request of up to {offers.pilot.hours} hours, named in the written scope. We scope, build, test and document it. The pilot ends when we hand the request over. Any further work needs a new written scope or the Ops Desk plan.</C>
           <C n="5.9">
             Ops Desk is {offers.ops.per}. It covers up to {offers.ops.hours} hours of work a month on one active request at a time, with a weekly update showing what is done, what is next and the hours used. After the pilot it is month to month, and either of us can end it with {offers.ops.noticeDays} days&apos; written notice. Unused hours don&apos;t roll over. Larger projects are quoted separately before any work starts. Ops Desk doesn&apos;t include media buying, creative or content, running outbound campaigns or booking meetings for you, large CRM migrations, or any guarantee of a pipeline number. Matt and Jennifer do the work, and we don&apos;t subcontract it without your written approval.

@@ -38,7 +38,7 @@ const steps = [
 
 const pricing: string[][] = [
   [offers.pilot.name, offers.pilot.price, `One defined request, up to ${offers.pilot.hours} hours, scoped, built, tested and documented`],
-  [offers.ops.name, offers.ops.per, "Up to 10 hours a month, one active request, weekly updates. Month to month after the pilot, 30 days' notice"],
+  [offers.ops.name, offers.ops.per, `Up to ${offers.ops.hours} hours a month, one active request, weekly updates. Month to month after the pilot, ${offers.ops.noticeDays} days' notice`],
 ];
 
 const faqs = [

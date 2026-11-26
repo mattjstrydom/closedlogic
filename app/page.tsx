@@ -155,7 +155,7 @@ export default function Home() {
               <h2 id="offers-title">Start with one fix, <span className="soft">or hand us the backlog</span></h2>
             </div>
             <div className="cl-pricing cl-pricing--4" data-reveal>
-              <PricingTier name={offers.fix.name} price={offers.fix.price} per="one-time" desc="One miscounted Google Ads conversion fixed and documented, with a 30-day guarantee. Starts with a free check.">
+              <PricingTier name={offers.fix.name} price={offers.fix.price} per="one-time" desc={`One miscounted Google Ads conversion fixed and documented, with a ${offers.fix.guaranteeDays}-day guarantee. Starts with a free check.`}>
                 <Link href="/signal-fix" className="btn">See Signal Fix</Link>
               </PricingTier>
               <PricingTier name={offers.audit.name} price={offers.audit.price} per="one-time" desc="Ten checks across Google Ads, your CRM and your reporting, with a 90-day baseline and a roadmap. For larger accounts.">
@@ -164,7 +164,7 @@ export default function Home() {
               <PricingTier name={offers.ops.name} price={offers.pilot.price} per={`pilot, then ${offers.ops.per}`} desc="Your ongoing marketing ops backlog, handled each month. One active request at a time, weekly updates.">
                 <Link href="/ops-desk" className="btn-outline">See the plan</Link>
               </PricingTier>
-              <PricingTier name={offers.measurement.name} price={offers.measurement.price} per="/month" desc="A senior ops and measurement lead for larger accounts. 25 hours a month, 3-month term.">
+              <PricingTier name={offers.measurement.name} price={offers.measurement.price} per="/month" desc={`A senior ops and measurement lead for larger accounts. ${offers.measurement.hours} hours a month, 3-month term.`}>
                 <Link href="/measurement-lead" className="btn-outline">See the Measurement Lead</Link>
               </PricingTier>
             </div>
